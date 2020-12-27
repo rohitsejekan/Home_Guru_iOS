@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="uky-Ue-KrG" customClass="ProgramPickerView" customModule="Home_Guru_Student" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="377"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FwH-nT-EYa">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="377"/>
+                    <subviews>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njq-rD-iyr">
+                            <rect key="frame" x="20" y="0.0" width="374" height="377"/>
+                            <subviews>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jc8-dF-Owq">
+                                    <rect key="frame" x="0.0" y="88.5" width="374" height="200"/>
+                                    <subviews>
+                                        <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zda-3R-pxt">
+                                            <rect key="frame" x="334" y="0.0" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="DfP-4a-OLT"/>
+                                                <constraint firstAttribute="width" constant="40" id="Klv-Wf-YTG"/>
+                                            </constraints>
+                                            <color key="tintColor" red="0.94509803920000002" green="0.37647058820000001" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <state key="normal" image="close">
+                                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                    <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                    <integer key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="cancelBtnAction:" destination="uky-Ue-KrG" eventType="touchUpInside" id="xPc-83-60p"/>
+                                            </connections>
+                                        </button>
+                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYy-rL-99T">
+                                            <rect key="frame" x="0.0" y="40" width="374" height="160"/>
+                                        </pickerView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstItem="zYy-rL-99T" firstAttribute="leading" secondItem="jc8-dF-Owq" secondAttribute="leading" id="2sa-57-swH"/>
+                                        <constraint firstAttribute="bottom" secondItem="zYy-rL-99T" secondAttribute="bottom" id="3hF-ja-XgJ"/>
+                                        <constraint firstAttribute="trailing" secondItem="zYy-rL-99T" secondAttribute="trailing" id="SI5-my-pMG"/>
+                                        <constraint firstItem="Zda-3R-pxt" firstAttribute="top" secondItem="jc8-dF-Owq" secondAttribute="top" id="Vxp-3F-CsG"/>
+                                        <constraint firstAttribute="height" constant="200" id="inH-Ql-QBC"/>
+                                        <constraint firstItem="zYy-rL-99T" firstAttribute="top" secondItem="Zda-3R-pxt" secondAttribute="bottom" id="qLX-9d-tgL"/>
+                                        <constraint firstAttribute="trailing" secondItem="Zda-3R-pxt" secondAttribute="trailing" id="w96-42-saN"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="jc8-dF-Owq" firstAttribute="leading" secondItem="njq-rD-iyr" secondAttribute="leading" id="K4H-Pz-e8q"/>
+                                <constraint firstAttribute="trailing" secondItem="jc8-dF-Owq" secondAttribute="trailing" id="RLa-dq-dE7"/>
+                                <constraint firstItem="jc8-dF-Owq" firstAttribute="centerY" secondItem="njq-rD-iyr" secondAttribute="centerY" id="TJs-cy-8mX"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="njq-rD-iyr" secondAttribute="bottom" id="C79-jz-5d2"/>
+                        <constraint firstItem="njq-rD-iyr" firstAttribute="leading" secondItem="FwH-nT-EYa" secondAttribute="leading" constant="20" id="XHu-Ue-I1a"/>
+                        <constraint firstAttribute="trailing" secondItem="njq-rD-iyr" secondAttribute="trailing" constant="20" id="jZf-ST-zev"/>
+                        <constraint firstItem="njq-rD-iyr" firstAttribute="top" secondItem="FwH-nT-EYa" secondAttribute="top" id="w4Q-D0-g8Q"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="FwH-nT-EYa" firstAttribute="top" secondItem="uky-Ue-KrG" secondAttribute="top" id="QAw-s6-ZRe"/>
+                <constraint firstAttribute="bottom" secondItem="FwH-nT-EYa" secondAttribute="bottom" id="RW3-SZ-jUQ"/>
+                <constraint firstItem="QrF-dw-Jhy" firstAttribute="trailing" secondItem="FwH-nT-EYa" secondAttribute="trailing" id="aIw-T4-FWx"/>
+                <constraint firstItem="FwH-nT-EYa" firstAttribute="leading" secondItem="QrF-dw-Jhy" secondAttribute="leading" id="jIK-sC-Fxf"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="QrF-dw-Jhy"/>
+            <connections>
+                <outlet property="pickerView" destination="zYy-rL-99T" id="C8G-B7-TMe"/>
+                <outlet property="programPickerOuterView" destination="jc8-dF-Owq" id="CYe-W5-Pvw"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="293.63839285714283"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close" width="76" height="76"/>
+    </resources>
+</document>

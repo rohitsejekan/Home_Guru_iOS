@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="qAl-yL-OvX" customClass="DatePickerView" customModule="Home_Guru_Student" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="559"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5D1-9X-r09">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="559"/>
+                    <subviews>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SU1-zV-kow">
+                            <rect key="frame" x="20" y="0.0" width="280" height="559"/>
+                            <subviews>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z75-aZ-ZhV">
+                                    <rect key="frame" x="0.0" y="161.5" width="280" height="236"/>
+                                    <subviews>
+                                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="GcD-T6-qeX">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="200"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="200" id="nXq-Zl-3LT"/>
+                                            </constraints>
+                                            <locale key="locale" localeIdentifier="en_IN"/>
+                                        </datePicker>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVa-PO-V21">
+                                            <rect key="frame" x="0.0" y="200" width="140" height="36"/>
+                                            <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="20"/>
+                                            <state key="normal" title="Cancel">
+                                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                    <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                    <integer key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="cancelBtnAction:" destination="qAl-yL-OvX" eventType="touchUpInside" id="q7x-bO-8Fs"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpm-Yg-J2n">
+                                            <rect key="frame" x="140" y="200" width="140" height="36"/>
+                                            <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="20"/>
+                                            <state key="normal" title="OK">
+                                                <color key="titleColor" red="0.94509803920000002" green="0.37647058820000001" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                    <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                    <integer key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="okBtnAction:" destination="qAl-yL-OvX" eventType="touchUpInside" id="9J8-BU-kP8"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstItem="gpm-Yg-J2n" firstAttribute="leading" secondItem="pVa-PO-V21" secondAttribute="trailing" id="1Bx-EJ-VK7"/>
+                                        <constraint firstAttribute="trailing" secondItem="GcD-T6-qeX" secondAttribute="trailing" id="3CZ-ZT-4xd"/>
+                                        <constraint firstItem="pVa-PO-V21" firstAttribute="width" secondItem="Z75-aZ-ZhV" secondAttribute="width" multiplier="0.5" id="3Xt-HY-wBM"/>
+                                        <constraint firstItem="GcD-T6-qeX" firstAttribute="top" secondItem="Z75-aZ-ZhV" secondAttribute="top" id="6ay-hn-40p"/>
+                                        <constraint firstAttribute="bottom" secondItem="pVa-PO-V21" secondAttribute="bottom" id="9Iv-1p-QwQ"/>
+                                        <constraint firstItem="GcD-T6-qeX" firstAttribute="leading" secondItem="Z75-aZ-ZhV" secondAttribute="leading" id="FRR-DJ-aV8"/>
+                                        <constraint firstAttribute="bottom" secondItem="gpm-Yg-J2n" secondAttribute="bottom" id="Gkt-hJ-wTT"/>
+                                        <constraint firstItem="gpm-Yg-J2n" firstAttribute="top" secondItem="GcD-T6-qeX" secondAttribute="bottom" id="IhB-Fb-TTU"/>
+                                        <constraint firstAttribute="trailing" secondItem="gpm-Yg-J2n" secondAttribute="trailing" id="Nnf-En-VIN"/>
+                                        <constraint firstItem="gpm-Yg-J2n" firstAttribute="leading" secondItem="pVa-PO-V21" secondAttribute="trailing" id="Zec-Sy-kCj"/>
+                                        <constraint firstItem="pVa-PO-V21" firstAttribute="top" secondItem="GcD-T6-qeX" secondAttribute="bottom" id="ha1-Xf-V6k"/>
+                                        <constraint firstItem="pVa-PO-V21" firstAttribute="top" secondItem="GcD-T6-qeX" secondAttribute="bottom" id="jS4-0x-yzq"/>
+                                        <constraint firstItem="pVa-PO-V21" firstAttribute="leading" secondItem="Z75-aZ-ZhV" secondAttribute="leading" id="tYT-1B-I3A"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="Z75-aZ-ZhV" firstAttribute="leading" secondItem="SU1-zV-kow" secondAttribute="leading" id="1oP-KN-fKz"/>
+                                <constraint firstItem="Z75-aZ-ZhV" firstAttribute="centerY" secondItem="SU1-zV-kow" secondAttribute="centerY" id="feF-eB-fkr"/>
+                                <constraint firstAttribute="trailing" secondItem="Z75-aZ-ZhV" secondAttribute="trailing" id="xPR-67-fJX"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="SU1-zV-kow" secondAttribute="bottom" id="0qf-Ui-XEx"/>
+                        <constraint firstAttribute="trailing" secondItem="SU1-zV-kow" secondAttribute="trailing" constant="20" id="Pg2-2h-XcH"/>
+                        <constraint firstItem="SU1-zV-kow" firstAttribute="leading" secondItem="5D1-9X-r09" secondAttribute="leading" constant="20" id="dsS-KV-15V"/>
+                        <constraint firstItem="SU1-zV-kow" firstAttribute="top" secondItem="5D1-9X-r09" secondAttribute="top" id="lXO-4Z-kPO"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="5D1-9X-r09" secondAttribute="trailing" id="FVL-LF-g8K"/>
+                <constraint firstItem="5D1-9X-r09" firstAttribute="top" secondItem="qAl-yL-OvX" secondAttribute="top" id="W5q-do-4Do"/>
+                <constraint firstAttribute="bottom" secondItem="5D1-9X-r09" secondAttribute="bottom" id="ivC-S9-omC"/>
+                <constraint firstItem="5D1-9X-r09" firstAttribute="leading" secondItem="qAl-yL-OvX" secondAttribute="leading" id="rpX-VR-D8G"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="hHk-4Q-8H4"/>
+            <connections>
+                <outlet property="datePicker" destination="GcD-T6-qeX" id="uLI-co-3KX"/>
+                <outlet property="datePickerOuterView" destination="Z75-aZ-ZhV" id="uqP-gI-Qpu"/>
+            </connections>
+            <point key="canvasLocation" x="134.78260869565219" y="168.41517857142856"/>
+        </view>
+    </objects>
+</document>

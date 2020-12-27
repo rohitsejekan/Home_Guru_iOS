@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceSansPro-Bold.ttf">
+            <string>SourceSansPro-Bold</string>
+        </array>
+        <array key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="440" id="KGk-i7-Jjw" customClass="NotificationDetailTableViewCell" customModule="Home_Guru_Student" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fka-pW-sBe">
+                        <rect key="frame" x="16" y="15" width="288" height="410"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet sit amet, consectetur" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fjv-H3-UcR">
+                                <rect key="frame" x="8" y="38" width="272" height="45.5"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11 January" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPM-K2-Imr">
+                                <rect key="frame" x="8" y="15" width="272" height="13"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
+                                <color key="textColor" red="0.72941176470000002" green="0.72941176470000002" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvG-uD-YeS">
+                                <rect key="frame" x="8" y="88.5" width="272" height="302"/>
+                                <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adipiscing accumsan et quis sed. Massa ac, lacus, vestibulum, egestas porttitor. Amet, molestie lectus nibh egestas nibh semper sem aliquam. Viverra molestie duis dapibus nec habitant quam. Elit mauris sed morbi massa sit. Diam cras cras et fringilla nec penatibus. In diam lectus pulvinar amet. Suscipit eu, eu vulputate et. Aliquet faucibus arcu vitae nec accumsan,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adipiscing accumsan et quis sed. Massa ac, lacus, vestibulum, egestas porttitor. </mutableString>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="16"/>
+                                <color key="textColor" red="0.72941176470000002" green="0.72941176470000002" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.035294117649999998" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="aPM-K2-Imr" firstAttribute="leading" secondItem="Fka-pW-sBe" secondAttribute="leading" constant="8" id="ATC-A8-9P3"/>
+                            <constraint firstItem="QvG-uD-YeS" firstAttribute="top" secondItem="Fjv-H3-UcR" secondAttribute="bottom" constant="5" id="CMN-P5-QIa"/>
+                            <constraint firstAttribute="trailing" secondItem="QvG-uD-YeS" secondAttribute="trailing" constant="8" id="L3H-Nz-Ron"/>
+                            <constraint firstItem="aPM-K2-Imr" firstAttribute="top" secondItem="Fka-pW-sBe" secondAttribute="top" constant="15" id="QHC-mV-Vc0"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QvG-uD-YeS" secondAttribute="bottom" constant="10" id="STL-3A-mtJ"/>
+                            <constraint firstAttribute="trailing" secondItem="Fjv-H3-UcR" secondAttribute="trailing" constant="8" id="b9m-UQ-bOu"/>
+                            <constraint firstAttribute="trailing" secondItem="aPM-K2-Imr" secondAttribute="trailing" constant="8" id="mrh-3L-h0I"/>
+                            <constraint firstItem="QvG-uD-YeS" firstAttribute="leading" secondItem="Fka-pW-sBe" secondAttribute="leading" constant="8" id="nvr-vh-JhV"/>
+                            <constraint firstItem="Fjv-H3-UcR" firstAttribute="leading" secondItem="Fka-pW-sBe" secondAttribute="leading" constant="8" id="o6V-nF-gaV"/>
+                            <constraint firstItem="Fjv-H3-UcR" firstAttribute="top" secondItem="aPM-K2-Imr" secondAttribute="bottom" constant="10" id="xJs-Tm-Wyl"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.0" green="0.035294117649999998" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Fka-pW-sBe" secondAttribute="trailing" constant="16" id="H8h-9U-2Zf"/>
+                    <constraint firstItem="Fka-pW-sBe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="L6h-Tf-4ag"/>
+                    <constraint firstItem="Fka-pW-sBe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="blc-0v-Km3"/>
+                    <constraint firstAttribute="bottom" secondItem="Fka-pW-sBe" secondAttribute="bottom" constant="15" id="uNk-7f-7df"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="aPM-K2-Imr" id="1ni-qj-JaG"/>
+                <outlet property="notificationDescLabel" destination="QvG-uD-YeS" id="e5h-CK-xvC"/>
+                <outlet property="notificationTitleLabel" destination="Fjv-H3-UcR" id="zAF-jP-Irk"/>
+            </connections>
+            <point key="canvasLocation" x="115.94202898550725" y="166.07142857142856"/>
+        </tableViewCell>
+    </objects>
+</document>

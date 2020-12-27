@@ -4,6 +4,10 @@
 target 'Home Guru' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  pod 'GooglePlaces'
+  pod 'GoogleMaps'
+  pod 'SwiftyJSON'
+  pod 'SKCountryPicker'
   pod 'FSCalendar'
   pod 'SlideMenuControllerSwift', :git => 'https://github.com/dekatotoro/SlideMenuControllerSwift.git', :branch => 'swift4'
   pod 'SVPinView', '~> 1.0'

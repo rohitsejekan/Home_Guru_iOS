@@ -1,33 +1,50 @@
 PODS:
   - Alamofire (5.2.2)
   - FSCalendar (2.8.1)
+  - GoogleMaps (3.10.0):
+    - GoogleMaps/Maps (= 3.10.0)
+  - GoogleMaps/Base (3.10.0)
+  - GoogleMaps/Maps (3.10.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.10.0):
+    - GoogleMaps/Base (= 3.10.0)
   - IQKeyboardManagerSwift (6.5.6)
   - Kingfisher (5.15.6):
     - Kingfisher/Core (= 5.15.6)
   - Kingfisher/Core (5.15.6)
   - MBProgressHUD (1.2.0)
+  - SKCountryPicker (1.2.9)
   - SlideMenuControllerSwift (3.0.2)
   - SVPinView (1.0.11)
+  - SwiftyJSON (5.0.0)
   - XLPagerTabStrip (8.1.1)
 
 DEPENDENCIES:
   - Alamofire
   - FSCalendar
+  - GoogleMaps
+  - GooglePlaces
   - IQKeyboardManagerSwift
   - Kingfisher (~> 5.0)
   - MBProgressHUD
+  - SKCountryPicker
   - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift4`)
   - SVPinView (~> 1.0)
+  - SwiftyJSON
   - XLPagerTabStrip (~> 8.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - FSCalendar
+    - GoogleMaps
+    - GooglePlaces
     - IQKeyboardManagerSwift
     - Kingfisher
     - MBProgressHUD
+    - SKCountryPicker
     - SVPinView
+    - SwiftyJSON
     - XLPagerTabStrip
 
 EXTERNAL SOURCES:
@@ -43,13 +60,17 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   FSCalendar: 5245140456fcbcac5824c203b98bd8068bdfee1a
+  GoogleMaps: 8c080862ff2748ece9929471b30feb56a6c5079d
+  GooglePlaces: 9a6f5f3a0c88da2aa1bf7426a65d3e004f5e69a1
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Kingfisher: b3554e7bf6106115b44e8795300bad580ef2fdc7
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  SKCountryPicker: 7ad1e7dfb482cfb26855e33c2d70dbf1eaf218fe
   SlideMenuControllerSwift: 9e8d2bba8ea9201c6207acb76e95a2841453ec9c
   SVPinView: 9b538d0ba68cdb092afe4f0f67ec84cbed079466
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 471e0fdedbe6e9b7fd0afaf1f57516b2fbb6cd42
+PODFILE CHECKSUM: a550b3803ae937f45070c81e9885208d65d2fca5
 
 COCOAPODS: 1.9.3
