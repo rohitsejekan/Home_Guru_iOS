@@ -7,13 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011294CC25F5F76300308A91 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011294CB25F5F76200308A91 /* DatePickerView.swift */; };
+		011294CE25F5F78F00308A91 /* DatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011294CD25F5F78E00308A91 /* DatePickerView.xib */; };
+		011294D025F5F7BD00308A91 /* ProgramPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011294CF25F5F7BD00308A91 /* ProgramPickerView.xib */; };
+		011294D225F5F7C800308A91 /* ProgramPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011294D125F5F7C700308A91 /* ProgramPickerView.swift */; };
+		011294D425F5F84600308A91 /* NotificationDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011294D325F5F84600308A91 /* NotificationDetailTableViewCell.xib */; };
+		011294D625F5F85C00308A91 /* NotificationDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011294D525F5F85C00308A91 /* NotificationDetailTableViewCell.swift */; };
+		011294D825F5F88300308A91 /* NotificationCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011294D725F5F88300308A91 /* NotificationCardTableViewCell.xib */; };
+		011294DA25F5F89100308A91 /* NotificationCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011294D925F5F89100308A91 /* NotificationCardTableViewCell.swift */; };
+		011294DC25F5F92C00308A91 /* MyGuruCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011294DB25F5F92B00308A91 /* MyGuruCard.xib */; };
+		011294DE25F5F94100308A91 /* MyGuruCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011294DD25F5F94000308A91 /* MyGuruCard.swift */; };
+		011294E025F5FB3200308A91 /* RegisterStudentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011294DF25F5FB3200308A91 /* RegisterStudentTableViewCell.xib */; };
+		011294E225F60AF600308A91 /* ProfileCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011294E125F60AF500308A91 /* ProfileCardTableViewCell.swift */; };
+		011294E425F60B0400308A91 /* ProfileCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011294E325F60B0400308A91 /* ProfileCardTableViewCell.xib */; };
+		011294E625F60B3E00308A91 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011294E525F60B3D00308A91 /* ProfileCollectionViewCell.swift */; };
+		011294E825F60B4D00308A91 /* ProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011294E725F60B4D00308A91 /* ProfileCollectionViewCell.xib */; };
+		011688AF26007609005E1701 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688AE26007609005E1701 /* DynamicHeightCollectionView.swift */; };
+		011688B12600849F005E1701 /* SelectScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B02600849E005E1701 /* SelectScheduleViewController.swift */; };
+		011688B32600BC21005E1701 /* addProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B22600BC20005E1701 /* addProfileViewController.swift */; };
+		011688B62600BD89005E1701 /* addProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B52600BD89005E1701 /* addProfileTableViewCell.swift */; };
+		01413CD425FF3084001BCF7A /* ConfirmScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01413CD325FF3084001BCF7A /* ConfirmScheduleViewController.swift */; };
+		01413CD625FF39A7001BCF7A /* confirmSheduleFirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01413CD525FF39A7001BCF7A /* confirmSheduleFirstTableViewCell.swift */; };
+		01413CD825FF3D00001BCF7A /* ConfirmScheduleSecondTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01413CD725FF3D00001BCF7A /* ConfirmScheduleSecondTableViewCell.swift */; };
+		01413CDA25FF6D8C001BCF7A /* ConfirmScheduleFirstCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01413CD925FF6D8C001BCF7A /* ConfirmScheduleFirstCollectionViewCell.swift */; };
+		01413CDC25FF6EFD001BCF7A /* confirmScheduleThirdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01413CDB25FF6EFD001BCF7A /* confirmScheduleThirdTableViewCell.swift */; };
 		01438EFB2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01438EF92589EAE400C70011 /* ScheduleClassDetailsTableViewCell.swift */; };
 		01438EFC2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01438EFA2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.xib */; };
 		01438EFE258A250800C70011 /* MyClassesDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01438EFD258A250800C70011 /* MyClassesDetailsViewController.swift */; };
 		0146F438258F18AF008537B8 /* MyGuruDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0146F437258F18AF008537B8 /* MyGuruDetailsTableViewCell.swift */; };
-		0151441A258E780600E83F64 /* MyGuruCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01514418258E780600E83F64 /* MyGuruCard.swift */; };
-		0151441B258E780600E83F64 /* MyGuruCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01514419258E780600E83F64 /* MyGuruCard.xib */; };
 		0151441D258E7CC000E83F64 /* MyGuruDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151441C258E7CC000E83F64 /* MyGuruDetailsViewController.swift */; };
+		015206B025FA24340049922C /* ScheduleAcademicList_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015206AF25FA24340049922C /* ScheduleAcademicList_2ViewController.swift */; };
+		015206B325FA258F0049922C /* ScheduleSubject_2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015206B125FA258F0049922C /* ScheduleSubject_2TableViewCell.swift */; };
+		015206B425FA258F0049922C /* ScheduleSubject_2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015206B225FA258F0049922C /* ScheduleSubject_2TableViewCell.xib */; };
 		0153073E2578C44900F98F1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153073D2578C44900F98F1A /* HomeViewController.swift */; };
 		015307402578C86C00F98F1A /* MyClassesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153073F2578C86C00F98F1A /* MyClassesViewController.swift */; };
 		015307422578C87A00F98F1A /* MyGurusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015307412578C87A00F98F1A /* MyGurusViewController.swift */; };
@@ -22,12 +47,9 @@
 		0153074A2578E59F00F98F1A /* MyClassInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015307492578E59F00F98F1A /* MyClassInfoTableViewCell.swift */; };
 		0153074E257923D600F98F1A /* ScheduledClassCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153074C257923D600F98F1A /* ScheduledClassCardTableViewCell.swift */; };
 		0153074F257923D600F98F1A /* ScheduledClassCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0153074D257923D600F98F1A /* ScheduledClassCardTableViewCell.xib */; };
+		01628ED825FCD0F50033398C /* SelectGuruTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01628ED725FCD0F50033398C /* SelectGuruTableViewCell.swift */; };
 		01638E8C258A5FEF00F95F64 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01638E8B258A5FEF00F95F64 /* SearchLocationViewController.swift */; };
 		01638E8E258A618400F95F64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01638E8D258A618400F95F64 /* MapViewController.swift */; };
-		01638E90258A650E00F95F64 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01638E8F258A650E00F95F64 /* DatePickerView.swift */; };
-		01638E92258A652100F95F64 /* DatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01638E91258A652100F95F64 /* DatePickerView.xib */; };
-		01638E94258A653900F95F64 /* ProgramPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01638E93258A653900F95F64 /* ProgramPickerView.xib */; };
-		01638E96258A654E00F95F64 /* ProgramPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01638E95258A654E00F95F64 /* ProgramPickerView.swift */; };
 		01638E98258A671E00F95F64 /* ParentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01638E97258A671D00F95F64 /* ParentDetails.swift */; };
 		016EEB6E2540398F00FE7351 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EEB6D2540398F00FE7351 /* BaseViewController.swift */; };
 		016EEB70254039BF00FE7351 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EEB6F254039BF00FE7351 /* SignInViewController.swift */; };
@@ -40,27 +62,18 @@
 		0178EB6D25961C4800466322 /* RechargeWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178EB6C25961C4800466322 /* RechargeWalletViewController.swift */; };
 		0178EB7025962DBF00466322 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178EB6F25962DBF00466322 /* ScheduleViewController.swift */; };
 		0178EB7325965A1D00466322 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178EB7225965A1D00466322 /* ScheduleTableViewCell.swift */; };
-		01963481258D0B7900DBA50E /* RegisterStudentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0196347F258D0B7900DBA50E /* RegisterStudentTableViewCell.xib */; };
 		019C128B25700F6B0010122C /* AlamofireService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C128A25700F6B0010122C /* AlamofireService.swift */; };
 		01ADA29E2598F25B00B44061 /* ScheduleSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA29D2598F25B00B44061 /* ScheduleSubjectViewController.swift */; };
 		01ADA2A02598F47900B44061 /* ScheduleAcademicListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA29F2598F47900B44061 /* ScheduleAcademicListViewController.swift */; };
 		01ADA2A22598F48D00B44061 /* ScheduleNonAcademicListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA2A12598F48D00B44061 /* ScheduleNonAcademicListViewController.swift */; };
 		01ADA2A52598FEB300B44061 /* ScheduleSubjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA2A32598FEB300B44061 /* ScheduleSubjectTableViewCell.swift */; };
 		01ADA2A62598FEB300B44061 /* ScheduleSubjectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ADA2A42598FEB300B44061 /* ScheduleSubjectTableViewCell.xib */; };
-		01C481D02594C91200FBFD93 /* ProfileCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481CE2594C91200FBFD93 /* ProfileCardTableViewCell.swift */; };
-		01C481D12594C91200FBFD93 /* ProfileCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C481CF2594C91200FBFD93 /* ProfileCardTableViewCell.xib */; };
-		01C481D42594CD2700FBFD93 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481D22594CD2700FBFD93 /* ProfileCollectionViewCell.swift */; };
-		01C481D52594CD2700FBFD93 /* ProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C481D32594CD2700FBFD93 /* ProfileCollectionViewCell.xib */; };
 		01C481D82594D2B900FBFD93 /* ProfileInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481D72594D2B900FBFD93 /* ProfileInfoTableViewCell.swift */; };
 		01C481DB2594D41400FBFD93 /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481DA2594D41400FBFD93 /* ContactUsViewController.swift */; };
 		01C481DD2594D42700FBFD93 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481DC2594D42700FBFD93 /* WalletViewController.swift */; };
 		01C481DF2594D43300FBFD93 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481DE2594D43300FBFD93 /* AccountViewController.swift */; };
 		01C481E12594E6E500FBFD93 /* ContactUsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481E02594E6E400FBFD93 /* ContactUsTableViewCell.swift */; };
 		01C481E42594ED8A00FBFD93 /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481E32594ED8A00FBFD93 /* NotificationsTableViewCell.swift */; };
-		01C481E82594EDDE00FBFD93 /* NotificationDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481E62594EDDE00FBFD93 /* NotificationDetailTableViewCell.swift */; };
-		01C481E92594EDDE00FBFD93 /* NotificationDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C481E72594EDDE00FBFD93 /* NotificationDetailTableViewCell.xib */; };
-		01C481EC2594EE1C00FBFD93 /* NotificationCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481EA2594EE1C00FBFD93 /* NotificationCardTableViewCell.swift */; };
-		01C481ED2594EE1C00FBFD93 /* NotificationCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C481EB2594EE1C00FBFD93 /* NotificationCardTableViewCell.xib */; };
 		01C481EF25950B4700FBFD93 /* NotificationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481EE25950B4700FBFD93 /* NotificationDetailsViewController.swift */; };
 		01C481F1259518BE00FBFD93 /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481F0259518BE00FBFD93 /* PaymentHistoryViewController.swift */; };
 		01E130CE253DA82500F63673 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E130CD253DA82500F63673 /* AppDelegate.swift */; };
@@ -70,20 +83,57 @@
 		01E130E8253DA8D100F63673 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E130E7253DA8D100F63673 /* ColorPalette.swift */; };
 		01E130EA253DA92100F63673 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E130E9253DA92100F63673 /* Extension.swift */; };
 		01E130EC253DA92C00F63673 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E130EB253DA92C00F63673 /* Helper.swift */; };
+		01E7D48525FC88440054D177 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7D48425FC88440054D177 /* PaddedLabel.swift */; };
+		01E7D48825FC8D4A0054D177 /* customButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7D48625FC8D4A0054D177 /* customButtonTableViewCell.swift */; };
+		01E7D48925FC8D4A0054D177 /* customButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E7D48725FC8D4A0054D177 /* customButtonTableViewCell.xib */; };
+		01E7D48B25FC9F390054D177 /* SelectGuruViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7D48A25FC9F390054D177 /* SelectGuruViewController.swift */; };
+		01F4BE3225F8F46F00326D12 /* myRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */; };
+		01F4BE3425F8F4E000326D12 /* myRegisterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4BE3325F8F4E000326D12 /* myRegisterTableViewCell.swift */; };
 		01F826BB258A373F00AA03FA /* RegisterStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F826BA258A373F00AA03FA /* RegisterStudentViewController.swift */; };
 		01F826BE258A37F300AA03FA /* RegisterParentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F826BD258A37F300AA03FA /* RegisterParentTableViewCell.swift */; };
 		01F826C0258A387E00AA03FA /* RegisterStudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F826BF258A387E00AA03FA /* RegisterStudentTableViewCell.swift */; };
+		01FA8B3225FB38640044C209 /* ScheduleAcademicList_3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3125FB38640044C209 /* ScheduleAcademicList_3ViewController.swift */; };
+		01FA8B3425FB42140044C209 /* ScheduleAcademicList_4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3325FB42140044C209 /* ScheduleAcademicList_4ViewController.swift */; };
+		01FA8B3725FB43160044C209 /* ScheduleSubject_4TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3525FB43160044C209 /* ScheduleSubject_4TableViewCell.swift */; };
+		01FA8B3825FB43160044C209 /* ScheduleSubject_4TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FA8B3625FB43160044C209 /* ScheduleSubject_4TableViewCell.xib */; };
+		01FA8B3A25FB4E5F0044C209 /* ScheduleDurationTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3925FB4E5F0044C209 /* ScheduleDurationTimeViewController.swift */; };
+		01FA8B3D25FB8D200044C209 /* DurationTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3C25FB8D200044C209 /* DurationTimeTableViewCell.swift */; };
 		85A536B55915651C7C6C1603 /* Pods_Home_Guru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8A0D551E7B6F1213709C33 /* Pods_Home_Guru.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		011294CB25F5F76200308A91 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		011294CD25F5F78E00308A91 /* DatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerView.xib; sourceTree = "<group>"; };
+		011294CF25F5F7BD00308A91 /* ProgramPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgramPickerView.xib; sourceTree = "<group>"; };
+		011294D125F5F7C700308A91 /* ProgramPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramPickerView.swift; sourceTree = "<group>"; };
+		011294D325F5F84600308A91 /* NotificationDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationDetailTableViewCell.xib; sourceTree = "<group>"; };
+		011294D525F5F85C00308A91 /* NotificationDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDetailTableViewCell.swift; sourceTree = "<group>"; };
+		011294D725F5F88300308A91 /* NotificationCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCardTableViewCell.xib; sourceTree = "<group>"; };
+		011294D925F5F89100308A91 /* NotificationCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCardTableViewCell.swift; sourceTree = "<group>"; };
+		011294DB25F5F92B00308A91 /* MyGuruCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyGuruCard.xib; sourceTree = "<group>"; };
+		011294DD25F5F94000308A91 /* MyGuruCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGuruCard.swift; sourceTree = "<group>"; };
+		011294DF25F5FB3200308A91 /* RegisterStudentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterStudentTableViewCell.xib; sourceTree = "<group>"; };
+		011294E125F60AF500308A91 /* ProfileCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCardTableViewCell.swift; sourceTree = "<group>"; };
+		011294E325F60B0400308A91 /* ProfileCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCardTableViewCell.xib; sourceTree = "<group>"; };
+		011294E525F60B3D00308A91 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		011294E725F60B4D00308A91 /* ProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCollectionViewCell.xib; sourceTree = "<group>"; };
+		011688AE26007609005E1701 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
+		011688B02600849E005E1701 /* SelectScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectScheduleViewController.swift; sourceTree = "<group>"; };
+		011688B22600BC20005E1701 /* addProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addProfileViewController.swift; sourceTree = "<group>"; };
+		011688B52600BD89005E1701 /* addProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addProfileTableViewCell.swift; sourceTree = "<group>"; };
+		01413CD325FF3084001BCF7A /* ConfirmScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleViewController.swift; sourceTree = "<group>"; };
+		01413CD525FF39A7001BCF7A /* confirmSheduleFirstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = confirmSheduleFirstTableViewCell.swift; sourceTree = "<group>"; };
+		01413CD725FF3D00001BCF7A /* ConfirmScheduleSecondTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleSecondTableViewCell.swift; sourceTree = "<group>"; };
+		01413CD925FF6D8C001BCF7A /* ConfirmScheduleFirstCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleFirstCollectionViewCell.swift; sourceTree = "<group>"; };
+		01413CDB25FF6EFD001BCF7A /* confirmScheduleThirdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = confirmScheduleThirdTableViewCell.swift; sourceTree = "<group>"; };
 		01438EF92589EAE400C70011 /* ScheduleClassDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleClassDetailsTableViewCell.swift; path = "Home Guru/Model/Custom Cells/My Classes/ScheduleClassDetailsTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		01438EFA2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ScheduleClassDetailsTableViewCell.xib; path = "Home Guru/Model/Custom Cells/My Classes/ScheduleClassDetailsTableViewCell.xib"; sourceTree = SOURCE_ROOT; };
 		01438EFD258A250800C70011 /* MyClassesDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClassesDetailsViewController.swift; sourceTree = "<group>"; };
 		0146F437258F18AF008537B8 /* MyGuruDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGuruDetailsTableViewCell.swift; sourceTree = "<group>"; };
-		01514418258E780600E83F64 /* MyGuruCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGuruCard.swift; sourceTree = "<group>"; };
-		01514419258E780600E83F64 /* MyGuruCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyGuruCard.xib; sourceTree = "<group>"; };
 		0151441C258E7CC000E83F64 /* MyGuruDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGuruDetailsViewController.swift; sourceTree = "<group>"; };
+		015206AF25FA24340049922C /* ScheduleAcademicList_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAcademicList_2ViewController.swift; sourceTree = "<group>"; };
+		015206B125FA258F0049922C /* ScheduleSubject_2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSubject_2TableViewCell.swift; sourceTree = "<group>"; };
+		015206B225FA258F0049922C /* ScheduleSubject_2TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleSubject_2TableViewCell.xib; sourceTree = "<group>"; };
 		0153073D2578C44900F98F1A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0153073F2578C86C00F98F1A /* MyClassesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClassesViewController.swift; sourceTree = "<group>"; };
 		015307412578C87A00F98F1A /* MyGurusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGurusViewController.swift; sourceTree = "<group>"; };
@@ -92,12 +142,9 @@
 		015307492578E59F00F98F1A /* MyClassInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClassInfoTableViewCell.swift; sourceTree = "<group>"; };
 		0153074C257923D600F98F1A /* ScheduledClassCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduledClassCardTableViewCell.swift; path = "Home Guru/Model/Custom Cells/My Classes/ScheduledClassCardTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		0153074D257923D600F98F1A /* ScheduledClassCardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ScheduledClassCardTableViewCell.xib; path = "Home Guru/Model/Custom Cells/My Classes/ScheduledClassCardTableViewCell.xib"; sourceTree = SOURCE_ROOT; };
+		01628ED725FCD0F50033398C /* SelectGuruTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGuruTableViewCell.swift; sourceTree = "<group>"; };
 		01638E8B258A5FEF00F95F64 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
 		01638E8D258A618400F95F64 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		01638E8F258A650E00F95F64 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
-		01638E91258A652100F95F64 /* DatePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatePickerView.xib; sourceTree = "<group>"; };
-		01638E93258A653900F95F64 /* ProgramPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramPickerView.xib; sourceTree = "<group>"; };
-		01638E95258A654E00F95F64 /* ProgramPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramPickerView.swift; sourceTree = "<group>"; };
 		01638E97258A671D00F95F64 /* ParentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentDetails.swift; sourceTree = "<group>"; };
 		016EEB6D2540398F00FE7351 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		016EEB6F254039BF00FE7351 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -115,27 +162,18 @@
 		0178EB6C25961C4800466322 /* RechargeWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeWalletViewController.swift; sourceTree = "<group>"; };
 		0178EB6F25962DBF00466322 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		0178EB7225965A1D00466322 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
-		0196347F258D0B7900DBA50E /* RegisterStudentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterStudentTableViewCell.xib; sourceTree = "<group>"; };
 		019C128A25700F6B0010122C /* AlamofireService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireService.swift; sourceTree = "<group>"; };
 		01ADA29D2598F25B00B44061 /* ScheduleSubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSubjectViewController.swift; sourceTree = "<group>"; };
 		01ADA29F2598F47900B44061 /* ScheduleAcademicListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAcademicListViewController.swift; sourceTree = "<group>"; };
 		01ADA2A12598F48D00B44061 /* ScheduleNonAcademicListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNonAcademicListViewController.swift; sourceTree = "<group>"; };
 		01ADA2A32598FEB300B44061 /* ScheduleSubjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSubjectTableViewCell.swift; sourceTree = "<group>"; };
 		01ADA2A42598FEB300B44061 /* ScheduleSubjectTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleSubjectTableViewCell.xib; sourceTree = "<group>"; };
-		01C481CE2594C91200FBFD93 /* ProfileCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardTableViewCell.swift; sourceTree = "<group>"; };
-		01C481CF2594C91200FBFD93 /* ProfileCardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCardTableViewCell.xib; sourceTree = "<group>"; };
-		01C481D22594CD2700FBFD93 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
-		01C481D32594CD2700FBFD93 /* ProfileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		01C481D72594D2B900FBFD93 /* ProfileInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoTableViewCell.swift; sourceTree = "<group>"; };
 		01C481DA2594D41400FBFD93 /* ContactUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsViewController.swift; sourceTree = "<group>"; };
 		01C481DC2594D42700FBFD93 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		01C481DE2594D43300FBFD93 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		01C481E02594E6E400FBFD93 /* ContactUsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsTableViewCell.swift; sourceTree = "<group>"; };
 		01C481E32594ED8A00FBFD93 /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
-		01C481E62594EDDE00FBFD93 /* NotificationDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailTableViewCell.swift; sourceTree = "<group>"; };
-		01C481E72594EDDE00FBFD93 /* NotificationDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationDetailTableViewCell.xib; sourceTree = "<group>"; };
-		01C481EA2594EE1C00FBFD93 /* NotificationCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCardTableViewCell.swift; sourceTree = "<group>"; };
-		01C481EB2594EE1C00FBFD93 /* NotificationCardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCardTableViewCell.xib; sourceTree = "<group>"; };
 		01C481EE25950B4700FBFD93 /* NotificationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailsViewController.swift; sourceTree = "<group>"; };
 		01C481F0259518BE00FBFD93 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHistoryViewController.swift; sourceTree = "<group>"; };
 		01E130CA253DA82500F63673 /* Home Guru Student.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Home Guru Student.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,9 +185,21 @@
 		01E130E7253DA8D100F63673 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		01E130E9253DA92100F63673 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		01E130EB253DA92C00F63673 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		01E7D48425FC88440054D177 /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
+		01E7D48625FC8D4A0054D177 /* customButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customButtonTableViewCell.swift; sourceTree = "<group>"; };
+		01E7D48725FC8D4A0054D177 /* customButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = customButtonTableViewCell.xib; sourceTree = "<group>"; };
+		01E7D48A25FC9F390054D177 /* SelectGuruViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGuruViewController.swift; sourceTree = "<group>"; };
+		01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myRegisterViewController.swift; sourceTree = "<group>"; };
+		01F4BE3325F8F4E000326D12 /* myRegisterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myRegisterTableViewCell.swift; sourceTree = "<group>"; };
 		01F826BA258A373F00AA03FA /* RegisterStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStudentViewController.swift; sourceTree = "<group>"; };
 		01F826BD258A37F300AA03FA /* RegisterParentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterParentTableViewCell.swift; sourceTree = "<group>"; };
 		01F826BF258A387E00AA03FA /* RegisterStudentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStudentTableViewCell.swift; sourceTree = "<group>"; };
+		01FA8B3125FB38640044C209 /* ScheduleAcademicList_3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAcademicList_3ViewController.swift; sourceTree = "<group>"; };
+		01FA8B3325FB42140044C209 /* ScheduleAcademicList_4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAcademicList_4ViewController.swift; sourceTree = "<group>"; };
+		01FA8B3525FB43160044C209 /* ScheduleSubject_4TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSubject_4TableViewCell.swift; sourceTree = "<group>"; };
+		01FA8B3625FB43160044C209 /* ScheduleSubject_4TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleSubject_4TableViewCell.xib; sourceTree = "<group>"; };
+		01FA8B3925FB4E5F0044C209 /* ScheduleDurationTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDurationTimeViewController.swift; sourceTree = "<group>"; };
+		01FA8B3C25FB8D200044C209 /* DurationTimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationTimeTableViewCell.swift; sourceTree = "<group>"; };
 		66741D6486074F71FE1F8CE0 /* Pods-Home Guru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Home Guru.release.xcconfig"; path = "Target Support Files/Pods-Home Guru/Pods-Home Guru.release.xcconfig"; sourceTree = "<group>"; };
 		6D8A0D551E7B6F1213709C33 /* Pods_Home_Guru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Home_Guru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E8731874D979584D038267 /* Pods-Home Guru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Home Guru.debug.xcconfig"; path = "Target Support Files/Pods-Home Guru/Pods-Home Guru.debug.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +217,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		011688B42600BD4B005E1701 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				011688B52600BD89005E1701 /* addProfileTableViewCell.swift */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
 		0146F436258F1892008537B8 /* My Gurus */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,8 +236,8 @@
 		01514417258E77DF00E83F64 /* My Gurus */ = {
 			isa = PBXGroup;
 			children = (
-				01514418258E780600E83F64 /* MyGuruCard.swift */,
-				01514419258E780600E83F64 /* MyGuruCard.xib */,
+				011294DB25F5F92B00308A91 /* MyGuruCard.xib */,
+				011294DD25F5F94000308A91 /* MyGuruCard.swift */,
 			);
 			path = "My Gurus";
 			sourceTree = "<group>";
@@ -210,6 +268,7 @@
 				01C481DA2594D41400FBFD93 /* ContactUsViewController.swift */,
 				01C481DE2594D43300FBFD93 /* AccountViewController.swift */,
 				01C481D92594D3FD00FBFD93 /* Wallet */,
+				011688B22600BC20005E1701 /* addProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -253,6 +312,14 @@
 				01438EFA2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.xib */,
 				01ADA2A32598FEB300B44061 /* ScheduleSubjectTableViewCell.swift */,
 				01ADA2A42598FEB300B44061 /* ScheduleSubjectTableViewCell.xib */,
+				015206B125FA258F0049922C /* ScheduleSubject_2TableViewCell.swift */,
+				015206B225FA258F0049922C /* ScheduleSubject_2TableViewCell.xib */,
+				01FA8B3525FB43160044C209 /* ScheduleSubject_4TableViewCell.swift */,
+				01FA8B3625FB43160044C209 /* ScheduleSubject_4TableViewCell.xib */,
+				01E7D48625FC8D4A0054D177 /* customButtonTableViewCell.swift */,
+				01E7D48725FC8D4A0054D177 /* customButtonTableViewCell.xib */,
+				01628ED725FCD0F50033398C /* SelectGuruTableViewCell.swift */,
+				01413CD325FF3084001BCF7A /* ConfirmScheduleViewController.swift */,
 			);
 			name = "My Classes";
 			path = "Home Guru/View/XIB's/My Classes";
@@ -298,6 +365,12 @@
 				01ADA29D2598F25B00B44061 /* ScheduleSubjectViewController.swift */,
 				01ADA29F2598F47900B44061 /* ScheduleAcademicListViewController.swift */,
 				01ADA2A12598F48D00B44061 /* ScheduleNonAcademicListViewController.swift */,
+				015206AF25FA24340049922C /* ScheduleAcademicList_2ViewController.swift */,
+				01FA8B3125FB38640044C209 /* ScheduleAcademicList_3ViewController.swift */,
+				01FA8B3325FB42140044C209 /* ScheduleAcademicList_4ViewController.swift */,
+				01FA8B3925FB4E5F0044C209 /* ScheduleDurationTimeViewController.swift */,
+				01E7D48A25FC9F390054D177 /* SelectGuruViewController.swift */,
+				011688B02600849E005E1701 /* SelectScheduleViewController.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -313,7 +386,7 @@
 		0196347D258D0AF700DBA50E /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				0196347F258D0B7900DBA50E /* RegisterStudentTableViewCell.xib */,
+				011294DF25F5FB3200308A91 /* RegisterStudentTableViewCell.xib */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -331,10 +404,10 @@
 		01C481CD2594C84800FBFD93 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				01C481CE2594C91200FBFD93 /* ProfileCardTableViewCell.swift */,
-				01C481CF2594C91200FBFD93 /* ProfileCardTableViewCell.xib */,
-				01C481D22594CD2700FBFD93 /* ProfileCollectionViewCell.swift */,
-				01C481D32594CD2700FBFD93 /* ProfileCollectionViewCell.xib */,
+				011294E125F60AF500308A91 /* ProfileCardTableViewCell.swift */,
+				011294E325F60B0400308A91 /* ProfileCardTableViewCell.xib */,
+				011294E525F60B3D00308A91 /* ProfileCollectionViewCell.swift */,
+				011294E725F60B4D00308A91 /* ProfileCollectionViewCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -370,10 +443,10 @@
 		01C481E52594EDB000FBFD93 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
-				01C481E62594EDDE00FBFD93 /* NotificationDetailTableViewCell.swift */,
-				01C481E72594EDDE00FBFD93 /* NotificationDetailTableViewCell.xib */,
-				01C481EA2594EE1C00FBFD93 /* NotificationCardTableViewCell.swift */,
-				01C481EB2594EE1C00FBFD93 /* NotificationCardTableViewCell.xib */,
+				011294D325F5F84600308A91 /* NotificationDetailTableViewCell.xib */,
+				011294D525F5F85C00308A91 /* NotificationDetailTableViewCell.swift */,
+				011294D725F5F88300308A91 /* NotificationCardTableViewCell.xib */,
+				011294D925F5F89100308A91 /* NotificationCardTableViewCell.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -414,6 +487,7 @@
 		01E130E2253DA84100F63673 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01FA8B3B25FB8CDF0044C209 /* cell */,
 				01E130E5253DA87200F63673 /* Storyboard */,
 				01E130E4253DA86800F63673 /* XIB's */,
 			);
@@ -432,6 +506,7 @@
 				0153073A2578C3BE00F98F1A /* My Gurus */,
 				0153073C2578C3D400F98F1A /* Notifications */,
 				0153073B2578C3CA00F98F1A /* Profile */,
+				01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -439,15 +514,16 @@
 		01E130E4253DA86800F63673 /* XIB's */ = {
 			isa = PBXGroup;
 			children = (
-				01638E91258A652100F95F64 /* DatePickerView.xib */,
-				01638E8F258A650E00F95F64 /* DatePickerView.swift */,
-				01638E93258A653900F95F64 /* ProgramPickerView.xib */,
-				01638E95258A654E00F95F64 /* ProgramPickerView.swift */,
+				011294CB25F5F76200308A91 /* DatePickerView.swift */,
+				011294CD25F5F78E00308A91 /* DatePickerView.xib */,
+				011294CF25F5F7BD00308A91 /* ProgramPickerView.xib */,
+				011294D125F5F7C700308A91 /* ProgramPickerView.swift */,
 				01C481CD2594C84800FBFD93 /* Profile */,
 				01C481E52594EDB000FBFD93 /* Notification */,
 				0196347D258D0AF700DBA50E /* Register */,
 				01514417258E77DF00E83F64 /* My Gurus */,
 				0153074B2579237700F98F1A /* My Classes */,
+				01F4BE3325F8F4E000326D12 /* myRegisterTableViewCell.swift */,
 			);
 			path = "XIB's";
 			sourceTree = "<group>";
@@ -468,6 +544,8 @@
 				01E130EB253DA92C00F63673 /* Helper.swift */,
 				016EEB7325403B0E00FE7351 /* Constants.swift */,
 				016EEB7525403B3C00FE7351 /* URLManager.swift */,
+				01E7D48425FC88440054D177 /* PaddedLabel.swift */,
+				011688AE26007609005E1701 /* DynamicHeightCollectionView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -479,6 +557,19 @@
 				01F826BF258A387E00AA03FA /* RegisterStudentTableViewCell.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		01FA8B3B25FB8CDF0044C209 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				011688B42600BD4B005E1701 /* profile */,
+				01FA8B3C25FB8D200044C209 /* DurationTimeTableViewCell.swift */,
+				01413CD525FF39A7001BCF7A /* confirmSheduleFirstTableViewCell.swift */,
+				01413CD725FF3D00001BCF7A /* ConfirmScheduleSecondTableViewCell.swift */,
+				01413CD925FF6D8C001BCF7A /* ConfirmScheduleFirstCollectionViewCell.swift */,
+				01413CDB25FF6EFD001BCF7A /* confirmScheduleThirdTableViewCell.swift */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		21C33B705491AC1711B7DD0C /* Pods */ = {
@@ -559,20 +650,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01963481258D0B7900DBA50E /* RegisterStudentTableViewCell.xib in Resources */,
-				01C481D52594CD2700FBFD93 /* ProfileCollectionViewCell.xib in Resources */,
-				01638E92258A652100F95F64 /* DatePickerView.xib in Resources */,
-				01638E94258A653900F95F64 /* ProgramPickerView.xib in Resources */,
+				011294D025F5F7BD00308A91 /* ProgramPickerView.xib in Resources */,
+				011294E425F60B0400308A91 /* ProfileCardTableViewCell.xib in Resources */,
+				015206B425FA258F0049922C /* ScheduleSubject_2TableViewCell.xib in Resources */,
 				01ADA2A62598FEB300B44061 /* ScheduleSubjectTableViewCell.xib in Resources */,
-				01C481D12594C91200FBFD93 /* ProfileCardTableViewCell.xib in Resources */,
-				01C481E92594EDDE00FBFD93 /* NotificationDetailTableViewCell.xib in Resources */,
+				011294D425F5F84600308A91 /* NotificationDetailTableViewCell.xib in Resources */,
+				011294CE25F5F78F00308A91 /* DatePickerView.xib in Resources */,
+				01E7D48925FC8D4A0054D177 /* customButtonTableViewCell.xib in Resources */,
+				011294E025F5FB3200308A91 /* RegisterStudentTableViewCell.xib in Resources */,
 				0153074F257923D600F98F1A /* ScheduledClassCardTableViewCell.xib in Resources */,
+				011294D825F5F88300308A91 /* NotificationCardTableViewCell.xib in Resources */,
 				01E130DA253DA82F00F63673 /* LaunchScreen.storyboard in Resources */,
-				0151441B258E780600E83F64 /* MyGuruCard.xib in Resources */,
-				01C481ED2594EE1C00FBFD93 /* NotificationCardTableViewCell.xib in Resources */,
 				01438EFC2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.xib in Resources */,
+				011294E825F60B4D00308A91 /* ProfileCollectionViewCell.xib in Resources */,
 				01E130D7253DA82F00F63673 /* Assets.xcassets in Resources */,
 				01E130D5253DA82500F63673 /* Main.storyboard in Resources */,
+				01FA8B3825FB43160044C209 /* ScheduleSubject_4TableViewCell.xib in Resources */,
+				011294DC25F5F92C00308A91 /* MyGuruCard.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,16 +736,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01C481E82594EDDE00FBFD93 /* NotificationDetailTableViewCell.swift in Sources */,
 				016EEB70254039BF00FE7351 /* SignInViewController.swift in Sources */,
 				016EEB6E2540398F00FE7351 /* BaseViewController.swift in Sources */,
-				01C481D42594CD2700FBFD93 /* ProfileCollectionViewCell.swift in Sources */,
+				01628ED825FCD0F50033398C /* SelectGuruTableViewCell.swift in Sources */,
 				0178EB6D25961C4800466322 /* RechargeWalletViewController.swift in Sources */,
+				01FA8B3425FB42140044C209 /* ScheduleAcademicList_4ViewController.swift in Sources */,
 				015307422578C87A00F98F1A /* MyGurusViewController.swift in Sources */,
-				01638E96258A654E00F95F64 /* ProgramPickerView.swift in Sources */,
 				01C481EF25950B4700FBFD93 /* NotificationDetailsViewController.swift in Sources */,
 				01ADA2A22598F48D00B44061 /* ScheduleNonAcademicListViewController.swift in Sources */,
 				01ADA2A02598F47900B44061 /* ScheduleAcademicListViewController.swift in Sources */,
+				011688B62600BD89005E1701 /* addProfileTableViewCell.swift in Sources */,
 				0178EB7025962DBF00466322 /* ScheduleViewController.swift in Sources */,
 				016EEB7625403B3C00FE7351 /* URLManager.swift in Sources */,
 				01C481DD2594D42700FBFD93 /* WalletViewController.swift in Sources */,
@@ -661,39 +755,61 @@
 				0153074A2578E59F00F98F1A /* MyClassInfoTableViewCell.swift in Sources */,
 				01F826BB258A373F00AA03FA /* RegisterStudentViewController.swift in Sources */,
 				016EEB802540460C00FE7351 /* OTPVerificationViewController.swift in Sources */,
+				01FA8B3D25FB8D200044C209 /* DurationTimeTableViewCell.swift in Sources */,
 				01C481DF2594D43300FBFD93 /* AccountViewController.swift in Sources */,
 				015307462578C89200F98F1A /* ProfileViewController.swift in Sources */,
 				01C481F1259518BE00FBFD93 /* PaymentHistoryViewController.swift in Sources */,
 				01E130CE253DA82500F63673 /* AppDelegate.swift in Sources */,
+				01F4BE3425F8F4E000326D12 /* myRegisterTableViewCell.swift in Sources */,
+				011688AF26007609005E1701 /* DynamicHeightCollectionView.swift in Sources */,
 				01E130EC253DA92C00F63673 /* Helper.swift in Sources */,
 				01C481D82594D2B900FBFD93 /* ProfileInfoTableViewCell.swift in Sources */,
 				01638E8C258A5FEF00F95F64 /* SearchLocationViewController.swift in Sources */,
+				015206B325FA258F0049922C /* ScheduleSubject_2TableViewCell.swift in Sources */,
 				01E130E8253DA8D100F63673 /* ColorPalette.swift in Sources */,
+				011294D625F5F85C00308A91 /* NotificationDetailTableViewCell.swift in Sources */,
+				011294DE25F5F94100308A91 /* MyGuruCard.swift in Sources */,
+				011294E225F60AF600308A91 /* ProfileCardTableViewCell.swift in Sources */,
 				01C481E12594E6E500FBFD93 /* ContactUsTableViewCell.swift in Sources */,
+				011294D225F5F7C800308A91 /* ProgramPickerView.swift in Sources */,
 				01E130EA253DA92100F63673 /* Extension.swift in Sources */,
 				0178EB6B2596199400466322 /* PaymentHistoryTableViewCell.swift in Sources */,
+				01413CD425FF3084001BCF7A /* ConfirmScheduleViewController.swift in Sources */,
+				01413CD825FF3D00001BCF7A /* ConfirmScheduleSecondTableViewCell.swift in Sources */,
+				01E7D48825FC8D4A0054D177 /* customButtonTableViewCell.swift in Sources */,
+				011294DA25F5F89100308A91 /* NotificationCardTableViewCell.swift in Sources */,
 				0153074E257923D600F98F1A /* ScheduledClassCardTableViewCell.swift in Sources */,
-				01C481D02594C91200FBFD93 /* ProfileCardTableViewCell.swift in Sources */,
 				01438EFB2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.swift in Sources */,
+				011294E625F60B3E00308A91 /* ProfileCollectionViewCell.swift in Sources */,
+				011688B32600BC21005E1701 /* addProfileViewController.swift in Sources */,
+				01F4BE3225F8F46F00326D12 /* myRegisterViewController.swift in Sources */,
+				011688B12600849F005E1701 /* SelectScheduleViewController.swift in Sources */,
+				01FA8B3225FB38640044C209 /* ScheduleAcademicList_3ViewController.swift in Sources */,
+				01FA8B3A25FB4E5F0044C209 /* ScheduleDurationTimeViewController.swift in Sources */,
+				01413CD625FF39A7001BCF7A /* confirmSheduleFirstTableViewCell.swift in Sources */,
+				01413CDC25FF6EFD001BCF7A /* confirmScheduleThirdTableViewCell.swift in Sources */,
 				01F826BE258A37F300AA03FA /* RegisterParentTableViewCell.swift in Sources */,
 				01438EFE258A250800C70011 /* MyClassesDetailsViewController.swift in Sources */,
+				01413CDA25FF6D8C001BCF7A /* ConfirmScheduleFirstCollectionViewCell.swift in Sources */,
 				0151441D258E7CC000E83F64 /* MyGuruDetailsViewController.swift in Sources */,
-				01C481EC2594EE1C00FBFD93 /* NotificationCardTableViewCell.swift in Sources */,
 				01638E8E258A618400F95F64 /* MapViewController.swift in Sources */,
 				019C128B25700F6B0010122C /* AlamofireService.swift in Sources */,
-				01638E90258A650E00F95F64 /* DatePickerView.swift in Sources */,
 				015307402578C86C00F98F1A /* MyClassesViewController.swift in Sources */,
+				01E7D48525FC88440054D177 /* PaddedLabel.swift in Sources */,
 				01ADA29E2598F25B00B44061 /* ScheduleSubjectViewController.swift in Sources */,
 				0178EB7325965A1D00466322 /* ScheduleTableViewCell.swift in Sources */,
 				01638E98258A671E00F95F64 /* ParentDetails.swift in Sources */,
 				01C481E42594ED8A00FBFD93 /* NotificationsTableViewCell.swift in Sources */,
 				0146F438258F18AF008537B8 /* MyGuruDetailsTableViewCell.swift in Sources */,
 				01F826C0258A387E00AA03FA /* RegisterStudentTableViewCell.swift in Sources */,
-				0151441A258E780600E83F64 /* MyGuruCard.swift in Sources */,
 				0153073E2578C44900F98F1A /* HomeViewController.swift in Sources */,
 				016EEB7425403B0E00FE7351 /* Constants.swift in Sources */,
 				015307442578C88700F98F1A /* NotificationsViewController.swift in Sources */,
+				01E7D48B25FC9F390054D177 /* SelectGuruViewController.swift in Sources */,
+				011294CC25F5F76300308A91 /* DatePickerView.swift in Sources */,
 				01C481DB2594D41400FBFD93 /* ContactUsViewController.swift in Sources */,
+				015206B025FA24340049922C /* ScheduleAcademicList_2ViewController.swift in Sources */,
+				01FA8B3725FB43160044C209 /* ScheduleSubject_4TableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

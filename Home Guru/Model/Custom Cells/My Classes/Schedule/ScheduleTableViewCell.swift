@@ -15,9 +15,11 @@ class ScheduleTableViewCell: UITableViewCell {
     @IBOutlet weak var timingsBtn: UIButton!
     @IBOutlet weak var noOfWeeksBtn: UIButton!
     
+    @IBOutlet weak var nxtBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.nxtBtn.layer.cornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ProfileViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, ProfileEditProtocol {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ProfileEditProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     var profileFields : [String] = ["Account","Wallet","Contact Us","Signout"]
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        hideNavbar()
+       // hideNavbar()
     }
     
     override func viewDidLoad() {
@@ -23,6 +23,8 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "ProfileCardTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileCardTableViewCell")
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,10 +34,12 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCardTableViewCell", for: indexPath) as? ProfileCardTableViewCell
-            cell!.delegate = self
-            cell!.selectionStyle = .none
-            return cell!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCardTableViewCell", for: indexPath) as! ProfileCardTableViewCell
+            cell.profileImage.image = imageWithGradient(img: cell.profileImage.image)
+           // cell!.profileEditDelegate = self
+            cell.delegate = self
+            cell.selectionStyle = .none
+            return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileInfoCell", for: indexPath) as? ProfileInfoTableViewCell
             cell?.titleLabel.text = profileFields[indexPath.row-1]
@@ -60,6 +64,7 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
             self.navigationController?.pushViewController(vc!, animated: true)
         case 4:
             // code for logout
+            UserDefaults.standard.set(false, forKey: Constants.loginStatus)
             print("....logout...")
         default:
             print(".....")
@@ -71,7 +76,9 @@ class ProfileViewController: BaseViewController, UITableViewDataSource, UITableV
     }
     
     func addProfile() {
-        // navigate to add profile screen
+           let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "addProfile") as? addProfileViewController
+                 vc!.hidesBottomBarWhenPushed = true
+                 self.present(vc!, animated: true, completion: nil)
     }
     
     

@@ -8,14 +8,17 @@
 
 import UIKit
 import XLPagerTabStrip
-
 class ScheduleSubjectViewController: ButtonBarPagerTabStripViewController {
+    
+    @IBOutlet weak var backBtn: UIButton!
     
     override func viewDidLoad() {
         configureButtonBar()
         super.viewDidLoad()
-        buttonBarView.backgroundColor = ColorPalette.homeGuruBlueColor
+        buttonBarView.backgroundColor = ColorPalette.homeGuruLiteBlueColor
         containerView.backgroundColor = ColorPalette.homeGuruBlueColor
+        
+        backBtn.layer.cornerRadius = 5
     }
     
     override func viewDidAppear(_ animated: Bool) {

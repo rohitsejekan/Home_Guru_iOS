@@ -23,11 +23,11 @@
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jc8-dF-Owq">
                                     <rect key="frame" x="0.0" y="88.5" width="374" height="200"/>
                                     <subviews>
-                                        <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zda-3R-pxt">
-                                            <rect key="frame" x="334" y="0.0" width="40" height="40"/>
+                                        <button clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zda-3R-pxt">
+                                            <rect key="frame" x="344" y="10" width="20" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="DfP-4a-OLT"/>
-                                                <constraint firstAttribute="width" constant="40" id="Klv-Wf-YTG"/>
+                                                <constraint firstAttribute="height" constant="20" id="DfP-4a-OLT"/>
+                                                <constraint firstAttribute="width" constant="20" id="Klv-Wf-YTG"/>
                                             </constraints>
                                             <color key="tintColor" red="0.94509803920000002" green="0.37647058820000001" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" image="close">
@@ -46,22 +46,23 @@
                                             </connections>
                                         </button>
                                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYy-rL-99T">
-                                            <rect key="frame" x="0.0" y="40" width="374" height="160"/>
+                                            <rect key="frame" x="0.0" y="30" width="374" height="170"/>
+                                            <color key="backgroundColor" red="0.0" green="0.035294117647058823" blue="0.086274509803921567" alpha="0.98493685787671237" colorSpace="custom" customColorSpace="sRGB"/>
                                         </pickerView>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" red="0.0" green="0.035294117649999998" blue="0.086274509799999996" alpha="0.98493685789999996" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="zYy-rL-99T" firstAttribute="leading" secondItem="jc8-dF-Owq" secondAttribute="leading" id="2sa-57-swH"/>
                                         <constraint firstAttribute="bottom" secondItem="zYy-rL-99T" secondAttribute="bottom" id="3hF-ja-XgJ"/>
                                         <constraint firstAttribute="trailing" secondItem="zYy-rL-99T" secondAttribute="trailing" id="SI5-my-pMG"/>
-                                        <constraint firstItem="Zda-3R-pxt" firstAttribute="top" secondItem="jc8-dF-Owq" secondAttribute="top" id="Vxp-3F-CsG"/>
+                                        <constraint firstItem="Zda-3R-pxt" firstAttribute="top" secondItem="jc8-dF-Owq" secondAttribute="top" constant="10" id="Vxp-3F-CsG"/>
                                         <constraint firstAttribute="height" constant="200" id="inH-Ql-QBC"/>
                                         <constraint firstItem="zYy-rL-99T" firstAttribute="top" secondItem="Zda-3R-pxt" secondAttribute="bottom" id="qLX-9d-tgL"/>
-                                        <constraint firstAttribute="trailing" secondItem="Zda-3R-pxt" secondAttribute="trailing" id="w96-42-saN"/>
+                                        <constraint firstAttribute="trailing" secondItem="Zda-3R-pxt" secondAttribute="trailing" constant="10" id="w96-42-saN"/>
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" red="0.0" green="0.035294117649999998" blue="0.086274509799999996" alpha="0.63120719180410967" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="jc8-dF-Owq" firstAttribute="leading" secondItem="njq-rD-iyr" secondAttribute="leading" id="K4H-Pz-e8q"/>
                                 <constraint firstAttribute="trailing" secondItem="jc8-dF-Owq" secondAttribute="trailing" id="RLa-dq-dE7"/>
@@ -69,7 +70,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.0" green="0.035294117649999998" blue="0.086274509799999996" alpha="0.98493685789999996" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="njq-rD-iyr" secondAttribute="bottom" id="C79-jz-5d2"/>
                         <constraint firstItem="njq-rD-iyr" firstAttribute="leading" secondItem="FwH-nT-EYa" secondAttribute="leading" constant="20" id="XHu-Ue-I1a"/>
@@ -78,7 +79,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" red="0.0" green="0.035294117649999998" blue="0.086274509799999996" alpha="0.59455265413287672" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="FwH-nT-EYa" firstAttribute="top" secondItem="uky-Ue-KrG" secondAttribute="top" id="QAw-s6-ZRe"/>
                 <constraint firstAttribute="bottom" secondItem="FwH-nT-EYa" secondAttribute="bottom" id="RW3-SZ-jUQ"/>
@@ -91,7 +92,7 @@
                 <outlet property="pickerView" destination="zYy-rL-99T" id="C8G-B7-TMe"/>
                 <outlet property="programPickerOuterView" destination="jc8-dF-Owq" id="CYe-W5-Pvw"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="293.63839285714283"/>
+            <point key="canvasLocation" x="-567" y="299"/>
         </view>
     </objects>
     <resources>

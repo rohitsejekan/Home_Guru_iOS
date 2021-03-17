@@ -11,21 +11,21 @@ import UIKit
 enum PickerType {
     case timings, weeks
 }
-
 class ScheduleViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, ProgramPickerProtocol {
     
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var backView: UIButton!
     var programPickerView : ProgramPickerView?
     var weeksList : [String] = ["2 weeks","3 weeks","4 weeks"]
     var timingsList : [String] = ["09.00 am - 10.00 am","11.00 am - 12.00 pm","01.00 pm - 02.00 pm"]
     var pickerType : PickerType = .timings
-    var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"09.00 am - 10.00 am","weeks":"2 weeks"]
+    var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"select","weeks":"2 weeks"]
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         tableView.estimatedRowHeight = 498.0
         tableView.rowHeight = UITableView.automaticDimension
+        backView.layer.cornerRadius = 5
     }
     
     @IBAction func chooseClassTypeAction(_ sender: UIButton) {
@@ -40,18 +40,17 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
     @IBAction func noOfWeeksAction(_ sender: UIButton) {
         showProgramPicker(pickerType: .weeks)
     }
-    
     @IBAction func nextAction(_ sender: UIButton) {
-        let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleSubjectViewController") as? ScheduleSubjectViewController
+        let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleSubjectViewController") as! ScheduleSubjectViewController
         setNavigationBackTitle(title: "Select Subject")
-        self.navigationController?.pushViewController(vc!, animated: false)
+        presentDetail(vc)
     }
     
     func showProgramPicker(pickerType: PickerType) {
         self.pickerType = pickerType
         programPickerView = Bundle.main.loadNibNamed("ProgramPickerView", owner: self, options: nil)?.first as! ProgramPickerView
         programPickerView?.delegate = self
-        programPickerView?.programList = (pickerType == .timings) ? timingsList : weeksList
+       // programPickerView?.programList = (pickerType == .timings) ? timingsList : weeksList
         programPickerView?.showProgramPickerView(onView: self.tableView)
         tableView.isScrollEnabled = false
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.none, animated: false)
@@ -68,7 +67,8 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
         cell?.onlineBtn.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.homeGuruOrangeColor : ColorPalette.whiteColor, for: .normal)
         cell?.onlineBtn.setImage(UIImage(named:(scheduleDetails["classType"] == "Online Class") ?  "orangeVideoClass" : "whiteVideoClass") , for: .normal)
         cell?.atHomeBtn.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.whiteColor : ColorPalette.homeGuruOrangeColor, for: .normal)
-        cell?.atHomeBtn.setImage(UIImage(named: (scheduleDetails["classType"] == "Online Class") ? "greyAtHome" : "whiteAtHome"), for: .normal)
+        cell?.atHomeBtn.setImage(UIImage(named: (scheduleDetails["classType"] == "Online Class") ? "whiteAtHome" : "orangeVideoClass"), for: .normal)
+        cell?.selectionStyle = .none
         return cell!
     }
     
@@ -78,7 +78,7 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
         programPickerView?.removeFromSuperview()
     }
     
-    func getSelectedProgram(data: String) {
+    func getSelectedProgram(programName data: String) {
         scheduleDetails[pickerType == .timings ? "timings" : "weeks"] = data
         tableView.isScrollEnabled = true
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
@@ -86,4 +86,7 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
 
+    @IBAction func goBack(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

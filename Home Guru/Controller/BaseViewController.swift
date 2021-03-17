@@ -18,19 +18,20 @@ class BaseViewController:  UIViewController,UINavigationControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        UINavigationBar.appearance().clipsToBounds = true
+       
         let statusBar : UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
         statusBar.backgroundColor = ColorPalette.homeGuruBlueColor
     }
-    
+
     func onInit() {
-        setNavigationBar()
+        //setNavigationBar()
     }
     
     func setNavigationBar() {
         guard let navigationController = self.navigationController else { return }
         navigationController.navigationBar.tintColor = ColorPalette.homeGuruOrangeColor
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.backgroundColor = ColorPalette.homeGuruBlueColor
         self.navigationController?.navigationBar.layer.masksToBounds = false

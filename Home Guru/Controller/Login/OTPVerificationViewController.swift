@@ -37,8 +37,12 @@ class OTPVerificationViewController: BaseViewController {
         print("Logged in user")
         UserDefaults.standard.set(true, forKey: Constants.loginStatus)
         DispatchQueue.main.async {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-            appDelegate.isLoggedIn()
+            // direct login if logged in
+//            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+//            appDelegate.isLoggedIn()
+            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "myRegisterVC") as! myRegisterViewController
+            vc.hidesBottomBarWhenPushed = true
+            self.present(vc, animated: true, completion: nil)
         }
     }
     

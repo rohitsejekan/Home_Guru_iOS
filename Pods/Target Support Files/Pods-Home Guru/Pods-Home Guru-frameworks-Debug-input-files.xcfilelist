@@ -8,4 +8,5 @@ ${BUILT_PRODUCTS_DIR}/SKCountryPicker/SKCountryPicker.framework
 ${BUILT_PRODUCTS_DIR}/SVPinView/SVPinView.framework
 ${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
+${BUILT_PRODUCTS_DIR}/UIViewController+NavigationBar/UIViewController_NavigationBar.framework
 ${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework

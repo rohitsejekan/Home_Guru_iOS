@@ -73,11 +73,12 @@ class SearchLocationViewController: UIViewController, UISearchBarDelegate, UITab
         let customSearchBar = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 36))
         customSearchBar.layer.cornerRadius = 8
         customSearchBar.clipsToBounds = true
-        customSearchBar.backgroundColor = UIColor.white
+        //customSearchBar.backgroundColor = UIColor.white
         searchController.searchBar.setSearchFieldBackgroundImage(customSearchBar.asImage(), for: .normal)
         searchController.searchBar.layer.cornerRadius = searchController.searchBar.frame.size.height/2
         searchController.searchBar.layer.masksToBounds = true
-        searchController.searchBar.layer.borderColor = ColorPalette.textColor.cgColor
+      
+        searchController.searchBar.backgroundColor = ColorPalette.homeGuruBlueColor
         searchController.searchBar.layer.borderWidth = 1.0
         searchController.searchBar.setBackgroundImage(customSearchBar.asImage(), for: .any, barMetrics: .default)
         searchBarOuterView.addSubview(searchController.searchBar)

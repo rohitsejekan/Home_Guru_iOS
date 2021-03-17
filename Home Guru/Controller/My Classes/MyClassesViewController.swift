@@ -16,31 +16,40 @@ enum DataDisplayType {
 class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    var overlayBool: Bool = false
     
     var points : Int = 0
     var scheduledClassInfo : [[String:Any]] = [["classType":"old class","dateObj":Date()],["classType":"today","dateObj":Date()],["classType":"demo today","dateObj":Date()],["classType":"future", "dateObj":Date()],["classType":"future demo","dateObj":Date()]]
     var classDetails : [Int] = []
     var showData : Bool = false
     var dataDisplayType : DataDisplayType = .homeInfo
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideNavbar()
+        
+        //navigationController?.hidesBarsOnTap = true
         tableView.estimatedRowHeight = 400.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "ScheduledClassCardTableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduledClassCardTableViewCell")
+        navigationController?.delegate = self
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-//        if UserDefaults.standard.bool(forKey: Constants.isRegistered) {
+        super.viewWillAppear(animated)
+          hideNavbar()
+        self.navigationController?.navigationBar.frame = CGRect(x: 0,y: 0,width: 0,height: 0);
+               //        if UserDefaults.standard.bool(forKey: Constants.isRegistered) {
 //            getScheduledClassInfo()
 //        } else {
             self.dataDisplayType = .registerInfo
             reloadData()
 //        }
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        hideNavbar()
+    }
+
+
     func reloadData() {
         DispatchQueue.main.async {
             self.showData = true
@@ -50,21 +59,21 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
     
     @IBAction func bookClassAction(_ sender: UIButton) {
         let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleViewController") as? ScheduleViewController
-        setNavigationBackTitle(title: "Schedule")
+        //setNavigationBackTitle(title: "Schedule")
         self.navigationController?.pushViewController(vc!, animated: false)
     }
     
     @IBAction func registerAction(_ sender: UIButton) {
         switch sender.currentTitle {
         case "REGISTER":
-//            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "RegisterParentViewController") as? RegisterParentViewController
-//            setNavigationBackTitle(title: "Register")
-//            vc!.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(vc!, animated: false)
-            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleViewController") as? ScheduleViewController
-            setNavigationBackTitle(title: "Schedule")
-            vc!.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc!, animated: false)
+            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "RegisterParentViewController") as! RegisterParentViewController
+            //setNavigationBackTitle(title: "Register")
+            vc.hidesBottomBarWhenPushed = true
+            self.present(vc, animated: true, completion: nil)
+//            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleViewController") as! ScheduleViewController
+//            //setNavigationBackTitle(title: "Schedule")
+//            vc.hidesBottomBarWhenPushed = true
+//            self.present(vc, animated: true, completion: nil)
         case "ADD CREDITS":
             print(".....")
 //            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "AddCreditViewController") as? AddCreditViewController
@@ -113,10 +122,27 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
     func showHomeInfoData(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyClassInfoTableViewCell", for: indexPath) as? MyClassInfoTableViewCell
         cell?.actionBtn.setTitle(dataDisplayType == .homeInfo ? "BOOK CLASS" : "REGISTER", for: .normal)
+        cell?.actionBtn.layer.cornerRadius = 0
         cell?.selectionStyle = .none
+       // cell?.bgImage.image = imageWithGradient(img:cell?.bgImage.image!)
+        if overlayBool == false{
+            cell!.overlayView.backgroundColor = ColorPalette.homeGuruBlueColor.withAlphaComponent(0.9)
+            overlayBool = true
+        }
+        
+      
         return cell!
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if dataDisplayType == .homeInfo || dataDisplayType == .registerInfo {
+            if indexPath.row == 0{
+                tableView.isScrollEnabled = false
+                return tableView.frame.height
+            }
+            
+        }
+        return UITableView.automaticDimension
+    }
     func showScheduledClassInfo(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        if scheduledClassInfo[indexPath.row].isEmpty {
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "NoDataTableViewCell", for: indexPath) as? NoDataTableViewCell
@@ -141,7 +167,7 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
         if dataDisplayType == .scheduleInfo {
             if indexPath.row != 0 {
                 let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "MyClassesDetailsViewController") as? MyClassesDetailsViewController
-                setNavigationBackTitle(title: getDateString(format: "dd MMM yyyy (E)", date: scheduledClassInfo[indexPath.row]["dateObj"] as! Date))
+               // setNavigationBackTitle(title: getDateString(format: "dd MMM yyyy (E)", date: scheduledClassInfo[indexPath.row]["dateObj"] as! Date))
                 vc!.scheduledClassInfo = scheduledClassInfo[indexPath.row]
                 vc!.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc!, animated: false)

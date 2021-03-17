@@ -17,6 +17,7 @@ PODS:
   - SlideMenuControllerSwift (3.0.2)
   - SVPinView (1.0.11)
   - SwiftyJSON (5.0.0)
+  - "UIViewController+NavigationBar (0.3.3)"
   - XLPagerTabStrip (8.1.1)
 
 DEPENDENCIES:
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift4`)
   - SVPinView (~> 1.0)
   - SwiftyJSON
+  - "UIViewController+NavigationBar"
   - XLPagerTabStrip (~> 8.0)
 
 SPEC REPOS:
@@ -45,6 +47,7 @@ SPEC REPOS:
     - SKCountryPicker
     - SVPinView
     - SwiftyJSON
+    - "UIViewController+NavigationBar"
     - XLPagerTabStrip
 
 EXTERNAL SOURCES:
@@ -69,8 +72,9 @@ SPEC CHECKSUMS:
   SlideMenuControllerSwift: 9e8d2bba8ea9201c6207acb76e95a2841453ec9c
   SVPinView: 9b538d0ba68cdb092afe4f0f67ec84cbed079466
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  "UIViewController+NavigationBar": cbf1628fec501efe53e107c5402ee445bd20c5b7
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: a550b3803ae937f45070c81e9885208d65d2fca5
+PODFILE CHECKSUM: c1e2d6d353cf74d48453630dea7bf05b566050d3
 
 COCOAPODS: 1.9.3

@@ -10,6 +10,7 @@ import UIKit
 
 class MyGuruDetailsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var guruImage: UIImageView!
     @IBOutlet weak var guruNameLabel: UILabel!
     @IBOutlet weak var perClassAmountLabel: UILabel!
     @IBOutlet weak var firstStarImageView: UIImageView!

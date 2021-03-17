@@ -12,6 +12,7 @@ protocol StudentSelectionProtocol {
 }
 class RegisterParentTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var noOfStudentsOuterView: UIView!
     @IBOutlet weak var inputType1TextField: UITextField!
     @IBOutlet weak var selectLocationOuterView: UIView!
@@ -78,12 +79,18 @@ class RegisterParentTableViewCell: UITableViewCell {
         case 2:
             inputType1TextField.keyboardType = UIKeyboardType.emailAddress
             customTextFieldWithoutAsterikPlaceholder(text: "  Email ID", textField: inputType1TextField)
-        case 5:
+        case 3:
+            inputType1TextField.keyboardType = UIKeyboardType.emailAddress
+            customTextFieldWithoutAsterikPlaceholder(text: "  Create Password", textField: inputType1TextField)
+        case 4:
+            inputType1TextField.keyboardType = UIKeyboardType.emailAddress
+            customTextFieldWithoutAsterikPlaceholder(text: "  Confirm Password", textField: inputType1TextField)
+        case 7:
             customTextFieldPlaceholder(text: "  Pincode", textField: inputType1TextField)
             inputType1TextField.keyboardType = UIKeyboardType.numberPad
-        case 6:
+        case 8:
             customTextFieldPlaceholder(text: "  House no., Building Name", textField: inputType1TextField)
-        case 7:
+        case 9:
             customTextFieldPlaceholder(text: "  Road Name, Area, Colony", textField: inputType1TextField)
         default:
             customTextFieldWithoutAsterikPlaceholder(text: "  Landmark(Optional)", textField: inputType1TextField)
@@ -100,15 +107,23 @@ class RegisterParentTableViewCell: UITableViewCell {
             if let email = userDetails["email"] as? String {
                 inputType1TextField.text = email
             }
-        case 5:
+        case 3:
+            if let email = userDetails["create_pass"] as? String {
+                inputType1TextField.text = email
+            }
+        case 4:
+            if let email = userDetails["confirm_pass"] as? String {
+                inputType1TextField.text = email
+            }
+        case 7:
             if let pincode = address["pincode"] as? String {
                 inputType1TextField.text = pincode
             }
-        case 6:
+        case 8:
             if let house_no = address["house_no"] as? String {
                 inputType1TextField.text = house_no
             }
-        case 7:
+        case 9:
             if let area = address["area"] as? String {
                 inputType1TextField.text = area
             }

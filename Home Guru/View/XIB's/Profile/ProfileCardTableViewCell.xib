@@ -27,11 +27,16 @@
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 93" translatesAutoresizingMaskIntoConstraints="NO" id="1LO-hx-mu1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="232"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="232" id="bCn-gS-Cvq"/>
                         </constraints>
                     </imageView>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Xdj-vP-vFb">
+                    <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPj-9j-PL7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="232"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Xdj-vP-vFb">
                         <rect key="frame" x="123" y="172" width="192" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -55,19 +60,19 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uk3-Bu-h2I">
-                        <rect key="frame" x="10" y="80" width="300" height="35.5"/>
-                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="28"/>
+                        <rect key="frame" x="10" y="80" width="300" height="38"/>
+                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="30"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-6p-mnq">
-                        <rect key="frame" x="10" y="118.5" width="300" height="18"/>
+                        <rect key="frame" x="10" y="121" width="300" height="18"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81u-wY-KUl">
-                        <rect key="frame" x="10" y="136.5" width="300" height="13"/>
+                        <rect key="frame" x="10" y="139" width="300" height="13"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -80,13 +85,17 @@
                     <constraint firstItem="1LO-hx-mu1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6WL-QK-IgE"/>
                     <constraint firstItem="1LO-hx-mu1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7ac-90-aPM"/>
                     <constraint firstAttribute="trailing" secondItem="uk3-Bu-h2I" secondAttribute="trailing" constant="10" id="AVB-jT-kYc"/>
+                    <constraint firstAttribute="bottom" secondItem="wPj-9j-PL7" secondAttribute="bottom" id="Fh6-76-EFX"/>
                     <constraint firstAttribute="trailing" secondItem="81u-wY-KUl" secondAttribute="trailing" constant="10" id="GHI-Q5-fO1"/>
                     <constraint firstItem="lDB-79-bdF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Kdf-Ki-SfU"/>
+                    <constraint firstItem="wPj-9j-PL7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="LLO-T0-DtD"/>
                     <constraint firstAttribute="bottom" secondItem="Xdj-vP-vFb" secondAttribute="bottom" constant="10" id="OZz-TZ-HbR"/>
                     <constraint firstAttribute="bottom" secondItem="1LO-hx-mu1" secondAttribute="bottom" id="RJG-be-UUh"/>
                     <constraint firstAttribute="trailing" secondItem="4ka-6p-mnq" secondAttribute="trailing" constant="10" id="Tfe-Ut-tAg"/>
+                    <constraint firstItem="wPj-9j-PL7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="V9I-Ac-LUo"/>
                     <constraint firstItem="81u-wY-KUl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="aeQ-XZ-hlF"/>
                     <constraint firstAttribute="trailing" secondItem="1LO-hx-mu1" secondAttribute="trailing" id="bXg-BF-rUG"/>
+                    <constraint firstAttribute="trailing" secondItem="wPj-9j-PL7" secondAttribute="trailing" id="fAj-7e-J0L"/>
                     <constraint firstAttribute="bottom" secondItem="lDB-79-bdF" secondAttribute="bottom" constant="20" id="g9j-30-OtT"/>
                     <constraint firstItem="4ka-6p-mnq" firstAttribute="top" secondItem="uk3-Bu-h2I" secondAttribute="bottom" constant="3" id="o4n-UX-sE3"/>
                     <constraint firstItem="Xdj-vP-vFb" firstAttribute="width" secondItem="1LO-hx-mu1" secondAttribute="width" multiplier="0.6" id="pSF-o6-YTn"/>
@@ -99,6 +108,7 @@
                 <outlet property="classLabel" destination="4ka-6p-mnq" id="sWA-Rg-BiW"/>
                 <outlet property="collectionView" destination="Xdj-vP-vFb" id="tcH-je-3tN"/>
                 <outlet property="dobDetailsLabel" destination="81u-wY-KUl" id="kOM-dm-RlG"/>
+                <outlet property="profileImage" destination="1LO-hx-mu1" id="UfK-2a-zDQ"/>
                 <outlet property="studentNameLabel" destination="uk3-Bu-h2I" id="hkj-ic-x8O"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="38.839285714285715"/>

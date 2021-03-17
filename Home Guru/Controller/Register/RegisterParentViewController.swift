@@ -103,23 +103,23 @@ class RegisterParentViewController: BaseViewController, UITableViewDataSource, U
         vc!.numberOfStudents = noOfStudents
         vc!.studentDetails = [[String:Any]](repeating: [String : Any](), count: noOfStudents)
         vc!.setNavigationBackTitle(title: "Register")
-        self.navigationController?.pushViewController(vc!, animated: true)
+        self.present(vc!, animated: false, completion: nil)
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 11
+        return 13
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
-            return 190.0
-        case 1,2,5,6,7,9,8:
+            return 210.0
+        case 1,2,3,4,7,8,9,10,11:
             return 80.0
-        case 3:
+        case 5:
             return 160.0
-        case 4:
+        case 6:
             return 200.0
         default:
             return 100.0
@@ -131,22 +131,32 @@ class RegisterParentViewController: BaseViewController, UITableViewDataSource, U
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "registerParentHeaderCell", for: indexPath) as? RegisterParentTableViewCell
             cell?.selectionStyle = .none
+         
+            
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = self.view.bounds
+            gradientLayer.colors = [UIColor.clear.cgColor, UIColor.blue.cgColor]
+            gradientLayer.locations = [0.8, 1.0]
+            cell?.bgImage.layer.addSublayer(gradientLayer)
             return cell!
-        case 1,2,5,6,7,9:
+        case 1,2,3,4,7,8,9,11:
             let cell = tableView.dequeueReusableCell(withIdentifier: "registerParentInput1Cell", for: indexPath) as? RegisterParentTableViewCell
             cell?.inputType1TextField.tag = indexPath.row
+            
+
+            cell?.inputType1TextField.borderStyle = .none
             cell?.setTextFieldPlaceholder(index: indexPath.row)
             cell?.inputType1TextField.text = ""
             cell?.setValue(index: indexPath.row, userDetails: userDetails, address: address)
             cell?.selectionStyle = .none
             return cell!
-        case 3:
+        case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: "registerParentNoOfStudentInputCell", for: indexPath) as? RegisterParentTableViewCell
             cell?.setSelectedState(btn1State: (cell?.oneStudentRadioBtn)!.isSelected,btn2State: (cell?.twoStudentRadioBtn)!.isSelected,btn3State: (cell?.threeStudentRadioBtn)!.isSelected, btn4State: (cell?.fourStudentRadioBtn)!.isSelected)
             cell?.delegate = self
             cell?.selectionStyle = .none
             return cell!
-        case 4:
+        case 6:
             let cell = tableView.dequeueReusableCell(withIdentifier: "registerParentAddressInputCell", for: indexPath) as? RegisterParentTableViewCell
             if isAddressSet {
                 cell?.selectLocationOuterView.isHidden = true
@@ -158,7 +168,7 @@ class RegisterParentViewController: BaseViewController, UITableViewDataSource, U
             }
             cell?.selectionStyle = .none
             return cell!
-        case 8:
+        case 10:
             let cell = tableView.dequeueReusableCell(withIdentifier: "registerParentInput2Cell", for: indexPath) as? RegisterParentTableViewCell
             cell?.setCityStateAttributes()
             cell?.inputType2TextField.text = address["state"] as? String
@@ -189,6 +199,7 @@ extension RegisterParentViewController : UIPickerViewDelegate, UIPickerViewDataS
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         address[(pickerType == .state) ? "state" : "city"] = (pickerType == .state) ? (Array(cityStateList.keys)[row] ) : !cityStateList.isEmpty ? (cityStateList[address["state"] as! String]?[row]) : ""
+        print("citystatae....\(cityStateList[address["state"] as! String])")
     }
 }
 
@@ -304,6 +315,7 @@ extension RegisterParentViewController {
                         if let result = value as? [String:Any] {
                             if let cityStateList = result["statecity"] as? [String:[String]] {
                                 self.cityStateList = cityStateList
+                                print("city.....\(cityStateList)")
                             }
                         }
                         DispatchQueue.main.async {

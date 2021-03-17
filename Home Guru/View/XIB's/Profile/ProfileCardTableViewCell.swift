@@ -14,6 +14,7 @@ protocol ProfileEditProtocol {
 
 class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
 
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var studentNameLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
@@ -27,9 +28,11 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "ProfileCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProfileCollectionViewCell")
+        
+        
     }
 
-
+   
     @IBAction func editProfileAction(_ sender: UIButton) {
         delegate?.editProfile(index: sender.tag)
     }

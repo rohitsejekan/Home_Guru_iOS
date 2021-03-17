@@ -27,6 +27,10 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
         tableView.register(UINib(nibName: "RegisterStudentTableViewCell", bundle: nil), forCellReuseIdentifier: "RegisterStudentTableViewCell")
         getProgramList()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        hideNavbar()
+    }
     
     @IBAction func registerParentAction(_ sender: UIButton) {
         print("studentDetails is ..\(studentDetails)")

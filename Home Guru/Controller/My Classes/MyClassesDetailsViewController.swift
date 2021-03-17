@@ -17,7 +17,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showNavbar()
+        //showNavbar()
         tableView.estimatedRowHeight = 120.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "ScheduleClassDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduleClassDetailsTableViewCell")
@@ -118,7 +118,10 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return showData ? count : 0
     }
-    
+  
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleClassDetailsTableViewCell", for: indexPath) as? ScheduleClassDetailsTableViewCell

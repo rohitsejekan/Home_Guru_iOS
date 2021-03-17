@@ -24,7 +24,10 @@ class NotificationsViewController: BaseViewController, UITableViewDataSource, UI
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "NotificationCardTableViewCell", bundle: nil), forCellReuseIdentifier: "NotificationCardTableViewCell")
     }
-    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        let hide = (viewController is NotificationsViewController)
+        navigationController.setNavigationBarHidden(hide, animated: animated)
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count + 1
     }
@@ -50,7 +53,8 @@ class NotificationsViewController: BaseViewController, UITableViewDataSource, UI
             let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "NotificationDetailsViewController") as? NotificationDetailsViewController
             vc!.notificationDetails = notifications[indexPath.row-1]
             vc!.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc!, animated: true)
+//            self.navigationController?.pushViewController(vc!, animated: true)
+            self.present(vc!, animated: true, completion: nil)
         }
     }
     

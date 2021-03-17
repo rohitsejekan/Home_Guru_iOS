@@ -8,7 +8,7 @@
 
 import UIKit
 import GoogleMaps
-//import GooglePlaces
+import GooglePlaces
 import CoreLocation
 import MBProgressHUD
 
@@ -32,6 +32,8 @@ class MapViewController: BaseViewController, LocateOnTheMap {
         self.locationManager.requestWhenInUseAuthorization()
         mapView.delegate = self
         locationDetailsOuterView.roundCorners(radius: 30.0, corners: [.topLeft,.topRight])
+        
+                
     }
     
     override func viewWillAppear(_ animated: Bool) {

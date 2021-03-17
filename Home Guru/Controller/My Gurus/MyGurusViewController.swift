@@ -24,16 +24,20 @@ class MyGurusViewController: BaseViewController, UITableViewDataSource, UITableV
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "MyGuruCard", bundle: nil), forCellReuseIdentifier: "MyGuruCard")
     }
-    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        let hide = (viewController is NotificationsViewController)
+        navigationController.setNavigationBarHidden(hide, animated: animated)
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return myGurus.count + 1
     }
     
-    
+   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyGuruHeaderCell", for: indexPath)
             cell.selectionStyle = .none
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyGuruCard", for: indexPath) as? MyGuruCard
@@ -44,10 +48,11 @@ class MyGurusViewController: BaseViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row != 0 {
-            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "MyGuruDetailsViewController") as? MyGuruDetailsViewController
-            vc!.myGurusDetails = myGurus[indexPath.row-1]
-            vc!.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc!, animated: true)
+            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "MyGuruDetailsViewController") as! MyGuruDetailsViewController
+            vc.myGurusDetails = myGurus[indexPath.row-1]
+            vc.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(vc!, animated: true)
+            self.present(vc, animated: true, completion: nil)
         }
     }
     
