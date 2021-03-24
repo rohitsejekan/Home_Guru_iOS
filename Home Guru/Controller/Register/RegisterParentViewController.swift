@@ -98,12 +98,17 @@ class RegisterParentViewController: BaseViewController, UITableViewDataSource, U
     @IBAction func nextBtnAction(_ sender: UIButton) {
         userDetails["residentalAddress"] = [address]
         print("userDetails is ..\(userDetails)")
-        let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "RegisterStudentViewController") as? RegisterStudentViewController
-        vc!.parentDetails = userDetails
-        vc!.numberOfStudents = noOfStudents
-        vc!.studentDetails = [[String:Any]](repeating: [String : Any](), count: noOfStudents)
-        vc!.setNavigationBackTitle(title: "Register")
-        self.present(vc!, animated: false, completion: nil)
+        if userDetails["name"] != nil && userDetails["email"] != nil && address["pincode"] != nil && address["house_no"] != nil && address["area"] != nil && address["landmark"] != nil{
+            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "RegisterStudentViewController") as? RegisterStudentViewController
+            vc!.parentDetails = userDetails
+            vc!.numberOfStudents = noOfStudents
+            vc!.studentDetails = [[String:Any]](repeating: [String : Any](), count: noOfStudents)
+            vc!.setNavigationBackTitle(title: "Register")
+            self.present(vc!, animated: false, completion: nil)
+        }else{
+            
+        }
+        
     }
     
     
@@ -345,6 +350,10 @@ extension RegisterParentViewController : UITextFieldDelegate, StudentSelectionPr
                 userDetails["name"] = textField.text
             case 2:
                 userDetails["email"] = textField.text
+            case 3:
+                userDetails["password"] = textField.text
+            case 4:
+                userDetails["confirmpassword"] = textField.text
             case 5:
                 address["pincode"] = textField.text
             case 6:
@@ -365,4 +374,5 @@ extension RegisterParentViewController : UITextFieldDelegate, StudentSelectionPr
     }
 
 }
+
 

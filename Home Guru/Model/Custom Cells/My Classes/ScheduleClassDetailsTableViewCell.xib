@@ -106,14 +106,14 @@
                                     <constraint firstItem="YzR-UH-Dsc" firstAttribute="leading" secondItem="wyD-Cr-cvJ" secondAttribute="trailing" constant="4" id="yJH-kJ-LGL"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o7L-53-HHq">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteAtHome" translatesAutoresizingMaskIntoConstraints="NO" id="o7L-53-HHq">
                                 <rect key="frame" x="16" y="52" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="F7V-Hm-cXE"/>
                                     <constraint firstAttribute="width" constant="20" id="a92-0Y-7ia"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="09:00 am" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hR8-ul-jks">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online Class" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hR8-ul-jks">
                                 <rect key="frame" x="44" y="53" width="260" height="18"/>
                                 <color key="backgroundColor" red="0.0" green="0.035294117649999998" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Bold" family="Source Sans Pro" pointSize="14"/>
@@ -130,20 +130,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IXg-YS-xWl">
                                 <rect key="frame" x="16" y="107" width="288" height="120"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lWv-5N-TLf">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mask Group" translatesAutoresizingMaskIntoConstraints="NO" id="lWv-5N-TLf">
                                         <rect key="frame" x="0.0" y="0.0" width="111" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="111" id="m1z-Bv-aIj"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rT7-Hv-c8d">
-                                        <rect key="frame" x="119" y="16" width="161" height="25.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vikram Patil" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rT7-Hv-c8d">
+                                        <rect key="frame" x="119" y="10" width="161" height="25.5"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ipW-oD-Wqk">
-                                        <rect key="frame" x="119" y="49" width="72" height="12"/>
+                                        <rect key="frame" x="119" y="43" width="72" height="12"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fullStar" translatesAutoresizingMaskIntoConstraints="NO" id="MZz-I0-H8N">
                                                 <rect key="frame" x="0.0" y="0.0" width="12" height="12"/>
@@ -187,7 +187,7 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGD-Fp-f9n">
-                                        <rect key="frame" x="119" y="69" width="161" height="18"/>
+                                        <rect key="frame" x="119" y="63" width="161" height="18"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="14"/>
                                         <color key="textColor" red="0.98431372549019602" green="0.45490196078431372" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -206,7 +206,7 @@
                                     <constraint firstItem="rT7-Hv-c8d" firstAttribute="leading" secondItem="lWv-5N-TLf" secondAttribute="trailing" constant="8" id="jl9-qy-Ekr"/>
                                     <constraint firstAttribute="bottom" secondItem="lWv-5N-TLf" secondAttribute="bottom" id="n0J-h6-tWm"/>
                                     <constraint firstItem="ipW-oD-Wqk" firstAttribute="top" secondItem="rT7-Hv-c8d" secondAttribute="bottom" constant="7.5" id="n59-Ao-KIt"/>
-                                    <constraint firstItem="rT7-Hv-c8d" firstAttribute="top" secondItem="IXg-YS-xWl" secondAttribute="top" constant="16" id="rBz-yr-WCt"/>
+                                    <constraint firstItem="rT7-Hv-c8d" firstAttribute="top" secondItem="IXg-YS-xWl" secondAttribute="top" constant="10" id="rBz-yr-WCt"/>
                                     <constraint firstAttribute="height" constant="120" id="riZ-ps-VJs"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -272,8 +272,10 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Mask Group" width="360" height="295"/>
         <image name="fullStar" width="56" height="54"/>
         <image name="greyDot" width="5.3333334922790527" height="5.3333334922790527"/>
         <image name="halfStar" width="56" height="54"/>
+        <image name="whiteAtHome" width="25" height="25"/>
     </resources>
 </document>

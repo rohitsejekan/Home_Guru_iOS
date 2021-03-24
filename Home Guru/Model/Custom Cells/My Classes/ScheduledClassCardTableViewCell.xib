@@ -47,13 +47,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VX9-ay-m7q">
                                         <rect key="frame" x="8" y="65" width="238" height="25.5"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="20"/>
-                                        <color key="textColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iI-1E-tm2">
                                         <rect key="frame" x="8" y="93.5" width="193" height="20.5"/>
                                         <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="16"/>
-                                        <color key="textColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DEMO   " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N41-ZK-oEO">
@@ -66,8 +66,8 @@
                                         <color key="textColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZRA-pA-vxQ">
-                                        <rect key="frame" x="8" y="36" width="195" height="24"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ZRA-pA-vxQ">
+                                        <rect key="frame" x="8" y="36" width="200" height="24"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07/10/2020" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCX-kC-gBt">
                                                 <rect key="frame" x="0.0" y="0.0" width="75" height="24"/>
@@ -75,43 +75,34 @@
                                                     <constraint firstAttribute="width" constant="75" id="NGJ-cA-qfA"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="14"/>
-                                                <color key="textColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="0.98431372549999996" green="0.4549019608" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greyDot" translatesAutoresizingMaskIntoConstraints="NO" id="mAE-Zc-dL2">
-                                                <rect key="frame" x="79" y="10" width="4" height="4"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="4" id="sZV-v2-Wzq"/>
-                                                    <constraint firstAttribute="width" constant="4" id="ywp-15-6aq"/>
-                                                </constraints>
+                                                <rect key="frame" x="78.5" y="0.0" width="5.5" height="24"/>
                                             </imageView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pv2-N3-i9F">
-                                                <rect key="frame" x="87" y="0.0" width="36" height="24"/>
+                                                <rect key="frame" x="87.5" y="0.0" width="40" height="24"/>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="14"/>
-                                                <color key="textColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="0.98431372549999996" green="0.4549019608" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="greyDot" translatesAutoresizingMaskIntoConstraints="NO" id="LYP-wo-Njm">
-                                                <rect key="frame" x="127" y="10" width="4" height="4"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="4" id="0YH-ca-K9Z"/>
-                                                    <constraint firstAttribute="height" constant="4" id="yfI-7r-r78"/>
-                                                </constraints>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greyDot" translatesAutoresizingMaskIntoConstraints="NO" id="LYP-wo-Njm">
+                                                <rect key="frame" x="131" y="0.0" width="5.5" height="24"/>
                                             </imageView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="09:00 am" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tcw-3E-Nve">
-                                                <rect key="frame" x="135" y="0.0" width="60" height="24"/>
+                                                <rect key="frame" x="140" y="0.0" width="60" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="ImQ-Uf-9sm"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="14"/>
-                                                <color key="textColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="0.98431372549999996" green="0.4549019608" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="LYP-wo-Njm" firstAttribute="centerY" secondItem="ZRA-pA-vxQ" secondAttribute="centerY" id="7t9-Bs-TZj"/>
+                                            <constraint firstAttribute="width" constant="200" id="N8a-QM-U5I"/>
                                             <constraint firstAttribute="height" constant="24" id="pkS-IO-Twq"/>
-                                            <constraint firstItem="mAE-Zc-dL2" firstAttribute="centerY" secondItem="ZRA-pA-vxQ" secondAttribute="centerY" id="ztz-AP-Iq9"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="jZW-na-zyd">
@@ -165,7 +156,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.49019607840000001" green="0.77647058820000003" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.078431372549019607" green="0.12941176470588234" blue="0.20392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="9Y9-mE-9h1" firstAttribute="centerY" secondItem="ZRA-pA-vxQ" secondAttribute="centerY" id="2tS-z6-SYg"/>
                                     <constraint firstItem="ZRA-pA-vxQ" firstAttribute="top" secondItem="N41-ZK-oEO" secondAttribute="bottom" constant="16" id="3cW-QS-j33"/>
@@ -239,6 +230,6 @@
         <image name="fullStar" width="56" height="54"/>
         <image name="greyDot" width="5.3333334922790527" height="5.3333334922790527"/>
         <image name="halfStar" width="56" height="54"/>
-        <image name="whiteAtHome" width="76" height="87"/>
+        <image name="whiteAtHome" width="25" height="25"/>
     </resources>
 </document>

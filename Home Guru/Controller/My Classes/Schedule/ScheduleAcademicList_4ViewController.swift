@@ -117,7 +117,8 @@ extension ScheduleAcademicList_4ViewController: nextScreen{
                                        //setNavigationBackTitle(title: "Schedule")
                 vc.hidesBottomBarWhenPushed = true
         vc.selectedCounts = checkedCount
-        presentDetail(vc)
+    self.navigationController?.pushViewController(vc, animated: false)
+
     }
     
     

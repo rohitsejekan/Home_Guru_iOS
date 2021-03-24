@@ -43,7 +43,8 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
     @IBAction func nextAction(_ sender: UIButton) {
         let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleSubjectViewController") as! ScheduleSubjectViewController
         setNavigationBackTitle(title: "Select Subject")
-        presentDetail(vc)
+    self.navigationController?.pushViewController(vc, animated: false)
+
     }
     
     func showProgramPicker(pickerType: PickerType) {

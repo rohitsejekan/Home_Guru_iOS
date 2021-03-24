@@ -108,12 +108,12 @@ class RegisterParentTableViewCell: UITableViewCell {
                 inputType1TextField.text = email
             }
         case 3:
-            if let email = userDetails["create_pass"] as? String {
-                inputType1TextField.text = email
+            if let createPass = userDetails["password"] as? String {
+                inputType1TextField.text = createPass
             }
         case 4:
-            if let email = userDetails["confirm_pass"] as? String {
-                inputType1TextField.text = email
+            if let confirmPass = userDetails["confirmpassword"] as? String {
+                inputType1TextField.text = confirmPass
             }
         case 7:
             if let pincode = address["pincode"] as? String {

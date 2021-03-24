@@ -49,7 +49,7 @@ public func customTextFieldPlaceholder(text: String, textField: UITextField) {
 }
 
 public func customTextFieldWithoutAsterikPlaceholder(text: String, textField: UITextField) {
-    textField.attributedPlaceholder = NSMutableAttributedString(string: text, attributes: [.foregroundColor: ColorPalette.textColor])
+    textField.attributedPlaceholder = NSMutableAttributedString(string: text, attributes: [.foregroundColor: UIColor.white])
 }
 
 func convertTimeFrom24To12HourFormat(time: String) -> String {

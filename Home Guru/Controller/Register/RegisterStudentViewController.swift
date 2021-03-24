@@ -9,23 +9,102 @@
 import UIKit
 import Alamofire
 import MBProgressHUD
+import Alamofire
+import SwiftyJSON
+class RegisterStudentViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, RegisterStudentDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == pickerView_2{
+            return classes.count
+            
 
-class RegisterStudentViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, RegisterStudentDelegate {
-
+        }else{
+            return storeBoard.count
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    {
+        if pickerView == pickerView_2{
+             return classes[row]
+        }else{
+            
+            return storeBoard[row]
+        }
+        
+    }
+    func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == pickerView_2{
+            selectedClass = classes[row]
+            self.studentDetails[currentIndex]["stdClass"] = 1
+            
+        }else{
+            self.studentDetails[currentIndex]["board"] = 1
+            selectedBoard = storeBoard[row]
+        }
+            
+   }
     @IBOutlet weak var tableView: UITableView!
-
+    var selectedBoard: String = ""
+    var selectedClass: String = ""
+    var storeBoard: [String] = []
     var studentDetails : [[String:Any]] = []
     var programList : [[String:Any]] = []
     var parentDetails : [String:Any] = [:]
     var numberOfStudents = 1
     var currentIndex = 0
+    var boards: [String] = ["class 1","class 10","class 1","class 1","class 1"]
+    var classes: [String] = ["class 1","class 2","class 3","class 4","class 5", "class 6", "class 7", "class 8", "class 9", "class 10", "class 11", "class 12"]
     var datePickerView : DatePickerView?
     var programPickerView : ProgramPickerView?
-
+    var pickerType : StateCityPickerType = .state
+    @IBOutlet weak var outerPickerView: UIView!
+    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var outerPickerView_2: UIView!
+    
+    @IBOutlet weak var pickerView_2: UIPickerView!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "RegisterStudentTableViewCell", bundle: nil), forCellReuseIdentifier: "RegisterStudentTableViewCell")
         getProgramList()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+       
+        pickerView_2.delegate = self
+        pickerView_2.dataSource = self
+        getBoards()
+         hideUnhidePickerView(view: self.outerPickerView, value: true)
+        hideUnhidePickerView(view: self.outerPickerView_2, value: true)
+
+        
+    }
+    func getBoards(){
+        AlamofireService.alamofireService.getRequest(url: URLManager.sharedUrlManager.getBoards, parameters: nil) { response
+                    in
+                    switch response.result {
+                    case .success(let value):
+                        if let status =  response.response?.statusCode {
+                            print("svis ..\(value)")
+                            print("sstatus is ..\(status)")
+                            if status == 200 || status == 201 {
+                                let json = JSON(value)
+                                for arr in json.arrayValue{
+                                    self.storeBoard.append(arr["name"].stringValue)
+                                    
+                                }
+
+                                print("data...\(self.storeBoard)")
+                                DispatchQueue.main.async {
+                                    self.pickerView.reloadAllComponents()
+                                }
+                            }
+                        }
+                    case .failure( _):
+                        self.showAlert(title: Constants.unknownTitle, message: Constants.unknownMsg)
+                    }
+                }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,7 +128,20 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
         currentIndex = index
         showDatePicker()
     }
-    
+    func selectBoard(index: Int){
+       endEditing()
+      
+        pickerView.selectedRow(inComponent: 0)
+        pickerView.reloadAllComponents()
+        hideUnhidePickerView(view: self.outerPickerView, value: false)
+    }
+    func selectClass(index: Int){
+        endEditing()
+        
+          pickerView_2.selectedRow(inComponent: 0)
+          pickerView_2.reloadAllComponents()
+          hideUnhidePickerView(view: self.outerPickerView_2, value: false)
+    }
     func showDatePicker() {
         datePickerView = Bundle.main.loadNibNamed("DatePickerView", owner: self, options: nil)?.first as! DatePickerView
         datePickerView?.delegate = self
@@ -100,11 +192,13 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
                 cell?.selectClassBtn.tag = indexPath.row
                 cell?.selectBoardBtn.tag = indexPath.row
                 cell?.nameTextField.tag = indexPath.row
+                cell?.boardTextField.inputView = pickerView
+                cell?.boardTextField.delegate = self
                 cell?.selectionStyle = .none
                 cell?.nameTextField.text = ""
                 cell?.dobTextField.text = "dd/mm/yyyy"
-                cell?.classTextField.text = ""
-                cell?.boardTextField.text = ""
+                cell?.classTextField.text = selectedClass
+                cell?.boardTextField.text = selectedBoard
                 cell?.studentLabel.text = "Student \(indexPath.row+1)"
                 if let name = studentDetails[indexPath.row]["name"] as? String {
                     cell?.nameTextField.text = name
@@ -122,6 +216,19 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
                 return cell
         }
     }
+
+    @IBAction func dismissPV2(_ sender: UIBarButtonItem) {
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+               hideUnhidePickerView(view: self.outerPickerView_2, value: true)
+    }
+    @IBAction func dismissPV(_ sender: UIBarButtonItem) {
+        
+        
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        hideUnhidePickerView(view: self.outerPickerView, value: true)
+
+    }
+    
 }
 
 extension RegisterStudentViewController {
@@ -134,14 +241,15 @@ extension RegisterStudentViewController {
             self.showAlert(title: "Message", message: "Please Check Your Internet Connection!")
             return
         }
-        parentDetails["password"] = "123456"
-        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
+//        parentDetails["password"] = "123456"
+//        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
         AlamofireService.alamofireService.postRequestWithBodyData(url: URLManager.sharedUrlManager.registerParent, details: parentDetails) {
         response in
            switch response.result {
            case .success(let value):
                if let status =  response.response?.statusCode {
                print("status is ..\(status)")
+                print("value...\(value)")
                    if status == 200 || status == 201 {
                        if let result = value as? [String:Any] {
                             print("result is ...\(result)")
@@ -184,6 +292,7 @@ extension RegisterStudentViewController: DatePickerProtocol {
         let dateObj = getDateFromString(format: "dd/MM/yyyy", dateString: date)
         studentDetails[currentIndex]["dob"] = getDateString(format: "yyyy-MM-dd", date:  dateObj)
         getProgram(months: Date().months(from: dateObj))
+        tableView.reloadData()
     }
     
     func getProgram(months: Int) {
@@ -207,6 +316,8 @@ extension RegisterStudentViewController: DatePickerProtocol {
             self.showAlert(title: "Message", message: "Please Select valid Dob!")
         }
     }
+    
+    
     
 }
 

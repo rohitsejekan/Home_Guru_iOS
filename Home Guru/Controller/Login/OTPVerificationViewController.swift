@@ -10,6 +10,8 @@ import UIKit
 import SVPinView
 import IQKeyboardManagerSwift
 import MBProgressHUD
+import FirebaseAuth
+import Firebase
 //import FirebaseAuth
 
 class OTPVerificationViewController: BaseViewController {
@@ -17,8 +19,8 @@ class OTPVerificationViewController: BaseViewController {
     @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var otpView: SVPinView!
     @IBOutlet weak var msgLabel: UILabel!
-    
-    var userDetails : [String:Any] = ["password":"123456"]
+    var otpNumber: String!
+    var userDetails : [String:Any] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +42,35 @@ class OTPVerificationViewController: BaseViewController {
             // direct login if logged in
 //            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
 //            appDelegate.isLoggedIn()
-            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "myRegisterVC") as! myRegisterViewController
-            vc.hidesBottomBarWhenPushed = true
-            self.present(vc, animated: true, completion: nil)
+            
+            if self.otpNumber.isEmpty{
+                 self.showAlert(title: "Message", message: "Couldn't send OTP! Please try again!!")
+                
+            }else{
+                if let otp = self.otpNumber {
+                        let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
+                        
+                        if let verificationCode = verificationID {
+                            let credential = PhoneAuthProvider.provider().credential(
+                                withVerificationID: verificationCode,
+                                verificationCode: otp)
+                          
+                            Auth.auth().signIn(with: credential) { (user, error) in
+                                // TODO: handle sign in
+                                 let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "RegisterParentViewController") as! RegisterParentViewController
+                                            vc.userDetails = self.userDetails
+                                           vc.hidesBottomBarWhenPushed = true
+                                           self.present(vc, animated: true, completion: nil)
+                            }
+                        } else {
+                            // Verification code was empty
+                            print("...no verification code ")
+                        }
+                     
+                    }
+                
+            }
+            
         }
     }
     
@@ -56,18 +84,19 @@ class OTPVerificationViewController: BaseViewController {
             phoneNumber = phoneNo
         }
         print("phoneNo is ...\(phoneNumber)")
-//        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
-//            if let error = error {
-//                print("Error is... \(error)")
-//                self.showAlert(title: "Message", message: "Couldn't send OTP! Please try again!!")
-//                return
-//            }
-//            // Sign in using the verificationID and the code sent to the user
-//            // ...
-//            print("OTP Sent")
-//            self.showAlert(title: "Message", message: "OTP sent Successfully!!")
-//            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-//        }
+        
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
+            if let error = error {
+                print("Error is... \(error)")
+                self.showAlert(title: "Message", message: "Couldn't send OTP! Please try again!!")
+                return
+            }
+            // Sign in using the verificationID and the code sent to the user
+            // ...
+            print("OTP Sent")
+            self.showAlert(title: "Message", message: "OTP sent Successfully!!")
+            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+        }
     }
     
     
@@ -142,7 +171,8 @@ class OTPVerificationViewController: BaseViewController {
     }
     
     func didFinishEnteringPin(pin:String) {
-        userDetails["otp"] = pin
+      otpNumber = pin
+        
     }
     
 }

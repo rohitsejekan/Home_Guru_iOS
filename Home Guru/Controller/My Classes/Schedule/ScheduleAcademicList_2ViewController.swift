@@ -55,7 +55,8 @@ class ScheduleAcademicList_2ViewController: UIViewController, IndicatorInfoProvi
             let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleAcademicList_3") as! ScheduleAcademicList_3ViewController
                        //setNavigationBackTitle(title: "Schedule")
                        vc.hidesBottomBarWhenPushed = true
-                       presentDetail(vc)
+            self.navigationController?.pushViewController(vc, animated: false)
+
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }

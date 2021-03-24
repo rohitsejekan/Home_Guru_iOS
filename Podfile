@@ -16,6 +16,8 @@ target 'Home Guru' do
   pod 'XLPagerTabStrip', '~> 8.0'
   pod 'MBProgressHUD'
   pod 'Kingfisher', '~> 5.0'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
 
   # Pods for Home Guru
 

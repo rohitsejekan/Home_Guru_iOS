@@ -11,7 +11,8 @@ import IQKeyboardManagerSwift
 import Alamofire
 import MBProgressHUD
 import SKCountryPicker
-
+import FirebaseAuth
+import Firebase
 class SignUpViewController: BaseViewController {
 
     @IBOutlet weak var mobileNoTextField: UITextField!
@@ -31,9 +32,43 @@ class SignUpViewController: BaseViewController {
     }
 
     @IBAction func signUpAction(_ sender: UIButton) {
-        let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "OTPVerificationViewController") as? OTPVerificationViewController
-        vc!.userDetails = self.userDetails
-        self.navigationController?.pushViewController(vc!, animated: true)
+       
+        
+  
+        if let OtpFormateNumber = self.userDetails["mobileNo"]{
+            print("your number ....\(OtpFormateNumber)")
+            PhoneAuthProvider.provider().verifyPhoneNumber(OtpFormateNumber as! String, uiDelegate: nil) { (verificationID, error) in
+
+                       if error != nil {
+
+                           print("error:\(String(describing: error?.localizedDescription))")
+
+                           print("1")
+
+                           return
+
+                       } else {
+
+                           print("2")
+
+                           UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+                          
+                         let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "OTPVerificationViewController") as? OTPVerificationViewController
+                                vc!.userDetails = self.userDetails
+                                self.present(vc!, animated: true, completion: nil)
+
+
+                       }
+
+                     
+
+                   }
+            
+        }
+       
+
+            
+    
     }
     
     @IBAction func signInAction(_ sender: UIButton) {

@@ -11,13 +11,15 @@ import IQKeyboardManagerSwift
 import Alamofire
 import MBProgressHUD
 import SKCountryPicker
+import FirebaseAuth
+import Firebase
 
 class SignInViewController: BaseViewController {
     
     @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var countryCodeLabel: UILabel!
     @IBOutlet weak var mobiletextField: UITextField!
-    var userDetails : [String:Any] = ["password":"123456"]
+    var userDetails = [String:Any]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,9 +78,34 @@ class SignInViewController: BaseViewController {
                                 UserDefaults.standard.set(false,forKey: Constants.loggedOut)
                                 DispatchQueue.main.async {
                                     hud.hide(animated: true)
-                                    let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "OTPVerificationViewController") as? OTPVerificationViewController
-//                                    vc!.userDetails = self.userDetails
-                                    self.navigationController?.pushViewController(vc!, animated: true)
+                                    
+                                    
+                                    PhoneAuthProvider.provider().verifyPhoneNumber(self.userDetails["mobileNo"] as! String, uiDelegate: nil) { (verificationID, error) in
+
+                                    if error != nil {
+
+                                        print("error:\(String(describing: error?.localizedDescription))")
+
+                                        print("1")
+
+                                        return
+
+                                    } else {
+
+                                        print("2")
+
+                                        UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+
+                                        let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "OTPVerificationViewController") as! OTPVerificationViewController
+                                        //                                    vc!.userDetails = self.userDetails
+                                        self.presentDetail(vc)
+
+
+                                    }
+                                        
+                                    }
+                                    
+                                  
                                 }
                             }
                         }
@@ -97,7 +124,7 @@ class SignInViewController: BaseViewController {
     @IBAction func signUpAction(_ sender: UIButton) {
         let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
         vc!.userDetails = self.userDetails
-        self.navigationController?.pushViewController(vc!, animated: true)
+        self.present(vc!, animated: true, completion: nil)
     }
     
 }

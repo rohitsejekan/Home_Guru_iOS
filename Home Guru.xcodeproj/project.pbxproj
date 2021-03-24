@@ -26,6 +26,7 @@
 		011688B12600849F005E1701 /* SelectScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B02600849E005E1701 /* SelectScheduleViewController.swift */; };
 		011688B32600BC21005E1701 /* addProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B22600BC20005E1701 /* addProfileViewController.swift */; };
 		011688B62600BD89005E1701 /* addProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B52600BD89005E1701 /* addProfileTableViewCell.swift */; };
+		012F3D3926089A5600325823 /* customTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012F3D3826089A5600325823 /* customTextField.swift */; };
 		01413CD425FF3084001BCF7A /* ConfirmScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01413CD325FF3084001BCF7A /* ConfirmScheduleViewController.swift */; };
 		01413CD625FF39A7001BCF7A /* confirmSheduleFirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01413CD525FF39A7001BCF7A /* confirmSheduleFirstTableViewCell.swift */; };
 		01413CD825FF3D00001BCF7A /* ConfirmScheduleSecondTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01413CD725FF3D00001BCF7A /* ConfirmScheduleSecondTableViewCell.swift */; };
@@ -62,6 +63,7 @@
 		0178EB6D25961C4800466322 /* RechargeWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178EB6C25961C4800466322 /* RechargeWalletViewController.swift */; };
 		0178EB7025962DBF00466322 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178EB6F25962DBF00466322 /* ScheduleViewController.swift */; };
 		0178EB7325965A1D00466322 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178EB7225965A1D00466322 /* ScheduleTableViewCell.swift */; };
+		019B85D42609D494000FF798 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 019B85D32609D493000FF798 /* GoogleService-Info.plist */; };
 		019C128B25700F6B0010122C /* AlamofireService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019C128A25700F6B0010122C /* AlamofireService.swift */; };
 		01ADA29E2598F25B00B44061 /* ScheduleSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA29D2598F25B00B44061 /* ScheduleSubjectViewController.swift */; };
 		01ADA2A02598F47900B44061 /* ScheduleAcademicListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA29F2598F47900B44061 /* ScheduleAcademicListViewController.swift */; };
@@ -87,6 +89,10 @@
 		01E7D48825FC8D4A0054D177 /* customButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7D48625FC8D4A0054D177 /* customButtonTableViewCell.swift */; };
 		01E7D48925FC8D4A0054D177 /* customButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E7D48725FC8D4A0054D177 /* customButtonTableViewCell.xib */; };
 		01E7D48B25FC9F390054D177 /* SelectGuruViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7D48A25FC9F390054D177 /* SelectGuruViewController.swift */; };
+		01F23E4C260B1A4F00EAEDE9 /* MobileRTCResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01F23E4B260B1A4F00EAEDE9 /* MobileRTCResources.bundle */; };
+		01F23E4F260B1AD600EAEDE9 /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F23E49260B1A3D00EAEDE9 /* MobileRTC.framework */; };
+		01F23E50260B1AD600EAEDE9 /* MobileRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01F23E49260B1A3D00EAEDE9 /* MobileRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01F23E55260B29BA00EAEDE9 /* zoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F23E54260B29BA00EAEDE9 /* zoomViewController.swift */; };
 		01F4BE3225F8F46F00326D12 /* myRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */; };
 		01F4BE3425F8F4E000326D12 /* myRegisterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4BE3325F8F4E000326D12 /* myRegisterTableViewCell.swift */; };
 		01F826BB258A373F00AA03FA /* RegisterStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F826BA258A373F00AA03FA /* RegisterStudentViewController.swift */; };
@@ -100,6 +106,20 @@
 		01FA8B3D25FB8D200044C209 /* DurationTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3C25FB8D200044C209 /* DurationTimeTableViewCell.swift */; };
 		85A536B55915651C7C6C1603 /* Pods_Home_Guru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8A0D551E7B6F1213709C33 /* Pods_Home_Guru.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		01F23E51260B1AD600EAEDE9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				01F23E50260B1AD600EAEDE9 /* MobileRTC.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		011294CB25F5F76200308A91 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -121,6 +141,7 @@
 		011688B02600849E005E1701 /* SelectScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectScheduleViewController.swift; sourceTree = "<group>"; };
 		011688B22600BC20005E1701 /* addProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addProfileViewController.swift; sourceTree = "<group>"; };
 		011688B52600BD89005E1701 /* addProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addProfileTableViewCell.swift; sourceTree = "<group>"; };
+		012F3D3826089A5600325823 /* customTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customTextField.swift; sourceTree = "<group>"; };
 		01413CD325FF3084001BCF7A /* ConfirmScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleViewController.swift; sourceTree = "<group>"; };
 		01413CD525FF39A7001BCF7A /* confirmSheduleFirstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = confirmSheduleFirstTableViewCell.swift; sourceTree = "<group>"; };
 		01413CD725FF3D00001BCF7A /* ConfirmScheduleSecondTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleSecondTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,6 +183,7 @@
 		0178EB6C25961C4800466322 /* RechargeWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeWalletViewController.swift; sourceTree = "<group>"; };
 		0178EB6F25962DBF00466322 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		0178EB7225965A1D00466322 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		019B85D32609D493000FF798 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		019C128A25700F6B0010122C /* AlamofireService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireService.swift; sourceTree = "<group>"; };
 		01ADA29D2598F25B00B44061 /* ScheduleSubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSubjectViewController.swift; sourceTree = "<group>"; };
 		01ADA29F2598F47900B44061 /* ScheduleAcademicListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAcademicListViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +211,9 @@
 		01E7D48625FC8D4A0054D177 /* customButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customButtonTableViewCell.swift; sourceTree = "<group>"; };
 		01E7D48725FC8D4A0054D177 /* customButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = customButtonTableViewCell.xib; sourceTree = "<group>"; };
 		01E7D48A25FC9F390054D177 /* SelectGuruViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGuruViewController.swift; sourceTree = "<group>"; };
+		01F23E49260B1A3D00EAEDE9 /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileRTC.framework; sourceTree = "<group>"; };
+		01F23E4B260B1A4F00EAEDE9 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MobileRTCResources.bundle; sourceTree = "<group>"; };
+		01F23E54260B29BA00EAEDE9 /* zoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zoomViewController.swift; sourceTree = "<group>"; };
 		01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myRegisterViewController.swift; sourceTree = "<group>"; };
 		01F4BE3325F8F4E000326D12 /* myRegisterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myRegisterTableViewCell.swift; sourceTree = "<group>"; };
 		01F826BA258A373F00AA03FA /* RegisterStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStudentViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85A536B55915651C7C6C1603 /* Pods_Home_Guru.framework in Frameworks */,
+				01F23E4F260B1AD600EAEDE9 /* MobileRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +506,7 @@
 				01E130D6253DA82F00F63673 /* Assets.xcassets */,
 				01E130D8253DA82F00F63673 /* LaunchScreen.storyboard */,
 				01E130DB253DA82F00F63673 /* Info.plist */,
+				019B85D32609D493000FF798 /* GoogleService-Info.plist */,
 			);
 			path = "Home Guru";
 			sourceTree = "<group>";
@@ -507,6 +534,7 @@
 				0153073C2578C3D400F98F1A /* Notifications */,
 				0153073B2578C3CA00F98F1A /* Profile */,
 				01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */,
+				01F23E54260B29BA00EAEDE9 /* zoomViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -546,6 +574,7 @@
 				016EEB7525403B3C00FE7351 /* URLManager.swift */,
 				01E7D48425FC88440054D177 /* PaddedLabel.swift */,
 				011688AE26007609005E1701 /* DynamicHeightCollectionView.swift */,
+				012F3D3826089A5600325823 /* customTextField.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -584,6 +613,8 @@
 		B7F684D442605D03A9ED34EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01F23E4B260B1A4F00EAEDE9 /* MobileRTCResources.bundle */,
+				01F23E49260B1A3D00EAEDE9 /* MobileRTC.framework */,
 				6D8A0D551E7B6F1213709C33 /* Pods_Home_Guru.framework */,
 			);
 			name = Frameworks;
@@ -602,6 +633,7 @@
 				01E130C8253DA82500F63673 /* Resources */,
 				40F836D4DB8D346EE29EE3D8 /* [CP] Embed Pods Frameworks */,
 				F8866C54E76DA70BE1DBD433 /* [CP] Copy Pods Resources */,
+				01F23E51260B1AD600EAEDE9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -657,10 +689,12 @@
 				011294D425F5F84600308A91 /* NotificationDetailTableViewCell.xib in Resources */,
 				011294CE25F5F78F00308A91 /* DatePickerView.xib in Resources */,
 				01E7D48925FC8D4A0054D177 /* customButtonTableViewCell.xib in Resources */,
+				019B85D42609D494000FF798 /* GoogleService-Info.plist in Resources */,
 				011294E025F5FB3200308A91 /* RegisterStudentTableViewCell.xib in Resources */,
 				0153074F257923D600F98F1A /* ScheduledClassCardTableViewCell.xib in Resources */,
 				011294D825F5F88300308A91 /* NotificationCardTableViewCell.xib in Resources */,
 				01E130DA253DA82F00F63673 /* LaunchScreen.storyboard in Resources */,
+				01F23E4C260B1A4F00EAEDE9 /* MobileRTCResources.bundle in Resources */,
 				01438EFC2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.xib in Resources */,
 				011294E825F60B4D00308A91 /* ProfileCollectionViewCell.xib in Resources */,
 				01E130D7253DA82F00F63673 /* Assets.xcassets in Resources */,
@@ -783,6 +817,8 @@
 				011294E625F60B3E00308A91 /* ProfileCollectionViewCell.swift in Sources */,
 				011688B32600BC21005E1701 /* addProfileViewController.swift in Sources */,
 				01F4BE3225F8F46F00326D12 /* myRegisterViewController.swift in Sources */,
+				01F23E55260B29BA00EAEDE9 /* zoomViewController.swift in Sources */,
+				012F3D3926089A5600325823 /* customTextField.swift in Sources */,
 				011688B12600849F005E1701 /* SelectScheduleViewController.swift in Sources */,
 				01FA8B3225FB38640044C209 /* ScheduleAcademicList_3ViewController.swift in Sources */,
 				01FA8B3A25FB4E5F0044C209 /* ScheduleDurationTimeViewController.swift in Sources */,
@@ -956,6 +992,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MVH8UZ3WJS;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Home Guru/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -976,6 +1017,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MVH8UZ3WJS;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Home Guru/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

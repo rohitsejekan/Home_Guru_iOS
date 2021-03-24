@@ -66,14 +66,16 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
     @IBAction func registerAction(_ sender: UIButton) {
         switch sender.currentTitle {
         case "REGISTER":
-            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "RegisterParentViewController") as! RegisterParentViewController
-            //setNavigationBackTitle(title: "Register")
-            vc.hidesBottomBarWhenPushed = true
-            self.present(vc, animated: true, completion: nil)
-//            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleViewController") as! ScheduleViewController
-//            //setNavigationBackTitle(title: "Schedule")
+//            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "RegisterParentViewController") as! RegisterParentViewController
+//            //setNavigationBackTitle(title: "Register")
 //            vc.hidesBottomBarWhenPushed = true
 //            self.present(vc, animated: true, completion: nil)
+            
+            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleViewController") as! ScheduleViewController
+            //setNavigationBackTitle(title: "Schedule")
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: false)
+
         case "ADD CREDITS":
             print(".....")
 //            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "AddCreditViewController") as? AddCreditViewController

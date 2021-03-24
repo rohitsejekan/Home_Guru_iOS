@@ -45,6 +45,9 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
                let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "MyGuruDetailsViewController") as! MyGuruDetailsViewController
                                //setNavigationBackTitle(title: "Schedule")
                                vc.hidesBottomBarWhenPushed = true
-                               presentDetail(vc)    }
+                self.navigationController?.pushViewController(vc, animated: false)
+
+        
+    }
 
 }

@@ -17,7 +17,7 @@ class URLManager {
     
     var getParentAuth : String {
         get {
-            return baseURL + "/parent/auth"
+            return baseURL + "/parent/auth/login"
         }
     }
     
@@ -37,6 +37,12 @@ class URLManager {
     var getProgramList : String {
         get {
             return baseURL + "/parent/program"
+        }
+    }
+    //boards
+    var getBoards: String{
+        get{
+            return baseURL + "/board"
         }
     }
     

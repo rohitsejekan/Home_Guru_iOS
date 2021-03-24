@@ -143,7 +143,10 @@ extension ScheduleDurationTimeViewController: nextScreen{
          let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "SelectGuru") as! SelectGuruViewController
                               //setNavigationBackTitle(title: "Schedule")
                               vc.hidesBottomBarWhenPushed = true
-        presentDetail(vc)    }
+        self.navigationController?.pushViewController(vc, animated: false)
+        
+        
+    }
     
     
 }

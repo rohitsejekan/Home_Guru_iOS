@@ -51,8 +51,8 @@ class MyGurusViewController: BaseViewController, UITableViewDataSource, UITableV
             let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "MyGuruDetailsViewController") as! MyGuruDetailsViewController
             vc.myGurusDetails = myGurus[indexPath.row-1]
             vc.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(vc!, animated: true)
-            self.present(vc, animated: true, completion: nil)
+
+       self.navigationController?.pushViewController(vc, animated: false)
         }
     }
     
