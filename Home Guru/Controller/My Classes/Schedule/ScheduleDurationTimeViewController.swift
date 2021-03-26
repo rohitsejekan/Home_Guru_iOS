@@ -15,6 +15,7 @@ enum PickerTypee {
 class ScheduleDurationTimeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,ProgramPickerProtocol {
     
     @IBOutlet weak var backBtn: UIButton!
+    var getCheckedName: [String] = []
     var selectedCounts: Int?
     func dismissProgramPicker() {
         tableView.isScrollEnabled = true
@@ -29,12 +30,14 @@ class ScheduleDurationTimeViewController: UIViewController, UITableViewDelegate,
                tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.none, animated: false)
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0{
                   let cell = tableView.dequeueReusableCell(withIdentifier: "DurationTime", for: indexPath) as? DurationTimeTableViewCell
                  
                     cell?.selectionStyle = .none
+            cell?.subjectName.text = getCheckedName[indexPath.row]
                   cell?.preservesSuperviewLayoutMargins = false
                   cell?.separatorInset = .zero
                   cell?.layoutMargins = .zero
@@ -45,10 +48,11 @@ class ScheduleDurationTimeViewController: UIViewController, UITableViewDelegate,
             //        cell?.radioImageView.image = UIImage(named: indexPath.row == index ? "radioSelected" : "radioUnselected")
                   
                     return cell!
-        }else  if indexPath.row < selectedCounts ?? 2{
+        }else  if indexPath.row < getCheckedName.count ?? 2{
                   let cell = tableView.dequeueReusableCell(withIdentifier: "DurationTime", for: indexPath) as? DurationTimeTableViewCell
                  
                     cell?.selectionStyle = .none
+            cell?.subjectName.text = getCheckedName[indexPath.row]
                   cell?.preservesSuperviewLayoutMargins = false
                   cell?.separatorInset = .zero
                   cell?.layoutMargins = .zero
@@ -92,18 +96,16 @@ class ScheduleDurationTimeViewController: UIViewController, UITableViewDelegate,
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if let sc = selectedCounts{
-            return sc + 1
-        }else{
-            return 1
-        }
+         
+            return getCheckedName.count + 1
+       
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
             return 300
-        }else if indexPath.row < selectedCounts ?? 2{
+        }else if indexPath.row < getCheckedName.count{
             return 200
         }else{
             return 100
@@ -135,7 +137,8 @@ var pickerType : PickerType = .timings
     */
 
     @IBAction func goBack(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+       // self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 extension ScheduleDurationTimeViewController: nextScreen{

@@ -10,6 +10,8 @@ import UIKit
 
 class myRegisterViewController: UIViewController {
 
+    
+   var userDetails : [String:Any] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,6 +19,12 @@ class myRegisterViewController: UIViewController {
     }
     
 
+    @IBAction func getRegistered(_ sender: UIButton) {
+        let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "RegisterParentViewController") as! RegisterParentViewController
+                vc.userDetails = self.userDetails
+                vc.hidesBottomBarWhenPushed = true
+                self.present(vc, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

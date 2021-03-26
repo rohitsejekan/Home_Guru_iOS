@@ -8,7 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
-
+import SwiftyJSON
 class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvider,UITableViewDataSource, UITableViewDelegate {
     var academicSubjectList : [[String:Any]] = [["title":"Class 1"],["title":"Class 2"],["title":"Class 3"],["title":"Class 4"],["title":"Class 5"],["title":"Class 6"],["title":"Class 7"],["title":"Class 8"]]
             var childNumber = ""
@@ -17,6 +17,9 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
     var rowsWhichAreChecked = [NSIndexPath]()
     var checkedCount: Int = 0
     var checkedName: [String] = []
+    var subjectId: String = ""
+    var subjectDetails: [String: String] = [:]
+    var getSubjects = [GetSubjects]()
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +29,48 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
         // Do any additional setup after loading the view.
         
         backBtn.layer.cornerRadius = 5
+        getGroupCat()
     }
-    
+    func getGroupCat(){
+                   subjectDetails["groupId"] = subjectId
+        print("sad....\(subjectId)")
+           //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
+                   AlamofireService.alamofireService.postRequestWithBodyData(url: URLManager.sharedUrlManager.getSubjects, details: subjectDetails) {
+                   response in
+                      switch response.result {
+                      case .success(let value):
+                          if let status =  response.response?.statusCode {
+                          print("status issw ..\(status)")
+                           print("value...\(value)")
+                              if status == 200 || status == 201 {
+                           let val = JSON(value)
+                               for arr in val.arrayValue{
+                                self.getSubjects.append(GetSubjects(json: arr))
+                                   print("child sub...\(arr)")
+                                
+                                   
+                               }
+                                print("get sub...\(self.getSubjects)")
+                                                     
+                           DispatchQueue.main.async {
+                            for _ in 0..<(self.getSubjects.count){
+                                self.checkedName.append("")
+                                
+                            }
+                            print("checkedName...\(self.checkedName)")
+                               self.tableView.reloadData()
+                            }
+                                                 }
+                          }
+                      case .failure( _):
+                          print("failure")
+                               return
+                           }
+                      }
+       }
     @IBAction func goBack(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+       // self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
             return IndicatorInfo(title: "\(childNumber)")
@@ -41,7 +82,8 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
                cell.checked = !cell.checked
         if cell.checked == true{
             checkedCount = checkedCount + 1
-            checkedName.append(cell.labelName.text ?? "")
+            //checkedName.append(cell.labelName.text ?? "")
+            checkedName.insert(cell.labelName.text ?? "", at: indexPath.row)
             print("checked count....\(checkedCount)")
             print("checked name...\(checkedName)")
         }else{
@@ -56,10 +98,10 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
         tableView.reloadData()
     }
           func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-              return academicSubjectList.count + 1
+              return getSubjects.count + 1
           }
           func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            if indexPath.row == academicSubjectList.count{
+            if indexPath.row == getSubjects.count{
                 return 100
             }else{
                 return 75
@@ -67,9 +109,9 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
               
           }
           func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            if indexPath.row < academicSubjectList.count {
+            if indexPath.row < getSubjects.count {
                    let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleSubject_4", for: indexPath) as? ScheduleSubject_4TableViewCell
-                        cell?.labelName.text = academicSubjectList[indexPath.row]["title"] as? String
+                cell?.labelName.text = getSubjects[indexPath.row].title
               
                         cell?.selectionStyle = .none
                       cell?.preservesSuperviewLayoutMargins = false
@@ -117,6 +159,7 @@ extension ScheduleAcademicList_4ViewController: nextScreen{
                                        //setNavigationBackTitle(title: "Schedule")
                 vc.hidesBottomBarWhenPushed = true
         vc.selectedCounts = checkedCount
+        vc.getCheckedName = checkedName
     self.navigationController?.pushViewController(vc, animated: false)
 
     }

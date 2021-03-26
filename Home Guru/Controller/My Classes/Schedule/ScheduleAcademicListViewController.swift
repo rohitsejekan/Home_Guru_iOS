@@ -8,6 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
+import Alamofire
+import SwiftyJSON
 
 class ScheduleAcademicListViewController: UIViewController, IndicatorInfoProvider,UITableViewDataSource, UITableViewDelegate {
 
@@ -16,11 +18,41 @@ class ScheduleAcademicListViewController: UIViewController, IndicatorInfoProvide
     var childNumber = ""
     var index : Int = 0
     
+    var academicDetails: [String: String] = [:]
+    var getAcademic = [AcademicService]()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "ScheduleSubjectTableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduleSubjectTableViewCell")
+                academicDetails["programType"] = "academic"
+        //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
+                AlamofireService.alamofireService.postRequestWithBodyData(url: URLManager.sharedUrlManager.groupCategory, details: academicDetails) {
+                response in
+                   switch response.result {
+                   case .success(let value):
+                       if let status =  response.response?.statusCode {
+                       print("status is ..\(status)")
+                        print("value...\(value)")
+                           if status == 200 || status == 201 {
+                        let val = JSON(value)
+                            for arr in val.arrayValue{
+                               
+                                self.getAcademic.append(AcademicService(json: arr))
+                            }
+                        
+                                                  
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                                                  }
+                                              }
+                       }
+                   case .failure( _):
+                       print("failure")
+                            return
+                        }
+                   }
+               
     }
     deinit {
         print("ViewController deinit")
@@ -37,12 +69,12 @@ class ScheduleAcademicListViewController: UIViewController, IndicatorInfoProvide
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return academicSubjectList.count
+        return getAcademic.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleSubjectTableViewCell", for: indexPath) as? ScheduleSubjectTableViewCell
-        cell?.subjectLabel.text = academicSubjectList[indexPath.row]["title"] as? String
+        cell?.subjectLabel.text = getAcademic[indexPath.row].groupName
 //        cell?.radioImageView.image = UIImage(named: indexPath.row == index ? "radioSelected" : "radioUnselected")
         cell?.radioImageView.image = UIImage(named: "Vector")
         cell?.selectionStyle = .none
@@ -58,7 +90,8 @@ class ScheduleAcademicListViewController: UIViewController, IndicatorInfoProvide
         let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleAcademicList_2") as! ScheduleAcademicList_2ViewController
                //setNavigationBackTitle(title: "Schedule")
                vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: false)
+        vc.groupId = getAcademic[indexPath.row]._id
+        self.navigationController?.pushViewController(vc, animated: false)
 
         DispatchQueue.main.async {
             self.tableView.reloadData()

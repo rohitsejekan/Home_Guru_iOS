@@ -52,7 +52,23 @@ class URLManager {
             return baseURL + "/parent"
         }
     }
+    // get subjects
+    var getSubjects: String{
+        get{
+            return baseURL + "/guru/getSubjects"
+        }
+    }
+    // group category
     
+    var groupCategory: String{
+        return baseURL + "/guru/groups"
+    }
+    // group category - child category
+      
+      var groupChildCategory: String{
+          return baseURL + "/guru/groupCategories"
+      }
+    //
     // get current points
     var getCurrentPoints : String {
         get {

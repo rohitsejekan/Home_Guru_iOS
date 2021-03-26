@@ -57,7 +57,7 @@ class OTPVerificationViewController: BaseViewController {
                           
                             Auth.auth().signIn(with: credential) { (user, error) in
                                 // TODO: handle sign in
-                                 let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "RegisterParentViewController") as! RegisterParentViewController
+                                 let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "myRegisterVC") as! myRegisterViewController
                                             vc.userDetails = self.userDetails
                                            vc.hidesBottomBarWhenPushed = true
                                            self.present(vc, animated: true, completion: nil)

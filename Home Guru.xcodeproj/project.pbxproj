@@ -22,6 +22,10 @@
 		011294E425F60B0400308A91 /* ProfileCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011294E325F60B0400308A91 /* ProfileCardTableViewCell.xib */; };
 		011294E625F60B3E00308A91 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011294E525F60B3D00308A91 /* ProfileCollectionViewCell.swift */; };
 		011294E825F60B4D00308A91 /* ProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011294E725F60B4D00308A91 /* ProfileCollectionViewCell.xib */; };
+		0112B554260DBAA1000E3FA9 /* AcademicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0112B553260DBAA1000E3FA9 /* AcademicService.swift */; };
+		0112B556260DC00F000E3FA9 /* AcademicGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0112B555260DC00F000E3FA9 /* AcademicGroup.swift */; };
+		0112B558260DE356000E3FA9 /* GetSubjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0112B557260DE356000E3FA9 /* GetSubjects.swift */; };
+		0112B55C260DEAE3000E3FA9 /* ScheduleAcademicList_5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0112B55B260DEAE3000E3FA9 /* ScheduleAcademicList_5ViewController.swift */; };
 		011688AF26007609005E1701 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688AE26007609005E1701 /* DynamicHeightCollectionView.swift */; };
 		011688B12600849F005E1701 /* SelectScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B02600849E005E1701 /* SelectScheduleViewController.swift */; };
 		011688B32600BC21005E1701 /* addProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B22600BC20005E1701 /* addProfileViewController.swift */; };
@@ -137,6 +141,10 @@
 		011294E325F60B0400308A91 /* ProfileCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCardTableViewCell.xib; sourceTree = "<group>"; };
 		011294E525F60B3D00308A91 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		011294E725F60B4D00308A91 /* ProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCollectionViewCell.xib; sourceTree = "<group>"; };
+		0112B553260DBAA1000E3FA9 /* AcademicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicService.swift; sourceTree = "<group>"; };
+		0112B555260DC00F000E3FA9 /* AcademicGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicGroup.swift; sourceTree = "<group>"; };
+		0112B557260DE356000E3FA9 /* GetSubjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSubjects.swift; sourceTree = "<group>"; };
+		0112B55B260DEAE3000E3FA9 /* ScheduleAcademicList_5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAcademicList_5ViewController.swift; sourceTree = "<group>"; };
 		011688AE26007609005E1701 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
 		011688B02600849E005E1701 /* SelectScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectScheduleViewController.swift; sourceTree = "<group>"; };
 		011688B22600BC20005E1701 /* addProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addProfileViewController.swift; sourceTree = "<group>"; };
@@ -397,6 +405,7 @@
 				01FA8B3925FB4E5F0044C209 /* ScheduleDurationTimeViewController.swift */,
 				01E7D48A25FC9F390054D177 /* SelectGuruViewController.swift */,
 				011688B02600849E005E1701 /* SelectScheduleViewController.swift */,
+				0112B55B260DEAE3000E3FA9 /* ScheduleAcademicList_5ViewController.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -423,6 +432,9 @@
 				019C128A25700F6B0010122C /* AlamofireService.swift */,
 				01638E97258A671D00F95F64 /* ParentDetails.swift */,
 				015307472578E53600F98F1A /* Custom Cells */,
+				0112B553260DBAA1000E3FA9 /* AcademicService.swift */,
+				0112B555260DC00F000E3FA9 /* AcademicGroup.swift */,
+				0112B557260DE356000E3FA9 /* GetSubjects.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -775,10 +787,14 @@
 				01628ED825FCD0F50033398C /* SelectGuruTableViewCell.swift in Sources */,
 				0178EB6D25961C4800466322 /* RechargeWalletViewController.swift in Sources */,
 				01FA8B3425FB42140044C209 /* ScheduleAcademicList_4ViewController.swift in Sources */,
+				0112B558260DE356000E3FA9 /* GetSubjects.swift in Sources */,
 				015307422578C87A00F98F1A /* MyGurusViewController.swift in Sources */,
 				01C481EF25950B4700FBFD93 /* NotificationDetailsViewController.swift in Sources */,
+				0112B55C260DEAE3000E3FA9 /* ScheduleAcademicList_5ViewController.swift in Sources */,
 				01ADA2A22598F48D00B44061 /* ScheduleNonAcademicListViewController.swift in Sources */,
 				01ADA2A02598F47900B44061 /* ScheduleAcademicListViewController.swift in Sources */,
+				0112B554260DBAA1000E3FA9 /* AcademicService.swift in Sources */,
+				0112B556260DC00F000E3FA9 /* AcademicGroup.swift in Sources */,
 				011688B62600BD89005E1701 /* addProfileTableViewCell.swift in Sources */,
 				0178EB7025962DBF00466322 /* ScheduleViewController.swift in Sources */,
 				016EEB7625403B3C00FE7351 /* URLManager.swift in Sources */,
