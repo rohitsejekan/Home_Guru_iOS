@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -44,6 +44,7 @@
 		015206B025FA24340049922C /* ScheduleAcademicList_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015206AF25FA24340049922C /* ScheduleAcademicList_2ViewController.swift */; };
 		015206B325FA258F0049922C /* ScheduleSubject_2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015206B125FA258F0049922C /* ScheduleSubject_2TableViewCell.swift */; };
 		015206B425FA258F0049922C /* ScheduleSubject_2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015206B225FA258F0049922C /* ScheduleSubject_2TableViewCell.xib */; };
+		0152102C2616F1AD003A7BEE /* GetGuruProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152102B2616F1AD003A7BEE /* GetGuruProfile.swift */; };
 		0153073E2578C44900F98F1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153073D2578C44900F98F1A /* HomeViewController.swift */; };
 		015307402578C86C00F98F1A /* MyClassesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153073F2578C86C00F98F1A /* MyClassesViewController.swift */; };
 		015307422578C87A00F98F1A /* MyGurusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015307412578C87A00F98F1A /* MyGurusViewController.swift */; };
@@ -53,6 +54,11 @@
 		0153074E257923D600F98F1A /* ScheduledClassCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153074C257923D600F98F1A /* ScheduledClassCardTableViewCell.swift */; };
 		0153074F257923D600F98F1A /* ScheduledClassCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0153074D257923D600F98F1A /* ScheduledClassCardTableViewCell.xib */; };
 		01628ED825FCD0F50033398C /* SelectGuruTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01628ED725FCD0F50033398C /* SelectGuruTableViewCell.swift */; };
+		01629C34261EDFCA00887B7D /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01629C33261EDFCA00887B7D /* CollectionViewFlowLayout.swift */; };
+		01629C36261EE90600887B7D /* myClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01629C35261EE90600887B7D /* myClasses.swift */; };
+		01629C3A261F1AF300887B7D /* classDetailsActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01629C39261F1AF300887B7D /* classDetailsActionTableViewCell.swift */; };
+		01629C3C261F2BA400887B7D /* ReScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01629C3B261F2BA400887B7D /* ReScheduleTableViewCell.swift */; };
+		01629C3E261F2C2800887B7D /* ReScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01629C3D261F2C2800887B7D /* ReScheduleViewController.swift */; };
 		01638E8C258A5FEF00F95F64 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01638E8B258A5FEF00F95F64 /* SearchLocationViewController.swift */; };
 		01638E8E258A618400F95F64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01638E8D258A618400F95F64 /* MapViewController.swift */; };
 		01638E98258A671E00F95F64 /* ParentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01638E97258A671D00F95F64 /* ParentDetails.swift */; };
@@ -97,11 +103,14 @@
 		01F23E4F260B1AD600EAEDE9 /* MobileRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F23E49260B1A3D00EAEDE9 /* MobileRTC.framework */; };
 		01F23E50260B1AD600EAEDE9 /* MobileRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01F23E49260B1A3D00EAEDE9 /* MobileRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01F23E55260B29BA00EAEDE9 /* zoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F23E54260B29BA00EAEDE9 /* zoomViewController.swift */; };
+		01F269B126205ABB00E38C0C /* Razorpay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F269B026205ABA00E38C0C /* Razorpay.xcframework */; };
+		01F269B226206E8800E38C0C /* Razorpay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01F269B026205ABA00E38C0C /* Razorpay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		01F4BE3225F8F46F00326D12 /* myRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */; };
 		01F4BE3425F8F4E000326D12 /* myRegisterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4BE3325F8F4E000326D12 /* myRegisterTableViewCell.swift */; };
 		01F826BB258A373F00AA03FA /* RegisterStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F826BA258A373F00AA03FA /* RegisterStudentViewController.swift */; };
 		01F826BE258A37F300AA03FA /* RegisterParentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F826BD258A37F300AA03FA /* RegisterParentTableViewCell.swift */; };
 		01F826C0258A387E00AA03FA /* RegisterStudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F826BF258A387E00AA03FA /* RegisterStudentTableViewCell.swift */; };
+		01F9F4082615C75B008BBDA3 /* getGuruSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F9F4072615C75B008BBDA3 /* getGuruSubject.swift */; };
 		01FA8B3225FB38640044C209 /* ScheduleAcademicList_3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3125FB38640044C209 /* ScheduleAcademicList_3ViewController.swift */; };
 		01FA8B3425FB42140044C209 /* ScheduleAcademicList_4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3325FB42140044C209 /* ScheduleAcademicList_4ViewController.swift */; };
 		01FA8B3725FB43160044C209 /* ScheduleSubject_4TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3525FB43160044C209 /* ScheduleSubject_4TableViewCell.swift */; };
@@ -118,6 +127,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				01F269B226206E8800E38C0C /* Razorpay.xcframework in Embed Frameworks */,
 				01F23E50260B1AD600EAEDE9 /* MobileRTC.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -163,6 +173,7 @@
 		015206AF25FA24340049922C /* ScheduleAcademicList_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAcademicList_2ViewController.swift; sourceTree = "<group>"; };
 		015206B125FA258F0049922C /* ScheduleSubject_2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSubject_2TableViewCell.swift; sourceTree = "<group>"; };
 		015206B225FA258F0049922C /* ScheduleSubject_2TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleSubject_2TableViewCell.xib; sourceTree = "<group>"; };
+		0152102B2616F1AD003A7BEE /* GetGuruProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGuruProfile.swift; sourceTree = "<group>"; };
 		0153073D2578C44900F98F1A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0153073F2578C86C00F98F1A /* MyClassesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClassesViewController.swift; sourceTree = "<group>"; };
 		015307412578C87A00F98F1A /* MyGurusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGurusViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +183,11 @@
 		0153074C257923D600F98F1A /* ScheduledClassCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduledClassCardTableViewCell.swift; path = "Home Guru/Model/Custom Cells/My Classes/ScheduledClassCardTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		0153074D257923D600F98F1A /* ScheduledClassCardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ScheduledClassCardTableViewCell.xib; path = "Home Guru/Model/Custom Cells/My Classes/ScheduledClassCardTableViewCell.xib"; sourceTree = SOURCE_ROOT; };
 		01628ED725FCD0F50033398C /* SelectGuruTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGuruTableViewCell.swift; sourceTree = "<group>"; };
+		01629C33261EDFCA00887B7D /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		01629C35261EE90600887B7D /* myClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myClasses.swift; sourceTree = "<group>"; };
+		01629C39261F1AF300887B7D /* classDetailsActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classDetailsActionTableViewCell.swift; sourceTree = "<group>"; };
+		01629C3B261F2BA400887B7D /* ReScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		01629C3D261F2C2800887B7D /* ReScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReScheduleViewController.swift; sourceTree = "<group>"; };
 		01638E8B258A5FEF00F95F64 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
 		01638E8D258A618400F95F64 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		01638E97258A671D00F95F64 /* ParentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentDetails.swift; sourceTree = "<group>"; };
@@ -222,11 +238,13 @@
 		01F23E49260B1A3D00EAEDE9 /* MobileRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileRTC.framework; sourceTree = "<group>"; };
 		01F23E4B260B1A4F00EAEDE9 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MobileRTCResources.bundle; sourceTree = "<group>"; };
 		01F23E54260B29BA00EAEDE9 /* zoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zoomViewController.swift; sourceTree = "<group>"; };
+		01F269B026205ABA00E38C0C /* Razorpay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Razorpay.xcframework; sourceTree = "<group>"; };
 		01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myRegisterViewController.swift; sourceTree = "<group>"; };
 		01F4BE3325F8F4E000326D12 /* myRegisterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myRegisterTableViewCell.swift; sourceTree = "<group>"; };
 		01F826BA258A373F00AA03FA /* RegisterStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStudentViewController.swift; sourceTree = "<group>"; };
 		01F826BD258A37F300AA03FA /* RegisterParentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterParentTableViewCell.swift; sourceTree = "<group>"; };
 		01F826BF258A387E00AA03FA /* RegisterStudentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStudentTableViewCell.swift; sourceTree = "<group>"; };
+		01F9F4072615C75B008BBDA3 /* getGuruSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getGuruSubject.swift; sourceTree = "<group>"; };
 		01FA8B3125FB38640044C209 /* ScheduleAcademicList_3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAcademicList_3ViewController.swift; sourceTree = "<group>"; };
 		01FA8B3325FB42140044C209 /* ScheduleAcademicList_4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAcademicList_4ViewController.swift; sourceTree = "<group>"; };
 		01FA8B3525FB43160044C209 /* ScheduleSubject_4TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSubject_4TableViewCell.swift; sourceTree = "<group>"; };
@@ -244,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85A536B55915651C7C6C1603 /* Pods_Home_Guru.framework in Frameworks */,
+				01F269B126205ABB00E38C0C /* Razorpay.xcframework in Frameworks */,
 				01F23E4F260B1AD600EAEDE9 /* MobileRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +301,7 @@
 				0153073F2578C86C00F98F1A /* MyClassesViewController.swift */,
 				01438EFD258A250800C70011 /* MyClassesDetailsViewController.swift */,
 				0178EB6E25962DA500466322 /* Schedule */,
+				01629C3D261F2C2800887B7D /* ReScheduleViewController.swift */,
 			);
 			path = "My Classes";
 			sourceTree = "<group>";
@@ -435,6 +455,9 @@
 				0112B553260DBAA1000E3FA9 /* AcademicService.swift */,
 				0112B555260DC00F000E3FA9 /* AcademicGroup.swift */,
 				0112B557260DE356000E3FA9 /* GetSubjects.swift */,
+				01F9F4072615C75B008BBDA3 /* getGuruSubject.swift */,
+				0152102B2616F1AD003A7BEE /* GetGuruProfile.swift */,
+				01629C35261EE90600887B7D /* myClasses.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -587,6 +610,7 @@
 				01E7D48425FC88440054D177 /* PaddedLabel.swift */,
 				011688AE26007609005E1701 /* DynamicHeightCollectionView.swift */,
 				012F3D3826089A5600325823 /* customTextField.swift */,
+				01629C33261EDFCA00887B7D /* CollectionViewFlowLayout.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -609,6 +633,8 @@
 				01413CD725FF3D00001BCF7A /* ConfirmScheduleSecondTableViewCell.swift */,
 				01413CD925FF6D8C001BCF7A /* ConfirmScheduleFirstCollectionViewCell.swift */,
 				01413CDB25FF6EFD001BCF7A /* confirmScheduleThirdTableViewCell.swift */,
+				01629C39261F1AF300887B7D /* classDetailsActionTableViewCell.swift */,
+				01629C3B261F2BA400887B7D /* ReScheduleTableViewCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -625,6 +651,7 @@
 		B7F684D442605D03A9ED34EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01F269B026205ABA00E38C0C /* Razorpay.xcframework */,
 				01F23E4B260B1A4F00EAEDE9 /* MobileRTCResources.bundle */,
 				01F23E49260B1A3D00EAEDE9 /* MobileRTC.framework */,
 				6D8A0D551E7B6F1213709C33 /* Pods_Home_Guru.framework */,
@@ -783,8 +810,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				016EEB70254039BF00FE7351 /* SignInViewController.swift in Sources */,
+				01629C3A261F1AF300887B7D /* classDetailsActionTableViewCell.swift in Sources */,
 				016EEB6E2540398F00FE7351 /* BaseViewController.swift in Sources */,
 				01628ED825FCD0F50033398C /* SelectGuruTableViewCell.swift in Sources */,
+				0152102C2616F1AD003A7BEE /* GetGuruProfile.swift in Sources */,
 				0178EB6D25961C4800466322 /* RechargeWalletViewController.swift in Sources */,
 				01FA8B3425FB42140044C209 /* ScheduleAcademicList_4ViewController.swift in Sources */,
 				0112B558260DE356000E3FA9 /* GetSubjects.swift in Sources */,
@@ -815,6 +844,8 @@
 				01E130EC253DA92C00F63673 /* Helper.swift in Sources */,
 				01C481D82594D2B900FBFD93 /* ProfileInfoTableViewCell.swift in Sources */,
 				01638E8C258A5FEF00F95F64 /* SearchLocationViewController.swift in Sources */,
+				01629C36261EE90600887B7D /* myClasses.swift in Sources */,
+				01629C3E261F2C2800887B7D /* ReScheduleViewController.swift in Sources */,
 				015206B325FA258F0049922C /* ScheduleSubject_2TableViewCell.swift in Sources */,
 				01E130E8253DA8D100F63673 /* ColorPalette.swift in Sources */,
 				011294D625F5F85C00308A91 /* NotificationDetailTableViewCell.swift in Sources */,
@@ -841,6 +872,7 @@
 				01413CD625FF39A7001BCF7A /* confirmSheduleFirstTableViewCell.swift in Sources */,
 				01413CDC25FF6EFD001BCF7A /* confirmScheduleThirdTableViewCell.swift in Sources */,
 				01F826BE258A37F300AA03FA /* RegisterParentTableViewCell.swift in Sources */,
+				01629C34261EDFCA00887B7D /* CollectionViewFlowLayout.swift in Sources */,
 				01438EFE258A250800C70011 /* MyClassesDetailsViewController.swift in Sources */,
 				01413CDA25FF6D8C001BCF7A /* ConfirmScheduleFirstCollectionViewCell.swift in Sources */,
 				0151441D258E7CC000E83F64 /* MyGuruDetailsViewController.swift in Sources */,
@@ -857,10 +889,12 @@
 				0153073E2578C44900F98F1A /* HomeViewController.swift in Sources */,
 				016EEB7425403B0E00FE7351 /* Constants.swift in Sources */,
 				015307442578C88700F98F1A /* NotificationsViewController.swift in Sources */,
+				01629C3C261F2BA400887B7D /* ReScheduleTableViewCell.swift in Sources */,
 				01E7D48B25FC9F390054D177 /* SelectGuruViewController.swift in Sources */,
 				011294CC25F5F76300308A91 /* DatePickerView.swift in Sources */,
 				01C481DB2594D41400FBFD93 /* ContactUsViewController.swift in Sources */,
 				015206B025FA24340049922C /* ScheduleAcademicList_2ViewController.swift in Sources */,
+				01F9F4082615C75B008BBDA3 /* getGuruSubject.swift in Sources */,
 				01FA8B3725FB43160044C209 /* ScheduleSubject_4TableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1006,6 +1040,7 @@
 			baseConfigurationReference = E3E8731874D979584D038267 /* Pods-Home Guru.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MVH8UZ3WJS;
 				ENABLE_BITCODE = NO;
@@ -1021,7 +1056,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bitjini.Home-Guru";
 				PRODUCT_NAME = "Home Guru Student";
-				SWIFT_VERSION = 5.0;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1031,6 +1067,7 @@
 			baseConfigurationReference = 66741D6486074F71FE1F8CE0 /* Pods-Home Guru.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MVH8UZ3WJS;
 				ENABLE_BITCODE = NO;
@@ -1046,7 +1083,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.priya.Home-Guru";
 				PRODUCT_NAME = "Home Guru Student";
-				SWIFT_VERSION = 5.0;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -11,6 +11,9 @@ import UIKit
 class SelectGuruTableViewCell: UITableViewCell {
     @IBOutlet weak var GuruFarelabel: PaddedLabel!
     
+    @IBOutlet weak var languageKnown: UILabel!
+    @IBOutlet weak var guruFare: PaddedLabel!
+    @IBOutlet weak var guruName: UILabel!
     @IBOutlet weak var holderView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()

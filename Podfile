@@ -15,9 +15,10 @@ target 'Home Guru' do
   pod 'Alamofire'
   pod 'XLPagerTabStrip', '~> 8.0'
   pod 'MBProgressHUD'
-  pod 'Kingfisher', '~> 5.0'
+  pod 'Kingfisher'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+#  pod 'razorpay-pod', '~> 1.0.26'
 
   # Pods for Home Guru
 

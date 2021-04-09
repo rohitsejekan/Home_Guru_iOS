@@ -45,11 +45,24 @@ class URLManager {
             return baseURL + "/board"
         }
     }
+    // make booking
     
+    var makeBooking: String{
+        get{
+            return baseURL + "/parent/guruclass/schedule"
+        }
+    }
     // register parent
     var registerParent : String {
         get {
             return baseURL + "/parent"
+        }
+    }
+    
+    // get guru byy subject
+    var getGuruSubject: String{
+        get{
+            return baseURL + "/guru"
         }
     }
     // get subjects
@@ -58,15 +71,34 @@ class URLManager {
             return baseURL + "/guru/getSubjects"
         }
     }
+    // get guru profile
+    
+    var getGuruProfile: String{
+        get{
+            return baseURL + "/guru/"
+        }
+    }
+    
+    // get my classes
+    var getMyClasses: String{
+        get{
+            return baseURL + "/parent/guruclass?"
+        }
+    }
     // group category
     
     var groupCategory: String{
         return baseURL + "/guru/groups"
     }
+
     // group category - child category
       
       var groupChildCategory: String{
           return baseURL + "/guru/groupCategories"
+      }
+    // get points
+      var getPoints: String{
+          return baseURL + "/parent/mypoints"
       }
     //
     // get current points

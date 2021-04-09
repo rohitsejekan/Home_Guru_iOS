@@ -15,9 +15,10 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backView: UIButton!
+    
     var programPickerView : ProgramPickerView?
-    var weeksList : [String] = ["2 weeks","3 weeks","4 weeks"]
-    var timingsList : [String] = ["09.00 am - 10.00 am","11.00 am - 12.00 pm","01.00 pm - 02.00 pm"]
+    var weeksList : [String] = ["weekends","weekdays","both"]
+    var timingsList : [String] = ["one weeks","two weeks","four weeks","six weeks"]
     var pickerType : PickerType = .timings
     var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"select","weeks":"2 weeks"]
     
@@ -26,10 +27,19 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
         tableView.estimatedRowHeight = 498.0
         tableView.rowHeight = UITableView.automaticDimension
         backView.layer.cornerRadius = 5
+          UserDefaults.standard.set("2", forKey: "classType")
+        print("retrive....\(UserDefaults.standard.string(forKey: "classType"))")
     }
     
     @IBAction func chooseClassTypeAction(_ sender: UIButton) {
         scheduleDetails["classType"] = sender.tag == 0 ? "At Home" : "Online Class"
+        if sender.tag == 0{
+            UserDefaults.standard.set("1", forKey: "classType")
+            print("retrive 1....\(UserDefaults.standard.string(forKey: "classType"))")
+        }else{
+            UserDefaults.standard.set("2", forKey: "classType")
+              print("retrive 2....\(UserDefaults.standard.string(forKey: "classType"))")
+        }
         self.tableView.reloadData()
     }
     
@@ -51,7 +61,8 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
         self.pickerType = pickerType
         programPickerView = Bundle.main.loadNibNamed("ProgramPickerView", owner: self, options: nil)?.first as! ProgramPickerView
         programPickerView?.delegate = self
-       // programPickerView?.programList = (pickerType == .timings) ? timingsList : weeksList
+        programPickerView?.pgStatus = false
+        programPickerView?.pgList = (pickerType == .timings) ? timingsList : weeksList
         programPickerView?.showProgramPickerView(onView: self.tableView)
         tableView.isScrollEnabled = false
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.none, animated: false)
@@ -80,6 +91,9 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func getSelectedProgram(programName data: String) {
+        print("selected...data..\(data)")
+        UserDefaults.standard.set("\(data)", forKey: "typeOfweeks")
+        print("retrive....\(UserDefaults.standard.string(forKey: "typeOfweeks"))")
         scheduleDetails[pickerType == .timings ? "timings" : "weeks"] = data
         tableView.isScrollEnabled = true
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
@@ -88,6 +102,7 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
     
 
     @IBAction func goBack(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+       // self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 }

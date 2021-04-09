@@ -29,6 +29,7 @@ class ScheduleAcademicList_3ViewController: UIViewController,IndicatorInfoProvid
     
     func getGroupCat(){
                 groupDetails["categoryid"] = groupId
+        UserDefaults.standard.set("\(groupId)", forKey: "groupId")
         //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
                 AlamofireService.alamofireService.postRequestWithBodyData(url: URLManager.sharedUrlManager.groupChildCategory, details: groupDetails) {
                 response in

@@ -13,10 +13,15 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
     var academicSubjectList : [[String:Any]] = [["title":"Class 1"],["title":"Class 2"],["title":"Class 3"],["title":"Class 4"],["title":"Class 5"],["title":"Class 6"],["title":"Class 7"],["title":"Class 8"]]
             var childNumber = ""
             var index : Int = 0
+    // store label
+    var checkedName: [String] = []
+    // store index value
+    var subId: [String] = []
+    var array = [Int]()
     @IBOutlet weak var backBtn: UIButton!
     var rowsWhichAreChecked = [NSIndexPath]()
     var checkedCount: Int = 0
-    var checkedName: [String] = []
+  
     var subjectId: String = ""
     var subjectDetails: [String: String] = [:]
     var getSubjects = [GetSubjects]()
@@ -53,11 +58,7 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
                                 print("get sub...\(self.getSubjects)")
                                                      
                            DispatchQueue.main.async {
-                            for _ in 0..<(self.getSubjects.count){
-                                self.checkedName.append("")
-                                
-                            }
-                            print("checkedName...\(self.checkedName)")
+                          
                                self.tableView.reloadData()
                             }
                                                  }
@@ -82,16 +83,24 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
                cell.checked = !cell.checked
         if cell.checked == true{
             checkedCount = checkedCount + 1
-            //checkedName.append(cell.labelName.text ?? "")
-            checkedName.insert(cell.labelName.text ?? "", at: indexPath.row)
+            checkedName.append(getSubjects[indexPath.row].title)
+            subId.append(getSubjects[indexPath.row]._id)
+            array.append(indexPath.row)
             print("checked count....\(checkedCount)")
-            print("checked name...\(checkedName)")
+            print("checked name...\(array)")
+            print("subject name...\(subId)")
+            print("name...\(checkedName)")
         }else{
             if checkedCount > 0{
-                checkedCount = checkedCount - 1
-                checkedName.remove(at: indexPath.row)
+                 checkedCount = checkedCount - 1
+                 let index = array.firstIndex(of: indexPath.row) ?? 0
+                array.remove(at: index)
+                checkedName.remove(at: index)
+                subId.remove(at: index)
                 print("unchecked count....\(checkedCount)")
-                print("unchecked name...\(checkedName)")
+                print("unchecked name...\(array)")
+                print("unchecked subject id...\(subId)")
+                print("name...\(checkedName)")
             }
             
         }
@@ -160,6 +169,12 @@ extension ScheduleAcademicList_4ViewController: nextScreen{
                 vc.hidesBottomBarWhenPushed = true
         vc.selectedCounts = checkedCount
         vc.getCheckedName = checkedName
+       
+        vc.studentDetails = [[String:Any]](repeating: [String : Any](), count: checkedCount)
+        UserDefaults.standard.set(subId, forKey: "subjectId")
+        UserDefaults.standard.set(checkedName, forKey: "checkedName")
+        print("idii id.....\( UserDefaults.standard.object(forKey: "subjectId"))")
+       
     self.navigationController?.pushViewController(vc, animated: false)
 
     }

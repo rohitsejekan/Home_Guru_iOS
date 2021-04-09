@@ -18,6 +18,8 @@ class ProgramPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var pickerView: UIPickerView!
     var delegate : ProgramPickerProtocol?
     var programList : [[String:Any]] = []
+    var pgList: [String] = []
+    var pgStatus: Bool = true
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -65,21 +67,45 @@ class ProgramPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
         
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return programList.count
+        if pgStatus == false{
+            return pgList.count
+        }else{
+            return programList.count
+        }
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.programList[row]["program"] as? String ?? "ok empty now"
+        if pgStatus == false{
+            return pgList[row]
+        }else{
+            return self.programList[row]["program"] as? String ?? "ok empty now"
+
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        UIView.animate(withDuration: 1.0) {
-            self.delegate?.getSelectedProgram(programName: self.programList[row]["program"] as? String ?? "ok empty now")
-            self.removeFromSuperview()
+        if pgStatus == false{
+            UIView.animate(withDuration: 1.0) {
+                               self.delegate?.getSelectedProgram(programName: self.pgList[row])
+                               self.removeFromSuperview()
+                           }
+       
+        }else{
+            UIView.animate(withDuration: 1.0) {
+                         self.delegate?.getSelectedProgram(programName: self.programList[row]["program"] as? String ?? "ok empty now")
+                         self.removeFromSuperview()
+                     }
         }
+  
     }
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        return NSAttributedString(string: programList[row]["program"] as? String ?? "ok empty now", attributes:[NSAttributedString.Key.foregroundColor: UIColor.white])
+        if pgStatus == false{
+              return NSAttributedString(string: pgList[row], attributes:[NSAttributedString.Key.foregroundColor: UIColor.white])
+        }else{
+              return NSAttributedString(string: programList[row]["program"] as? String ?? "ok empty now", attributes:[NSAttributedString.Key.foregroundColor: UIColor.white])
+        }
+      
     }
 
 }

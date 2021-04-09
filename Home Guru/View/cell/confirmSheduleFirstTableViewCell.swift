@@ -14,7 +14,7 @@ class confirmSheduleFirstTableViewCell: UITableViewCell, UICollectionViewDelegat
     @IBOutlet weak var guruName: UILabel!
     @IBOutlet weak var GuruFare: UILabel!
     @IBOutlet weak var datesCV: UICollectionView!
-    
+    var arr = [String]()
     var tags : [String] = ["1","2","3","4","5","6","1","2","3","4","5","6"]
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,7 +26,16 @@ class confirmSheduleFirstTableViewCell: UITableViewCell, UICollectionViewDelegat
         datesCV.dataSource = self
         datesCV.layoutIfNeeded()
     }
-
+    func configure(with arr: [String]) {
+          self.arr = arr
+          self.datesCV.reloadData()
+          self.datesCV.layoutIfNeeded()
+      }
+//    func getLoad(){
+//        datesCV.delegate = self
+//               datesCV.dataSource = self
+//               datesCV.layoutIfNeeded()
+//    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -34,11 +43,13 @@ class confirmSheduleFirstTableViewCell: UITableViewCell, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tags.count
+        return arr.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ConfirmScheduleFirst", for: indexPath) as! ConfirmScheduleFirstCollectionViewCell
+        cell.datesLabel.text = arr[indexPath.row]
         return cell
     }
     
@@ -49,8 +60,8 @@ extension confirmSheduleFirstTableViewCell: UICollectionViewDelegateFlowLayout {
         return 10.0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let text = self.tags[indexPath.row]
-        let cellWidth = text.size(withAttributes:[.font: UIFont.systemFont(ofSize:12.0)]).width + 30.0
+        let text = self.arr[indexPath.row]
+        let cellWidth = text.size(withAttributes:[.font: UIFont.systemFont(ofSize:12.0)]).width + 20.0
         return CGSize(width: cellWidth, height: 30.0)
     }
     

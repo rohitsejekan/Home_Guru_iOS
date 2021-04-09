@@ -12,6 +12,8 @@ import MBProgressHUD
 import Alamofire
 import SwiftyJSON
 class RegisterStudentViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, RegisterStudentDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+    
+    var studentArray: [String]?
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -37,12 +39,20 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
     }
     func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == pickerView_2{
-            selectedClass = classes[row]
-            self.studentDetails[currentIndex]["stdClass"] = 1
+              selectedClass = classes[row]
+                      studentArray?.append(classes[row])
+                      print("picker 1....\(selectedClass)")
+                      print("picker 1 current index....\(currentIndex)")
+
+                      self.studentDetails[currentIndex]["stdClass"] = selectedClass
+                      print("picker 1 value ....\(self.studentDetails[currentIndex]["stdClass"])")
             
         }else{
-            self.studentDetails[currentIndex]["board"] = 1
-            selectedBoard = storeBoard[row]
+                  selectedBoard = storeBoard[row]
+                  print("picker 2....\(selectedBoard)")
+                  print("picker 2 current index....\(currentIndex)")
+                  self.studentDetails[currentIndex]["board"] = selectedBoard
+                      print("picker 2 value ....\(self.studentDetails[currentIndex]["board"])")
         }
             
    }
@@ -52,6 +62,7 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
     var storeBoard: [String] = []
     var studentDetails : [[String:Any]] = []
     var programList : [[String:Any]] = []
+    var pgList: [String] = []
     var parentDetails : [String:Any] = [:]
     var numberOfStudents = 1
     var currentIndex = 0
@@ -78,7 +89,6 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
          hideUnhidePickerView(view: self.outerPickerView, value: true)
         hideUnhidePickerView(view: self.outerPickerView_2, value: true)
 
-        
     }
     func getBoards(){
         AlamofireService.alamofireService.getRequest(url: URLManager.sharedUrlManager.getBoards, parameters: nil) { response
@@ -130,14 +140,14 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
     }
     func selectBoard(index: Int){
        endEditing()
-      
+        currentIndex = index
         pickerView.selectedRow(inComponent: 0)
         pickerView.reloadAllComponents()
         hideUnhidePickerView(view: self.outerPickerView, value: false)
     }
     func selectClass(index: Int){
         endEditing()
-        
+          currentIndex = index
           pickerView_2.selectedRow(inComponent: 0)
           pickerView_2.reloadAllComponents()
           hideUnhidePickerView(view: self.outerPickerView_2, value: false)
@@ -146,7 +156,7 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
         datePickerView = Bundle.main.loadNibNamed("DatePickerView", owner: self, options: nil)?.first as! DatePickerView
         datePickerView?.delegate = self
         datePickerView?.showDatePickerView(onView: self.tableView)
-        tableView.isScrollEnabled = false
+        tableView.isScrollEnabled = true
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.none, animated: false)
     }
     
@@ -206,6 +216,12 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
                 if let dob = studentDetails[indexPath.row]["dob"] as? String {
                     cell?.dobTextField.text = dob
                 }
+                if let classStudent = studentDetails[indexPath.row]["stdClass"] as? String{
+                    cell?.classTextField.text = classStudent
+                }
+                if let board = studentDetails[indexPath.row]["board"] as? String{
+                                 cell?.boardTextField.text = board
+                }
                 if let program = studentDetails[indexPath.row]["programName"] as? String {
                     cell?.classTextField.text = program
                 }
@@ -220,12 +236,22 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
     @IBAction func dismissPV2(_ sender: UIBarButtonItem) {
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
                hideUnhidePickerView(view: self.outerPickerView_2, value: true)
+        reload(tableView: self.tableView)
     }
     @IBAction func dismissPV(_ sender: UIBarButtonItem) {
         
         
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
         hideUnhidePickerView(view: self.outerPickerView, value: true)
+        reload(tableView: self.tableView)
+
+    }
+    func reload(tableView: UITableView) {
+
+        let contentOffset = tableView.contentOffset
+        tableView.reloadData()
+        tableView.layoutIfNeeded()
+        tableView.setContentOffset(contentOffset, animated: false)
 
     }
     

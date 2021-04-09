@@ -28,9 +28,10 @@ class AlamofireService: NSObject {
     
     func headersWithXAuthToken() -> HTTPHeaders {
         var header : HTTPHeaders = [:]
-        if let token = UserDefaults.standard.string(forKey: Constants.token) {
-            header["x-auth-token"] = token
-        }
+  //        if let token = UserDefaults.standard.string(forKey: Constants.token) {
+        //            header["x-auth-token"] = token
+        //        }
+                header["x-auth-token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsImlhdCI6MTYwODYyOTA0OH0.ktuO-f_lC9-pmcgKqkZPNBozJVpyafJOPATe6Y2BQKg"
         return header
     }
     

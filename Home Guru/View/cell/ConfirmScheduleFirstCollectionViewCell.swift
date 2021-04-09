@@ -10,4 +10,5 @@ import UIKit
 
 class ConfirmScheduleFirstCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var datesLabel: UILabel!
 }

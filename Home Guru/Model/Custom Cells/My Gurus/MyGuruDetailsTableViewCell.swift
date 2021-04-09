@@ -23,6 +23,7 @@ class MyGuruDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var experienceLabel: UILabel!
     @IBOutlet weak var subjectsLabel: UILabel!
     
+    @IBOutlet weak var subjectPlaceholder: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

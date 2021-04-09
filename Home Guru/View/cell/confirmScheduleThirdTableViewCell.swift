@@ -10,6 +10,8 @@ import UIKit
 
 class confirmScheduleThirdTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var totalAmount: UILabel!
+    @IBOutlet weak var noOfClass: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

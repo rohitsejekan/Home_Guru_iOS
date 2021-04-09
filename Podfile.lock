@@ -97,7 +97,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - IQKeyboardManagerSwift
-  - Kingfisher (~> 5.0)
+  - Kingfisher
   - MBProgressHUD
   - SKCountryPicker
   - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift4`)
@@ -167,6 +167,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: da4f563da55a074b5c2394e598300a0bcd5b33ca
+PODFILE CHECKSUM: f478ef60ac00a4a78dd7684d61c467dd378a19ec
 
 COCOAPODS: 1.10.1

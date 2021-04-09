@@ -10,8 +10,9 @@ import Foundation
 import SwiftyJSON
 struct GetSubjects {
     var title: String = ""
-    //var _id: String = ""
+    var _id: String = ""
     init(json: JSON) {
         self.title = json["title"].stringValue
+        self._id = json["_id"].stringValue
     }
 }

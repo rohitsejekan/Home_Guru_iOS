@@ -8,7 +8,7 @@
 
 import UIKit
 import MBProgressHUD
-
+import SwiftyJSON
 enum DataDisplayType {
     case homeInfo, scheduleInfo, registerInfo
 }
@@ -17,12 +17,12 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     var overlayBool: Bool = false
-    
+    var myClassDetails = [myClasses]()
     var points : Int = 0
     var scheduledClassInfo : [[String:Any]] = [["classType":"old class","dateObj":Date()],["classType":"today","dateObj":Date()],["classType":"demo today","dateObj":Date()],["classType":"future", "dateObj":Date()],["classType":"future demo","dateObj":Date()]]
     var classDetails : [Int] = []
     var showData : Bool = false
-    var dataDisplayType : DataDisplayType = .homeInfo
+    var dataDisplayType : DataDisplayType = .scheduleInfo
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +32,38 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "ScheduledClassCardTableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduledClassCardTableViewCell")
         navigationController?.delegate = self
+        getMyclassDetails()
     }
-
+    func getMyclassDetails(){
+               
+            AlamofireService.alamofireService.getRequestWithToken(url: URLManager.sharedUrlManager.getMyClasses + "studentId=\(2)", parameters: nil) {
+                            response in
+                               switch response.result {
+                               case .success(let value):
+                                   if let status =  response.response?.statusCode {
+                                   print("guru p ..\(status)")
+                                    print("g p...\(value)")
+                                       if status == 200 || status == 201 {
+                                    let val = JSON(value)
+                                        for arr in val.arrayValue{
+                                         self.myClassDetails.append(myClasses(json: arr))
+                                           // print("child sub...\(arr)")
+                    
+                    
+                                        }
+                                        print("classes.......\(self.myClassDetails)")
+                                    DispatchQueue.main.async {
+                                   
+                                        self.tableView.reloadData()
+                                     }
+                                                          }
+                                   }
+                               case .failure( _):
+                                   print("failure")
+                                        return
+                                    }
+                               }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
           hideNavbar()
@@ -41,7 +71,7 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                //        if UserDefaults.standard.bool(forKey: Constants.isRegistered) {
 //            getScheduledClassInfo()
 //        } else {
-            self.dataDisplayType = .registerInfo
+            self.dataDisplayType = .scheduleInfo
             reloadData()
 //        }
     }
@@ -94,7 +124,12 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return showData ? ((dataDisplayType == .homeInfo || dataDisplayType == .registerInfo) ? 1 : (( scheduledClassInfo.count == 0 ? 1 : scheduledClassInfo.count + 1))) : 0
+        if dataDisplayType == .scheduleInfo{
+            return myClassDetails.count + 1
+        }else{
+             return showData ? ((dataDisplayType == .homeInfo || dataDisplayType == .registerInfo) ? 1 : (( scheduledClassInfo.count == 0 ? 1 : scheduledClassInfo.count + 1))) : 0
+        }
+       
     }
     
 //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -138,10 +173,12 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if dataDisplayType == .homeInfo || dataDisplayType == .registerInfo {
             if indexPath.row == 0{
-                tableView.isScrollEnabled = false
+               tableView.isScrollEnabled = false
                 return tableView.frame.height
             }
             
+        }else{
+             tableView.isScrollEnabled = true
         }
         return UITableView.automaticDimension
     }
@@ -160,7 +197,11 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduledClassCardTableViewCell", for: indexPath) as? ScheduledClassCardTableViewCell
-        cell?.setCardValues(data: scheduledClassInfo[indexPath.row-1])
+        cell?.moduleLabel.text = myClassDetails[indexPath.row - 1].subject[0].subjectName
+        cell?.nameLabel.text = myClassDetails[indexPath.row - 1].faculty?.name
+        cell?.dateLabel.text = myClassDetails[indexPath.row - 1].scheduleDate
+        cell?.timeLabel.text = myClassDetails[indexPath.row - 1].timeSlotFrom
+        cell?.setCardValues(data: scheduledClassInfo[indexPath.row - 1])
         cell?.selectionStyle = .none
         return cell!
     }
@@ -171,6 +212,13 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                 let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "MyClassesDetailsViewController") as? MyClassesDetailsViewController
                // setNavigationBackTitle(title: getDateString(format: "dd MMM yyyy (E)", date: scheduledClassInfo[indexPath.row]["dateObj"] as! Date))
                 vc!.scheduledClassInfo = scheduledClassInfo[indexPath.row]
+                if let facultyName = myClassDetails[indexPath.row - 1].faculty?.name{
+                    vc?.facultyName = facultyName
+                }
+                
+                vc?.subject = myClassDetails[indexPath.row - 1].subject[0].subjectName
+                vc?.scheduledate = myClassDetails[indexPath.row - 1].scheduleDate
+                vc?.scheduleTime = myClassDetails[indexPath.row - 1].timeSlotFrom
                 vc!.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc!, animated: false)
             }

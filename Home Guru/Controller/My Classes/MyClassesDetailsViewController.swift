@@ -14,6 +14,10 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
     var scheduledClassInfo : [String:Any] = [:]
     var count = 2
     var showData : Bool = true
+    var facultyName: String = ""
+    var subject: String = ""
+    var scheduledate: String = ""
+    var scheduleTime: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,17 +126,34 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNonzeroMagnitude
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 1{
+            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ReScheduleViewController") as! ReScheduleViewController
+            //setNavigationBackTitle(title: "Schedule")
+            vc.hidesBottomBarWhenPushed = true
+           
+         
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleClassDetailsTableViewCell", for: indexPath) as? ScheduleClassDetailsTableViewCell
-            cell?.selectionStyle = .none
-            return cell!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleClassDetailsTableViewCell", for: indexPath) as! ScheduleClassDetailsTableViewCell
+            cell.teacherNameLabel.text = facultyName
+            cell.subjectLabel.text = subject
+            cell.dateLabel.text = scheduledate
+            cell.timeLabel.text = scheduleTime
+            cell.selectionStyle = .none
+            return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleDetailsActionCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "classDetailsAction", for: indexPath) as! classDetailsActionTableViewCell
             cell.selectionStyle = .none
             return cell
         }
     }
     
+    @IBAction func goBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
 }
