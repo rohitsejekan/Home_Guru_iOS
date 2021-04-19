@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftyJSON
 class PaymentHistoryViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -23,8 +23,33 @@ class PaymentHistoryViewController: BaseViewController, UITableViewDataSource, U
         tableView.estimatedRowHeight = 86.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "NotificationCardTableViewCell", bundle: nil), forCellReuseIdentifier: "NotificationCardTableViewCell")
+        
+        getpaymentHistory()
     }
     
+    func getpaymentHistory(){
+        AlamofireService.alamofireService.getRequestWithToken(url: URLManager.sharedUrlManager.transcation, parameters: nil) {
+                  response in
+                  switch response.result {
+                  case .success(let value):
+                      if let status =  response.response?.statusCode {
+                          print("status is ..\(status)")
+                          if status == 200 || status == 201 {
+                            let json = JSON(value)
+                            print("value....\(json)")
+                            for arr in json.arrayValue{
+                                print("v.....\(arr["points"])")
+                            }
+                              DispatchQueue.main.async {
+                                print("....\(response.result)")
+                              }
+                          }
+                      }
+                  case .failure( _):
+                      print("failure")
+                  }
+              }
+    }
     @IBAction func backAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }

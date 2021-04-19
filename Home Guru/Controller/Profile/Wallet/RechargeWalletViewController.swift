@@ -8,15 +8,18 @@
 
 import UIKit
 import Razorpay
+import SwiftyJSON
 class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletionProtocol, UITextFieldDelegate {
 
     @IBOutlet weak var availablePointsLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
-    var amount: Int = 0
+    var amount = 1
      var razorpay: RazorpayCheckout!
+    var paymentSuccess: [String: String] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
              razorpay = RazorpayCheckout.initWithKey("rzp_test_TLpg89CUg8B1bI", andDelegate: self)
+        amountTextField.delegate = self
     }
         func onPaymentError(_ code: Int32, description str: String) {
     //        let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "PaymentStatusViewController") as? PaymentStatusViewController
@@ -30,21 +33,50 @@ class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletion
         
         func onPaymentSuccess(_ payment_id: String) {
             print("payment_id is ..\(payment_id)")
-            saveTransactionDetails(paymentId: payment_id)
-            let alert = UIAlertController(title: "SUCCESS!", message: "Payment is successful", preferredStyle: .alert)
-                   let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                   alert.addAction(action)
-                   self.present(alert, animated: true, completion: nil)
+//            saveTransactionDetails(paymentId: payment_id)
+//            let alert = UIAlertController(title: "SUCCESS!", message: "Payment is successful", preferredStyle: .alert)
+//                   let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                   alert.addAction(action)
+//                   self.present(alert, animated: true, completion: nil)
+                   paymentSuccess["amount"] = "1"
+                   paymentSuccess["paymentRef"] = payment_id
+                   print("confirm book...\(paymentSuccess)")
+                   
+               //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
+                       AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.wallet, details: paymentSuccess) {
+                       response in
+                          switch response.result {
+                          case .success(let value):
+                              if let status =  response.response?.statusCode {
+                              print("status issw ..\(status)")
+                               print("value...\(value)")
+                                  if status == 200 || status == 201 {
+                               let val = JSON(value)
+                                 
+                                    print("val...\(val)")
+                                                         
+                               DispatchQueue.main.async {
+                              
+                                }
+                                                     }
+                              }
+                          case .failure( _):
+                              print("failure")
+                                   return
+                               }
+                          }
         }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        amount = Int(amountTextField.text!) ?? 0
+        if let amt = amountTextField.text{
+            amount = Int(amt) ?? 0
+        }
 
         print("amount.....\(amount)")
     }
     func saveTransactionDetails(paymentId: String) {
         var details : [String:Any] = [
             "transactionType": "credit",
-            "amount": "\(amountTextField.text)",
+            "amount": "\(amountTextField)",
             "paymentRef": paymentId,
             "status": true
         ]
@@ -86,12 +118,12 @@ class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletion
     @IBAction func proceedAction(_ sender: UIButton) {
         
         // take to payment gateway
-        let options:[String:Any] = ["amount" : "\(amount))",
+        let options:[String:Any] = ["amount" : amount * 100,
                                       "description" : "for test purpose",
                                       "image": UIImage(named: "img"),
                                       "name" : "business name",
                                       "prefill" :
-                                          ["contact" : "9876543210",
+                                          ["contact" : "9845876654",
                                            "email":"demo@inm.com"],
                                       "theme" : "#F00000"]
           razorpay?.open(options)

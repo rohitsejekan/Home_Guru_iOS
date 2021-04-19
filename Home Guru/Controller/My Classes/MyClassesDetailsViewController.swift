@@ -18,6 +18,10 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
     var subject: String = ""
     var scheduledate: String = ""
     var scheduleTime: String = ""
+    var classId: String = ""
+    var classType: String = ""
+    
+    @IBOutlet weak var navlabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +29,13 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
         tableView.estimatedRowHeight = 120.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "ScheduleClassDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduleClassDetailsTableViewCell")
+        print("classid...\(classId)")
         // Do any additional setup after loading the view.
+        navlabel.text = scheduledate
+       print("stu id....\(StructOperation.glovalVariable.studentId)")
+        print("fac id....\(StructOperation.glovalVariable.facultyId)")
+         print("fac charge....\(StructOperation.glovalVariable.subjectId)")
+         print("sub charge....\(StructOperation.glovalVariable.hourlyCompenstaion)")
     }
     
     
@@ -142,6 +152,16 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
             cell.teacherNameLabel.text = facultyName
             cell.subjectLabel.text = subject
             cell.dateLabel.text = scheduledate
+            if let weekday = getDayOfWeek(scheduledate) {
+                cell.dayLabel.text = String(weekday.prefix(3))
+            } else {
+                print("bad input")
+            }
+            if classType == "1"{
+                cell.classTypeLabel.text = "Online Class"
+            }else{
+                cell.classTypeLabel.text = "At Home Clases"
+            }
             cell.timeLabel.text = scheduleTime
             cell.selectionStyle = .none
             return cell
@@ -156,4 +176,14 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
         self.navigationController?.popViewController(animated: true)
     }
     
+}
+
+extension MyClassesDetailsViewController{
+    func getDayOfWeek(_ today:String) -> String? {
+        let df  = DateFormatter()
+        df.dateFormat = "YYYY-MM-dd"
+        let date = df.date(from: today)!
+        df.dateFormat = "EEEE"
+        return df.string(from: date);
+    }
 }

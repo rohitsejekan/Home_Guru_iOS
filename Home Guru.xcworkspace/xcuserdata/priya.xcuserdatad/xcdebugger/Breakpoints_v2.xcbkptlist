@@ -3,4 +3,114 @@
    uuid = "C69B1F93-9BAF-4320-A9F2-FEC13B8D909C"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "53B27330-9C84-4032-ADAC-AF25BF153D2C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Home Guru/Controller/Profile/Wallet/PaymentHistoryViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "PaymentHistoryViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "53B27330-9C84-4032-ADAC-AF25BF153D2C - 5cbb27becf26db09"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Home_Guru_Student.PaymentHistoryViewController.transactionList.getter : Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;"
+                  moduleName = "Home Guru Student"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/priya/Desktop/Home_Guru_iOS/Home%20Guru/Controller/Profile/Wallet/PaymentHistoryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "140">
+               </Location>
+               <Location
+                  uuid = "53B27330-9C84-4032-ADAC-AF25BF153D2C - 1bfc7cf1c77ccb05"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Home_Guru_Student.PaymentHistoryViewController.transactionList.setter : Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;"
+                  moduleName = "Home Guru Student"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/priya/Desktop/Home_Guru_iOS/Home%20Guru/Controller/Profile/Wallet/PaymentHistoryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  uuid = "53B27330-9C84-4032-ADAC-AF25BF153D2C - 672331b6f925714"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Home_Guru_Student.PaymentHistoryViewController.transactionList.modify : Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;"
+                  moduleName = "Home Guru Student"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/priya/Desktop/Home_Guru_iOS/Home%20Guru/Controller/Profile/Wallet/PaymentHistoryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "53B27330-9C84-4032-ADAC-AF25BF153D2C - 7ea4091c490feedd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Home_Guru_Student.PaymentHistoryViewController.transactionList.modify : Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Home Guru Student"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/priya/Desktop/Home_Guru_iOS/Home%20Guru/Controller/Profile/Wallet/PaymentHistoryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "53B27330-9C84-4032-ADAC-AF25BF153D2C - c3e89677ec361f20"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Home_Guru_Student.PaymentHistoryViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Home_Guru_Student.PaymentHistoryViewController"
+                  moduleName = "Home Guru Student"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/priya/Desktop/Home_Guru_iOS/Home%20Guru/Controller/Profile/Wallet/PaymentHistoryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "292">
+               </Location>
+               <Location
+                  uuid = "53B27330-9C84-4032-ADAC-AF25BF153D2C - afba758953066c62"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Home_Guru_Student.PaymentHistoryViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Home_Guru_Student.PaymentHistoryViewController&gt;"
+                  moduleName = "Home Guru Student"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/priya/Desktop/Home_Guru_iOS/Home%20Guru/Controller/Profile/Wallet/PaymentHistoryViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "240">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

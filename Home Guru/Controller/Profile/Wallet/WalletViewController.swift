@@ -15,8 +15,7 @@ class WalletViewController: BaseViewController{
 
     @IBOutlet weak var availablePointsLabel: UILabel!
     @IBOutlet weak var settingsView: UIView!
-   
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         hideNavbar()

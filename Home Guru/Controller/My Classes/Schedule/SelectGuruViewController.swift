@@ -19,7 +19,7 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
     var guruProfileDetails = [GetGuruProfile]()
     var guruProfileOnId = [GetGuruProfile]()
     var getGuruDetails = [getGurusubject]()
-    var guruFare: String = ""
+    var guruFare: [String] = []
   
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -27,6 +27,8 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
         backBtn.layer.cornerRadius = 5
         // Do any additional setup after loading the view.
         getGuru()
+        
+        print("slot d...\(slotDetails)")
    
     }
     
@@ -65,13 +67,17 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
                             print("...getguruDetails..\(self.getGuruDetails)")
                              
                             }
+                       
+                        // to get faculty fare based on classtype
                             for arr in self.getGuruDetails{
                                 for arr1 in arr.guruSubjectDetail{
                                     if UserDefaults.standard.string(forKey: "classType") ?? "" == "1"{
-                                        self.guruFare = "Rs " + arr1.hourlyFees[0].facultyCharges + " /Hour"
+                                        self.guruFare.append(arr1.hourlyFees[0].facultyCharges)
                                         print("guru fare..\(self.guruFare)")
                                         }else{
-                                            self.guruFare = "Rs " + arr1.hourlyFees[1].facultyCharges + " /Hour"
+                                        
+                                        self.guruFare.append(arr1.hourlyFees[1].facultyCharges)
+                                            
                                         print("guru fare..\(self.guruFare)")
                                             }
                                   
@@ -105,7 +111,7 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
                         cell?.layoutMargins = .zero
         cell?.guruName.text = getGuruDetails[indexPath.row].name
         cell?.languageKnown.text = getGuruDetails[indexPath.row].languages
-        cell?.guruFare.text = guruFare
+        cell?.guruFare.text = "Rs "+guruFare[indexPath.row] + "/hour"
           //        cell?.radioImageView.image = UIImage(named: indexPath.row == index ? "radioSelected" : "radioUnselected")
                 
                   return cell!

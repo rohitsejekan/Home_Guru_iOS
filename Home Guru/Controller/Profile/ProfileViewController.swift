@@ -7,12 +7,15 @@
 //
 
 import UIKit
-
+import SwiftyJSON
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ProfileEditProtocol {
 
     @IBOutlet weak var tableView: UITableView!
     var profileFields : [String] = ["Account","Wallet","Contact Us","Signout"]
-    
+    var studentName: String = ""
+    var studentStd: String = ""
+    var studentDob: String = ""
+    var childrenDetails = [myChildren]()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
        // hideNavbar()
@@ -23,8 +26,39 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "ProfileCardTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileCardTableViewCell")
+        getprofile()
         
         
+    }
+    private func getprofile(){
+        AlamofireService.alamofireService.getRequestWithToken(url: URLManager.sharedUrlManager.getProfile, parameters: nil) {
+                           response in
+                              switch response.result {
+                              case .success(let value):
+                                  if let status =  response.response?.statusCode {
+                                  print("guru p ..\(status)")
+                                   print("g p...\(value)")
+                                      if status == 200 || status == 201 {
+                                   let val = JSON(value)
+                                      print("val ...\(val)")
+                                        for arr in val["student"].arrayValue{
+                                            self.childrenDetails.append(myChildren(json: arr))
+                                            self.studentName = arr["name"].stringValue
+                                            self.studentStd = arr["stdClass"].stringValue
+                                            self.studentDob = arr["dob"].stringValue
+                                        }
+                                        print("mychildren...\(self.childrenDetails)")
+                                   DispatchQueue.main.async {
+                                  
+                                       self.tableView.reloadData()
+                                    }
+                                                         }
+                                  }
+                              case .failure( _):
+                                  print("failure")
+                                       return
+                                   }
+                              }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,6 +72,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.profileImage.image = imageWithGradient(img: cell.profileImage.image)
            // cell!.profileEditDelegate = self
             cell.delegate = self
+
+            if !childrenDetails.isEmpty{
+                print("my..\(childrenDetails.count)")
+                cell.myChildrenCount = childrenDetails.count
+                //cell.myChildrens = childrenDetails
+            }
+            cell.configure(with: self.childrenDetails)
+            cell.studentNameLabel.text = studentName
+            cell.classLabel.text = "CLASS - " + studentStd
+            cell.dobDetailsLabel.text = studentDob
             cell.selectionStyle = .none
             return cell
         } else {
@@ -73,6 +117,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func editProfile(index: Int) {
         // navigate to edit profile
+    let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "editProfileViewController") as! editProfileViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func addProfile() {

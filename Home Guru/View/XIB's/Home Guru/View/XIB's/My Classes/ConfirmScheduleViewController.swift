@@ -37,7 +37,7 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
        totalFare = UserDefaults.standard.string(forKey: "totalFare") ?? ""
         //
                  
-                
+        print("total fare.....\(totalFare)")
         confirmBooking()
     }
     
@@ -59,10 +59,10 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                confirmBook["classType"] = classTypeId
                confirmBook["is_demo"] = 0
                confirmBook["facultyId"] = guruId
-               confirmBook["studentId"] = 1
+        confirmBook["studentId"] = StructOperation.glovalVariable.studentId
                confirmBook["noOfHours"] = 2
                confirmBook["hourlyCompensation"] = guruFare
-        confirmBook["classes"] = subjectDatesSlot
+        confirmBook["classes"] = StructOperation.glovalVariable.subjectDatesSlot
         
                print("confirm book...\(confirmBook)")
                

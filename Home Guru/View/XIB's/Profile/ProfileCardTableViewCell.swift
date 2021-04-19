@@ -19,6 +19,9 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
     @IBOutlet weak var studentNameLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
     @IBOutlet weak var dobDetailsLabel: UILabel!
+    var arr = [myChildren]()
+    var myChildrenCount = Int()
+  
     var studentList : [[String:Any]] = [["name":"abc","class":"8th","dob":"26/11/2001"]]
     var delegate : ProfileEditProtocol?
     
@@ -29,10 +32,15 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "ProfileCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProfileCollectionViewCell")
         
-        
+        //print("any....\(myChildrens.count)")
     }
 
-   
+   func configure(with arr: [myChildren]) {
+         print("any....\(arr)")
+         self.arr = arr
+         self.collectionView.reloadData()
+         self.collectionView.layoutIfNeeded()
+     }
     @IBAction func editProfileAction(_ sender: UIButton) {
         delegate?.editProfile(index: sender.tag)
     }
@@ -44,14 +52,17 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return studentList.count + 1
+        return arr.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCollectionViewCell", for: indexPath) as? ProfileCollectionViewCell
-        if indexPath.item == studentList.count {
+        if indexPath.item == arr.count {
             cell?.profileNameLabel.text = "Add Profile"
             cell?.profileImageView.image = UIImage(named: "add")
+        }else{
+            cell?.profileNameLabel.text = arr[indexPath.row].name
+            cell?.profileImageView.image = UIImage(named: "degree")
         }
         return cell!
     }
@@ -61,7 +72,7 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == studentList.count {
+        if indexPath.item == arr.count {
             delegate?.addProfile()
         } else {
             showSelectedProfile(index: indexPath.item)
@@ -69,9 +80,12 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
     }
     
     func showSelectedProfile(index: Int) {
-        studentNameLabel.text = studentList[index]["name"] as! String
-        classLabel.text = studentList[index]["class"] as! String
-        dobDetailsLabel.text = studentList[index]["dob"] as! String
+        if !arr.isEmpty{
+            studentNameLabel.text = arr[index].name
+            classLabel.text = arr[index].stdClass
+            dobDetailsLabel.text = arr[index].dob
+        }
+     
     }
     
 }

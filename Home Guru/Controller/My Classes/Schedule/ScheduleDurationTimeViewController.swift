@@ -16,66 +16,76 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
      }
      
      func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-         if pickerView == pickerView_2{
-             return classes.count
+         if pickerView == pickerViewDuration{
+             return duration.count
              
 
          }else{
-             return boards.count
+             return classes.count
          }
      }
      func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
      {
-         if pickerView == pickerView_2{
-              return classes[row]
+         if pickerView == pickerViewDuration{
+              return duration[row]
          }else{
              
-             return boards[row]
+             return classes[row]
          }
          
      }
      func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-         if pickerView == pickerView_2{
-               selectedClass = classes[row]
-                       studentArray?.append(classes[row])
-                       print("picker 1....\(selectedClass)")
-                       print("picker 1 current index....\(currentIndex)")
-                        studentDetails[currentIndex]["name"] = getCheckedName[currentIndex]
-                       self.studentDetails[currentIndex]["duration"] = selectedClass
+         if pickerView == pickerViewDuration{
             
-                       print("picker 1 value ....\(self.studentDetails[currentIndex]["duration"])")
+            selectedBoard = duration[row]
+                              print("picker 2....\(selectedBoard)")
+                              print("picker 2 current index....\(currentIndex)")
+                              self.studentDetails[currentIndex]["start"] = selectedBoard
+                             studentDetails[currentIndex]["name"] = getCheckedName[currentIndex]
+                                  print("picker 2 value ....\(self.studentDetails[currentIndex]["start"])")
              
          }else{
-                   selectedBoard = boards[row]
-                   print("picker 2....\(selectedBoard)")
-                   print("picker 2 current index....\(currentIndex)")
-                   self.studentDetails[currentIndex]["start"] = selectedBoard
-                  studentDetails[currentIndex]["name"] = getCheckedName[currentIndex]
-                       print("picker 2 value ....\(self.studentDetails[currentIndex]["start"])")
+                    selectedClass = classes[row]
+                                       studentArray?.append(classes[row])
+                                       print("picker 1....\(selectedClass)")
+                                       print("picker 1 current index....\(currentIndex)")
+                                        studentDetails[currentIndex]["name"] = getCheckedName[currentIndex]
+                                       self.studentDetails[currentIndex]["duration"] = selectedClass
+                            
+                                       print("picker 1 value ....\(self.studentDetails[currentIndex]["duration"])")
          }
              
     }
     func selectDuration(index: Int) {
+        if outerPickerDurationView.isHidden{
+            outerPickerDurationView.isHidden = false
+        }
+        currentIndex = index
+    }
+    
+    func getStartTime(index: Int) {
+        self.studentDetails[index]["duration"] = "\(pickerViewTime.date.localTime)"
+        print("picker date.....\(self.studentDetails[index]["duration"])")
         if outerPickerView2.isHidden{
             outerPickerView2.isHidden = false
         }
         currentIndex = index
     }
     
-    func getStartTime(index: Int) {
-        if outerPickerView.isHidden{
-            outerPickerView.isHidden = false
-        }
-        currentIndex = index
+    func serverToLocal(date:String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ssZ"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        let localDate = dateFormatter.date(from: date)
+
+        return localDate
     }
-    
-    
-    var boards: [String] = ["class 1","class 10","class 1","class 1","class 1"]
+    var duration: [String] = ["1 Hour","1.5 Hour","2 Hour","2.5 Hour","3 Hour", "3.5 Hour","4 Hour"]
     var classes: [String] = ["class 1","class 2","class 3","class 4","class 5", "class 6", "class 7", "class 8", "class 9", "class 10", "class 11", "class 12"]
     var slotDetails : [String:Any] = [:]
     var studentArray: [String]?
     @IBOutlet weak var backBtn: UIButton!
-    @IBOutlet weak var outerPickerView: UIView!
+    @IBOutlet weak var outerPickerDurationView: UIView!
     @IBOutlet weak var outerPickerView2: UIView!
     
     
@@ -88,20 +98,21 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
      var timingsList : [String] = ["one weeks","two weeks","four weeks","six weeks"]
     var storeBoard: [String] = []
     
-    @IBOutlet weak var pickerView_1: UIPickerView!
-    @IBOutlet weak var pickerView_2: UIPickerView!
+    @IBOutlet weak var pickerViewDuration: UIPickerView!
+   
+    @IBOutlet weak var pickerViewTime: UIDatePicker!
     var selectedCounts: Int?
     func dismissProgramPicker() {
         tableView.isScrollEnabled = true
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.none, animated: false)
         programPickerView?.removeFromSuperview()
-        pickerView_1.delegate = self
-        pickerView_1.dataSource = self
-        
-        pickerView_2.delegate = self
-        pickerView_2.dataSource = self
-        pickerView_1.isHidden = true
-        pickerView_2.isHidden = true
+        pickerViewDuration.delegate = self
+        pickerViewDuration.dataSource = self
+       
+       // pickerViewTime.delegate = self
+        //pickerViewTime.dataSource = self
+        pickerViewDuration.isHidden = true
+        pickerViewTime.isHidden = true
     }
     
     func getSelectedProgram(programName data: String) {
@@ -227,18 +238,22 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
         
     }
     
-var pickerType : PickerType = .timings
- var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"select","weeks":"2 weeks"]
-  var programPickerView : ProgramPickerView?
+   var pickerType : PickerType = .timings
+   var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"select","weeks":"2 weeks"]
+   var programPickerView : ProgramPickerView?
     @IBOutlet weak var tableView: UITableView!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
            tableView.register(UINib(nibName: "customButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "customButton")
-        outerPickerView.isHidden = true
+        outerPickerDurationView.isHidden = true
         outerPickerView2.isHidden = true
           backBtn.layer.cornerRadius = 5
-//        hideUnhidePickerView(view: self.outerPickerView, value: true)
+         pickerViewTime.datePickerMode = .time
+        
+       
+       // hideUnhidePickerView(view: self.outerPickerView, value: true)
 //        hideUnhidePickerView(view: self.outerPickerView2, value: true)
         
     }
@@ -262,7 +277,7 @@ var pickerType : PickerType = .timings
   
     @IBAction func dismissPV1(_ sender: UIBarButtonItem) {
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
-               hideUnhidePickerView(view: self.outerPickerView, value: true)
+               hideUnhidePickerView(view: self.outerPickerDurationView, value: true)
         reload(tableView: self.tableView)
     }
     @IBAction func dismissPV(_ sender: UIBarButtonItem) {
@@ -291,13 +306,17 @@ extension ScheduleDurationTimeViewController: nextScreen{
         defaults.set(slotDetails, forKey: "savedSubjects")
         vc.slotDetails = slotDetails
         slotDetails["subject"] = studentDetails
-        
+        print("slot details....\(studentDetails)")
         UserDefaults.standard.set(slotDetails, forKey: "dict")
         
         self.navigationController?.pushViewController(vc, animated: false)
         
         
     }
-    
-    
+  
+}
+extension Date {
+    var localTime: String {
+        return description(with: NSLocale.current)
+    }
 }

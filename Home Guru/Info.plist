@@ -70,6 +70,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Your Camera is required for Home Guru</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your Library is required for Home Guru</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Your Microphone is required for Home Guru</string>
 </dict>

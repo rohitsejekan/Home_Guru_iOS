@@ -36,11 +36,11 @@ class DurationTimeTableViewCell: UITableViewCell {
     }
 
     @IBAction func selectDuration(_ sender: UIButton) {
-        delegate?.selectDuration(index: sender.tag)
+        delegate?.getStartTime(index: sender.tag)
         
     }
     
     @IBAction func selectTimeStart(_ sender: UIButton) {
-        delegate?.getStartTime(index: sender.tag)
+        delegate?.selectDuration(index: sender.tag)
     }
 }

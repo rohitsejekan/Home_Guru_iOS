@@ -60,26 +60,26 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uk3-Bu-h2I">
-                        <rect key="frame" x="10" y="80" width="300" height="38"/>
+                        <rect key="frame" x="10" y="85" width="300" height="38"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="30"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-6p-mnq">
-                        <rect key="frame" x="10" y="121" width="300" height="18"/>
+                        <rect key="frame" x="10" y="126" width="300" height="18"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81u-wY-KUl">
-                        <rect key="frame" x="10" y="139" width="300" height="13"/>
-                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="10"/>
+                        <rect key="frame" x="10" y="146" width="300" height="14"/>
+                        <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="11"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="81u-wY-KUl" firstAttribute="top" secondItem="4ka-6p-mnq" secondAttribute="bottom" id="1DZ-1e-FQX"/>
+                    <constraint firstItem="81u-wY-KUl" firstAttribute="top" secondItem="4ka-6p-mnq" secondAttribute="bottom" constant="2" id="1DZ-1e-FQX"/>
                     <constraint firstAttribute="trailing" secondItem="Xdj-vP-vFb" secondAttribute="trailing" constant="5" id="1bp-CW-3xF"/>
                     <constraint firstItem="uk3-Bu-h2I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="4BB-jh-DUm"/>
                     <constraint firstItem="1LO-hx-mu1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6WL-QK-IgE"/>
@@ -99,7 +99,7 @@
                     <constraint firstAttribute="bottom" secondItem="lDB-79-bdF" secondAttribute="bottom" constant="20" id="g9j-30-OtT"/>
                     <constraint firstItem="4ka-6p-mnq" firstAttribute="top" secondItem="uk3-Bu-h2I" secondAttribute="bottom" constant="3" id="o4n-UX-sE3"/>
                     <constraint firstItem="Xdj-vP-vFb" firstAttribute="width" secondItem="1LO-hx-mu1" secondAttribute="width" multiplier="0.6" id="pSF-o6-YTn"/>
-                    <constraint firstItem="uk3-Bu-h2I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="80" id="r5X-4C-tl0"/>
+                    <constraint firstItem="uk3-Bu-h2I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="85" id="r5X-4C-tl0"/>
                     <constraint firstItem="4ka-6p-mnq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rl5-FA-8MF"/>
                 </constraints>
             </tableViewCellContentView>

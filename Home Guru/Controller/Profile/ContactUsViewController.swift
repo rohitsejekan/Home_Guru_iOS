@@ -23,7 +23,7 @@ class ContactUsViewController: BaseViewController, UITableViewDataSource, UITabl
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        showNavbar()
+        
     }
         
     @IBAction func callAction(_ sender: UIButton) {

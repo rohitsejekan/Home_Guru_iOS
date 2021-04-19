@@ -207,6 +207,7 @@ class SelectScheduleViewController: UIViewController {
             let dict = ["dates": "\(typeDates)", "classType": "1"]
             dateBodyCarry.append(dict)
         }
+        StructOperation.glovalVariable.subjectDatesSlot = dateBodyCarry
         vc.subjectDatesSlot = dateBodyCarry
         print("dateBodyCarry........\(dateBodyCarry)")
         vc.guruProfileDetails = guruProfileDetails

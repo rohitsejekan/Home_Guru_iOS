@@ -22,8 +22,13 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
     var scheduledClassInfo : [[String:Any]] = [["classType":"old class","dateObj":Date()],["classType":"today","dateObj":Date()],["classType":"demo today","dateObj":Date()],["classType":"future", "dateObj":Date()],["classType":"future demo","dateObj":Date()]]
     var classDetails : [Int] = []
     var showData : Bool = false
-    var dataDisplayType : DataDisplayType = .scheduleInfo
-   
+    var dateString: String = ""
+    var dataDisplayType : DataDisplayType = .registerInfo
+   fileprivate lazy var dateFormatter2: DateFormatter = {
+          let formatter = DateFormatter()
+          formatter.dateFormat = "yyyy-MM-dd"
+          return formatter
+      }()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +38,26 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
         tableView.register(UINib(nibName: "ScheduledClassCardTableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduledClassCardTableViewCell")
         navigationController?.delegate = self
         getMyclassDetails()
+        let date = Date()
+        dateString = dateFormatter2.string(from: date)
+        print("today....\(dateString)")
+        
+     let start = "2010-09-01"
+        let end = "2010-09-05"
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+       
+
+
+
+      //  let components = cal.dateComponents(.Day, from: startDate, to: endDate, options: [])
+
+       // print("dates...\(components)")
+        
     }
+  
     func getMyclassDetails(){
                
             AlamofireService.alamofireService.getRequestWithToken(url: URLManager.sharedUrlManager.getMyClasses + "studentId=\(2)", parameters: nil) {
@@ -71,7 +95,7 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                //        if UserDefaults.standard.bool(forKey: Constants.isRegistered) {
 //            getScheduledClassInfo()
 //        } else {
-            self.dataDisplayType = .scheduleInfo
+            self.dataDisplayType = .registerInfo
             reloadData()
 //        }
     }
@@ -195,15 +219,22 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyClassActionCell", for: indexPath)
             cell.selectionStyle = .none
             return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduledClassCardTableViewCell", for: indexPath) as? ScheduledClassCardTableViewCell
+            cell?.moduleLabel.text = myClassDetails[indexPath.row - 1].subject[0].subjectName
+            cell?.nameLabel.text = myClassDetails[indexPath.row - 1].faculty?.name
+            cell?.dateLabel.text = myClassDetails[indexPath.row - 1].scheduleDate
+            cell?.timeLabel.text = myClassDetails[indexPath.row - 1].timeSlotFrom
+             if let weekday = getDayOfWeek(myClassDetails[indexPath.row - 1].scheduleDate) {
+                           cell?.dayLabel.text = String(weekday.prefix(3))
+            } else {
+                print("bad input")
+                }
+            cell?.setCardValues(data: scheduledClassInfo[indexPath.row - 1])
+            cell?.selectionStyle = .none
+            return cell!
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduledClassCardTableViewCell", for: indexPath) as? ScheduledClassCardTableViewCell
-        cell?.moduleLabel.text = myClassDetails[indexPath.row - 1].subject[0].subjectName
-        cell?.nameLabel.text = myClassDetails[indexPath.row - 1].faculty?.name
-        cell?.dateLabel.text = myClassDetails[indexPath.row - 1].scheduleDate
-        cell?.timeLabel.text = myClassDetails[indexPath.row - 1].timeSlotFrom
-        cell?.setCardValues(data: scheduledClassInfo[indexPath.row - 1])
-        cell?.selectionStyle = .none
-        return cell!
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -211,18 +242,70 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
             if indexPath.row != 0 {
                 let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "MyClassesDetailsViewController") as? MyClassesDetailsViewController
                // setNavigationBackTitle(title: getDateString(format: "dd MMM yyyy (E)", date: scheduledClassInfo[indexPath.row]["dateObj"] as! Date))
-                vc!.scheduledClassInfo = scheduledClassInfo[indexPath.row]
+                vc!.scheduledClassInfo = scheduledClassInfo[indexPath.row - 1]
                 if let facultyName = myClassDetails[indexPath.row - 1].faculty?.name{
                     vc?.facultyName = facultyName
                 }
-                
+                vc?.classId = myClassDetails[indexPath.row - 1]._id
                 vc?.subject = myClassDetails[indexPath.row - 1].subject[0].subjectName
                 vc?.scheduledate = myClassDetails[indexPath.row - 1].scheduleDate
                 vc?.scheduleTime = myClassDetails[indexPath.row - 1].timeSlotFrom
+                vc?.classType = myClassDetails[indexPath.row - 1].classType
+                if let stuId = myClassDetails[indexPath.row - 1].student?._id{
+                    StructOperation.glovalVariable.studentId = stuId
+                }
+                if myClassDetails[indexPath.row - 1].classType == "2"{
+                    if let fCharge = myClassDetails[indexPath.row - 1].faculty?.subjects[0].hourlyCompensation[0].facultyCharges{
+                        StructOperation.glovalVariable.hourlyCompenstaion = fCharge
+                    }
+                    
+                }else{
+                    if let fCharge = myClassDetails[indexPath.row - 1].faculty?.subjects[0].hourlyCompensation[1].facultyCharges{
+                        StructOperation.glovalVariable.hourlyCompenstaion = fCharge
+                    }
+                    
+
+                }
+                    StructOperation.glovalVariable.subjectId = myClassDetails[indexPath.row - 1].subject[0]._id
+               
+                if let facId = myClassDetails[indexPath.row - 1].faculty?._id{
+                    StructOperation.glovalVariable.facultyId = facId
+                }
+                
                 vc!.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc!, animated: false)
             }
         }
     }
     
+}
+
+extension MyClassesViewController{
+func getDayOfWeek(_ today:String) -> String? {
+    let df  = DateFormatter()
+    df.dateFormat = "YYYY-MM-dd"
+    let date = df.date(from: today)!
+    df.dateFormat = "EEEE"
+    return df.string(from: date);
+}
+
+}
+extension Date {
+    static var yesterday: Date { return Date().dayBefore }
+    static var tomorrow:  Date { return Date().dayAfter }
+    var dayBefore: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
+    }
+    var dayAfter: Date {
+        return Calendar.current.date(byAdding: .day, value: 1, to: noon)!
+    }
+    var noon: Date {
+        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
+    }
+    var month: Int {
+        return Calendar.current.component(.month,  from: self)
+    }
+    var isLastDayOfMonth: Bool {
+        return dayAfter.month != month
+    }
 }

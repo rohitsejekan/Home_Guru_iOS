@@ -1,20 +1,20 @@
 //
-//  ReScheduleTableViewCell.swift
+//  editProfileTableViewCell.swift
 //  Home Guru
 //
-//  Created by Priya Vernekar on 08/04/21.
+//  Created by Priya Vernekar on 19/04/21.
 //  Copyright © 2021 Priya Vernekar. All rights reserved.
 //
 
 import UIKit
 
-class ReScheduleTableViewCell: UITableViewCell {
+class editProfileTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var onlineClasses: UIButton!
-    @IBOutlet weak var atHome: UIButton!
-    @IBOutlet weak var startTime: UIButton!
-    @IBOutlet weak var classDuration: UIButton!
-    @IBOutlet weak var goNextPage: UIButton!
+    @IBOutlet weak var editClass: UITextField!
+    @IBOutlet weak var editYear: UITextField!
+    @IBOutlet weak var editMonth: UITextField!
+    @IBOutlet weak var editDate: UITextField!
+    @IBOutlet weak var editName: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,5 +26,4 @@ class ReScheduleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-  
 }

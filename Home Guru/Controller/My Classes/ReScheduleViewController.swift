@@ -14,8 +14,9 @@ class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITable
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var outerPickerView: UIView!
     var boards: [String] = ["class 1","class 10","class 1","class 1","class 1"]
-     var classes: [String] = ["class 1","class 2","class 3","class 4","class 5", "class 6", "class 7", "class 8", "class 9", "class 10", "class 11", "class 12"]
-
+     var startDuration: [String] = ["1 Hour","2 Hour","4 Hour","6 Hour","8 Hour"]
+    var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"select","weeks":"2 weeks"]
+    var selectedTime: String = ""
     @IBOutlet weak var outerPickerView2: UIView!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -61,7 +62,7 @@ class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITable
    }
    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
        if pickerView == pickerView2{
-           return classes.count
+           return startDuration.count
 
        }else{
            return boards.count
@@ -70,7 +71,7 @@ class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITable
    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
    {
        if pickerView == pickerView2{
-            return classes[row]
+            return startDuration[row]
        }else{
            
            return boards[row]
@@ -79,10 +80,11 @@ class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITable
    }
    func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
        if pickerView == pickerView2{
-            print("\(classes[row])")
+            print("\(startDuration[row])")
+        selectedTime = "\(startDuration[row])"
            
        }else{
-          print("\(classes[row])")
+          print("\(startDuration[row])")
        }
            
   }
@@ -95,10 +97,29 @@ class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITable
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "ReSchedule") as! ReScheduleTableViewCell
         cell.goNextPage.addTarget(self, action: #selector(connected(sender:)), for: .touchUpInside)
+        cell.startTime.setTitle(selectedTime, for: .normal)
+        cell.classDuration.setTitle(selectedTime, for: .normal)
+        
+        cell.atHome.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.homeGuruOrangeColor : ColorPalette.whiteColor, for: .normal)
+        cell.atHome.setImage(UIImage(named:(scheduleDetails["classType"] == "Online Class") ?  "orangeVideoClass" : "whiteVideoClass") , for: .normal)
+        cell.onlineClasses.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.whiteColor : ColorPalette.homeGuruOrangeColor, for: .normal)
+        cell.onlineClasses.setImage(UIImage(named: (scheduleDetails["classType"] == "Online Class") ? "whiteAtHome" : "orangeVideoClass"), for: .normal)
+
         cell.goNextPage.tag = indexPath.row
         cell.selectionStyle = .none
 
          return cell
+     }
+    @IBAction func chooseClassTypeAction(_ sender: UIButton) {
+         scheduleDetails["classType"] = sender.tag == 0 ? "At Home" : "Online Class"
+         if sender.tag == 0{
+             UserDefaults.standard.set("1", forKey: "classType")
+             print("retrive 1....\(UserDefaults.standard.string(forKey: "classType"))")
+         }else{
+             UserDefaults.standard.set("2", forKey: "classType")
+               print("retrive 2....\(UserDefaults.standard.string(forKey: "classType"))")
+         }
+         self.tableView.reloadData()
      }
     @objc func connected(sender: UIButton){
 //        let buttonTag = sender.tag

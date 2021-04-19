@@ -96,7 +96,8 @@ class AlamofireService: NSObject {
         var request = URLRequest(url: URL(string:url)!)
         request.httpMethod = HTTPMethod.post.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(UserDefaults.standard.string(forKey: Constants.token)!, forHTTPHeaderField: "x-auth-token")
+request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsImlhdCI6MTYwODYyOTA0OH0.ktuO-f_lC9-pmcgKqkZPNBozJVpyafJOPATe6Y2BQKg", forHTTPHeaderField: "x-auth-token")
+       // request.addValue(UserDefaults.standard.string(forKey: Constants.token)!, forHTTPHeaderField: "x-auth-token")
         guard let data = JSONStringify(withJSON: details as AnyObject) else { return }
         print(data)
         print(request.allHTTPHeaderFields!)
@@ -162,6 +163,26 @@ class AlamofireService: NSObject {
             response in
             completion(response)
         })
+        
+    }
+    
+    func imageUpload(url: String,details: [String:Any],completion: @escaping completionBlock){
+        print(url)
+        print(details)
+        var headers = headersWithXAuthToken()
+               headers["Content-type"] = "multipart/form-data"
+               print(headers)
+        AF.upload(multipartFormData: { (multipartFormData) in
+            for (key, value) in details {
+                multipartFormData.append((("\(value)").data(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue)))!, withName: key)
+            }
+            print("multipartFormData is ...\(multipartFormData)")
+            
+        }, to: url , usingThreshold: UInt64.init(), method: HTTPMethod.put, headers: headers).responseJSON(completionHandler: {
+            response in
+            completion(response)
+        })
+        
         
     }
     

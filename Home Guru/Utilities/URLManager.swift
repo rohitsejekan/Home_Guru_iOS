@@ -52,6 +52,22 @@ class URLManager {
             return baseURL + "/parent/guruclass/schedule"
         }
     }
+    
+    // payment history
+    
+    var transcation: String{
+        get{
+            return baseURL + "/parent/transactions"
+        }
+    }
+    
+    //wallet
+    
+    var wallet: String{
+        get{
+            return baseURL + "/parent/wallet"
+        }
+    }
     // register parent
     var registerParent : String {
         get {
@@ -91,6 +107,11 @@ class URLManager {
         return baseURL + "/guru/groups"
     }
 
+    // add profile
+    
+    var addProfile: String{
+        return baseURL + "/parent/student"
+    }
     // group category - child category
       
       var groupChildCategory: String{
@@ -107,7 +128,12 @@ class URLManager {
             return baseURL + "/parent/koalamoney"
         }
     }
-    
+    // get profile
+    var getProfile: String {
+        get{
+            return baseURL + "/parent/me"
+        }
+    }
     // get Parent Profile Details
     var getProfileDetails : String {
         get {

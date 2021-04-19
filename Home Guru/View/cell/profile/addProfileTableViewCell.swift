@@ -10,6 +10,7 @@ import UIKit
 
 class addProfileTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var editName: UITextField!
     
     @IBOutlet weak var classEdit: UITextField!
