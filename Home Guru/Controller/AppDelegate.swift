@@ -115,3 +115,4 @@ extension AppDelegate: MobileRTCAuthDelegate {
     // Result of calling sdkAuth(). MobileRTCAuthError_Success represents a successful authorization.
 
   }
+

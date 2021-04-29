@@ -10,6 +10,7 @@ import UIKit
 import XLPagerTabStrip
 import Alamofire
 import SwiftyJSON
+import NVActivityIndicatorView
 
 class ScheduleAcademicListViewController: UIViewController, IndicatorInfoProvider,UITableViewDataSource, UITableViewDelegate {
 
@@ -18,13 +19,16 @@ class ScheduleAcademicListViewController: UIViewController, IndicatorInfoProvide
     var childNumber = ""
     var index : Int = 0
     
+    @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
     var academicDetails: [String: String] = [:]
     var getAcademic = [AcademicService]()
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "ScheduleSubjectTableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduleSubjectTableViewCell")
+        activityLoaderView.startAnimating()
                 academicDetails["programType"] = "academic"
         //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
                 AlamofireService.alamofireService.postRequestWithBodyData(url: URLManager.sharedUrlManager.groupCategory, details: academicDetails) {
@@ -43,6 +47,7 @@ class ScheduleAcademicListViewController: UIViewController, IndicatorInfoProvide
                         
                                                   
                         DispatchQueue.main.async {
+                            self.activityLoaderView.stopAnimating()
                             self.tableView.reloadData()
                                                   }
                                               }

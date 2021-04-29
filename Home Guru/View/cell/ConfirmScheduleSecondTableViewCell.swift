@@ -10,6 +10,7 @@ import UIKit
 
 class ConfirmScheduleSecondTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var subjectContainer: UIView!
     @IBOutlet weak var subjectTime: UILabel!
     @IBOutlet weak var subjectName: UILabel!
     override func awakeFromNib() {

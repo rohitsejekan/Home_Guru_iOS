@@ -45,7 +45,9 @@ class ScheduledClassCardTableViewCell: UITableViewCell {
                 setAttributes(outerViewColor: ColorPalette.homeGuruDarkGreyColor, dateLabelColor: ColorPalette.homeGuruOrangeColor, nameLabelColor: ColorPalette.homeGuruLightGreyColor, moduleLabelColor: ColorPalette.homeGuruLightGreyColor, classLabelColor: ColorPalette.homeGuruLightGreyColor, noOfDaysLeftStatus: true, ratingsStatus: false, demoStatus: true)
             case "today":
                 setAttributes(outerViewColor: ColorPalette.homeGuruOrangeColor, dateLabelColor: ColorPalette.homeGuruBlackColor, nameLabelColor: UIColor.white, moduleLabelColor: UIColor.white, classLabelColor: ColorPalette.homeGuruOrangeColor, noOfDaysLeftStatus: false, ratingsStatus: true, demoStatus: true)
-            case "demo today":
+//            case "demo today":
+//                setAttributes(outerViewColor: ColorPalette.homeGuruOrangeColor, dateLabelColor: ColorPalette.homeGuruBlackColor, nameLabelColor: UIColor.white, moduleLabelColor: UIColor.white, classLabelColor: ColorPalette.homeGuruOrangeColor, noOfDaysLeftStatus: false, ratingsStatus: true, demoStatus: false)
+            case "not held":
                 setAttributes(outerViewColor: ColorPalette.homeGuruOrangeColor, dateLabelColor: ColorPalette.homeGuruBlackColor, nameLabelColor: UIColor.white, moduleLabelColor: UIColor.white, classLabelColor: ColorPalette.homeGuruOrangeColor, noOfDaysLeftStatus: false, ratingsStatus: true, demoStatus: false)
             case "future":
                 setAttributes(outerViewColor: ColorPalette.homeGuruDarkGreyColor, dateLabelColor: ColorPalette.homeGuruOrangeColor, nameLabelColor: UIColor.white, moduleLabelColor: UIColor.white, classLabelColor: ColorPalette.homeGuruLightGreyColor,  noOfDaysLeftStatus: false, ratingsStatus: true, demoStatus: true)

@@ -8,11 +8,13 @@
 
 import UIKit
 import SwiftyJSON
-
+import NVActivityIndicatorView
 class WalletViewController: BaseViewController{
 
     
 
+    @IBOutlet weak var backBtn: UIButton!
+    @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
     @IBOutlet weak var availablePointsLabel: UILabel!
     @IBOutlet weak var settingsView: UIView!
   
@@ -20,6 +22,16 @@ class WalletViewController: BaseViewController{
         super.viewDidLoad()
         hideNavbar()
         hideUnhideView(view: settingsView, status: true)
+       // back button
+        backBtn.layer.cornerRadius = 3
+        
+   
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        getWallet()
+    }
+    func getWallet(){
+        activityLoaderView.startAnimating()
         AlamofireService.alamofireService.getRequestWithToken(url: URLManager.sharedUrlManager.getPoints, parameters: nil) { response
                   in
                   switch response.result {
@@ -31,7 +43,9 @@ class WalletViewController: BaseViewController{
                             let json = JSON(value)
                               print("results...\(json["points"])")
                               self.availablePointsLabel.text = json["points"].stringValue
+                            StructOperation.glovalVariable.points = json["points"].stringValue
                               DispatchQueue.main.async {
+                                self.activityLoaderView.stopAnimating()
                               }
                           }
                       }
@@ -39,10 +53,7 @@ class WalletViewController: BaseViewController{
                       self.showAlert(title: Constants.unknownTitle, message: Constants.unknownMsg)
                   }
               }
-        
-   
     }
-    
     @IBAction func referAndEarnAction(_ sender: UIButton) {
     }
     

@@ -64,8 +64,15 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
     }
     
     func getStartTime(index: Int) {
-        self.studentDetails[index]["duration"] = "\(pickerViewTime.date.localTime)"
-        print("picker date.....\(self.studentDetails[index]["duration"])")
+       
+        
+        timeTruncate = String(pickerViewTime.date.string(format: "HH:mm"))
+            let arr = timeTruncate.prefix(36)
+            ScheduleTime = String(arr.suffix(11))
+     
+        print("picker date.....\(ScheduleTime)")
+        print("picker date.....\(timeTruncate)")
+         self.studentDetails[index]["duration"] = "\(timeTruncate)"
         if outerPickerView2.isHidden{
             outerPickerView2.isHidden = false
         }
@@ -80,26 +87,26 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
 
         return localDate
     }
-    var duration: [String] = ["1 Hour","1.5 Hour","2 Hour","2.5 Hour","3 Hour", "3.5 Hour","4 Hour"]
+    var timeTruncate: String = ""
+    var duration: [String] = ["01 Hour","1.5 Hour","02 Hour","2.5 Hour","03 Hour", "3.5 Hour","4 Hour"]
     var classes: [String] = ["class 1","class 2","class 3","class 4","class 5", "class 6", "class 7", "class 8", "class 9", "class 10", "class 11", "class 12"]
     var slotDetails : [String:Any] = [:]
     var studentArray: [String]?
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var outerPickerDurationView: UIView!
     @IBOutlet weak var outerPickerView2: UIView!
-    
-    
     var currentIndex = 0
     var selectedClass: String = ""
+    var ScheduleTime: String = ""
     var selectedBoard: String = ""
     var studentDetails : [[String:Any]] = []
     var getCheckedName: [String] = []
-   var weeksList : [String] = ["weekends","weekdays","both"]
-     var timingsList : [String] = ["one weeks","two weeks","four weeks","six weeks"]
+    var timeArray: [String] = []
+    var durationArray: [String] = []
     var storeBoard: [String] = []
     
     @IBOutlet weak var pickerViewDuration: UIPickerView!
-   
+    
     @IBOutlet weak var pickerViewTime: UIDatePicker!
     var selectedCounts: Int?
     func dismissProgramPicker() {
@@ -108,11 +115,10 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
         programPickerView?.removeFromSuperview()
         pickerViewDuration.delegate = self
         pickerViewDuration.dataSource = self
-       
+        
        // pickerViewTime.delegate = self
         //pickerViewTime.dataSource = self
-        pickerViewDuration.isHidden = true
-        pickerViewTime.isHidden = true
+        
     }
     
     func getSelectedProgram(programName data: String) {
@@ -132,7 +138,7 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
         if indexPath.row == 0{
                   let cell = tableView.dequeueReusableCell(withIdentifier: "DurationTime", for: indexPath) as? DurationTimeTableViewCell
                  cell?.selectDuration.setTitle(scheduleDetails["timings"], for: .normal)
-                       cell?.selectStartTime.setTitle(scheduleDetails["weeks"], for: .normal)
+                cell?.selectStartTime.setTitle(scheduleDetails["weeks"], for: .normal)
                     cell?.selectionStyle = .none
                 cell?.delegate = self
                 cell?.subjectName.text = getCheckedName[indexPath.row]
@@ -239,7 +245,7 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
     }
     
    var pickerType : PickerType = .timings
-   var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"select","weeks":"2 weeks"]
+   var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"select","weeks":"select"]
    var programPickerView : ProgramPickerView?
     @IBOutlet weak var tableView: UITableView!
   
@@ -258,16 +264,6 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func goBack(_ sender: Any) {
        // self.dismiss(animated: true, completion: nil)
@@ -301,13 +297,27 @@ extension ScheduleDurationTimeViewController: nextScreen{
                               //setNavigationBackTitle(title: "Schedule")
                               vc.hidesBottomBarWhenPushed = true
        
-
+        
+               for info in studentDetails{
+                   for _ in info{
+                       timeArray.append(info["duration"] as! String)
+                       durationArray.append(info["start"] as! String)
+                       break
+                   }
+               }
+               print("slot details....\(studentDetails)")
+               print("timeArray....\(timeArray)")
+               print("durationArray....\(durationArray)")
+               UserDefaults.standard.set(slotDetails, forKey: "dict")
         let defaults = UserDefaults.standard
         defaults.set(slotDetails, forKey: "savedSubjects")
-        vc.slotDetails = slotDetails
-        slotDetails["subject"] = studentDetails
-        print("slot details....\(studentDetails)")
-        UserDefaults.standard.set(slotDetails, forKey: "dict")
+        //vc.slotDetails = slotDetails
+        vc.selectedSlot = timeArray
+        vc.selectedDuration = durationArray
+        StructOperation.glovalVariable.timeSlotFrom = timeArray
+        vc.slotDetails["subject"] = studentDetails
+       UserDefaults.standard.set(slotDetails, forKey: "dict")
+
         
         self.navigationController?.pushViewController(vc, animated: false)
         
@@ -318,5 +328,21 @@ extension ScheduleDurationTimeViewController: nextScreen{
 extension Date {
     var localTime: String {
         return description(with: NSLocale.current)
+    }
+}
+extension Date {
+    func localDate() -> Date {
+        let nowUTC = Date()
+        let timeZoneOffset = Double(TimeZone.current.secondsFromGMT(for: nowUTC))
+        guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: nowUTC) else {return Date()}
+
+        return localDate
+    }
+}
+extension Date {
+    func string(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
     }
 }

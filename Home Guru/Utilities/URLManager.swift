@@ -32,6 +32,12 @@ class URLManager {
             return baseURL + "/statecity"
         }
     }
+    // get zoom id
+    var getZoomId: String{
+        get{
+            return baseURL + "/faculty/guruclass/getZoom?"
+        }
+    }
     
     // get program list
     var getProgramList : String {
@@ -45,6 +51,14 @@ class URLManager {
             return baseURL + "/board"
         }
     }
+    
+    // get active user
+    
+    var activeUser: String{
+        get{
+            return baseURL + "/parent/me"
+        }
+    }
     // make booking
     
     var makeBooking: String{
@@ -52,7 +66,26 @@ class URLManager {
             return baseURL + "/parent/guruclass/schedule"
         }
     }
+    // make reschedule
+       
+       var makeReschedule: String{
+           get{
+               return baseURL + "/parent/guruclass/reschedule"
+           }
+       }
+    //cancel schedule
     
+    var cancelSchedule: String{
+        get{
+            return baseURL + "/parent/guruclass/cancelClass"
+        }
+    }
+    // contact us
+    var contactus: String{
+        get{
+            return baseURL + "/parent/contactus"
+        }
+    }
     // payment history
     
     var transcation: String{
@@ -101,6 +134,13 @@ class URLManager {
             return baseURL + "/parent/guruclass?"
         }
     }
+    
+    //current booking
+    var currentBooking: String{
+        get{
+            return baseURL + "/parent/guruclass/mybookings"
+        }
+    }
     // group category
     
     var groupCategory: String{
@@ -111,6 +151,15 @@ class URLManager {
     
     var addProfile: String{
         return baseURL + "/parent/student"
+    }
+    // add attachment
+    var addAttachment: String {
+        return baseURL + "/parent/student/updateattachments/"
+    }
+    // update student
+    
+    var updateStudent: String{
+        return baseURL + "/parent/student/updatestudent/"
     }
     // group category - child category
       

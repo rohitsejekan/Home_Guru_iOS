@@ -10,10 +10,17 @@ import UIKit
 
 class confirmSheduleFirstTableViewCell: UITableViewCell, UICollectionViewDelegate,UICollectionViewDataSource{
 
+    @IBOutlet weak var guruContainer: UIView!
     @IBOutlet weak var GuruSkills: UILabel!
     @IBOutlet weak var guruName: UILabel!
     @IBOutlet weak var GuruFare: UILabel!
     @IBOutlet weak var datesCV: UICollectionView!
+    @IBOutlet weak var currentMonth: PaddedLabel!
+    @IBOutlet weak var firstStarRating: UIImageView!
+    @IBOutlet weak var secondStarRating: UIImageView!
+    @IBOutlet weak var thirdStarRating: UIImageView!
+    @IBOutlet weak var fourthStarRating: UIImageView!
+    @IBOutlet weak var fifthStarRating: UIImageView!
     var arr = [String]()
     var tags : [String] = ["1","2","3","4","5","6","1","2","3","4","5","6"]
     override func awakeFromNib() {

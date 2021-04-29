@@ -31,7 +31,10 @@ class AlamofireService: NSObject {
   //        if let token = UserDefaults.standard.string(forKey: Constants.token) {
         //            header["x-auth-token"] = token
         //        }
-                header["x-auth-token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsImlhdCI6MTYwODYyOTA0OH0.ktuO-f_lC9-pmcgKqkZPNBozJVpyafJOPATe6Y2BQKg"
+        if let token = UserDefaults.standard.string(forKey: Constants.token){
+               header["x-auth-token"] = token
+               }
+//                header["x-auth-token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsImlhdCI6MTYwODYyOTA0OH0.ktuO-f_lC9-pmcgKqkZPNBozJVpyafJOPATe6Y2BQKg"
         return header
     }
     
@@ -70,6 +73,17 @@ class AlamofireService: NSObject {
                 completion(response)
         }
     }
+    
+    func getRequestWithSecretKey(url: String, parameters: [String:AnyObject]?, completion: @escaping completionBlock) {
+          let headers = getRequestHeaders()
+          print(url)
+          print(headers)
+          AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers)
+              .responseJSON {
+                  response in
+                  completion(response)
+          }
+      }
        
     // post request with body data as JSON and responseJSON
     func postRequestWithBodyData(url: String, details: [String:Any]?, completion: @escaping completionBlock) {
@@ -88,6 +102,24 @@ class AlamofireService: NSObject {
                 completion(response)
         })
     }
+       
+    // post request with body data as JSON and responseString
+    func postRequestWithBodyDataString(url: String, details: [String:Any]?, completion: @escaping completionStringBlock) {
+        print(url)
+        print(details)
+        var request = URLRequest(url: URL(string:url)!)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(Constants.secretKey, forHTTPHeaderField: "secret-key")
+        guard let data = JSONStringify(withJSON: details as AnyObject) else { return }
+        print(data)
+        print(request.allHTTPHeaderFields!)
+        request.httpBody = data
+        
+        AF.request(request).responseString(completionHandler: { response in
+                completion(response)
+        })
+    }
     
     // post request with body data as JSON and responseJSON
     func postRequestWithBodyDataAndToken(url: String, details: [String:Any], completion: @escaping completionBlock) {
@@ -96,7 +128,10 @@ class AlamofireService: NSObject {
         var request = URLRequest(url: URL(string:url)!)
         request.httpMethod = HTTPMethod.post.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsImlhdCI6MTYwODYyOTA0OH0.ktuO-f_lC9-pmcgKqkZPNBozJVpyafJOPATe6Y2BQKg", forHTTPHeaderField: "x-auth-token")
+        if let token = UserDefaults.standard.string(forKey: Constants.token){
+            request.addValue(token, forHTTPHeaderField: "x-auth-token")
+        }
+        
        // request.addValue(UserDefaults.standard.string(forKey: Constants.token)!, forHTTPHeaderField: "x-auth-token")
         guard let data = JSONStringify(withJSON: details as AnyObject) else { return }
         print(data)
@@ -106,6 +141,30 @@ request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsImlhdCI6MTYwO
         AF.request(request).responseJSON(completionHandler: { response in
                 completion(response)
         })
+      
+    }
+   
+    // post request with body data as JSON and responsestring
+    func postRequestWithBodyDataAndTokenString(url: String, details: [String:Any], completion: @escaping completionStringBlock) {
+        print(url)
+        print(details)
+        var request = URLRequest(url: URL(string:url)!)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let token = UserDefaults.standard.string(forKey: Constants.token){
+                   request.addValue(token, forHTTPHeaderField: "x-auth-token")
+               }
+        
+       // request.addValue(UserDefaults.standard.string(forKey: Constants.token)!, forHTTPHeaderField: "x-auth-token")
+        guard let data = JSONStringify(withJSON: details as AnyObject) else { return }
+        print(data)
+        print(request.allHTTPHeaderFields!)
+        request.httpBody = data
+        
+        AF.request(request).responseString(completionHandler: { response in
+                completion(response)
+        })
+      
     }
     
     // post request with body data as JSON and responseString
@@ -157,6 +216,7 @@ request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsImlhdCI6MTYwO
             if !(imageDetails.isEmpty) {
                 multipartFormData.append(imageDetails["data"] as! Data, withName: imageDetails["key"] as! String, fileName: (imageDetails["fileName"] as! String), mimeType:  imageDetails["fileType"] as! String)
                 }
+          
             print("multipartFormData is ...\(multipartFormData)")
             print("imageDetails is ...\(imageDetails)")
         }, to: url , usingThreshold: UInt64.init(), method: HTTPMethod.put, headers: headers).responseJSON(completionHandler: {
@@ -166,25 +226,7 @@ request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjYsImlhdCI6MTYwO
         
     }
     
-    func imageUpload(url: String,details: [String:Any],completion: @escaping completionBlock){
-        print(url)
-        print(details)
-        var headers = headersWithXAuthToken()
-               headers["Content-type"] = "multipart/form-data"
-               print(headers)
-        AF.upload(multipartFormData: { (multipartFormData) in
-            for (key, value) in details {
-                multipartFormData.append((("\(value)").data(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue)))!, withName: key)
-            }
-            print("multipartFormData is ...\(multipartFormData)")
-            
-        }, to: url , usingThreshold: UInt64.init(), method: HTTPMethod.put, headers: headers).responseJSON(completionHandler: {
-            response in
-            completion(response)
-        })
-        
-        
-    }
+
     
     
 }

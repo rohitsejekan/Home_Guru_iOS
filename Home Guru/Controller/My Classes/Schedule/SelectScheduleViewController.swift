@@ -11,6 +11,8 @@ import FSCalendar
 class SelectScheduleViewController: UIViewController {
 
     @IBOutlet weak var nextBtn: UIButton!
+    //guru fare
+    var guruFare: String = ""
     var typeOfWeek: String?
     @IBOutlet weak var fsCalendar: FSCalendar!
     private weak var calendar: FSCalendar!
@@ -25,21 +27,35 @@ class SelectScheduleViewController: UIViewController {
     var classesDates: [String: String] = [:]
     var datesString: [String] = []
     var datesStringBody: [String] = []
-    var dateBodyCarry: [[String: String]] = [[:]]
+    var dateBodyCarry = [[String: String]]()
+    var selectedTimeSlot: String = ""
+    var getCurrentMonth: String = ""
+    var dateFormated: String = ""
     fileprivate lazy var dateFormatter2: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
     
+    var demoClass: Bool?
+    var reSchedule: Bool?
     var arrDates = NSMutableArray()
     var arrDates_1 = NSMutableArray()
     var arrDates_2 = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
+        //current month
+        let date = Date()
+        getCurrentMonth = date.month
+        //curreent month ends
         nextBtn.layer.cornerRadius = 5
         // Do any additional setup after loading the view.
-        fsCalendar.allowsMultipleSelection = true
+        if demoClass == true || reSchedule == true{
+            fsCalendar.allowsMultipleSelection = false
+        }else{
+            fsCalendar.allowsMultipleSelection = true
+        }
+        
         fsCalendar.delegate = self
         fsCalendar.dataSource = self
         fsCalendar.placeholderType = .none
@@ -198,21 +214,76 @@ class SelectScheduleViewController: UIViewController {
     }
 
     @IBAction func goNext(_ sender: Any) {
-        let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ConfirmSchedule") as! ConfirmScheduleViewController
-        //setNavigationBackTitle(title: "Schedule")
-        vc.hidesBottomBarWhenPushed = true
-        vc.slotDetails = slotDetails
-        
-        for typeDates in datesStringBody{
-            let dict = ["dates": "\(typeDates)", "classType": "1"]
-            dateBodyCarry.append(dict)
+        if reSchedule == true || demoClass == true{
+             let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ConfirmSchedule") as! ConfirmScheduleViewController
+                        //setNavigationBackTitle(title: "Schedule")
+                        vc.hidesBottomBarWhenPushed = true
+                        vc.slotDetails = slotDetails
+                        var skip = false
+                        for typeDates in datesStringBody{
+                              if !skip{
+                                    skip = true
+                                    continue
+                            }else{
+                                if let cType = UserDefaults.standard.string(forKey: "classType"){
+                                    let dict = ["date": "\(typeDates)", "classType": "\(cType)"]
+                                    dateBodyCarry.append(dict)
+                                }
+                            
+                            
+                            }
+                        }
+                        StructOperation.glovalVariable.subjectDatesSlot = dateBodyCarry
+                        vc.subjectDatesSlot = dateBodyCarry
+                        vc.bookDemo = demoClass
+                        vc.reschedle = reSchedule
+                        vc.guruFare = guruFare
+                        print("guruFare........\(guruFare)")
+                        vc.guruProfileDetails = guruProfileDetails
+                        vc.selectedDate.append(selectedTimeSlot)
+                        vc.selectedTimeSlot = dateFormated
+                        vc.currentMonth = getCurrentMonth
+            //            for arr in datesString{
+            //               vc.selectedTimeSlot = arr
+            //            }
+                        
+                        self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+       
+            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ConfirmSchedule") as! ConfirmScheduleViewController
+              //setNavigationBackTitle(title: "Schedule")
+              vc.hidesBottomBarWhenPushed = true
+              vc.slotDetails = slotDetails
+            
+              for typeDates in datesStringBody{
+                 
+                      let dict = ["date": "\(typeDates)", "classType": "1"]
+                                     dateBodyCarry.append(dict)
+                  
+                 
+              }
+              var skip = false
+              for dateCarry in dateBodyCarry{
+                  if !skip{
+                      skip = true
+                      continue
+                  }else{
+                      print("skipped....\(dateCarry)")
+                  }
+              }
+              StructOperation.glovalVariable.subjectDatesSlot = dateBodyCarry
+              vc.subjectDatesSlot = dateBodyCarry
+              vc.bookDemo = demoClass
+              vc.reschedle = reSchedule
+              vc.guruFare = guruFare
+              print("guruFare........\(guruFare)")
+              vc.guruProfileDetails = guruProfileDetails
+              vc.selectedDate = datesString
+              vc.currentMonth = getCurrentMonth
+              self.navigationController?.pushViewController(vc, animated: true)
+
         }
-        StructOperation.glovalVariable.subjectDatesSlot = dateBodyCarry
-        vc.subjectDatesSlot = dateBodyCarry
-        print("dateBodyCarry........\(dateBodyCarry)")
-        vc.guruProfileDetails = guruProfileDetails
-        vc.selectedDate = datesString
-         presentDetail(vc)
+
         
        
 
@@ -237,64 +308,110 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
            // nothing selected:
-         if firstDate == nil {
-             firstDate = date
-             datesRange = [firstDate!]
+        print("date...\(date)")
+        if demoClass == false {
+          if firstDate == nil {
+                    firstDate = date
+                    datesRange = [firstDate!]
+                    datesString.removeAll()
+                    datesStringBody.removeAll()
+                    print("datesRange contain nothing selecteds: \(datesRange!)")
+              firstDate = date.addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT(for: date)))
+              if let fd = firstDate{
+                      datesRange = [fd]
+              }else{
+                  print("first date is empty....")
+                  }
+              // get future dates based on selected date
+            
+              let nextweeks = Calendar.current.date(byAdding: .weekOfYear, value: Int(StructOperation.glovalVariable.noOfweeks) ?? 1, to: firstDate!)
+               
+               print("datesRange contains 1: \(datesRange!)")
+               print("firstDate 1: \(firstDate!)")
+               let range = datesRange(from: firstDate!, to: nextweeks!)
+              print("se 2.......\(range)")
+              lastDate = range.last
+                             
+              // display selected dates in calendar
+              for d in range {
+                      calendar.select(d)
+                     let last4 = String(dateFormatter2.string(from: d).suffix(2))
+                    datesString.append(last4)
+                    datesStringBody.append(String(dateFormatter2.string(from: d)))
+                    print("datesStringBody...\(datesStringBody)")
+                  }
+                      datesRange = range
+                             
+                      print("date contains: \(date)")
+                  arrDates.contains(dateFormatter2.string(from: date))
+                  print("datesRange contains new: \(datesRange!))")
 
-             print("datesRange contains: \(datesRange!)")
-
-             return
-         }
-
-         // only first date is selected:
-         if firstDate != nil && lastDate == nil {
-             // handle the case of if the last date is less than the first date:
-             if date <= firstDate! {
-                 calendar.deselect(firstDate!)
-                 firstDate = date
-                 datesRange = [firstDate!]
-
-                 print("datesRange contains: \(datesRange!)")
-
-                 return
-             }
-
-             let range = datesRange(from: firstDate!, to: date)
-
-             lastDate = range.last
-
-             for d in range {
-                print("single date...\(dateFormatter2.string(from: d))")
-                 calendar.select(d)
-                let last4 = String(dateFormatter2.string(from: d).suffix(2))
-                datesString.append(last4)
-                datesStringBody.append(String(dateFormatter2.string(from: d)))
-                
-             }
-
-             datesRange = range
-
-             print("datesRange contains: \(datesRange!)")
-            print("dates in string..\(datesString)")
-            print("dates in stringbody..\(datesStringBody)")
-             arrDates.contains(dateFormatter2.string(from: date))
-
-             return
-         }
-
-         // both are selected:
-         if firstDate != nil && lastDate != nil {
-             for d in calendar.selectedDates {
-                 calendar.deselect(d)
-             }
-
-             lastDate = nil
-             firstDate = nil
-
-             datesRange = []
-             
-            print("datesRange contains: \(datesRange!)")
-         }
+                    return
+                }
+//
+//                  // only first date is selected:
+//                  if firstDate != nil && lastDate == nil {
+//                      // handle the case of if the last date is less than the first date:
+//                      if date <= firstDate! {
+//                          calendar.deselect(firstDate!)
+//                          firstDate = date
+//                          datesRange = [firstDate!]
+//
+//                          print("datesRange contains: \(datesRange!)")
+//
+//                          return
+//                      }
+//
+//                      let range = datesRange(from: firstDate!, to: date)
+//
+//                      lastDate = range.last
+//
+//                      for d in range {
+//                         print("single date...\(dateFormatter2.string(from: d))")
+//                          calendar.select(d)
+//                         let last4 = String(dateFormatter2.string(from: d).suffix(2))
+//                         datesString.append(last4)
+//                         datesStringBody.append(String(dateFormatter2.string(from: d)))
+//                        print("datesStringBody...\(datesStringBody)")
+//
+//                      }
+//
+//                      datesRange = range
+//
+//                      print("datesRange contains: \(datesRange!)")
+//                     print("dates in string..\(datesString)")
+//                     print("dates in stringbody..\(datesStringBody)")
+//                      arrDates.contains(dateFormatter2.string(from: date))
+//
+//                      return
+//                  }
+//
+//                  // both are selected:
+//                  if firstDate != nil && lastDate != nil {
+//                      for d in calendar.selectedDates {
+//                          calendar.deselect(d)
+//                      }
+//
+//                      lastDate = nil
+//                      firstDate = nil
+//
+//                      datesRange = []
+//
+//                     print("datesRange contains are: \(datesRange!)")
+//                  }
+        }else if reSchedule == true{
+            // if reSchedule is true
+            dateFormated = String(dateFormatter2.string(from: date))
+            selectedTimeSlot = String(dateFormatter2.string(from: date).suffix(2))
+            print("date...\(dateFormatter2.string(from: date).suffix(2))")
+        }
+        else {
+            // if democlass is true
+            dateFormated = String(dateFormatter2.string(from: date))
+            selectedTimeSlot = String(dateFormatter2.string(from: date).suffix(2))
+            print("date...\(dateFormatter2.string(from: date).suffix(2))")
+        }
+      
     }
     func datesRange(from: Date, to: Date) -> [Date] {
         // in case of the "from" date is more than "to" date,
@@ -326,18 +443,18 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
                         tempDate = Calendar.current.date(byAdding: .day, value: 1, to: tempDate)!
                 arrDates_2 = self.getUserSelectedDates([2,3,4,5,6], calender: self.fsCalendar)
                         if arrDates_2.contains(dateFormatter2.string(from: tempDate)) {
-                                          print("not added due to its saturday or sunday")
+                                          print("not added due to its weekdays")
                                       }
                         else{
                             // check each selected date falls in weekend of next month
-                                           if tempDate.dayNumberOfWeek()! == 2 || tempDate.dayNumberOfWeek()! == 3 ||
-                                            tempDate.dayNumberOfWeek()! == 4 || tempDate.dayNumberOfWeek()! == 5 ||
-                                            tempDate.dayNumberOfWeek()! == 6
-                                            {
-                                               print("skiped due to weekdays")
-                                           }else{
-                                               array.append(tempDate)
-                                           }
+                                    if tempDate.dayNumberOfWeek()! == 2 || tempDate.dayNumberOfWeek()! == 3 ||
+                                    tempDate.dayNumberOfWeek()! == 4 || tempDate.dayNumberOfWeek()! == 5 ||
+                                        tempDate.dayNumberOfWeek()! == 6
+                                    {
+                                        print("skiped due to weekdays")
+                                    }else{
+                                        array.append(tempDate)
+                                    }
                         }
             //            array.append(tempDate)
                     }
@@ -356,6 +473,7 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
 
         return array
     }
+    
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
          // both are selected:
 
@@ -367,12 +485,15 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
 
                lastDate = nil
                firstDate = nil
-
+               datesString.removeAll()
+               datesStringBody.removeAll()
                datesRange = []
                print("datesRange contains: \(datesRange!)")
            }
     }
-    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+          self.view.layoutIfNeeded()
+      }
        func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
            print("new days........\(arrDates)")
             arrDates = self.getUserSelectedDates([2, 3, 4, 5, 6], calender: self.fsCalendar)
@@ -394,12 +515,38 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
     
     //disable previous dates
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-        if date .compare(Date()) == .orderedAscending {
-            return false
-        }
-        else {
+        arrDates = self.getUserSelectedDates([2, 3, 4, 5, 6], calender: self.fsCalendar)
+        let tdate = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+        switch typeOfWeek{
+        case "weekends":
+            if arrDates.contains(dateFormatter2.string(from: tdate)) {
+                return false
+            }else if tdate.dayNumberOfWeek()! == 2 || tdate.dayNumberOfWeek()! == 3 ||
+            tdate.dayNumberOfWeek()! == 4 || tdate.dayNumberOfWeek()! == 5 ||
+                tdate.dayNumberOfWeek()! == 6{
+                return false
+            }
+            else if date .compare(Date()) == .orderedAscending {
+                return false
+            }
+            else {
+                return true
+            }
+        case "weekdays":
+            if arrDates.contains(dateFormatter2.string(from: tdate)) {
+                return true
+            }else if date .compare(Date()) == .orderedAscending {
+                return false
+            }
+            else {
+                return true
+            }
+        default:
             return true
+            
         }
+       
+        
     }
     
 }
@@ -413,6 +560,13 @@ extension Date {
     func string(with format: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+}
+extension Date {
+    var month: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"
         return dateFormatter.string(from: self)
     }
 }

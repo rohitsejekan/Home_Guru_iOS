@@ -44,7 +44,7 @@ class ScheduleSubjectViewController: ButtonBarPagerTabStripViewController {
     }
     
     @IBAction func backAction(_ sender: UIButton) {
-        self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func configureButtonBar() {

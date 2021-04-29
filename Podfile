@@ -15,6 +15,7 @@ target 'Home Guru' do
   pod 'Alamofire'
   pod 'XLPagerTabStrip', '~> 8.0'
   pod 'MBProgressHUD'
+  pod 'NVActivityIndicatorView'
   pod 'Kingfisher'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'

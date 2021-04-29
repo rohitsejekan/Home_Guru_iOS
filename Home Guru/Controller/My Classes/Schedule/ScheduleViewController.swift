@@ -15,12 +15,12 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backView: UIButton!
-    
+    var selectedDropDown: Bool = false
     var programPickerView : ProgramPickerView?
     var weeksList : [String] = ["weekends","weekdays","both"]
     var timingsList : [String] = ["one weeks","two weeks","four weeks","six weeks"]
     var pickerType : PickerType = .timings
-    var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"select","weeks":"2 weeks"]
+    var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"select","weeks":"select"]
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -51,10 +51,39 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
         showProgramPicker(pickerType: .weeks)
     }
     @IBAction func nextAction(_ sender: UIButton) {
-        let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleSubjectViewController") as! ScheduleSubjectViewController
-        setNavigationBackTitle(title: "Select Subject")
-    self.navigationController?.pushViewController(vc, animated: false)
-
+        
+            if selectedDropDown == false{
+                let alert = UIAlertController(title: "Alert", message: "please fill the required information", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+            }else{
+                let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleSubjectViewController") as! ScheduleSubjectViewController
+                    setNavigationBackTitle(title: "Select Subject")
+                if let weeks = scheduleDetails["timings"]{
+                    if weeks == "one weeks"{
+                        
+                        StructOperation.glovalVariable.noOfweeks = String(1)
+                    }else if weeks == "six weeks"{
+                        
+                        StructOperation.glovalVariable.noOfweeks = String(6)
+                    }
+                    else if weeks == "two weeks"{
+                        
+                        StructOperation.glovalVariable.noOfweeks = String(2)
+                    }
+                    else if weeks == "four weeks"{
+                        
+                        StructOperation.glovalVariable.noOfweeks = String(4)
+                    }
+                    
+                }
+                print("weeks...\(StructOperation.glovalVariable.noOfweeks)")
+                
+                self.navigationController?.pushViewController(vc, animated: false)
+            }
+        
+        
+  
     }
     
     func showProgramPicker(pickerType: PickerType) {
@@ -76,6 +105,7 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleTableViewCell", for: indexPath) as? ScheduleTableViewCell
         cell?.timingsBtn.setTitle(scheduleDetails["timings"], for: .normal)
         cell?.noOfWeeksBtn.setTitle(scheduleDetails["weeks"], for: .normal)
+            
         cell?.onlineBtn.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.homeGuruOrangeColor : ColorPalette.whiteColor, for: .normal)
         cell?.onlineBtn.setImage(UIImage(named:(scheduleDetails["classType"] == "Online Class") ?  "orangeVideoClass" : "whiteVideoClass") , for: .normal)
         cell?.atHomeBtn.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.whiteColor : ColorPalette.homeGuruOrangeColor, for: .normal)
@@ -91,6 +121,7 @@ class ScheduleViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func getSelectedProgram(programName data: String) {
+        selectedDropDown = true
         print("selected...data..\(data)")
         UserDefaults.standard.set("\(data)", forKey: "typeOfweeks")
         print("retrive....\(UserDefaults.standard.string(forKey: "typeOfweeks"))")

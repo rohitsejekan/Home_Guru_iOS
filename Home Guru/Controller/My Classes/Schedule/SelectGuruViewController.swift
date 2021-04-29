@@ -9,9 +9,11 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import NVActivityIndicatorView
 class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
+    @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
     @IBOutlet weak var backBtn: UIButton!
     var guruDetails : [String:Any] = [:]
     var slotDetails: [String: Any] = [:]
@@ -20,6 +22,8 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
     var guruProfileOnId = [GetGuruProfile]()
     var getGuruDetails = [getGurusubject]()
     var guruFare: [String] = []
+    var selectedSlot: [String] = []
+    var selectedDuration: [String] = []
   
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -35,10 +39,10 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     func getGuru(){
-        
-        guruDetails["subject"] = [1,2]
-        guruDetails["hours"] = [1,1]
-        guruDetails["time"] = ["10:00", "11:00"]
+        activityLoaderView.startAnimating()
+        guruDetails["subject"] = UserDefaults.standard.object(forKey: "subjectId") as! [String]
+        guruDetails["hours"] = selectedDuration
+        guruDetails["time"] = selectedSlot
         
        // print("...\(UserDefaults.standard.string(forKey: "groupId"))")
         if let classType = UserDefaults.standard.string(forKey: "classType"){
@@ -48,9 +52,11 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         if let groupId = UserDefaults.standard.string(forKey: "groupId"){
             print("groupId...\(groupId)")
-            guruDetails["groupId"] = "7"
+           // guruDetails["groupId"] = "7"
+           guruDetails["groupId"] = groupId
 
         }
+        print("getGuruSubject body...\(guruDetails)")
                 AlamofireService.alamofireService.postRequestWithBodyData(url: URLManager.sharedUrlManager.getGuruSubject, details: guruDetails) {
                 response in
                    switch response.result {
@@ -83,6 +89,7 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
                                   
                                 }
                             DispatchQueue.main.async {
+                                self.activityLoaderView.stopAnimating()
                                 self.tableView.reloadData()
                             }
                            }
@@ -103,24 +110,45 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
         return 150
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-          let cell = tableView.dequeueReusableCell(withIdentifier: "SelectGuru", for: indexPath) as? SelectGuruTableViewCell
-               
-                  cell?.selectionStyle = .none
-                  cell?.preservesSuperviewLayoutMargins = false
-                        cell?.separatorInset = .zero
-                        cell?.layoutMargins = .zero
-        cell?.guruName.text = getGuruDetails[indexPath.row].name
-        cell?.languageKnown.text = getGuruDetails[indexPath.row].languages
-        cell?.guruFare.text = "Rs "+guruFare[indexPath.row] + "/hour"
-          //        cell?.radioImageView.image = UIImage(named: indexPath.row == index ? "radioSelected" : "radioUnselected")
-                
-                  return cell!
+        if !getGuruDetails.isEmpty{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectGuru", for: indexPath) as? SelectGuruTableViewCell
+                          
+                             cell?.selectionStyle = .none
+                             cell?.preservesSuperviewLayoutMargins = false
+                                   cell?.separatorInset = .zero
+                                   cell?.layoutMargins = .zero
+                   cell?.guruName.text = getGuruDetails[indexPath.row].name
+                   cell?.languageKnown.text = getGuruDetails[indexPath.row].languages
+            if getGuruDetails[indexPath.row].profilePic?.profile != ""{
+                if let img = getGuruDetails[indexPath.row].profilePic?.profile{
+                    let url = URL(string: img)
+                    cell?.facultyAvatar.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.7))], progressBlock: nil)
+                    cell?.facultyAvatar.kf.indicatorType = .activity
+                }
+                }else{
+                           cell?.facultyAvatar.image = UIImage(named: "Avatar 2")
+                       }
+            
+                    if !guruFare.isEmpty{
+                        cell?.guruFare.text = "Rs "+guruFare[indexPath.row] + "/hour"
+
+                    }else{
+                        cell?.guruFare.text = ""
+                    }
+                     //        cell?.radioImageView.image = UIImage(named: indexPath.row == index ? "radioSelected" : "radioUnselected")
+                           
+                             return cell!
+        }else{
+            return UITableViewCell()
+        }
+         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "MyGuruDetailsViewController") as! MyGuruDetailsViewController
                                //setNavigationBackTitle(title: "Schedule")
                                vc.hidesBottomBarWhenPushed = true
         vc.guruId = getGuruDetails[indexPath.row]._id
+        
          UserDefaults.standard.set(getGuruDetails[indexPath.row]._id, forKey: "guruId")
         UserDefaults.standard.set(guruFare, forKey: "guruFare")
         print("1..\(slotDetails)")

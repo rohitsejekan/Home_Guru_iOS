@@ -46,15 +46,16 @@
 //
 //        if UserDefaults.standard.bool(forKey: "GalleryUpload") {
 //            parameter = [
-//                "image_list": [imageName],
+//                "iprofilePic": [imageName],
 //                "album": album
 //            ]
-//            url = "https://app.openmindsworld.org/get_signed_url/"
+//            url = "https://api1653.homeguru.cc/api/parent/student/updateattachments/"
 //        } else {
 //            parameter = [
-//                "image_list": [imageName]
+//                "profilePic": [imageName],
+//                "studentId": id
 //            ]
-//            url = "https://app.openmindsworld.org/get_signed_url/"
+//            url = "https://api1653.homeguru.cc/api/parent/student/updateattachments/"
 //        }
 //
 //        middleware.getSignedUrl(withParameter: parameter, url: url) { (data, error) in

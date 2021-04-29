@@ -8,13 +8,16 @@
 
 import UIKit
 import SwiftyJSON
+import NVActivityIndicatorView
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ProfileEditProtocol {
 
+    @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     var profileFields : [String] = ["Account","Wallet","Contact Us","Signout"]
     var studentName: String = ""
     var studentStd: String = ""
     var studentDob: String = ""
+    var window: UIWindow?
     var childrenDetails = [myChildren]()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -31,6 +34,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     private func getprofile(){
+        self.activityLoaderView.startAnimating()
         AlamofireService.alamofireService.getRequestWithToken(url: URLManager.sharedUrlManager.getProfile, parameters: nil) {
                            response in
                               switch response.result {
@@ -49,7 +53,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                                         }
                                         print("mychildren...\(self.childrenDetails)")
                                    DispatchQueue.main.async {
-                                  
+                                    self.activityLoaderView.stopAnimating()
                                        self.tableView.reloadData()
                                     }
                                                          }
@@ -73,11 +77,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
            // cell!.profileEditDelegate = self
             cell.delegate = self
 
-            if !childrenDetails.isEmpty{
-                print("my..\(childrenDetails.count)")
-                cell.myChildrenCount = childrenDetails.count
-                //cell.myChildrens = childrenDetails
-            }
             cell.configure(with: self.childrenDetails)
             cell.studentNameLabel.text = studentName
             cell.classLabel.text = "CLASS - " + studentStd
@@ -109,6 +108,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         case 4:
             // code for logout
             UserDefaults.standard.set(false, forKey: Constants.loginStatus)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let rootVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = rootVC
+
             print("....logout...")
         default:
             print(".....")
@@ -118,6 +122,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func editProfile(index: Int) {
         // navigate to edit profile
     let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "editProfileViewController") as! editProfileViewController
+        vc.updateDelegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -127,7 +132,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                  self.present(vc!, animated: true, completion: nil)
     }
     
-    
-
 }
-
+extension ProfileViewController: updateProfile{
+    func updateP() {
+        getprofile()
+    }
+}

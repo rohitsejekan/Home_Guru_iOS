@@ -10,9 +10,14 @@ import UIKit
 import MobileRTC
 class zoomViewController: UIViewController {
 
+    @IBOutlet weak var backBtn: UIButton!
+    var meetPassword: String = ""
+    var meetId: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //back button
+        backBtn.layer.cornerRadius = 7
         // Do any additional setup after loading the view.
         MobileRTC.shared().setMobileRTCRootController(self.navigationController)
         
@@ -41,10 +46,12 @@ class zoomViewController: UIViewController {
 
         alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Meeting number"
+            textField.text = "\(self.meetId)"
             textField.keyboardType = .phonePad
         }
         alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Meeting password"
+            textField.text = "\(self.meetPassword)"
             textField.keyboardType = .asciiCapable
             textField.isSecureTextEntry = true
         }
@@ -52,9 +59,9 @@ class zoomViewController: UIViewController {
         let joinMeetingAction = UIAlertAction(title: "Join meeting", style: .default, handler: { [weak self] alert -> Void in
             let numberTextField = alertController.textFields![0] as UITextField
             let passwordTextField = alertController.textFields![1] as UITextField
-
-            if let meetingNumber = numberTextField.text, let password = passwordTextField.text {
-                self?.joinMeeting(meetingNumber: meetingNumber, meetingPassword: password)
+            
+            if let meetingNumber = numberTextField.text{
+                self?.joinMeeting(meetingNumber: meetingNumber, meetingPassword: self!.meetPassword)
             }
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { [weak self] (action : UIAlertAction!) -> Void in })
@@ -70,6 +77,10 @@ class zoomViewController: UIViewController {
         }
         // uncommented below code to get alert for second time
         //self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func backBtnaction(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
     @IBAction func joinAnInstantMeeting(_ sender: Any) {
               // Obtain the MobileRTCAuthService from the Zoom SDK, and check if the user is logged into Zoom.

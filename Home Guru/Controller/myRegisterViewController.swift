@@ -11,10 +11,11 @@ import UIKit
 class myRegisterViewController: UIViewController {
 
     
-   var userDetails : [String:Any] = [:]
+    @IBOutlet weak var backgroundImage: UIImageView!
+    var userDetails : [String:Any] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.backgroundImage.image = imageWithGradient(img: self.backgroundImage.image)
         // Do any additional setup after loading the view.
     }
     

@@ -25,7 +25,7 @@ class ScheduleSubject_4TableViewCell: UITableViewCell {
     var checked: Bool! {
         didSet {
             if (self.checked == true) {
-                self.toggleImage.image = UIImage(named: "close")
+                self.toggleImage.image = UIImage(named: "checkBox")
                 print("checked")
             }else{
                 self.toggleImage.image = UIImage(named: "ch")

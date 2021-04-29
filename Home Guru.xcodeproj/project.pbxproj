@@ -31,6 +31,7 @@
 		011688B12600849F005E1701 /* SelectScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B02600849E005E1701 /* SelectScheduleViewController.swift */; };
 		011688B32600BC21005E1701 /* addProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B22600BC20005E1701 /* addProfileViewController.swift */; };
 		011688B62600BD89005E1701 /* addProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011688B52600BD89005E1701 /* addProfileTableViewCell.swift */; };
+		011770CB263335FD003647E6 /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011770CA263335FC003647E6 /* TransactionHistory.swift */; };
 		011821CD26218F3300B4B37C /* DataTraverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011821CC26218F3300B4B37C /* DataTraverse.swift */; };
 		012F3D3926089A5600325823 /* customTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012F3D3826089A5600325823 /* customTextField.swift */; };
 		01413CD425FF3084001BCF7A /* ConfirmScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01413CD325FF3084001BCF7A /* ConfirmScheduleViewController.swift */; };
@@ -71,6 +72,11 @@
 		016EEB7625403B3C00FE7351 /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EEB7525403B3C00FE7351 /* URLManager.swift */; };
 		016EEB7E2540446F00FE7351 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EEB7D2540446F00FE7351 /* SignUpViewController.swift */; };
 		016EEB802540460C00FE7351 /* OTPVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EEB7F2540460C00FE7351 /* OTPVerificationViewController.swift */; };
+		01708520263679160037CEF9 /* currentPastBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0170851E263679160037CEF9 /* currentPastBookingTableViewCell.swift */; };
+		01708521263679160037CEF9 /* currentPastBookingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0170851F263679160037CEF9 /* currentPastBookingTableViewCell.xib */; };
+		01708523263685FE0037CEF9 /* currentPastBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01708522263685FE0037CEF9 /* currentPastBooking.swift */; };
+		0170852626368E350037CEF9 /* userUpdateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0170852426368E350037CEF9 /* userUpdateTableViewCell.swift */; };
+		0170852726368E350037CEF9 /* userUpdateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0170852526368E350037CEF9 /* userUpdateTableViewCell.xib */; };
 		0178EB6B2596199400466322 /* PaymentHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178EB6A2596199300466322 /* PaymentHistoryTableViewCell.swift */; };
 		0178EB6D25961C4800466322 /* RechargeWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178EB6C25961C4800466322 /* RechargeWalletViewController.swift */; };
 		0178EB7025962DBF00466322 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178EB6F25962DBF00466322 /* ScheduleViewController.swift */; };
@@ -101,6 +107,13 @@
 		01E7D48825FC8D4A0054D177 /* customButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7D48625FC8D4A0054D177 /* customButtonTableViewCell.swift */; };
 		01E7D48925FC8D4A0054D177 /* customButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E7D48725FC8D4A0054D177 /* customButtonTableViewCell.xib */; };
 		01E7D48B25FC9F390054D177 /* SelectGuruViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7D48A25FC9F390054D177 /* SelectGuruViewController.swift */; };
+		01E8C05726355E2E00EAA9EB /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8C05626355E2E00EAA9EB /* Common.swift */; };
+		01E8C05B26355E4B00EAA9EB /* ImageReponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8C05926355E4B00EAA9EB /* ImageReponseModel.swift */; };
+		01E8C05C26355E4B00EAA9EB /* ImageRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8C05A26355E4B00EAA9EB /* ImageRequestModel.swift */; };
+		01E8C05E26355E7600EAA9EB /* HttpUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8C05D26355E7600EAA9EB /* HttpUtility.swift */; };
+		01E8C06126355E8900EAA9EB /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8C06026355E8900EAA9EB /* ImageManager.swift */; };
+		01E8C0632635E2F100EAA9EB /* currentBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8C0622635E2F000EAA9EB /* currentBookingViewController.swift */; };
+		01E8C0652635E4ED00EAA9EB /* pastBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8C0642635E4EC00EAA9EB /* pastBookingViewController.swift */; };
 		01EE0D84262D91B10073777E /* myChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE0D83262D91B10073777E /* myChildren.swift */; };
 		01EE0D86262DB5FE0073777E /* editProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE0D85262DB5FE0073777E /* editProfileViewController.swift */; };
 		01EE0D88262DB8170073777E /* editProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE0D87262DB8170073777E /* editProfileTableViewCell.swift */; };
@@ -110,6 +123,7 @@
 		01F23E55260B29BA00EAEDE9 /* zoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F23E54260B29BA00EAEDE9 /* zoomViewController.swift */; };
 		01F269B126205ABB00E38C0C /* Razorpay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F269B026205ABA00E38C0C /* Razorpay.xcframework */; };
 		01F269B226206E8800E38C0C /* Razorpay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01F269B026205ABA00E38C0C /* Razorpay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		01F4973E26300A86001169CA /* NonAcademic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4973D26300A86001169CA /* NonAcademic.swift */; };
 		01F4BE3225F8F46F00326D12 /* myRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */; };
 		01F4BE3425F8F4E000326D12 /* myRegisterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4BE3325F8F4E000326D12 /* myRegisterTableViewCell.swift */; };
 		01F826BB258A373F00AA03FA /* RegisterStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F826BA258A373F00AA03FA /* RegisterStudentViewController.swift */; };
@@ -165,6 +179,7 @@
 		011688B02600849E005E1701 /* SelectScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectScheduleViewController.swift; sourceTree = "<group>"; };
 		011688B22600BC20005E1701 /* addProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addProfileViewController.swift; sourceTree = "<group>"; };
 		011688B52600BD89005E1701 /* addProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addProfileTableViewCell.swift; sourceTree = "<group>"; };
+		011770CA263335FC003647E6 /* TransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
 		011821CC26218F3300B4B37C /* DataTraverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTraverse.swift; sourceTree = "<group>"; };
 		012F3D3826089A5600325823 /* customTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customTextField.swift; sourceTree = "<group>"; };
 		01413CD325FF3084001BCF7A /* ConfirmScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +225,11 @@
 		016EEB7C25403CF700FE7351 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		016EEB7D2540446F00FE7351 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		016EEB7F2540460C00FE7351 /* OTPVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationViewController.swift; sourceTree = "<group>"; };
+		0170851E263679160037CEF9 /* currentPastBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currentPastBookingTableViewCell.swift; sourceTree = "<group>"; };
+		0170851F263679160037CEF9 /* currentPastBookingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = currentPastBookingTableViewCell.xib; sourceTree = "<group>"; };
+		01708522263685FE0037CEF9 /* currentPastBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currentPastBooking.swift; sourceTree = "<group>"; };
+		0170852426368E350037CEF9 /* userUpdateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userUpdateTableViewCell.swift; sourceTree = "<group>"; };
+		0170852526368E350037CEF9 /* userUpdateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = userUpdateTableViewCell.xib; sourceTree = "<group>"; };
 		0178EB6A2596199300466322 /* PaymentHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		0178EB6C25961C4800466322 /* RechargeWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeWalletViewController.swift; sourceTree = "<group>"; };
 		0178EB6F25962DBF00466322 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
@@ -242,6 +262,13 @@
 		01E7D48625FC8D4A0054D177 /* customButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customButtonTableViewCell.swift; sourceTree = "<group>"; };
 		01E7D48725FC8D4A0054D177 /* customButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = customButtonTableViewCell.xib; sourceTree = "<group>"; };
 		01E7D48A25FC9F390054D177 /* SelectGuruViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGuruViewController.swift; sourceTree = "<group>"; };
+		01E8C05626355E2E00EAA9EB /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		01E8C05926355E4B00EAA9EB /* ImageReponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageReponseModel.swift; sourceTree = "<group>"; };
+		01E8C05A26355E4B00EAA9EB /* ImageRequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRequestModel.swift; sourceTree = "<group>"; };
+		01E8C05D26355E7600EAA9EB /* HttpUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpUtility.swift; sourceTree = "<group>"; };
+		01E8C06026355E8900EAA9EB /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		01E8C0622635E2F000EAA9EB /* currentBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currentBookingViewController.swift; sourceTree = "<group>"; };
+		01E8C0642635E4EC00EAA9EB /* pastBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pastBookingViewController.swift; sourceTree = "<group>"; };
 		01EE0D83262D91B10073777E /* myChildren.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myChildren.swift; sourceTree = "<group>"; };
 		01EE0D85262DB5FE0073777E /* editProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editProfileViewController.swift; sourceTree = "<group>"; };
 		01EE0D87262DB8170073777E /* editProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -249,6 +276,7 @@
 		01F23E4B260B1A4F00EAEDE9 /* MobileRTCResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MobileRTCResources.bundle; sourceTree = "<group>"; };
 		01F23E54260B29BA00EAEDE9 /* zoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zoomViewController.swift; sourceTree = "<group>"; };
 		01F269B026205ABA00E38C0C /* Razorpay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Razorpay.xcframework; sourceTree = "<group>"; };
+		01F4973D26300A86001169CA /* NonAcademic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonAcademic.swift; sourceTree = "<group>"; };
 		01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myRegisterViewController.swift; sourceTree = "<group>"; };
 		01F4BE3325F8F4E000326D12 /* myRegisterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myRegisterTableViewCell.swift; sourceTree = "<group>"; };
 		01F826BA258A373F00AA03FA /* RegisterStudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterStudentViewController.swift; sourceTree = "<group>"; };
@@ -460,6 +488,7 @@
 		019C128925700F540010122C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01E8C05826355E4B00EAA9EB /* ImageModels */,
 				019C128A25700F6B0010122C /* AlamofireService.swift */,
 				01638E97258A671D00F95F64 /* ParentDetails.swift */,
 				015307472578E53600F98F1A /* Custom Cells */,
@@ -472,6 +501,9 @@
 				011821CC26218F3300B4B37C /* DataTraverse.swift */,
 				01109A17262716C500D873B9 /* ImageUploader.swift */,
 				01EE0D83262D91B10073777E /* myChildren.swift */,
+				01F4973D26300A86001169CA /* NonAcademic.swift */,
+				011770CA263335FC003647E6 /* TransactionHistory.swift */,
+				01708522263685FE0037CEF9 /* currentPastBooking.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -550,8 +582,10 @@
 			children = (
 				016EEB7725403C9600FE7351 /* Font */,
 				01E130E2253DA84100F63673 /* View */,
+				01E8C05F26355E8900EAA9EB /* Manager */,
 				01E130E3253DA85800F63673 /* Controller */,
 				019C128925700F540010122C /* Model */,
+				01E8C05526355E2E00EAA9EB /* Common */,
 				01E130E6253DA8AE00F63673 /* Utilities */,
 				01E130D6253DA82F00F63673 /* Assets.xcassets */,
 				01E130D8253DA82F00F63673 /* LaunchScreen.storyboard */,
@@ -585,6 +619,8 @@
 				0153073B2578C3CA00F98F1A /* Profile */,
 				01F4BE3125F8F46F00326D12 /* myRegisterViewController.swift */,
 				01F23E54260B29BA00EAEDE9 /* zoomViewController.swift */,
+				01E8C0622635E2F000EAA9EB /* currentBookingViewController.swift */,
+				01E8C0642635E4EC00EAA9EB /* pastBookingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -620,6 +656,7 @@
 				01E130E7253DA8D100F63673 /* ColorPalette.swift */,
 				01E130E9253DA92100F63673 /* Extension.swift */,
 				01E130EB253DA92C00F63673 /* Helper.swift */,
+				01E8C05D26355E7600EAA9EB /* HttpUtility.swift */,
 				016EEB7325403B0E00FE7351 /* Constants.swift */,
 				016EEB7525403B3C00FE7351 /* URLManager.swift */,
 				01E7D48425FC88440054D177 /* PaddedLabel.swift */,
@@ -628,6 +665,31 @@
 				01629C33261EDFCA00887B7D /* CollectionViewFlowLayout.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		01E8C05526355E2E00EAA9EB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				01E8C05626355E2E00EAA9EB /* Common.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		01E8C05826355E4B00EAA9EB /* ImageModels */ = {
+			isa = PBXGroup;
+			children = (
+				01E8C05926355E4B00EAA9EB /* ImageReponseModel.swift */,
+				01E8C05A26355E4B00EAA9EB /* ImageRequestModel.swift */,
+			);
+			path = ImageModels;
+			sourceTree = "<group>";
+		};
+		01E8C05F26355E8900EAA9EB /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				01E8C06026355E8900EAA9EB /* ImageManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		01F826BC258A37E200AA03FA /* Register */ = {
@@ -650,6 +712,10 @@
 				01413CDB25FF6EFD001BCF7A /* confirmScheduleThirdTableViewCell.swift */,
 				01629C39261F1AF300887B7D /* classDetailsActionTableViewCell.swift */,
 				01629C3B261F2BA400887B7D /* ReScheduleTableViewCell.swift */,
+				0170851E263679160037CEF9 /* currentPastBookingTableViewCell.swift */,
+				0170851F263679160037CEF9 /* currentPastBookingTableViewCell.xib */,
+				0170852426368E350037CEF9 /* userUpdateTableViewCell.swift */,
+				0170852526368E350037CEF9 /* userUpdateTableViewCell.xib */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -742,6 +808,7 @@
 				01ADA2A62598FEB300B44061 /* ScheduleSubjectTableViewCell.xib in Resources */,
 				011294D425F5F84600308A91 /* NotificationDetailTableViewCell.xib in Resources */,
 				011294CE25F5F78F00308A91 /* DatePickerView.xib in Resources */,
+				0170852726368E350037CEF9 /* userUpdateTableViewCell.xib in Resources */,
 				01E7D48925FC8D4A0054D177 /* customButtonTableViewCell.xib in Resources */,
 				019B85D42609D494000FF798 /* GoogleService-Info.plist in Resources */,
 				011294E025F5FB3200308A91 /* RegisterStudentTableViewCell.xib in Resources */,
@@ -751,6 +818,7 @@
 				01F23E4C260B1A4F00EAEDE9 /* MobileRTCResources.bundle in Resources */,
 				01438EFC2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.xib in Resources */,
 				011294E825F60B4D00308A91 /* ProfileCollectionViewCell.xib in Resources */,
+				01708521263679160037CEF9 /* currentPastBookingTableViewCell.xib in Resources */,
 				01E130D7253DA82F00F63673 /* Assets.xcassets in Resources */,
 				01E130D5253DA82500F63673 /* Main.storyboard in Resources */,
 				01FA8B3825FB43160044C209 /* ScheduleSubject_4TableViewCell.xib in Resources */,
@@ -832,7 +900,9 @@
 				0152102C2616F1AD003A7BEE /* GetGuruProfile.swift in Sources */,
 				0178EB6D25961C4800466322 /* RechargeWalletViewController.swift in Sources */,
 				01EE0D84262D91B10073777E /* myChildren.swift in Sources */,
+				01E8C0632635E2F100EAA9EB /* currentBookingViewController.swift in Sources */,
 				01FA8B3425FB42140044C209 /* ScheduleAcademicList_4ViewController.swift in Sources */,
+				011770CB263335FD003647E6 /* TransactionHistory.swift in Sources */,
 				0112B558260DE356000E3FA9 /* GetSubjects.swift in Sources */,
 				01EE0D86262DB5FE0073777E /* editProfileViewController.swift in Sources */,
 				015307422578C87A00F98F1A /* MyGurusViewController.swift in Sources */,
@@ -846,16 +916,21 @@
 				0178EB7025962DBF00466322 /* ScheduleViewController.swift in Sources */,
 				016EEB7625403B3C00FE7351 /* URLManager.swift in Sources */,
 				01C481DD2594D42700FBFD93 /* WalletViewController.swift in Sources */,
+				01E8C0652635E4ED00EAA9EB /* pastBookingViewController.swift in Sources */,
 				016EEB72254039D100FE7351 /* RegisterParentViewController.swift in Sources */,
 				01ADA2A52598FEB300B44061 /* ScheduleSubjectTableViewCell.swift in Sources */,
 				016EEB7E2540446F00FE7351 /* SignUpViewController.swift in Sources */,
 				0153074A2578E59F00F98F1A /* MyClassInfoTableViewCell.swift in Sources */,
 				01F826BB258A373F00AA03FA /* RegisterStudentViewController.swift in Sources */,
 				016EEB802540460C00FE7351 /* OTPVerificationViewController.swift in Sources */,
+				01708520263679160037CEF9 /* currentPastBookingTableViewCell.swift in Sources */,
+				01F4973E26300A86001169CA /* NonAcademic.swift in Sources */,
 				01FA8B3D25FB8D200044C209 /* DurationTimeTableViewCell.swift in Sources */,
 				01C481DF2594D43300FBFD93 /* AccountViewController.swift in Sources */,
 				015307462578C89200F98F1A /* ProfileViewController.swift in Sources */,
 				01C481F1259518BE00FBFD93 /* PaymentHistoryViewController.swift in Sources */,
+				0170852626368E350037CEF9 /* userUpdateTableViewCell.swift in Sources */,
+				01E8C05B26355E4B00EAA9EB /* ImageReponseModel.swift in Sources */,
 				01E130CE253DA82500F63673 /* AppDelegate.swift in Sources */,
 				01F4BE3425F8F4E000326D12 /* myRegisterTableViewCell.swift in Sources */,
 				011688AF26007609005E1701 /* DynamicHeightCollectionView.swift in Sources */,
@@ -875,6 +950,7 @@
 				0178EB6B2596199400466322 /* PaymentHistoryTableViewCell.swift in Sources */,
 				01413CD425FF3084001BCF7A /* ConfirmScheduleViewController.swift in Sources */,
 				01413CD825FF3D00001BCF7A /* ConfirmScheduleSecondTableViewCell.swift in Sources */,
+				01E8C05726355E2E00EAA9EB /* Common.swift in Sources */,
 				01E7D48825FC8D4A0054D177 /* customButtonTableViewCell.swift in Sources */,
 				011294DA25F5F89100308A91 /* NotificationCardTableViewCell.swift in Sources */,
 				0153074E257923D600F98F1A /* ScheduledClassCardTableViewCell.swift in Sources */,
@@ -895,8 +971,10 @@
 				01413CDA25FF6D8C001BCF7A /* ConfirmScheduleFirstCollectionViewCell.swift in Sources */,
 				0151441D258E7CC000E83F64 /* MyGuruDetailsViewController.swift in Sources */,
 				01638E8E258A618400F95F64 /* MapViewController.swift in Sources */,
+				01E8C06126355E8900EAA9EB /* ImageManager.swift in Sources */,
 				019C128B25700F6B0010122C /* AlamofireService.swift in Sources */,
 				015307402578C86C00F98F1A /* MyClassesViewController.swift in Sources */,
+				01E8C05C26355E4B00EAA9EB /* ImageRequestModel.swift in Sources */,
 				01E7D48525FC88440054D177 /* PaddedLabel.swift in Sources */,
 				01ADA29E2598F25B00B44061 /* ScheduleSubjectViewController.swift in Sources */,
 				01109A18262716C500D873B9 /* ImageUploader.swift in Sources */,
@@ -907,8 +985,10 @@
 				0146F438258F18AF008537B8 /* MyGuruDetailsTableViewCell.swift in Sources */,
 				01F826C0258A387E00AA03FA /* RegisterStudentTableViewCell.swift in Sources */,
 				0153073E2578C44900F98F1A /* HomeViewController.swift in Sources */,
+				01E8C05E26355E7600EAA9EB /* HttpUtility.swift in Sources */,
 				016EEB7425403B0E00FE7351 /* Constants.swift in Sources */,
 				015307442578C88700F98F1A /* NotificationsViewController.swift in Sources */,
+				01708523263685FE0037CEF9 /* currentPastBooking.swift in Sources */,
 				01629C3C261F2BA400887B7D /* ReScheduleTableViewCell.swift in Sources */,
 				01E7D48B25FC9F390054D177 /* SelectGuruViewController.swift in Sources */,
 				011294CC25F5F76300308A91 /* DatePickerView.swift in Sources */,

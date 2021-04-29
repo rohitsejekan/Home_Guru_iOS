@@ -15,13 +15,19 @@ struct myClasses{
     var subject = [subjectDetails]()
     var scheduleDate: String = ""
     var timeSlotFrom: String = ""
+    var timeSlotTo: String = ""
+    var is_demo: String = ""
     var _id: String = ""
     var classType: String = ""
+    var status: String = ""
     init(json: JSON) {
         self.student = studentDetails(sDetails: json["student"])
         self.classType = json["classType"].stringValue
         self.scheduleDate = json["date"].stringValue
+        self.status = json["status"].stringValue
+        self.is_demo = json["is_demo"].stringValue
         self._id = json["_id"].stringValue
+        self.timeSlotTo = json["timeSlotTo"].stringValue
         self.timeSlotFrom = json["timeSlotFrom"].stringValue
         self.faculty = facultyDetails(fJson: json["faculty"])
         for arr in json["subject"].arrayValue{
@@ -38,11 +44,16 @@ struct studentDetails{
 struct facultyDetails{
     var name: String = ""
     var _id: String = ""
+    var ratings: String = ""
+    var languagesKnown: String = ""
+    var facultyPic: facultyProfile
     var subjects = [facultySubjectDetails]()
     init(fJson: JSON){
         for arr in fJson["subjects"].arrayValue{
             self.subjects.append(facultySubjectDetails(facultySubDetails: arr))
         }
+        self.facultyPic = facultyProfile(fp: fJson["profilePic"])
+        self.ratings = fJson["ratings"].stringValue
         self._id = fJson["_id"].stringValue
         self.name = fJson["name"].stringValue
     }
@@ -50,10 +61,18 @@ struct facultyDetails{
 
 struct facultySubjectDetails{
     var hourlyCompensation = [hourlyCompensationDetails]()
+    var profilePic: facultyProfile?
     init(facultySubDetails: JSON){
+        //self.profilePic = facultyProfile(fp: facultySubDetails["profilePic"])
         for arr in facultySubDetails["hourlyCompensation"].arrayValue{
             self.hourlyCompensation.append(hourlyCompensationDetails(hourlyFare: arr))
         }
+    }
+}
+struct facultyProfile{
+    var image_url: String = ""
+    init(fp: JSON){
+        self.image_url = fp["image_url"].stringValue
     }
 }
 struct hourlyCompensationDetails{

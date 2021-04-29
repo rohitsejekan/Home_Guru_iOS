@@ -82,6 +82,9 @@ PODS:
     - nanopb/encode (= 2.30907.0)
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (1.2.12)
   - SKCountryPicker (1.2.9)
   - SlideMenuControllerSwift (3.0.2)
@@ -99,6 +102,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher
   - MBProgressHUD
+  - NVActivityIndicatorView
   - SKCountryPicker
   - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift4`)
   - SVPinView (~> 1.0)
@@ -125,6 +129,7 @@ SPEC REPOS:
     - Kingfisher
     - MBProgressHUD
     - nanopb
+    - NVActivityIndicatorView
     - PromisesObjC
     - SKCountryPicker
     - SVPinView
@@ -160,6 +165,7 @@ SPEC CHECKSUMS:
   Kingfisher: b3554e7bf6106115b44e8795300bad580ef2fdc7
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SKCountryPicker: 7ad1e7dfb482cfb26855e33c2d70dbf1eaf218fe
   SlideMenuControllerSwift: 9e8d2bba8ea9201c6207acb76e95a2841453ec9c
@@ -167,6 +173,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: f478ef60ac00a4a78dd7684d61c467dd378a19ec
+PODFILE CHECKSUM: 7b8000aa4656175a2fc9aaad447f740e317ba9c0
 
 COCOAPODS: 1.10.1

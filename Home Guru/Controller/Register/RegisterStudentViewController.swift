@@ -280,9 +280,15 @@ extension RegisterStudentViewController {
                        if let result = value as? [String:Any] {
                             print("result is ...\(result)")
                             if let token = result["token"] as? String, let parentDetails = result["parent"] as? [String:Any] {
+                                print("new token...\(token)")
                                 UserDefaults.standard.set(token, forKey: Constants.token)
                                 ParentDetails.parentDetails.saveData(data: parentDetails, token: token)
+                                
                             }
+                        let json = JSON(value)
+                        // store student id
+                        StructOperation.glovalVariable.studentId = json["parent"]["student"][0]["_id"].stringValue
+                        // store student id ends
                             hud.hide(animated: true)
                             UserDefaults.standard.set(true, forKey: Constants.isRegistered)
                             UserDefaults.standard.set(0,forKey: Constants.currentSelectedStudentProfile)

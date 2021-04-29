@@ -7,54 +7,78 @@
 //
 
 import UIKit
-
-class MyGurusViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
-
-    @IBOutlet weak var tableView: UITableView!
-    var myGurus : [[String:Any]] = [[:],[:],[:],[:],[:],[:]]
+import XLPagerTabStrip
+class MyGurusViewController: ButtonBarPagerTabStripViewController {
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        hideNavbar()
-    }
+
     
+    @IBOutlet weak var backBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.estimatedRowHeight = 100.0
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(UINib(nibName: "MyGuruCard", bundle: nil), forCellReuseIdentifier: "MyGuruCard")
+        configureButtonBar()
+               super.viewDidLoad()
+               buttonBarView.backgroundColor = ColorPalette.homeGuruLiteBlueColor
+               containerView.backgroundColor = ColorPalette.homeGuruBlueColor
+        //back buton
+        backBtn.layer.cornerRadius = 3
+        
     }
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let hide = (viewController is NotificationsViewController)
         navigationController.setNavigationBarHidden(hide, animated: animated)
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myGurus.count + 1
+    override func viewWillAppear(_ animated: Bool) {
+          super.viewWillAppear(true)
+          buttonBarView.backgroundColor = ColorPalette.homeGuruBlueColor
+          containerView.backgroundColor = ColorPalette.homeGuruBlueColor
+      }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        configureButtonBar()
     }
-    
-   
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MyGuruHeaderCell", for: indexPath)
-            cell.selectionStyle = .none
+    func configureButtonBar() {
+            // Sets the background colour of the pager strip and the pager strip item
+            settings.style.buttonBarBackgroundColor = ColorPalette.homeGuruBlueColor
+            settings.style.buttonBarItemBackgroundColor = ColorPalette.homeGuruBlueColor
+            settings.style.selectedBarBackgroundColor = ColorPalette.homeGuruOrangeColor
+            settings.style.selectedBarHeight = 2.0
             
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MyGuruCard", for: indexPath) as? MyGuruCard
-            cell?.selectionStyle = .none
-            return cell!
+            // Sets the pager strip item font and font color
+            settings.style.buttonBarItemFont = UIFont(name: "SourceSansPro-Regular", size: 16.0) ?? UIFont.systemFont(ofSize: 16.0)
+            settings.style.buttonBarItemTitleColor = ColorPalette.homeGuruLightGreyColor
+            
+            // Sets the pager strip item offsets
+            settings.style.buttonBarMinimumLineSpacing = 0
+    //        settings.style.buttonBarItemsShouldFillAvailableWidth = true
+            settings.style.buttonBarLeftContentInset = 0
+            settings.style.buttonBarRightContentInset = 0
+            
+            // Sets the height and colour of the slider bar of the selected pager tab
+            settings.style.selectedBarHeight = 2.0
+            
+            // Changing item text color on swipe
+            changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
+                guard changeCurrentIndex == true else { return }
+                oldCell?.label.textColor = ColorPalette.homeGuruLightGreyColor
+                newCell?.label.textColor = ColorPalette.whiteColor
+                newCell?.backgroundColor = ColorPalette.homeGuruBlueColor
+            }
         }
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        
+        let child1 = Constants.mainStoryboard.instantiateViewController(withIdentifier: "currentBookingViewController") as! currentBookingViewController
+        child1.childNumber = "  CURRENT BOOKINGS   "
+        
+        let child2 = Constants.mainStoryboard.instantiateViewController(withIdentifier: "pastBookingViewController") as! pastBookingViewController
+        child2.childNumber = "   PAST BOOKINGS   "
+        
+        return [child1, child2]
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row != 0 {
-            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "MyGuruDetailsViewController") as! MyGuruDetailsViewController
-            vc.myGurusDetails = myGurus[indexPath.row-1]
-            vc.hidesBottomBarWhenPushed = true
-
-       self.navigationController?.pushViewController(vc, animated: false)
-        }
+    
+    @IBAction func goBack(_ sender: UIButton) {
+        self.tabBarController?.selectedIndex = 0
     }
     
-
 }
+

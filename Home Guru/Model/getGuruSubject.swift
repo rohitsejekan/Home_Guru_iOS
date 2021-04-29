@@ -14,7 +14,9 @@ struct getGurusubject{
     var name: String = ""
     var languages: String = ""
     var guruSubjectDetail = [guruSubjectDetails]()
+    var profilePic: facultyImage?
     init(json: JSON) {
+        self.profilePic = facultyImage(fi: json["profilePic"])
         self._id = json["_id"].stringValue
         self.name = json["name"].stringValue
         self.languages = json["languagesKnown"].stringValue
@@ -24,7 +26,12 @@ struct getGurusubject{
     }
 }
 
-
+struct facultyImage{
+    var profile: String = ""
+    init(fi: JSON){
+        self.profile = fi["image_url"].stringValue
+    }
+}
 
 struct guruSubjectDetails{
     var preferedSubjectData = [preferedSubjectDetails]()

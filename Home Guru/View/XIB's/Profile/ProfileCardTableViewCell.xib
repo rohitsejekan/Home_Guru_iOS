@@ -111,7 +111,7 @@
                 <outlet property="profileImage" destination="1LO-hx-mu1" id="UfK-2a-zDQ"/>
                 <outlet property="studentNameLabel" destination="uk3-Bu-h2I" id="hkj-ic-x8O"/>
             </connections>
-            <point key="canvasLocation" x="140.57971014492756" y="38.839285714285715"/>
+            <point key="canvasLocation" x="-93" y="-10"/>
         </tableViewCell>
     </objects>
     <resources>

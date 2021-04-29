@@ -137,12 +137,12 @@ class RegisterParentViewController: BaseViewController, UITableViewDataSource, U
             let cell = tableView.dequeueReusableCell(withIdentifier: "registerParentHeaderCell", for: indexPath) as? RegisterParentTableViewCell
             cell?.selectionStyle = .none
          
-            
-            let gradientLayer = CAGradientLayer()
-            gradientLayer.frame = self.view.bounds
-            gradientLayer.colors = [UIColor.clear.cgColor, UIColor.blue.cgColor]
-            gradientLayer.locations = [0.8, 1.0]
-            cell?.bgImage.layer.addSublayer(gradientLayer)
+            cell?.bgImage.image = imageWithGradient(img: cell?.bgImage.image)
+//            let gradientLayer = CAGradientLayer()
+//            gradientLayer.frame = self.view.bounds
+//            gradientLayer.colors = [UIColor.clear.cgColor, UIColor.blue.cgColor]
+//            gradientLayer.locations = [0.8, 1.0]
+//            cell?.bgImage.layer.addSublayer(gradientLayer)
             return cell!
         case 1,2,3,4,7,8,9,11:
             let cell = tableView.dequeueReusableCell(withIdentifier: "registerParentInput1Cell", for: indexPath) as? RegisterParentTableViewCell
@@ -271,6 +271,8 @@ extension RegisterParentViewController {
             }
             guard let response = response, let address = response.firstResult()
                 else { return }
+            
+            
             print("address in register parent ..\(address)")
             g_address = address.lines![0]
             g_addressDetails = address
@@ -282,7 +284,8 @@ extension RegisterParentViewController {
                     self.address["location"] = locationCordinates
                 }
             }
-            var addressString = (address.lines![0] as! String).components(separatedBy: ",")
+            let addressString = (address.lines![0] as! String).components(separatedBy: ",")
+            UserDefaults.standard.set(addressString, forKey: "userAddress")
             self.address["pincode"] =  address.postalCode
             var houseAddress = ""
             for item in addressString {

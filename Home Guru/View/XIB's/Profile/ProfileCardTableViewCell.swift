@@ -62,7 +62,7 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
             cell?.profileImageView.image = UIImage(named: "add")
         }else{
             cell?.profileNameLabel.text = arr[indexPath.row].name
-            cell?.profileImageView.image = UIImage(named: "degree")
+            cell?.profileImageView.image = UIImage(named: "Avatar 2")
         }
         return cell!
     }
@@ -81,8 +81,11 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
     
     func showSelectedProfile(index: Int) {
         if !arr.isEmpty{
+//            print("selected id..\(arr[index]._id)")
+            StructOperation.glovalVariable.studentId = arr[index]._id
+            print("stu id....\(StructOperation.glovalVariable.studentId)")
             studentNameLabel.text = arr[index].name
-            classLabel.text = arr[index].stdClass
+            classLabel.text = "CLASS - " + arr[index].stdClass
             dobDetailsLabel.text = arr[index].dob
         }
      

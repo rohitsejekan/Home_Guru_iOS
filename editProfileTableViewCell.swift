@@ -10,7 +10,8 @@ import UIKit
 
 class editProfileTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var editClass: UITextField!
+    @IBOutlet weak var editClass: UIButton!
+    
     @IBOutlet weak var editYear: UITextField!
     @IBOutlet weak var editMonth: UITextField!
     @IBOutlet weak var editDate: UITextField!

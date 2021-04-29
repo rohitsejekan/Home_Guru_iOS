@@ -15,6 +15,7 @@ class SelectGuruTableViewCell: UITableViewCell {
     @IBOutlet weak var guruFare: PaddedLabel!
     @IBOutlet weak var guruName: UILabel!
     @IBOutlet weak var holderView: UIView!
+    @IBOutlet weak var facultyAvatar: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

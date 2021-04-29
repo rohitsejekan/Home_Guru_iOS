@@ -7,15 +7,72 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import NVActivityIndicatorView
 
 class AccountViewController: UIViewController {
 
+    @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
+    @IBOutlet weak var backBtn: UIButton!
+    @IBOutlet weak var landMarkLabel: UILabel!
+    @IBOutlet weak var cityName: UILabel!
+    @IBOutlet weak var addressLabel: UITextView!
+    @IBOutlet weak var stateName: UILabel!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var pinCodeLabel: UILabel!
+    @IBOutlet weak var outerBox: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        outerBox.layer.cornerRadius = 15.0
         // Do any additional setup after loading the view.
+        // back button
+        backBtn.layer.cornerRadius = 5
+        //user address
+        let address = UserDefaults.standard.string(forKey: "userAddress")
+        print("add..\(address)")
+        if let add = address{
+            addressLabel.text = add
+        }
+        
+        
+        getActiveUser()
     }
-    
+    func getActiveUser(){
+        activityLoaderView.startAnimating()
+        AlamofireService.alamofireService.getRequestWithToken(url: URLManager.sharedUrlManager.activeUser, parameters: nil) { response
+                     in
+                     switch response.result {
+                     case .success(let value):
+                         if let status =  response.response?.statusCode {
+                             print("svis ..\(value)")
+                             print("sstatus is ..\(status)")
+                             if status == 200 || status == 201 {
+                                 let json = JSON(value)
+                                self.phoneLabel.text = json["mobileNo"].stringValue
+                                self.userName.text = json["name"].stringValue
+                                self.emailLabel.text = json["email"].stringValue
+                                for arr in json["residentalAddress"].arrayValue{
+                                    self.pinCodeLabel.text = "Pin Code: " + arr["pincode"].stringValue
+                                    self.cityName.text = "City: " + arr["city"].stringValue
+                                    self.stateName.text = "State: " + arr["state"].stringValue
+                                    self.landMarkLabel.text = "LandMark: " + arr["landmark"].stringValue
+                                    
+                                }
+
+                                 DispatchQueue.main.async {
+                                     self.activityLoaderView.stopAnimating()
+
+                                 }
+                             }
+                         }
+                     case .failure( _):
+                         print("failure")
+                     }
+                 }
+    }
 
     /*
     // MARK: - Navigation
@@ -27,4 +84,7 @@ class AccountViewController: UIViewController {
     }
     */
 
+    @IBAction func goBack(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }

@@ -9,19 +9,22 @@
 import UIKit
 import XLPagerTabStrip
 import SwiftyJSON
+import NVActivityIndicatorView
 class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvider,UITableViewDataSource, UITableViewDelegate {
     var academicSubjectList : [[String:Any]] = [["title":"Class 1"],["title":"Class 2"],["title":"Class 3"],["title":"Class 4"],["title":"Class 5"],["title":"Class 6"],["title":"Class 7"],["title":"Class 8"]]
             var childNumber = ""
             var index : Int = 0
+    @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
     // store label
     var checkedName: [String] = []
+    var groupDetails: [String: String] = [:]
     // store index value
     var subId: [String] = []
     var array = [Int]()
     @IBOutlet weak var backBtn: UIButton!
     var rowsWhichAreChecked = [NSIndexPath]()
     var checkedCount: Int = 0
-  
+    var norecord: Bool?
     var subjectId: String = ""
     var subjectDetails: [String: String] = [:]
     var getSubjects = [GetSubjects]()
@@ -32,11 +35,13 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
         
          tableView.register(UINib(nibName: "customButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "customButton")
         // Do any additional setup after loading the view.
-        
+        // custom userupdate cell
+               tableView.register(UINib(nibName: "userUpdateTableViewCell", bundle: nil), forCellReuseIdentifier: "userUpdate")
         backBtn.layer.cornerRadius = 5
         getGroupCat()
     }
     func getGroupCat(){
+        activityLoaderView.startAnimating()
                    subjectDetails["groupId"] = subjectId
         print("sad....\(subjectId)")
            //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
@@ -50,6 +55,7 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
                               if status == 200 || status == 201 {
                            let val = JSON(value)
                                for arr in val.arrayValue{
+                                self.norecord = false
                                 self.getSubjects.append(GetSubjects(json: arr))
                                    print("child sub...\(arr)")
                                 
@@ -58,17 +64,49 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
                                 print("get sub...\(self.getSubjects)")
                                                      
                            DispatchQueue.main.async {
-                          
+                          self.activityLoaderView.stopAnimating()
                                self.tableView.reloadData()
                             }
                                                  }
                           }
                       case .failure( _):
                           print("failure")
+                          self.getGroupCat(id: self.subjectId)
                                return
                            }
                       }
        }
+    func getGroupCat(id: String){
+        activityLoaderView.startAnimating()
+                groupDetails["categoryid"] = id
+        //UserDefaults.standard.set("\(id)", forKey: "groupId")
+        //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
+                AlamofireService.alamofireService.postRequestWithBodyDataString(url: URLManager.sharedUrlManager.groupChildCategory, details: groupDetails) {
+                response in
+                   switch response.result {
+                   case .success(let value):
+                       if let status =  response.response?.statusCode {
+                       print("status is ..\(status)")
+                        print("value...\(value)")
+                           if status == 200 || status == 201 {
+                        let val = JSON(value)
+                            self.norecord = true
+                                print("output...\(val)")
+                      
+                        
+                                                  
+                        DispatchQueue.main.async {
+                            self.activityLoaderView.stopAnimating()
+                            self.tableView.reloadData()
+                                                  }
+                                              }
+                       }
+                   case .failure( _):
+                       print("failure")
+                            return
+                        }
+                   }
+    }
     @IBAction func goBack(_ sender: Any) {
        // self.dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
@@ -107,36 +145,59 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
         tableView.reloadData()
     }
           func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-              return getSubjects.count + 1
+            if norecord == false{
+                return getSubjects.count + 1
+            }else{
+                return 1
+            }
+              
           }
           func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            if indexPath.row == getSubjects.count{
+            switch norecord{
+            case false:
+                if indexPath.row == getSubjects.count{
+                    return 100
+                }else{
+                    return 75
+                }
+            case true:
+                return 120
+            default:
                 return 100
-            }else{
-                return 75
             }
+            
               
           }
           func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            if indexPath.row < getSubjects.count {
-                   let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleSubject_4", for: indexPath) as? ScheduleSubject_4TableViewCell
-                cell?.labelName.text = getSubjects[indexPath.row].title
-              
-                        cell?.selectionStyle = .none
-                      cell?.preservesSuperviewLayoutMargins = false
-                      cell?.separatorInset = .zero
-                      cell?.layoutMargins = .zero
-            
-                //        cell?.radioImageView.image = UIImage(named: indexPath.row == index ? "radioSelected" : "radioUnselected")
-                      
-                        return cell!
-            }else{
-                 let cell = tableView.dequeueReusableCell(withIdentifier: "customButton", for: indexPath) as! customButtonTableViewCell
-                cell.goToDelegate = self
+            switch norecord{
+            case false:
+                if indexPath.row < getSubjects.count {
+                                  let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleSubject_4", for: indexPath) as? ScheduleSubject_4TableViewCell
+                               cell?.labelName.text = getSubjects[indexPath.row].title
+                             
+                                       cell?.selectionStyle = .none
+                                     cell?.preservesSuperviewLayoutMargins = false
+                                     cell?.separatorInset = .zero
+                                     cell?.layoutMargins = .zero
+                           
+                               //        cell?.radioImageView.image = UIImage(named: indexPath.row == index ? "radioSelected" : "radioUnselected")
+                                     
+                                       return cell!
+                           }else{
+                                let cell = tableView.dequeueReusableCell(withIdentifier: "customButton", for: indexPath) as! customButtonTableViewCell
+                               cell.goToDelegate = self
+                               return cell
+                           }
+            case true:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "userUpdate", for: indexPath) as! userUpdateTableViewCell
                 return cell
+            default:
+                return UITableViewCell()
+                    
+        }
+                
             }
-     
-          }
+           
           
 //          func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //              index = indexPath.row
@@ -173,6 +234,7 @@ extension ScheduleAcademicList_4ViewController: nextScreen{
         vc.studentDetails = [[String:Any]](repeating: [String : Any](), count: checkedCount)
         UserDefaults.standard.set(subId, forKey: "subjectId")
         UserDefaults.standard.set(checkedName, forKey: "checkedName")
+       // StructOperation.glovalVariable.studentId = subjectId
         print("idii id.....\( UserDefaults.standard.object(forKey: "subjectId"))")
        
     self.navigationController?.pushViewController(vc, animated: false)

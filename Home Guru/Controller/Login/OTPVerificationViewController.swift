@@ -57,10 +57,17 @@ class OTPVerificationViewController: BaseViewController {
                           
                             Auth.auth().signIn(with: credential) { (user, error) in
                                 // TODO: handle sign in
-                                 let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "myRegisterVC") as! myRegisterViewController
-                                            vc.userDetails = self.userDetails
-                                           vc.hidesBottomBarWhenPushed = true
-                                           self.present(vc, animated: true, completion: nil)
+                               if UserDefaults.standard.bool(forKey: Constants.loginStatus) == true {
+                                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+                                appDelegate.isLoggedIn()
+                                    
+                                }else{
+                            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "myRegisterVC") as! myRegisterViewController
+                                vc.userDetails = self.userDetails
+                                vc.hidesBottomBarWhenPushed = true
+                                self.present(vc, animated: true, completion: nil)
+                                }
+                            
                             }
                         } else {
                             // Verification code was empty

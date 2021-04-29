@@ -7,41 +7,40 @@
 //
 
 import UIKit
-class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource ,UIPickerViewDataSource, UIPickerViewDelegate{
+class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource{
  
+
+    @IBOutlet weak var pickerViewStart: UIDatePicker!
     
-    @IBOutlet weak var pickerView2: UIPickerView!
-    @IBOutlet weak var pickerView: UIPickerView!
-    @IBOutlet weak var outerPickerView: UIView!
     var boards: [String] = ["class 1","class 10","class 1","class 1","class 1"]
      var startDuration: [String] = ["1 Hour","2 Hour","4 Hour","6 Hour","8 Hour"]
     var scheduleDetails : [String:String] = ["classType" : "Online Class","timings":"select","weeks":"2 weeks"]
     var selectedTime: String = ""
-    @IBOutlet weak var outerPickerView2: UIView!
+    var timeSlot: String = "select time"
+    var timeTruncate: String = ""
+    
+    @IBOutlet weak var outerPickerStartView: UIView!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableView.automaticDimension
         // Do any additional setup after loading the view.
-        pickerView.delegate = self
-        pickerView.dataSource = self
         
-        pickerView2.delegate = self
-        pickerView2.dataSource = self
-        outerPickerView.isHidden = true
-        outerPickerView2.isHidden = true
+        pickerViewStart.datePickerMode = .time
+        
+        outerPickerStartView.isHidden = true
     }
     
     @IBAction func dismissPV1(_ sender: UIBarButtonItem) {
-        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
-               hideUnhidePickerView(view: self.outerPickerView, value: true)
-        reload(tableView: self.tableView)
-        print("clicked")
+//        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+//               hideUnhidePickerView(view: self.outerPickerDurationView, value: true)
+//        reload(tableView: self.tableView)
+//        print("clicked")
     }
     @IBAction func dismissPV2(_ sender: UIBarButtonItem) {
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
-               hideUnhidePickerView(view: self.outerPickerView2, value: true)
+               hideUnhidePickerView(view: self.outerPickerStartView, value: true)
         reload(tableView: self.tableView)
     }
     func reload(tableView: UITableView) {
@@ -53,41 +52,23 @@ class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITable
 
        }
     @IBAction func selectDays(_ sender: UIButton) {
-        if outerPickerView2.isHidden{
-                  outerPickerView2.isHidden = false
-              }
+//        if outerPickerDurationView.isHidden{
+//                  outerPickerDurationView.isHidden = false
+//              }
     }
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-       return 1
-   }
-   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-       if pickerView == pickerView2{
-           return startDuration.count
-
-       }else{
-           return boards.count
-       }
-   }
-   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-   {
-       if pickerView == pickerView2{
-            return startDuration[row]
-       }else{
-           
-           return boards[row]
-       }
+    @IBAction func selectTime(_ sender: UIButton) {
+        
+        timeTruncate = String(pickerViewStart.date.string1(format: "HH:mm"))
        
-   }
-   func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-       if pickerView == pickerView2{
-            print("\(startDuration[row])")
-        selectedTime = "\(startDuration[row])"
-           
-       }else{
-          print("\(startDuration[row])")
-       }
-           
-  }
+        timeSlot = timeTruncate
+        StructOperation.glovalVariable.reScheduleTimeSlotFrom = timeTruncate
+        if outerPickerStartView.isHidden{
+            outerPickerStartView.isHidden = false
+        }
+    }
+  
+ 
+
       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          return 1
      }
@@ -97,8 +78,8 @@ class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITable
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "ReSchedule") as! ReScheduleTableViewCell
         cell.goNextPage.addTarget(self, action: #selector(connected(sender:)), for: .touchUpInside)
-        cell.startTime.setTitle(selectedTime, for: .normal)
-        cell.classDuration.setTitle(selectedTime, for: .normal)
+        cell.startTime.setTitle(timeSlot, for: .normal)
+       cell.classDuration.setTitle(StructOperation.glovalVariable.timeDifference + " hr", for: .normal)
         
         cell.atHome.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.homeGuruOrangeColor : ColorPalette.whiteColor, for: .normal)
         cell.atHome.setImage(UIImage(named:(scheduleDetails["classType"] == "Online Class") ?  "orangeVideoClass" : "whiteVideoClass") , for: .normal)
@@ -126,9 +107,33 @@ class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITable
            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "SelectSchedule") as! SelectScheduleViewController
            //setNavigationBackTitle(title: "Schedule")
            vc.hidesBottomBarWhenPushed = true
-          
+           vc.reSchedule = true
         
            self.navigationController?.pushViewController(vc, animated: false)
 
+    }
+    @IBAction func goBaack(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+extension Date {
+    var localTime1: String {
+        return description(with: NSLocale.current)
+    }
+}
+extension Date {
+    func localDate1() -> Date {
+        let nowUTC = Date()
+        let timeZoneOffset = Double(TimeZone.current.secondsFromGMT(for: nowUTC))
+        guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: nowUTC) else {return Date()}
+
+        return localDate
+    }
+}
+extension Date {
+    func string1(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
     }
 }
