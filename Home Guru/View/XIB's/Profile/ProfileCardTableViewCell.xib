@@ -60,19 +60,22 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uk3-Bu-h2I">
-                        <rect key="frame" x="10" y="85" width="300" height="38"/>
+                        <rect key="frame" x="10" y="105" width="300" height="38"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="30"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ka-6p-mnq">
-                        <rect key="frame" x="10" y="126" width="300" height="18"/>
+                        <rect key="frame" x="10" y="146" width="300" height="0.0"/>
+                        <constraints>
+                            <constraint firstAttribute="height" id="jGO-kz-KOc"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81u-wY-KUl">
-                        <rect key="frame" x="10" y="146" width="300" height="14"/>
+                        <rect key="frame" x="10" y="148" width="300" height="14"/>
                         <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="11"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -99,8 +102,8 @@
                     <constraint firstAttribute="bottom" secondItem="lDB-79-bdF" secondAttribute="bottom" constant="20" id="g9j-30-OtT"/>
                     <constraint firstItem="4ka-6p-mnq" firstAttribute="top" secondItem="uk3-Bu-h2I" secondAttribute="bottom" constant="3" id="o4n-UX-sE3"/>
                     <constraint firstItem="Xdj-vP-vFb" firstAttribute="width" secondItem="1LO-hx-mu1" secondAttribute="width" multiplier="0.6" id="pSF-o6-YTn"/>
-                    <constraint firstItem="uk3-Bu-h2I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="85" id="r5X-4C-tl0"/>
                     <constraint firstItem="4ka-6p-mnq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rl5-FA-8MF"/>
+                    <constraint firstItem="Xdj-vP-vFb" firstAttribute="top" secondItem="81u-wY-KUl" secondAttribute="bottom" constant="10" id="ufF-8e-mgi"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

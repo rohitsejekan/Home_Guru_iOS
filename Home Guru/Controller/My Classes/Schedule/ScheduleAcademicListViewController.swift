@@ -93,6 +93,7 @@ class ScheduleAcademicListViewController: UIViewController, IndicatorInfoProvide
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         index = indexPath.row
         let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleAcademicList_2") as! ScheduleAcademicList_2ViewController
+        vc.navName = getAcademic[indexPath.row].groupName
                //setNavigationBackTitle(title: "Schedule")
                vc.hidesBottomBarWhenPushed = true
         print("gid...\(getAcademic[indexPath.row]._id)")

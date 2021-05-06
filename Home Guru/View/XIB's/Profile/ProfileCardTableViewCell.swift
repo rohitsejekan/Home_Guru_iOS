@@ -10,9 +10,14 @@ import UIKit
 protocol ProfileEditProtocol {
     func editProfile(index: Int)
     func addProfile()
+    func switchProfile(index: Int)
 }
 
 class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
+ 
+    
+   
+    
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -21,7 +26,7 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
     @IBOutlet weak var dobDetailsLabel: UILabel!
     var arr = [myChildren]()
     var myChildrenCount = Int()
-  
+    var profileVC: profileSwitchViewController?
     var studentList : [[String:Any]] = [["name":"abc","class":"8th","dob":"26/11/2001"]]
     var delegate : ProfileEditProtocol?
     
@@ -31,6 +36,7 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "ProfileCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProfileCollectionViewCell")
+        
         
         //print("any....\(myChildrens.count)")
     }
@@ -80,14 +86,15 @@ class ProfileCardTableViewCell: UITableViewCell, UICollectionViewDataSource, UIC
     }
     
     func showSelectedProfile(index: Int) {
-        if !arr.isEmpty{
-//            print("selected id..\(arr[index]._id)")
-            StructOperation.glovalVariable.studentId = arr[index]._id
-            print("stu id....\(StructOperation.glovalVariable.studentId)")
-            studentNameLabel.text = arr[index].name
-            classLabel.text = "CLASS - " + arr[index].stdClass
-            dobDetailsLabel.text = arr[index].dob
-        }
+        delegate?.switchProfile(index: index)
+//        if !arr.isEmpty{
+////            print("selected id..\(arr[index]._id)")
+//            StructOperation.glovalVariable.studentId = arr[index]._id
+//            print("stu id....\(StructOperation.glovalVariable.studentId)")
+//            studentNameLabel.text = arr[index].name
+//            classLabel.text = "CLASS - " + arr[index].stdClass
+//            dobDetailsLabel.text = arr[index].dob
+//        }
      
     }
     

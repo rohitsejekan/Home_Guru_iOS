@@ -8,12 +8,18 @@
 
 import UIKit
 import XLPagerTabStrip
+import JJFloatingActionButton
 class ScheduleSubjectViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var backBtn: UIButton!
-    
+    let actionButton = JJFloatingActionButton()
     override func viewDidLoad() {
+        //floating button
+        floatingButton()
         configureButtonBar()
+        actionButton.buttonDiameter = 65
+        actionButton.buttonImageSize = CGSize(width: 35, height: 35)
+        //floating button ends
         super.viewDidLoad()
         buttonBarView.backgroundColor = ColorPalette.homeGuruLiteBlueColor
         containerView.backgroundColor = ColorPalette.homeGuruBlueColor
@@ -28,7 +34,7 @@ class ScheduleSubjectViewController: ButtonBarPagerTabStripViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        buttonBarView.backgroundColor = ColorPalette.homeGuruBlueColor
+        buttonBarView.backgroundColor = ColorPalette.homeGuruLiteBlueColor
         containerView.backgroundColor = ColorPalette.homeGuruBlueColor
     }
     
@@ -49,8 +55,8 @@ class ScheduleSubjectViewController: ButtonBarPagerTabStripViewController {
     
     func configureButtonBar() {
         // Sets the background colour of the pager strip and the pager strip item
-        settings.style.buttonBarBackgroundColor = ColorPalette.homeGuruBlueColor
-        settings.style.buttonBarItemBackgroundColor = ColorPalette.homeGuruBlueColor
+        settings.style.buttonBarBackgroundColor = ColorPalette.homeGuruLiteBlueColor
+        settings.style.buttonBarItemBackgroundColor = ColorPalette.homeGuruLiteBlueColor
         settings.style.selectedBarBackgroundColor = ColorPalette.homeGuruOrangeColor
         settings.style.selectedBarHeight = 2.0
         
@@ -76,4 +82,48 @@ class ScheduleSubjectViewController: ButtonBarPagerTabStripViewController {
         }
     }
     
+}
+extension ScheduleSubjectViewController{
+    func floatingButton(){
+              actionButton.addItem(title: "whatsApp", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
+              
+                         
+                         if let whatsappURL = URL(string: "https://api.whatsapp.com/send?phone=+919001990019&text=Invitation"), UIApplication.shared.canOpenURL(whatsappURL) {
+                                        if #available(iOS 10, *) {
+                                            UIApplication.shared.open(whatsappURL)
+                                        } else {
+                                            UIApplication.shared.openURL(whatsappURL)
+                                        }
+                         }
+                     }
+
+                     actionButton.addItem(title: "call", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
+                       // do something
+                   if let url = URL(string: "tel://\(Constants.contactUs)"), UIApplication.shared.canOpenURL(url) {
+                                      if #available(iOS 10, *) {
+                                          UIApplication.shared.open(url)
+                                      } else {
+                                          UIApplication.shared.openURL(url)
+                                      }
+                                  }
+                     }
+
+                     actionButton.buttonImage = UIImage(named: "customer-service")
+                     actionButton.buttonColor = ColorPalette.homeGuruDarkGreyColor
+                     view.addSubview(actionButton)
+                     actionButton.translatesAutoresizingMaskIntoConstraints = false
+                     if #available(iOS 11.0, *) {
+                         actionButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+                     } else {
+                         // Fallback on earlier versions
+                         actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+                     }
+                     if #available(iOS 11.0, *) {
+                         actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+                     } else {
+                         // Fallback on earlier versions
+                         actionButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+                     }
+          }
+          
 }

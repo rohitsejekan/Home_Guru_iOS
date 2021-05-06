@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key></key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -29,14 +31,22 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Your Camera is required for Home Guru</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Home Guru wants to access your location</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Your location is required for Home Guru benefits for you</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is required for Home Guru benefits for you</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Your Microphone is required for Home Guru</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your Library is required for Home Guru</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SourceSansPro-Black.ttf</string>
@@ -53,6 +63,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -67,14 +79,6 @@
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>Your Camera is required for Home Guru</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Your Library is required for Home Guru</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Your Microphone is required for Home Guru</string>
+	<false/>
 </dict>
 </plist>

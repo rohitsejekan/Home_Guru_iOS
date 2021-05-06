@@ -10,6 +10,7 @@ import UIKit
 
 class confirmSheduleFirstTableViewCell: UITableViewCell, UICollectionViewDelegate,UICollectionViewDataSource{
 
+    @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var guruContainer: UIView!
     @IBOutlet weak var GuruSkills: UILabel!
     @IBOutlet weak var guruName: UILabel!
@@ -57,6 +58,7 @@ class confirmSheduleFirstTableViewCell: UITableViewCell, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ConfirmScheduleFirst", for: indexPath) as! ConfirmScheduleFirstCollectionViewCell
         cell.datesLabel.text = arr[indexPath.row]
+        cell.layer.cornerRadius = 20
         return cell
     }
     
@@ -69,7 +71,7 @@ extension confirmSheduleFirstTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let text = self.arr[indexPath.row]
         let cellWidth = text.size(withAttributes:[.font: UIFont.systemFont(ofSize:12.0)]).width + 20.0
-        return CGSize(width: cellWidth, height: 30.0)
+        return CGSize(width: 40, height: 40.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

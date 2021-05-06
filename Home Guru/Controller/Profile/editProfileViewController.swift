@@ -15,28 +15,50 @@ class editProfileViewController: BaseViewController, UITableViewDelegate, UITabl
     var updateDelegate: updateProfile!
     var editDetails: [String: String] = [:]
     var sendEditedDetails: [String: String] = [:]
+    //for datepicker
+       var studentDates: String = ""
+    // for date picker ends
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var outerPickerView: UIView!
+    var datePickerView1 : DatePickerView?
     var selectedClass: String = ""
      var classes: [String] = ["class 1","class 2","class 3","class 4","class 5", "class 6", "class 7", "class 8", "class 9", "class 10", "class 11", "class 12"]
+    
+    // datepicker implementation
+     func showDatePicker() {
+          datePickerView1 = Bundle.main.loadNibNamed("DatePickerView", owner: self, options: nil)?.first as! DatePickerView
+          datePickerView1?.delegate = self
+          datePickerView1?.showDatePickerView(onView: self.tableView)
+          tableView.isScrollEnabled = true
+          tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.none, animated: false)
+      }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 1{
+            return 70
+        }else{
+            return UITableView.automaticDimension
+        }
+        
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "editProfile") as! editProfileTableViewCell
                 cell.editName.delegate = self
                 cell.editName.tag = 0
-                cell.editDate.delegate = self
-                cell.editDate.tag = 1
-                cell.editYear.delegate = self
-                cell.editYear.tag = 2
-                cell.editMonth.delegate = self
-                cell.editMonth.tag = 3
-                cell.editClass.setTitle(selectedClass, for: .normal)
-                cell.editClass.contentHorizontalAlignment = .left
+                cell.datePickerDelegate = self
+//                cell.editDate.delegate = self
+//                cell.editDate.tag = 1
+//                cell.editYear.delegate = self
+//                cell.editYear.tag = 2
+//                cell.editMonth.delegate = self
+//                cell.editMonth.tag = 3
+                //cell.editClass.setTitle(selectedClass, for: .normal)
+               // cell.editClass.contentHorizontalAlignment = .left
+              cell.dobBtn.setTitle(studentDates, for: .normal)
                 return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "customButton", for: indexPath) as! customButtonTableViewCell
@@ -86,9 +108,9 @@ class editProfileViewController: BaseViewController, UITableViewDelegate, UITabl
 
       }
     @IBAction func buttonPickerView(_ sender: UIButton) {
-        if outerPickerView.isHidden{
-            outerPickerView.isHidden = false
-        }
+//        if outerPickerView.isHidden{
+//            outerPickerView.isHidden = false
+//        }
 
     }
     
@@ -121,10 +143,13 @@ class editProfileViewController: BaseViewController, UITableViewDelegate, UITabl
                        print("status issw ..\(status)")
                         print("value...\(value)")
                            if status == 200 || status == 201 {
-                        let alert = UIAlertController(title: "PROFILE UPDATE", message: "SUCCESSFULLY DONE", preferredStyle: .alert)
-                            let cancel = UIAlertAction(title: "ok", style: .default, handler: nil)
-                            
-                            alert.addAction(cancel)
+                       // pop alert controller
+                            let alert = UIAlertController(title: "Editing", message: "Edited successfully", preferredStyle: UIAlertController.Style.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshEditing"), object: nil)
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }))
+                            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
                             self.present(alert, animated: true, completion: nil)
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
@@ -146,6 +171,8 @@ class editProfileViewController: BaseViewController, UITableViewDelegate, UITabl
                         }
                    }
     }
+    
+    
 
 }
 
@@ -173,3 +200,24 @@ extension editProfileViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
 }
+extension editProfileViewController: DatePickerProtocol,showDatePicker {
+    func datePicker() {
+        showDatePicker()
+    }
+    
+ 
+ func dismiss() {
+     tableView.isScrollEnabled = true
+     tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.none, animated: false)
+     datePickerView1?.removeFromSuperview()
+ }
+ 
+ func getSelectedDate(date: String) {
+     let dateObj = getDateFromString(format: "dd/MM/yyyy", dateString: date)
+     studentDates = getDateString(format: "yyyy-MM-dd", date:  dateObj)
+     //getProgram(months: Date().months(from: dateObj))
+     tableView.reloadData()
+ }
+ 
+
+ }

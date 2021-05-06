@@ -43,15 +43,17 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
                       studentArray?.append(classes[row])
                       print("picker 1....\(selectedClass)")
                       print("picker 1 current index....\(currentIndex)")
+            self.studentDetails[currentIndex]["stdClass"] = "1"
 
-                      self.studentDetails[currentIndex]["stdClass"] = selectedClass
+//                      self.studentDetails[currentIndex]["stdClass"] = selectedClass
                       print("picker 1 value ....\(self.studentDetails[currentIndex]["stdClass"])")
             
         }else{
                   selectedBoard = storeBoard[row]
                   print("picker 2....\(selectedBoard)")
                   print("picker 2 current index....\(currentIndex)")
-                  self.studentDetails[currentIndex]["board"] = selectedBoard
+                  self.studentDetails[currentIndex]["board"] = "cbse"
+//                  self.studentDetails[currentIndex]["board"] = selectedBoard
                       print("picker 2 value ....\(self.studentDetails[currentIndex]["board"])")
         }
             
@@ -138,20 +140,20 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
         currentIndex = index
         showDatePicker()
     }
-    func selectBoard(index: Int){
-       endEditing()
-        currentIndex = index
-        pickerView.selectedRow(inComponent: 0)
-        pickerView.reloadAllComponents()
-        hideUnhidePickerView(view: self.outerPickerView, value: false)
-    }
-    func selectClass(index: Int){
-        endEditing()
-          currentIndex = index
-          pickerView_2.selectedRow(inComponent: 0)
-          pickerView_2.reloadAllComponents()
-          hideUnhidePickerView(view: self.outerPickerView_2, value: false)
-    }
+//    func selectBoard(index: Int){
+//       endEditing()
+//        currentIndex = index
+//        pickerView.selectedRow(inComponent: 0)
+//        pickerView.reloadAllComponents()
+//        hideUnhidePickerView(view: self.outerPickerView, value: false)
+//    }
+//    func selectClass(index: Int){
+//        endEditing()
+//          currentIndex = index
+//          pickerView_2.selectedRow(inComponent: 0)
+//          pickerView_2.reloadAllComponents()
+//          hideUnhidePickerView(view: self.outerPickerView_2, value: false)
+//    }
     func showDatePicker() {
         datePickerView = Bundle.main.loadNibNamed("DatePickerView", owner: self, options: nil)?.first as! DatePickerView
         datePickerView?.delegate = self
@@ -199,10 +201,10 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "RegisterStudentTableViewCell", for: indexPath) as? RegisterStudentTableViewCell
                 cell?.delegate = self
                 cell?.selectDOBBtn.tag = indexPath.row
-                cell?.selectClassBtn.tag = indexPath.row
+               // cell?.selectClassBtn.tag = indexPath.row
                 cell?.selectBoardBtn.tag = indexPath.row
                 cell?.nameTextField.tag = indexPath.row
-                cell?.boardTextField.inputView = pickerView
+               // cell?.boardTextField.inputView = pickerView
                 cell?.boardTextField.delegate = self
                 cell?.selectionStyle = .none
                 cell?.nameTextField.text = ""
@@ -216,12 +218,12 @@ class RegisterStudentViewController: BaseViewController, UITableViewDataSource, 
                 if let dob = studentDetails[indexPath.row]["dob"] as? String {
                     cell?.dobTextField.text = dob
                 }
-                if let classStudent = studentDetails[indexPath.row]["stdClass"] as? String{
-                    cell?.classTextField.text = classStudent
-                }
-                if let board = studentDetails[indexPath.row]["board"] as? String{
-                                 cell?.boardTextField.text = board
-                }
+//                if let classStudent = studentDetails[indexPath.row]["stdClass"] as? String{
+//                    cell?.classTextField.text = classStudent
+//                }
+//                if let board = studentDetails[indexPath.row]["board"] as? String{
+//                    cell?.boardTextField.text = board
+//                }
                 if let program = studentDetails[indexPath.row]["programName"] as? String {
                     cell?.classTextField.text = program
                 }
@@ -288,9 +290,13 @@ extension RegisterStudentViewController {
                         let json = JSON(value)
                         // store student id
                         StructOperation.glovalVariable.studentId = json["parent"]["student"][0]["_id"].stringValue
+                        
+                        print("stu....\(StructOperation.glovalVariable.studentId)")
                         // store student id ends
                             hud.hide(animated: true)
                             UserDefaults.standard.set(true, forKey: Constants.isRegistered)
+                            UserDefaults.standard.set(json["parent"]["student"][0]["_id"].stringValue, forKey: "studentId")
+                            
                             UserDefaults.standard.set(0,forKey: Constants.currentSelectedStudentProfile)
                             self.showAlert(title: "Message", message: "User Registered Successfully!")
                             UserDefaults.standard.set(true, forKey: Constants.loginStatus)

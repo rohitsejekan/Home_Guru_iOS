@@ -13,7 +13,7 @@ class Constants {
     static let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
     static let secretKey = "FM?WafKiopS@k2&L$zfS#aA9"
     static let googleApiKey = "AIzaSyC_QhwJZjN3ICPMtQ9d28tXsIlNHEFBqH0"
-    static let contactUs = "+91 - 9001990019"
+    static let contactUs = "+91-9001990019"
     static let currentSelectedStudentProfile = "currentSelectedStudentProfile"
     static let token = "token"
     static let currentPoints = "currentPoints"

@@ -11,6 +11,7 @@ import UIKit
 class MyGuruDetailsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var demoBtn: UIButton!
+    @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var guruImage: UIImageView!
     @IBOutlet weak var guruNameLabel: UILabel!
     @IBOutlet weak var perClassAmountLabel: UILabel!

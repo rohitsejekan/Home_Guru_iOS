@@ -10,10 +10,12 @@ import UIKit
 import XLPagerTabStrip
 import SwiftyJSON
 import NVActivityIndicatorView
+import JJFloatingActionButton
 class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvider,UITableViewDataSource, UITableViewDelegate {
     var academicSubjectList : [[String:Any]] = [["title":"Class 1"],["title":"Class 2"],["title":"Class 3"],["title":"Class 4"],["title":"Class 5"],["title":"Class 6"],["title":"Class 7"],["title":"Class 8"]]
             var childNumber = ""
             var index : Int = 0
+    let actionButton = JJFloatingActionButton()
     @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
     // store label
     var checkedName: [String] = []
@@ -26,11 +28,17 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
     var checkedCount: Int = 0
     var norecord: Bool?
     var subjectId: String = ""
-    var subjectDetails: [String: String] = [:]
+    var subjectDetails: [String: Any] = [:]
     var getSubjects = [GetSubjects]()
+    var popToVC: Bool = false
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        //floating button
+        floatingButton()
+        actionButton.buttonDiameter = 65
+        actionButton.buttonImageSize = CGSize(width: 35, height: 35)
+        //floating button ends
                tableView.register(UINib(nibName: "ScheduleSubject_4TableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduleSubject_4")
         
          tableView.register(UINib(nibName: "customButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "customButton")
@@ -42,7 +50,7 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
     }
     func getGroupCat(){
         activityLoaderView.startAnimating()
-                   subjectDetails["groupId"] = subjectId
+                   subjectDetails["groupId"] = [subjectId]
         print("sad....\(subjectId)")
            //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
                    AlamofireService.alamofireService.postRequestWithBodyData(url: URLManager.sharedUrlManager.getSubjects, details: subjectDetails) {
@@ -108,41 +116,50 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
                    }
     }
     @IBAction func goBack(_ sender: Any) {
-       // self.dismiss(animated: true, completion: nil)
-        self.navigationController?.popViewController(animated: true)
+        if popToVC == true{
+            // self.dismiss(animated: true, completion: nil)
+             let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleAcademicList_2") as! ScheduleAcademicList_2ViewController
+            self.navigationController?.popToViewController(vc, animated: true)
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
+       
     }
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
             return IndicatorInfo(title: "\(childNumber)")
         }
  
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selected.....\(indexPath.row)")
-         let cell = tableView.cellForRow(at: indexPath) as! ScheduleSubject_4TableViewCell
-               cell.checked = !cell.checked
-        if cell.checked == true{
-            checkedCount = checkedCount + 1
-            checkedName.append(getSubjects[indexPath.row].title)
-            subId.append(getSubjects[indexPath.row]._id)
-            array.append(indexPath.row)
-            print("checked count....\(checkedCount)")
-            print("checked name...\(array)")
-            print("subject name...\(subId)")
-            print("name...\(checkedName)")
-        }else{
-            if checkedCount > 0{
-                 checkedCount = checkedCount - 1
-                 let index = array.firstIndex(of: indexPath.row) ?? 0
-                array.remove(at: index)
-                checkedName.remove(at: index)
-                subId.remove(at: index)
-                print("unchecked count....\(checkedCount)")
-                print("unchecked name...\(array)")
-                print("unchecked subject id...\(subId)")
-                print("name...\(checkedName)")
-            }
-            
+        if indexPath.row < getSubjects.count{
+            print("selected.....\(indexPath.row)")
+                    let cell = tableView.cellForRow(at: indexPath) as! ScheduleSubject_4TableViewCell
+                          cell.checked = !cell.checked
+                   if cell.checked == true{
+                       checkedCount = checkedCount + 1
+                       checkedName.append(getSubjects[indexPath.row].title)
+                       subId.append(getSubjects[indexPath.row]._id)
+                       array.append(indexPath.row)
+                       print("checked count....\(checkedCount)")
+                       print("checked name...\(array)")
+                       print("subject name...\(subId)")
+                       print("name...\(checkedName)")
+                   }else{
+                       if checkedCount > 0{
+                            checkedCount = checkedCount - 1
+                            let index = array.firstIndex(of: indexPath.row) ?? 0
+                           array.remove(at: index)
+                           checkedName.remove(at: index)
+                           subId.remove(at: index)
+                           print("unchecked count....\(checkedCount)")
+                           print("unchecked name...\(array)")
+                           print("unchecked subject id...\(subId)")
+                           print("name...\(checkedName)")
+                       }
+                       
+                   }
+                   tableView.reloadData()
         }
-        tableView.reloadData()
+       
     }
           func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             if norecord == false{
@@ -192,7 +209,8 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
                 let cell = tableView.dequeueReusableCell(withIdentifier: "userUpdate", for: indexPath) as! userUpdateTableViewCell
                 return cell
             default:
-                return UITableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: "userUpdate", for: indexPath) as! userUpdateTableViewCell
+                return cell
                     
         }
                 
@@ -210,17 +228,6 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
 //              }
 //          }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 extension ScheduleAcademicList_4ViewController: nextScreen{
@@ -242,4 +249,48 @@ extension ScheduleAcademicList_4ViewController: nextScreen{
     }
     
     
+}
+extension ScheduleAcademicList_4ViewController{
+    func floatingButton(){
+              actionButton.addItem(title: "whatsApp", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
+              
+                         
+                         if let whatsappURL = URL(string: "https://api.whatsapp.com/send?phone=+919001990019&text=Invitation"), UIApplication.shared.canOpenURL(whatsappURL) {
+                                        if #available(iOS 10, *) {
+                                            UIApplication.shared.open(whatsappURL)
+                                        } else {
+                                            UIApplication.shared.openURL(whatsappURL)
+                                        }
+                         }
+                     }
+
+                     actionButton.addItem(title: "call", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
+                       // do something
+                   if let url = URL(string: "tel://\(Constants.contactUs)"), UIApplication.shared.canOpenURL(url) {
+                                      if #available(iOS 10, *) {
+                                          UIApplication.shared.open(url)
+                                      } else {
+                                          UIApplication.shared.openURL(url)
+                                      }
+                                  }
+                     }
+
+                     actionButton.buttonImage = UIImage(named: "customer-service")
+                     actionButton.buttonColor = ColorPalette.homeGuruDarkGreyColor
+                     view.addSubview(actionButton)
+                     actionButton.translatesAutoresizingMaskIntoConstraints = false
+                     if #available(iOS 11.0, *) {
+                         actionButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+                     } else {
+                         // Fallback on earlier versions
+                         actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+                     }
+                     if #available(iOS 11.0, *) {
+                         actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+                     } else {
+                         // Fallback on earlier versions
+                         actionButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+                     }
+          }
+          
 }

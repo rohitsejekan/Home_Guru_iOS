@@ -29,7 +29,7 @@ class MyGurusViewController: ButtonBarPagerTabStripViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(true)
-          buttonBarView.backgroundColor = ColorPalette.homeGuruBlueColor
+          buttonBarView.backgroundColor = ColorPalette.homeGuruLiteBlueColor
           containerView.backgroundColor = ColorPalette.homeGuruBlueColor
       }
     override func viewDidAppear(_ animated: Bool) {
@@ -38,8 +38,8 @@ class MyGurusViewController: ButtonBarPagerTabStripViewController {
     }
     func configureButtonBar() {
             // Sets the background colour of the pager strip and the pager strip item
-            settings.style.buttonBarBackgroundColor = ColorPalette.homeGuruBlueColor
-            settings.style.buttonBarItemBackgroundColor = ColorPalette.homeGuruBlueColor
+            settings.style.buttonBarBackgroundColor = ColorPalette.homeGuruLiteBlueColor
+            settings.style.buttonBarItemBackgroundColor = ColorPalette.homeGuruLiteBlueColor
             settings.style.selectedBarBackgroundColor = ColorPalette.homeGuruOrangeColor
             settings.style.selectedBarHeight = 2.0
             

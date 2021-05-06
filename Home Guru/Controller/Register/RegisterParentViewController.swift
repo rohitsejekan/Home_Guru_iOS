@@ -275,6 +275,9 @@ extension RegisterParentViewController {
             
             print("address in register parent ..\(address)")
             g_address = address.lines![0]
+            print("address in register parent ..\(g_address)")
+            
+
             g_addressDetails = address
             if var locationCordinates = self.address["location"] as? [String:Any] {
                 if var cordinates = locationCordinates["coordinates"] as? [Double] {
@@ -285,7 +288,6 @@ extension RegisterParentViewController {
                 }
             }
             let addressString = (address.lines![0] as! String).components(separatedBy: ",")
-            UserDefaults.standard.set(addressString, forKey: "userAddress")
             self.address["pincode"] =  address.postalCode
             var houseAddress = ""
             for item in addressString {

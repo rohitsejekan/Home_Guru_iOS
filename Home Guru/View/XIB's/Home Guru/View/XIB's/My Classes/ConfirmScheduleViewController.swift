@@ -21,6 +21,7 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
     var totalFare: String = ""
     var bookDemo: Bool?
     var reschedle: Bool?
+    var guruAvatar: String = ""
     var subjectDatesSlot: [[String: String]] = [[:]]
     @IBOutlet weak var backBtn: UIButton!
     var getSubjectSlots: [[String: Any]] = [[:]]
@@ -70,14 +71,15 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
         //                confirmBook["studentId"] = StructOperation.glovalVariable.studentId
         confirmBook["noOfHours"] = StructOperation.glovalVariable.timeDifference
         //               confirmBook["hourlyCompensation"] = guruFare
-        confirmBook["hourlyCompensation"] = UserDefaults.standard.string(forKey: "totalFare")
+        //        confirmBook["hourlyCompensation"] = UserDefaults.standard.string(forKey: "totalFare")
+        confirmBook["hourlyCompensation"] = guruFare
         confirmBook["date"] = selectedTimeSlot
         confirmBook["classId"] = StructOperation.glovalVariable.classId
         
         print("confirm reschedule book...\(confirmBook)")
         
         //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
-        AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.makeReschedule, details: confirmBook) {
+        AlamofireService.alamofireService.postRequestWithBodyDataAndTokenString(url: URLManager.sharedUrlManager.makeReschedule, details: confirmBook) {
             response in
             switch response.result {
             case .success(let value):
@@ -87,6 +89,14 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                     if status == 200 || status == 201 {
                         let val = JSON(value)
                         print("successfully rescheduled")
+                        // pop alert controller
+                        let alert = UIAlertController(title: "Booking", message: "Rescheduled successfully", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshReschedule"), object: nil)
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }))
+                        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                         for arr in val.arrayValue{
                             //  self.getSubjects.append(GetSubjects(json: arr))
                             print("child sub...\(arr)")
@@ -135,18 +145,22 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
         }
         
         confirmBook["facultyId"] = guruId
-        confirmBook["studentId"] = "2"
+        //        confirmBook["studentId"] = "2"
+        if let id = UserDefaults.standard.string(forKey: "studentId"){
+            confirmBook["studentId"] = id
+        }
         
         //        confirmBook["studentId"] = StructOperation.glovalVariable.studentId
         confirmBook["noOfHours"] = getTimeSlot
         //               confirmBook["hourlyCompensation"] = guruFare
-        confirmBook["hourlyCompensation"] = UserDefaults.standard.string(forKey: "totalFare")
+        //        confirmBook["hourlyCompensation"] = UserDefaults.standard.string(forKey: "totalFare")
+        confirmBook["hourlyCompensation"] = guruFare
         confirmBook["classes"] = StructOperation.glovalVariable.subjectDatesSlot
         
         print("confirm schedule book...\(confirmBook)")
         
         //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
-        AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.makeBooking, details: confirmBook) {
+        AlamofireService.alamofireService.postRequestWithBodyDataAndTokenString(url: URLManager.sharedUrlManager.makeBooking, details: confirmBook) {
             response in
             switch response.result {
             case .success(let value):
@@ -160,6 +174,7 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                         // pop alert controller
                         let alert = UIAlertController(title: "Booking", message: "Booked successfully", preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
                             self.navigationController?.popToRootViewController(animated: true)
                         }))
                         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
@@ -175,9 +190,14 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                     if status == 400{
                         // pop alert controller
                         let val = JSON(value)
+                        print("message..\(val)")
                         let alert = UIAlertController(title: "Booking", message: "\(val["message"])", preferredStyle: UIAlertController.Style.alert)
-                       
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                            
+                            
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }))
                         self.present(alert, animated: true, completion: nil)
                         
                     }
@@ -212,11 +232,17 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                 let cell = tableView.dequeueReusableCell(withIdentifier: "confirmSheduleFirst", for: indexPath) as!
                 confirmSheduleFirstTableViewCell
                 cell.guruName.text = guruProfileDetails[0].name
+                if guruAvatar != ""{
+                    cell.avatar.image = UIImage(named: "\(guruAvatar)")
+                }else{
+                    cell.avatar.image = UIImage(named: "facultyPlaceholder")
+                }
+                
                 cell.GuruSkills.text = guruProfileDetails[0].languagesKnown
                 cell.guruContainer.layer.cornerRadius = 8
                 cell.GuruFare.text = guruFare + "/ Hr"
                 cell.currentMonth.text = currentMonth
-                cell.currentMonth.layer.cornerRadius = 5
+                //cell.currentMonth.layer.cornerRadius = 5
                 cell.selectionStyle = .none
                 cell.configure(with: self.selectedDate)
                 //            DispatchQueue.main.async {
@@ -240,8 +266,8 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
             }else if indexPath.row == getSubjectSlots.count + 1 && bookDemo == false{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "confirmScheduleThird", for: indexPath) as! confirmScheduleThirdTableViewCell
                 cell.totalAmount.text = guruFare
-                cell.grandTotalAmount.text = String(Int(getSubjectSlots.count) * Int(guruFare)!)
-                cell.noOfClass.text = String(getSubjectSlots.count)
+                cell.grandTotalAmount.text = String(Int(selectedDate.count) * Int(guruFare)!)
+                cell.noOfClass.text = String(selectedDate.count)
                 cell.totalContainer.layer.cornerRadius = 5
                 cell.selectionStyle = .none
                 return cell
@@ -255,8 +281,9 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                 let cell = tableView.dequeueReusableCell(withIdentifier: "confirmSheduleFirst", for: indexPath) as!
                 confirmSheduleFirstTableViewCell
                 cell.currentMonth.text = currentMonth
-                cell.currentMonth.layer.cornerRadius = 5
+                //cell.currentMonth.layer.cornerRadius = 5
                 cell.selectionStyle = .none
+                cell.GuruFare.text = StructOperation.glovalVariable.hourlyCompenstaion + "/ Hr"
                 cell.guruName.text = StructOperation.glovalVariable.facultyName
                 cell.GuruSkills.text =  StructOperation.glovalVariable.languageKnowns
                 if let ratings = Int(StructOperation.glovalVariable.facultyRating){
@@ -307,7 +334,7 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                 cell.subjectContainer.layer.cornerRadius = 5
                 cell.selectionStyle = .none
                 cell.subjectName.text = StructOperation.glovalVariable.forRescheduleSubjectName
-                cell.subjectTime.text =  StructOperation.glovalVariable.reScheduleTimeSlotFrom
+                cell.subjectTime.text = "-          " + StructOperation.glovalVariable.reScheduleTimeSlotFrom
                 return cell
                 
                 
@@ -332,7 +359,11 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                 return UITableView.automaticDimension
             }
         }else{
-            return UITableView.automaticDimension
+            if indexPath.row == 2{
+                return 90
+            }else{
+                return UITableView.automaticDimension
+            }
         }
         
         

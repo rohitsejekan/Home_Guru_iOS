@@ -37,7 +37,7 @@ class OTPVerificationViewController: BaseViewController {
         endEditing()
         //        verifyOTP()
         print("Logged in user")
-        UserDefaults.standard.set(true, forKey: Constants.loginStatus)
+        //UserDefaults.standard.set(true, forKey: Constants.loginStatus)
         DispatchQueue.main.async {
             // direct login if logged in
 //            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -54,7 +54,7 @@ class OTPVerificationViewController: BaseViewController {
                             let credential = PhoneAuthProvider.provider().credential(
                                 withVerificationID: verificationCode,
                                 verificationCode: otp)
-                          
+                          print("login status...\(UserDefaults.standard.bool(forKey: Constants.loginStatus))")
                             Auth.auth().signIn(with: credential) { (user, error) in
                                 // TODO: handle sign in
                                if UserDefaults.standard.bool(forKey: Constants.loginStatus) == true {

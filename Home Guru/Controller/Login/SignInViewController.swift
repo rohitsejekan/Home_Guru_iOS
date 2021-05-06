@@ -13,7 +13,7 @@ import MBProgressHUD
 import SKCountryPicker
 import FirebaseAuth
 import Firebase
-
+import SwiftyJSON
 class SignInViewController: BaseViewController {
     
     @IBOutlet weak var outerView: UIView!
@@ -30,6 +30,7 @@ class SignInViewController: BaseViewController {
         }
         customTextFieldPlaceholder(text: "Enter Phone Number", textField: mobiletextField)
         countryCodeLabel.text = country.dialingCode
+        print("status...\(UserDefaults.standard.bool(forKey: Constants.loginStatus))")
     }
     
     @IBAction func countryCodePickerAction(_ sender: UIButton) {
@@ -58,6 +59,7 @@ class SignInViewController: BaseViewController {
             self.showAlert(title: "Message", message: "Please Check Your Internet Connection!")
             return
         }
+        print("sign in\(userDetails)")
         AlamofireService.alamofireService.postRequestWithBodyData(url: URLManager.sharedUrlManager.getParentAuth, details: userDetails) {
             response in
             switch response.result {
@@ -66,6 +68,7 @@ class SignInViewController: BaseViewController {
                     print("status is ..\(status)")
                     if status == 200 || status == 201 {
                         if let result = value as? [String:Any] {
+                            let json = JSON(value)
                             print("result is ...\(result)")
                             if let token = result["token"] as? String, let parentDetails = result["parent"] as? [String:Any] {
                                 if let mobileNo = parentDetails["mobileNo"] as? String {
@@ -73,6 +76,7 @@ class SignInViewController: BaseViewController {
                                 }
                                 UserDefaults.standard.set(true, forKey: Constants.isRegistered)
                                 UserDefaults.standard.set(token, forKey: Constants.token)
+                                UserDefaults.standard.set(json["parent"]["student"][0]["_id"].stringValue, forKey: "studentId")
                                 UserDefaults.standard.set(parentDetails, forKey: Constants.parentDetails)
                                 UserDefaults.standard.set(true,forKey: Constants.loginStatus)
                                 UserDefaults.standard.set(false,forKey: Constants.loggedOut)

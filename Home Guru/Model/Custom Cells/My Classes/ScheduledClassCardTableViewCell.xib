@@ -110,43 +110,23 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fullStar" translatesAutoresizingMaskIntoConstraints="NO" id="jT0-kA-3W9">
                                                 <rect key="frame" x="0.0" y="0.0" width="12" height="12"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="12" id="Oz0-rw-dZC"/>
-                                                    <constraint firstAttribute="width" constant="12" id="pZa-UH-iMU"/>
-                                                </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fullStar" translatesAutoresizingMaskIntoConstraints="NO" id="9zN-ym-8rq">
                                                 <rect key="frame" x="15" y="0.0" width="12" height="12"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="12" id="3w9-Oy-tBv"/>
-                                                    <constraint firstAttribute="height" constant="12" id="7fu-Qw-iQS"/>
-                                                </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fullStar" translatesAutoresizingMaskIntoConstraints="NO" id="7jh-c7-moz">
                                                 <rect key="frame" x="30" y="0.0" width="12" height="12"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="12" id="Ycx-45-xbq"/>
-                                                    <constraint firstAttribute="height" constant="12" id="ddc-zK-EP4"/>
-                                                </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fullStar" translatesAutoresizingMaskIntoConstraints="NO" id="EBj-lv-uNq">
                                                 <rect key="frame" x="45" y="0.0" width="12" height="12"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="12" id="59I-UZ-5kf"/>
-                                                    <constraint firstAttribute="height" constant="12" id="72N-sF-fTV"/>
-                                                </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="halfStar" translatesAutoresizingMaskIntoConstraints="NO" id="pEr-PG-h2M">
                                                 <rect key="frame" x="60" y="0.0" width="12" height="12"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="12" id="XpU-IL-iRx"/>
-                                                    <constraint firstAttribute="height" constant="12" id="dqt-qs-lki"/>
-                                                </constraints>
                                             </imageView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="72" id="DKY-1r-aDf"/>
-                                            <constraint firstAttribute="height" constant="12" id="aAq-vJ-3hd"/>
+                                            <constraint firstAttribute="height" constant="12" id="1zi-XU-KLN"/>
+                                            <constraint firstAttribute="width" constant="72" identifier="id100" id="DKY-1r-aDf"/>
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7 days left" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvf-Jk-oGb">
@@ -172,6 +152,7 @@
                                     <constraint firstItem="jZW-na-zyd" firstAttribute="top" secondItem="3iI-1E-tm2" secondAttribute="top" id="apW-g1-1Z6"/>
                                     <constraint firstItem="ZRA-pA-vxQ" firstAttribute="leading" secondItem="5PB-cJ-EnQ" secondAttribute="leading" constant="8" id="kYG-xH-DB0"/>
                                     <constraint firstItem="xvf-Jk-oGb" firstAttribute="top" secondItem="jZW-na-zyd" secondAttribute="top" id="lS6-Gu-0Aa"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jZW-na-zyd" secondAttribute="bottom" constant="10" id="lVb-pA-4BE"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3iI-1E-tm2" secondAttribute="bottom" constant="10" id="pRK-m8-i2s"/>
                                     <constraint firstItem="jZW-na-zyd" firstAttribute="leading" secondItem="3iI-1E-tm2" secondAttribute="trailing" constant="5" id="tfc-ia-Ml7"/>
                                     <constraint firstAttribute="trailing" secondItem="jZW-na-zyd" secondAttribute="trailing" constant="10" id="vBn-Qt-YXF"/>
@@ -223,7 +204,7 @@
                 <outlet property="thirdStarImageView" destination="7jh-c7-moz" id="urM-FR-dal"/>
                 <outlet property="timeLabel" destination="Tcw-3E-Nve" id="XLj-2a-yNa"/>
             </connections>
-            <point key="canvasLocation" x="221.73913043478262" y="38.839285714285715"/>
+            <point key="canvasLocation" x="200" y="25"/>
         </tableViewCell>
     </objects>
     <resources>

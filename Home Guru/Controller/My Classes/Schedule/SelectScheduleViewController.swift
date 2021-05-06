@@ -14,6 +14,7 @@ class SelectScheduleViewController: UIViewController {
     //guru fare
     var guruFare: String = ""
     var typeOfWeek: String?
+    var guruProfile: String  = ""
     @IBOutlet weak var fsCalendar: FSCalendar!
     private weak var calendar: FSCalendar!
     var slotDetails: [String: Any] = [:]
@@ -42,6 +43,7 @@ class SelectScheduleViewController: UIViewController {
     var arrDates = NSMutableArray()
     var arrDates_1 = NSMutableArray()
     var arrDates_2 = NSMutableArray()
+    var arrDatesWeekends = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
         //current month
@@ -49,6 +51,8 @@ class SelectScheduleViewController: UIViewController {
         getCurrentMonth = date.month
         //curreent month ends
         nextBtn.layer.cornerRadius = 5
+        
+        print("weeks..\(StructOperation.glovalVariable.noOfweeks)")
         // Do any additional setup after loading the view.
         if demoClass == true || reSchedule == true{
             fsCalendar.allowsMultipleSelection = false
@@ -62,6 +66,7 @@ class SelectScheduleViewController: UIViewController {
         arrDates = self.getUserSelectedDates([2, 3, 4, 5, 6], calender: self.fsCalendar)
         if let typeWeek = UserDefaults.standard.string(forKey: "typeOfweeks"){
             typeOfWeek = typeWeek
+            print("typeweeks..\(typeOfWeek)")
         }
     }
     // function to get dates based on days [1,2,3,4,5,6,7] ex. 1 means monday and so on
@@ -254,7 +259,7 @@ class SelectScheduleViewController: UIViewController {
               //setNavigationBackTitle(title: "Schedule")
               vc.hidesBottomBarWhenPushed = true
               vc.slotDetails = slotDetails
-            
+              vc.guruAvatar = guruProfile
               for typeDates in datesStringBody{
                  
                       let dict = ["date": "\(typeDates)", "classType": "1"]
@@ -325,11 +330,13 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
               // get future dates based on selected date
             
               let nextweeks = Calendar.current.date(byAdding: .weekOfYear, value: Int(StructOperation.glovalVariable.noOfweeks) ?? 1, to: firstDate!)
-               
-               print("datesRange contains 1: \(datesRange!)")
+               print("next week....\(nextweeks)")
+            print("datesRange contains 1: \(datesRange!)")
                print("firstDate 1: \(firstDate!)")
-               let range = datesRange(from: firstDate!, to: nextweeks!)
-              print("se 2.......\(range)")
+            var range = datesRange(from: firstDate!, to: nextweeks!)
+            // remove last is used because if user selects one week with preference as weekend , it selects 3 weekends date instead of two weekend dates
+            print("se 2.......\(range.removeLast())")
+              // remove last is used because if user selects one week with preference as weekend , it selects 3 weekends date instead of two weekend dates
               lastDate = range.last
                              
               // display selected dates in calendar
@@ -417,7 +424,9 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
         // in case of the "from" date is more than "to" date,
         // it should returns an empty array:
         if from > to { return [Date]() }
-
+        if let w = typeOfWeek{
+            print("ww..\(w)")
+        }
         var tempDate = from
         var array = [tempDate]
         if typeOfWeek == "weekdays"{
@@ -426,7 +435,7 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
                          arrDates_2 = self.getUserSelectedDates([1,7], calender: self.fsCalendar)
                         if arrDates_2.contains(dateFormatter2.string(from: tempDate)) {
                                           print("not added due to its saturday or sunday")
-                                      }
+                        }
                         else{
                             // check each selected date falls in weekend of next month
                                            if tempDate.dayNumberOfWeek()! == 7 || tempDate.dayNumberOfWeek()! == 1 {
@@ -442,6 +451,7 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
              while tempDate < to {
                         tempDate = Calendar.current.date(byAdding: .day, value: 1, to: tempDate)!
                 arrDates_2 = self.getUserSelectedDates([2,3,4,5,6], calender: self.fsCalendar)
+                print("weekend..\(arrDates_2)")
                         if arrDates_2.contains(dateFormatter2.string(from: tempDate)) {
                                           print("not added due to its weekdays")
                                       }
@@ -504,10 +514,10 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
                return UIColor.white
            }
            if arrDates_1.contains(dateFormatter2.string(from: date)){
-               return UIColor.red
+               return UIColor.lightGray
            }
            if arrDates_2.contains(dateFormatter2.string(from: date)){
-               return UIColor.red
+               return UIColor.lightGray
            }else{
                return nil
            }
@@ -515,15 +525,23 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
     
     //disable previous dates
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-        arrDates = self.getUserSelectedDates([2, 3, 4, 5, 6], calender: self.fsCalendar)
-        let tdate = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+        arrDates = self.getUserSelectedDates([2,3,4,5,6], calender: self.fsCalendar)
+        arrDatesWeekends = self.getUserSelectedDates([1,7], calender: self.fsCalendar)
+        print("week days....\(arrDates)")
+        print("week ends....\(arrDatesWeekends)")
+        //let tdate = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+        print("tdate....\(dateFormatter2.string(from: date))")
+        let today = dateFormatter2.string(from: date)
+        let tdate  = dateFormatter2.date(from: "\(today)")
         switch typeOfWeek{
         case "weekends":
-            if arrDates.contains(dateFormatter2.string(from: tdate)) {
+            
+            if arrDates.contains(dateFormatter2.string(from: tdate!)) {
                 return false
-            }else if tdate.dayNumberOfWeek()! == 2 || tdate.dayNumberOfWeek()! == 3 ||
-            tdate.dayNumberOfWeek()! == 4 || tdate.dayNumberOfWeek()! == 5 ||
-                tdate.dayNumberOfWeek()! == 6{
+            }
+            else if tdate!.dayNumberOfWeek()! == 2 || tdate!.dayNumberOfWeek()! == 3 ||
+                tdate!.dayNumberOfWeek()! == 4 || tdate!.dayNumberOfWeek()! == 5 ||
+                tdate!.dayNumberOfWeek()! == 6{
                 return false
             }
             else if date .compare(Date()) == .orderedAscending {
@@ -533,13 +551,16 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
                 return true
             }
         case "weekdays":
-            if arrDates.contains(dateFormatter2.string(from: tdate)) {
+            if arrDates.contains(dateFormatter2.string(from: tdate!)) {
                 return true
-            }else if date .compare(Date()) == .orderedAscending {
+            }else if arrDatesWeekends.contains(dateFormatter2.string(from: tdate!)){
+                return false
+            }
+            else if date .compare(Date()) == .orderedAscending {
                 return false
             }
             else {
-                return true
+                return false
             }
         default:
             return true

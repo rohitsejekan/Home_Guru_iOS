@@ -10,11 +10,10 @@ import UIKit
 import SwiftyJSON
 import NVActivityIndicatorView
 import Kingfisher
-protocol refreshProtocol: class{
-    func refreshTableView()
-}
+
 class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     var scheduledClassInfo : [String:Any] = [:]
     var count = 2
@@ -28,6 +27,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
     var classType: String = ""
     var profilePic: String = ""
     var isDemo: String = ""
+    var daysLeft: Int = 0
     //rating star
     @IBOutlet weak var ratingStarFirst: UIButton!
     @IBOutlet weak var ratingStarSecond: UIButton!
@@ -39,25 +39,37 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
     var isCheckedthird = true
     var isCheckedfourth = true
     var isCheckedfifth = true
-    
+    var starValidate = false
+    var starValidateSecond = false
+    var starValidateThird = false
+    var starValidateFourth = false
+    var starValidateFifth = false
+    var ratingStar: String = ""
     //rating starend
-    weak var refreshDelegate: refreshProtocol?
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var ratingViewBottom: NSLayoutConstraint!
-    var daysleft: String = ""
+    //var daysleft: String = ""
     @IBOutlet weak var queryField: UITextField!
+    
+    @IBOutlet weak var ratingQuery: UITextView!
     @IBOutlet weak var popView: UIView!
     @IBOutlet weak var bottomView: NSLayoutConstraint!
     var cancelClass = [String: String]()
     @IBOutlet weak var navlabel: UILabel!
     var queryString: String = ""
+    var ratingString: String = ""
+    var feedBack = [String: String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //showNavbar()
         tableView.estimatedRowHeight = 120.0
         tableView.rowHeight = UITableView.automaticDimension
+        //back btn
+        backBtn.layer.cornerRadius = 8
+        //back btn ends
+        
         //cancelbtn
         cancelBtn.layer.cornerRadius = 7
         // custom cell
@@ -73,12 +85,19 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
         print("sub charge....\(StructOperation.glovalVariable.hourlyCompenstaion)")
         //class status
         print("class status  .....\(classStatus)")
+        
         // textfield delegate
         queryField.delegate = self
+        //rating textfield delegate
+        ratingQuery.text = "Add feedback here...."
+        ratingQuery.textColor = UIColor.lightGray
+        ratingQuery.delegate = self
+        
         // get demo value 1 0r 0
         isDemo = StructOperation.glovalVariable.isDemo
         
         print("profilePic...\(profilePic)")
+        
         
     }
     
@@ -138,12 +157,16 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
         
     }
     @IBAction func ratingBtnCancel(_ sender: UIButton) {
-        if ratingViewBottom.constant == -400{
-            ratingViewBottom.constant = 0
+        if ratingViewBottom.constant == 0{
+            ratingViewBottom.constant = -400
         }
+    }
+    @IBAction func addRating(_ sender: UIButton) {
+        feedback()
     }
     func joinMeeting(){
         
+        activityIndicatorView.startAnimating()
         AlamofireService.alamofireService.getRequestWithSecretKey(url: URLManager.sharedUrlManager.getZoomId + "classId=\(classId)", parameters: nil) { response
             in
             switch response.result {
@@ -155,6 +178,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                     if status == 200 || status == 201 {
                         print("join..\(value)")
                         DispatchQueue.main.async {
+                            self.activityIndicatorView.stopAnimating()
                             let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "zoomViewController") as! zoomViewController
                             vc.meetPassword = json["faculty"]["password"].stringValue
                             vc.meetId = json["faculty"]["zoomMeeting"].stringValue
@@ -169,52 +193,24 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
         }
     }
     func reScheduleClass() {
-        //        var details : [String:String] = [:]
-        //        if let classId = scheduledClassInfo["_id"] as? String, let dateId =  scheduledClassInfo["date_id"] as? String {
-        //            details["class"] = classId
-        //            details["dateId"] = dateId
-        //        }
-        //        let hud = showLoader(onView: tableView)
-        //        if !isNetConnectionAvailable() {
-        //            self.hideLoader(loader: hud)
-        //            self.showAlert(title: "Message", message: "Please Check Your Internet Connection!")
-        //            return
-        //        }
-        //        AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.rescheduleClass, details: details) {
-        //            response in
-        //            switch response.result {
-        //            case .success(let value):
-        //                if let status =  response.response?.statusCode {
-        //                    print("status is ..\(status)")
-        //                    if status == 200 || status == 201 {
-        //                        if let result = value as? [String:Any] {
-        //                            print("result is ...\(result)")
-        //                        }
-        //                        DispatchQueue.main.async {
-        //                            self.hideLoader(loader: hud)
-        //                            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "PopUpViewController") as! PopUpViewController
-        //                            vc.details["title"]  = "Cancel Class"
-        //                            vc.details["msg"] = "Your request for class cancelation has been sent successfully!"
-        //                            vc.details["action"] = "HOME"
-        //                            self.navigationController?.pushViewController(vc, animated: true)
-        //                        }
-        //                    } else {
-        //                        self.hideLoader(loader: hud)
-        //                        self.showAlert(title: Constants.unknownTitle, message: Constants.unknownMsg)
-        //                    }
-        //                }
-        //            case .failure( _):
-        //                self.hideLoader(loader: hud)
-        //                self.showAlert(title: Constants.unknownTitle, message: Constants.unknownMsg)
-        //            }
-        //        }
+          let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ReScheduleViewController") as! ReScheduleViewController
+            //setNavigationBackTitle(title: "Schedule")
+            vc.hidesBottomBarWhenPushed = true
+            
+            
+            self.navigationController?.pushViewController(vc, animated: false)
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isDemo == "1" && classStatus == "upcoming"{
+        if isDemo == "1" && classStatus == "upcoming" && daysLeft == 0 {
             return 1
-        }else{
+        }else if isDemo == "0" && classStatus == "upcoming" && daysLeft == 0{
+            return 1
+        }else if classStatus == "upcoming" && isDemo == "0" && daysLeft > 0{
+            return 2
+        }
+        else{
             return showData ? count : 0
         }
         
@@ -230,27 +226,28 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
         return UITableView.automaticDimension
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 1{
-            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ReScheduleViewController") as! ReScheduleViewController
-            //setNavigationBackTitle(title: "Schedule")
-            vc.hidesBottomBarWhenPushed = true
-            
-            
-            self.navigationController?.pushViewController(vc, animated: false)
-        }
+//        if indexPath.row == 1{
+//            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ReScheduleViewController") as! ReScheduleViewController
+//            //setNavigationBackTitle(title: "Schedule")
+//            vc.hidesBottomBarWhenPushed = true
+//
+//
+//            self.navigationController?.pushViewController(vc, animated: false)
+//        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if classStatus == "upcoming"{
+        if classStatus == "upcoming" && isDemo == "0" && daysLeft > 0{
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleClassDetailsTableViewCell", for: indexPath) as! ScheduleClassDetailsTableViewCell
                 cell.teacherNameLabel.text = facultyName
                 cell.subjectLabel.text = subject
                 cell.dateLabel.text = scheduledate
+               
                 // date display
-                if daysleft == "0"{
+                if daysLeft == 0{
                     cell.daysLeftLabel.text = "Today"
                 }else{
-                    cell.daysLeftLabel.text = daysleft + " days left"
+                    cell.daysLeftLabel.text = String(daysLeft) + " days left"
                 }
                 
                 if profilePic != ""{
@@ -267,8 +264,10 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                     print("bad input")
                 }
                 if classType == "1"{
+                    cell.classTypeImageView.image = UIImage(named: "onlineWhite")
                     cell.classTypeLabel.text = "Online Class"
                 }else{
+                    cell.classTypeImageView.image = UIImage(named: "whiteAtHome")
                     cell.classTypeLabel.text = "At Home Clases"
                 }
                 cell.timeLabel.text = scheduleTime
@@ -279,16 +278,49 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                 cell.selectionStyle = .none
                 return cell
             }
-        }else if isDemo == "1" && classStatus == "upcoming" {
+        }else if isDemo == "1" && classStatus == "upcoming" && daysLeft == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleClassDetailsTableViewCell", for: indexPath) as! ScheduleClassDetailsTableViewCell
             cell.teacherNameLabel.text = facultyName
             cell.subjectLabel.text = subject
             cell.dateLabel.text = scheduledate
             // date display
-            if daysleft == "Today"{
-                cell.daysLeftLabel.text = daysleft
+            if daysLeft == 0{
+                cell.daysLeftLabel.text = "toady"
             }else{
-                cell.daysLeftLabel.text = daysleft + " days left"
+                cell.daysLeftLabel.text = String(daysLeft) + " days left"
+            }
+            
+            if profilePic != ""{
+                let url = URL(string: profilePic)
+                cell.classImageView.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.7))], progressBlock: nil)
+                cell.classImageView.kf.indicatorType = .activity
+            }else{
+                cell.classImageView.image = UIImage(named: "Avatar 2")
+            }
+            
+            if let weekday = getDayOfWeek(scheduledate) {
+                cell.dayLabel.text = String(weekday.prefix(3))
+            } else {
+                print("bad input")
+            }
+            if classType == "1"{
+                cell.classTypeLabel.text = "Online Class"
+            }else{
+                cell.classTypeLabel.text = "At Home Clases"
+            }
+            cell.timeLabel.text = scheduleTime
+            cell.selectionStyle = .none
+            return cell
+        }else if isDemo == "0" && classStatus == "upcoming" && daysLeft == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleClassDetailsTableViewCell", for: indexPath) as! ScheduleClassDetailsTableViewCell
+            cell.teacherNameLabel.text = facultyName
+            cell.subjectLabel.text = subject
+            cell.dateLabel.text = scheduledate
+            // date display
+            if daysLeft == 0{
+                cell.daysLeftLabel.text = "Today"
+            }else{
+                cell.daysLeftLabel.text = String(daysLeft) + " days left"
             }
             
             if profilePic != ""{
@@ -320,10 +352,10 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                 cell.subjectLabel.text = subject
                 cell.dateLabel.text = scheduledate
                 // date display
-                if daysleft == "Today"{
-                    cell.daysLeftLabel.text = daysleft
+                if daysLeft == 0{
+                    cell.daysLeftLabel.text = "Today"
                 }else{
-                    cell.daysLeftLabel.text = daysleft + " days left"
+                    cell.daysLeftLabel.text = String(daysLeft) + " days left"
                 }
                 
                 if profilePic != ""{
@@ -362,10 +394,10 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                 cell.subjectLabel.text = subject
                 cell.dateLabel.text = scheduledate
                 // date display
-                if daysleft == "Today"{
-                    cell.daysLeftLabel.text = daysleft
+                if daysLeft == 0{
+                    cell.daysLeftLabel.text = "Today"
                 }else{
-                    cell.daysLeftLabel.text = daysleft + " days left"
+                    cell.daysLeftLabel.text = String(daysLeft) + " days left"
                 }
                 
                 if profilePic != ""{
@@ -405,10 +437,10 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                 cell.subjectLabel.text = subject
                 cell.dateLabel.text = scheduledate
                 // date display
-                if daysleft == "Today"{
-                    cell.daysLeftLabel.text = daysleft
+                if daysLeft == 0{
+                    cell.daysLeftLabel.text = "Today"
                 }else{
-                    cell.daysLeftLabel.text = daysleft + " days left"
+                    cell.daysLeftLabel.text = String(daysLeft) + " days left"
                 }
                 
                 if profilePic != ""{
@@ -460,8 +492,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                         let alert = UIAlertController(title: "Booking", message: "Class Canceled successfully", preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
                             // refresh tableview of myclassviewcontroller
-                            self.refreshDelegate?.refreshTableView()
-                            // refresh tableview of myclassviewcontroller ends
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshCancel"), object: nil)                            // refresh tableview of myclassviewcontroller ends
                             
                             self.navigationController?.popToRootViewController(animated: true)
                         }))
@@ -501,53 +532,103 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
         if sender.tag == 0{
             isCheckedfirst = !isCheckedfirst
             if isCheckedfirst {
-                ratingStarFirst.setImage(UIImage(named: "fullStar"), for: .normal)
+                starValidate = false
+                ratingStarFirst.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                
                 //sender.setTitleColor(.green, for: .normal)
             } else {
-                
-                ratingStarFirst.setImage(UIImage(named: ""), for: .normal)
+                starValidate = true
+                ratingStarFirst.setImage(UIImage(named: "star"), for: .normal)
+                ratingStar = "1"
                 //sender.setTitleColor(.red, for: .normal)
+            }
+            if starValidate == false{
+                ratingStar = "0"
+                ratingStarSecond.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                ratingStarThird.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                ratingStarFourth.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                 ratingStarFifth.setImage(UIImage(named: "starplaceholder"), for: .normal)
             }
         }else if sender.tag == 1{
-            isCheckedfsecond = !isCheckedfsecond
-            if isCheckedfsecond {
-                ratingStarSecond.setImage(UIImage(named: "fullStar"), for: .normal)
-                //sender.setTitleColor(.green, for: .normal)
-            } else {
-                
-                ratingStarSecond.setImage(UIImage(named: ""), for: .normal)
-                //sender.setTitleColor(.red, for: .normal)
+            if starValidate{
+                isCheckedfsecond = !isCheckedfsecond
+                          if isCheckedfsecond {
+                            starValidateSecond = false
+                              ratingStarSecond.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                              //sender.setTitleColor(.green, for: .normal)
+                          } else {
+                              starValidateSecond = true
+                            ratingStar = "2"
+                              ratingStarSecond.setImage(UIImage(named: "star"), for: .normal)
+                              //sender.setTitleColor(.red, for: .normal)
+                          }
+                if starValidateSecond == false{
+                    ratingStar = "0"
+                    ratingStarThird.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                    ratingStarFourth.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                     ratingStarFifth.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                }
+
             }
+          
         }else if sender.tag == 2{
-            isCheckedthird = !isCheckedthird
-            if isCheckedthird {
-                ratingStarThird.setImage(UIImage(named: "fullStar"), for: .normal)
-                //sender.setTitleColor(.green, for: .normal)
-            } else {
-                
-                ratingStarThird.setImage(UIImage(named: ""), for: .normal)
-                //sender.setTitleColor(.red, for: .normal)
+            if starValidateSecond{
+                isCheckedthird = !isCheckedthird
+                         if isCheckedthird {
+                            starValidateThird = false
+                             ratingStarThird.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                             //sender.setTitleColor(.green, for: .normal)
+                         } else {
+                            ratingStar = "3"
+                             starValidateThird = true
+                             ratingStarThird.setImage(UIImage(named: "star"), for: .normal)
+                             //sender.setTitleColor(.red, for: .normal)
+                         }
             }
+            if starValidateThird == false{
+                ratingStar = "0"
+                ratingStarFourth.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                 ratingStarFifth.setImage(UIImage(named: "starplaceholder"), for: .normal)
+            }
+
+         
         }else if sender.tag == 3{
-            isCheckedfourth = !isCheckedfourth
-            if isCheckedfourth {
-                ratingStarFourth.setImage(UIImage(named: "fullStar"), for: .normal)
-                //sender.setTitleColor(.green, for: .normal)
-            } else {
-                
-                ratingStarFourth.setImage(UIImage(named: ""), for: .normal)
-                //sender.setTitleColor(.red, for: .normal)
+            if starValidateThird{
+                isCheckedfourth = !isCheckedfourth
+                         if isCheckedfourth {
+                            starValidateFourth = true
+                             ratingStarFourth.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                             //sender.setTitleColor(.green, for: .normal)
+                         } else {
+                            ratingStar = "4"
+                             starValidateFourth = false
+                             ratingStarFourth.setImage(UIImage(named: "star"), for: .normal)
+                             //sender.setTitleColor(.red, for: .normal)
+                         }
             }
+            if starValidateFourth == false{
+                          ratingStar = "0"
+                            ratingStarFifth.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                       }
+         
         }else{
-            isCheckedfifth = !isCheckedfifth
-            if isCheckedfifth {
-                ratingStarFifth.setImage(UIImage(named: "fullStar"), for: .normal)
-                //sender.setTitleColor(.green, for: .normal)
-            } else {
-                
-                ratingStarFifth.setImage(UIImage(named: ""), for: .normal)
-                //sender.setTitleColor(.red, for: .normal)
+            if starValidateFourth{
+                isCheckedfifth = !isCheckedfifth
+                       if isCheckedfifth {
+                        starValidateFifth = false
+                           ratingStarFifth.setImage(UIImage(named: "starplaceholder"), for: .normal)
+                           //sender.setTitleColor(.green, for: .normal)
+                       } else {
+                           starValidateFifth = true
+                           ratingStar = "5"
+                           ratingStarFifth.setImage(UIImage(named: "star"), for: .normal)
+                           //sender.setTitleColor(.red, for: .normal)
+                       }
+                if starValidateFifth == false{
+                    ratingStar = "0"
+                }
             }
+       
         }
     }
     
@@ -564,7 +645,72 @@ extension MyClassesDetailsViewController{
 }
 extension MyClassesDetailsViewController: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
-        queryString = textField.text!
-        print("text....\(queryString)")
+      
+            queryString = textField.text!
+            print("text....\(queryString)")
+        
+        
+    }
+}
+extension MyClassesDetailsViewController: UITextViewDelegate{
+    func textViewDidEndEditing(_ textView: UITextView) {
+        ratingString = textView.text!
+        print("text...\(ratingString)")
+        
+        if textView.text.isEmpty {
+            textView.text = "Placeholder"
+            textView.textColor = UIColor.lightGray
+        }
+       
+    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.white
+        }
+    }
+}
+extension MyClassesDetailsViewController{
+    func feedback(){
+        feedBack["classId"] = StructOperation.glovalVariable.classId
+        feedBack["feedback"] = ratingString
+        feedBack["rating"] = ratingStar
+        feedBack["facultyId"] = StructOperation.glovalVariable.facultyId
+              activityIndicatorView.startAnimating()
+              //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
+              print("cancel body....\(cancelClass)")
+              AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.feedBack, details: cancelClass) {
+                  response in
+                  switch response.result {
+                  case .success(let value):
+                      if let status =  response.response?.statusCode {
+                          print("status issw ..\(status)")
+                          print("value...\(value)")
+                          if status == 200 || status == 201 {
+                              
+                              print("successfully feedbacked")
+                              let alert = UIAlertController(title: "Booking", message: "Class Canceled successfully", preferredStyle: UIAlertController.Style.alert)
+                              alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                                  // refresh tableview of myclassviewcontroller
+                                  
+                                  // refresh tableview of myclassviewcontroller ends
+                                  
+                                  self.navigationController?.popToRootViewController(animated: true)
+                              }))
+                              alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+                              self.present(alert, animated: true, completion: nil)
+                              
+                              //print("get sub...\(self.getSubjects)")
+                              DispatchQueue.main.async {
+                                  self.activityIndicatorView.stopAnimating()
+                                  self.tableView.reloadData()
+                              }
+                          }
+                      }
+                  case .failure( _):
+                      print("failure")
+                      return
+                  }
+              }
     }
 }

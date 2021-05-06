@@ -91,6 +91,7 @@ class ScheduleNonAcademicListViewController:UIViewController, IndicatorInfoProvi
         let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleAcademicList_2") as! ScheduleAcademicList_2ViewController
         //setNavigationBackTitle(title: "Schedule")
         vc.hidesBottomBarWhenPushed = true
+        vc.navName = getNonAcademicDetails[indexPath.row].groupName
         vc.groupId = getNonAcademicDetails[indexPath.row]._id
 //         presentDetail(vc)
          self.navigationController?.pushViewController(vc, animated: false)

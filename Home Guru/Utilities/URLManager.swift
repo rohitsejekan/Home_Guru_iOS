@@ -15,11 +15,16 @@ class URLManager {
     
     var baseURL = "https://api1653.homeguru.cc/api"
     
+//    var getParentAuth : String {
+//        get {
+//            return baseURL + "/parent/auth/login"
+//        }
+//    }
     var getParentAuth : String {
-        get {
-            return baseURL + "/parent/auth/login"
-        }
-    }
+           get {
+               return baseURL + "/parent/auth/login"
+           }
+       }
     
     var verifyUserExists : String {
         get {
@@ -78,6 +83,12 @@ class URLManager {
     var cancelSchedule: String{
         get{
             return baseURL + "/parent/guruclass/cancelClass"
+        }
+    }
+    //feed back
+    var feedBack: String{
+        get{
+            return baseURL + "/parent/guruclass/rating"
         }
     }
     // contact us

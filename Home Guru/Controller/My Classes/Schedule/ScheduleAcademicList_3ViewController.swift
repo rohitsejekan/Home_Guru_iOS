@@ -10,8 +10,10 @@ import UIKit
 import XLPagerTabStrip
 import SwiftyJSON
 import NVActivityIndicatorView
+import JJFloatingActionButton
 class ScheduleAcademicList_3ViewController: UIViewController,IndicatorInfoProvider,UITableViewDataSource, UITableViewDelegate {
 
+    let actionButton = JJFloatingActionButton()
     @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
     @IBOutlet weak var backBtn: UIButton!
     var groupId: String = ""
@@ -24,6 +26,11 @@ class ScheduleAcademicList_3ViewController: UIViewController,IndicatorInfoProvid
          var index : Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        //floating button
+        floatingButton()
+        actionButton.buttonDiameter = 65
+        actionButton.buttonImageSize = CGSize(width: 35, height: 35)
+        //floating button ends
          tableView.register(UINib(nibName: "ScheduleSubject_2TableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduleSubject_2")
         // custom userupdate cell
                    tableView.register(UINib(nibName: "userUpdateTableViewCell", bundle: nil), forCellReuseIdentifier: "userUpdate")
@@ -81,11 +88,10 @@ class ScheduleAcademicList_3ViewController: UIViewController,IndicatorInfoProvid
                               if status == 200 || status == 201 {
                            let val = JSON(value)
                                self.norecord = true
-                               for arr in val.arrayValue{
-                                  
-                                   print("child...\(arr)")
-                                   self.childGroupDetails.append(AcademicGroup(json: arr))
-                               }
+                              let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleAcademicList_4") as! ScheduleAcademicList_4ViewController
+                                vc.subjectId = self.groupId
+                                vc.popToVC = true
+                                self.navigationController?.pushViewController(vc, animated: false)
                            
                                                      
                            DispatchQueue.main.async {
@@ -129,10 +135,12 @@ class ScheduleAcademicList_3ViewController: UIViewController,IndicatorInfoProvid
                          cell?.preservesSuperviewLayoutMargins = false
                          cell?.separatorInset = .zero
                          cell?.layoutMargins = .zero
+                cell?.selectionStyle = .none
                  //        cell?.radioImageView.image = UIImage(named: indexPath.row == index ? "radioSelected" : "radioUnselected")
                 return cell!
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "userUpdate", for: indexPath) as! userUpdateTableViewCell
+                cell.selectionStyle = .none
                 return cell
             }
          
@@ -165,4 +173,48 @@ class ScheduleAcademicList_3ViewController: UIViewController,IndicatorInfoProvid
         //self.dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
     }
+}
+extension ScheduleAcademicList_3ViewController{
+    func floatingButton(){
+              actionButton.addItem(title: "whatsApp", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
+              
+                         
+                         if let whatsappURL = URL(string: "https://api.whatsapp.com/send?phone=+919001990019&text=Invitation"), UIApplication.shared.canOpenURL(whatsappURL) {
+                                        if #available(iOS 10, *) {
+                                            UIApplication.shared.open(whatsappURL)
+                                        } else {
+                                            UIApplication.shared.openURL(whatsappURL)
+                                        }
+                         }
+                     }
+
+                     actionButton.addItem(title: "call", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
+                       // do something
+                   if let url = URL(string: "tel://\(Constants.contactUs)"), UIApplication.shared.canOpenURL(url) {
+                                      if #available(iOS 10, *) {
+                                          UIApplication.shared.open(url)
+                                      } else {
+                                          UIApplication.shared.openURL(url)
+                                      }
+                                  }
+                     }
+
+                     actionButton.buttonImage = UIImage(named: "customer-service")
+                     actionButton.buttonColor = ColorPalette.homeGuruDarkGreyColor
+                     view.addSubview(actionButton)
+                     actionButton.translatesAutoresizingMaskIntoConstraints = false
+                     if #available(iOS 11.0, *) {
+                         actionButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+                     } else {
+                         // Fallback on earlier versions
+                         actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+                     }
+                     if #available(iOS 11.0, *) {
+                         actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+                     } else {
+                         // Fallback on earlier versions
+                         actionButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+                     }
+          }
+          
 }

@@ -32,7 +32,7 @@ struct facultyInformation{
     var profilePic: profilepic?
     init(fi: JSON) {
         self.name = fi["name"].stringValue
-        self.profilePic = profilepic(pc: fi)
+        self.profilePic = profilepic(pc: fi["profilePic"])
     }
 }
 struct profilepic{

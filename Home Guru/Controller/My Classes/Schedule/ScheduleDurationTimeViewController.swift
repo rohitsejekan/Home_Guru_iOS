@@ -5,10 +5,12 @@
 //  Created by Priya Vernekar on 12/03/21.
 //  Copyright © 2021 Priya Vernekar. All rights reserved.
 
-import UIKit
+
 enum PickerTypee {
     case timings, weeks
 }
+import UIKit
+import JJFloatingActionButton
 class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource,ProgramPickerProtocol,DurtionTimeDelegate,UIPickerViewDataSource, UIPickerViewDelegate{
     
      func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -104,7 +106,7 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
     var timeArray: [String] = []
     var durationArray: [String] = []
     var storeBoard: [String] = []
-    
+    let actionButton = JJFloatingActionButton()
     @IBOutlet weak var pickerViewDuration: UIPickerView!
     
     @IBOutlet weak var pickerViewTime: UIDatePicker!
@@ -251,6 +253,11 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
   
     override func viewDidLoad() {
         super.viewDidLoad()
+        //floating button
+        floatingButton()
+        actionButton.buttonDiameter = 65
+        actionButton.buttonImageSize = CGSize(width: 35, height: 35)
+        //floating button ends
 
            tableView.register(UINib(nibName: "customButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "customButton")
         outerPickerDurationView.isHidden = true
@@ -345,4 +352,48 @@ extension Date {
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
+}
+extension ScheduleDurationTimeViewController{
+    func floatingButton(){
+              actionButton.addItem(title: "whatsApp", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
+              
+                         
+                         if let whatsappURL = URL(string: "https://api.whatsapp.com/send?phone=+919001990019&text=Invitation"), UIApplication.shared.canOpenURL(whatsappURL) {
+                                        if #available(iOS 10, *) {
+                                            UIApplication.shared.open(whatsappURL)
+                                        } else {
+                                            UIApplication.shared.openURL(whatsappURL)
+                                        }
+                         }
+                     }
+
+                     actionButton.addItem(title: "call", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
+                       // do something
+                   if let url = URL(string: "tel://\(Constants.contactUs)"), UIApplication.shared.canOpenURL(url) {
+                                      if #available(iOS 10, *) {
+                                          UIApplication.shared.open(url)
+                                      } else {
+                                          UIApplication.shared.openURL(url)
+                                      }
+                                  }
+                     }
+
+                     actionButton.buttonImage = UIImage(named: "customer-service")
+                     actionButton.buttonColor = ColorPalette.homeGuruDarkGreyColor
+                     view.addSubview(actionButton)
+                     actionButton.translatesAutoresizingMaskIntoConstraints = false
+                     if #available(iOS 11.0, *) {
+                         actionButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+                     } else {
+                         // Fallback on earlier versions
+                         actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+                     }
+                     if #available(iOS 11.0, *) {
+                         actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+                     } else {
+                         // Fallback on earlier versions
+                         actionButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+                     }
+          }
+          
 }

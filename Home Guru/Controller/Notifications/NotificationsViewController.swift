@@ -15,7 +15,7 @@ class NotificationsViewController: BaseViewController, UITableViewDataSource, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        hideNavbar()
+        //hideNavbar()
     }
     
     override func viewDidLoad() {
@@ -24,10 +24,7 @@ class NotificationsViewController: BaseViewController, UITableViewDataSource, UI
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "NotificationCardTableViewCell", bundle: nil), forCellReuseIdentifier: "NotificationCardTableViewCell")
     }
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        let hide = (viewController is NotificationsViewController)
-        navigationController.setNavigationBarHidden(hide, animated: animated)
-    }
+ 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count + 1
     }

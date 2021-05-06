@@ -13,12 +13,14 @@ class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletion
 
     @IBOutlet weak var availablePointsLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
-    var amount = 1
+    var amount: Int?
      var razorpay: RazorpayCheckout!
     var paymentSuccess: [String: String] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
              razorpay = RazorpayCheckout.initWithKey("rzp_test_TLpg89CUg8B1bI", andDelegate: self)
+//        razorpay = RazorpayCheckout.initWithKey("rzp_live_NBgNfxcb6H93HM", andDelegate: self)
+        
         amountTextField.delegate = self
     }
         func onPaymentError(_ code: Int32, description str: String) {
@@ -38,7 +40,7 @@ class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletion
 //                   let action = UIAlertAction(title: "OK", style: .default, handler: nil)
 //                   alert.addAction(action)
 //                   self.present(alert, animated: true, completion: nil)
-                   paymentSuccess["amount"] = "1"
+            paymentSuccess["amount"] = "\(amountTextField.text!)"
                    paymentSuccess["paymentRef"] = payment_id
                    print("confirm book...\(paymentSuccess)")
                    
@@ -53,7 +55,7 @@ class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletion
                                   if status == 200 || status == 201 {
                                let val = JSON(value)
                                  
-                                    print("val...\(val)")
+                                print("val...\(val)")
                                                          
                                DispatchQueue.main.async {
                               
@@ -67,8 +69,8 @@ class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletion
                           }
         }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let amt = amountTextField.text{
-            amount = Int(amt) ?? 0
+        if let amt = Int(amountTextField.text ?? "1"){
+            amount = amt * 100
         }
 
         print("amount.....\(amount)")
@@ -76,7 +78,7 @@ class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletion
     func saveTransactionDetails(paymentId: String) {
         var details : [String:Any] = [
             "transactionType": "credit",
-            "amount": "\(amountTextField)",
+            "amount": "\(amountTextField.text)",
             "paymentRef": paymentId,
             "status": true
         ]
@@ -118,7 +120,7 @@ class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletion
     @IBAction func proceedAction(_ sender: UIButton) {
         
         // take to payment gateway
-        let options:[String:Any] = ["amount" : amount * 100,
+        let options:[String:Any] = ["amount" : amount ?? 1,
                                       "description" : "for test purpose",
                                       "image": UIImage(named: "img"),
                                       "name" : "business name",
@@ -130,3 +132,4 @@ class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletion
     }
     
 }
+

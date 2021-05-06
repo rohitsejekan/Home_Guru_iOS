@@ -95,9 +95,23 @@ extension pastBookingViewController: UITableViewDelegate, UITableViewDataSource{
                   cell.subjectName.text = pastBook[indexPath.row].subject[0].subjectName
                   cell.facultyName.text = pastBook[indexPath.row].faculty?.name
                   cell.scheduleDate.text = pastBook[indexPath.row].date
+                 // cell.facultyImage.layer.cornerRadius = 25
+                  cell.selectionStyle = .none
+               if let img = pastBook[indexPath.row].faculty?.profilePic?.image_url{
+                         print("img...\(img)")
+                         if img == ""{
+                             cell.facultyImage.image = UIImage(named: "facultyPlaceholder")
+                         }else{
+                             //cell.facultyImage.image = UIImage(named: "\(img)")
+                             let url = URL(string: "\(img)")
+                             cell.facultyImage.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.7))], progressBlock: nil)
+                             
+                         }
+                     }
                   return cell
         }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "userUpdate", for: indexPath) as! userUpdateTableViewCell
+                 cell.selectionStyle = .none
                 return cell
         }
       

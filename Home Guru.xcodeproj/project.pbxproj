@@ -42,6 +42,8 @@
 		01438EFB2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01438EF92589EAE400C70011 /* ScheduleClassDetailsTableViewCell.swift */; };
 		01438EFC2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01438EFA2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.xib */; };
 		01438EFE258A250800C70011 /* MyClassesDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01438EFD258A250800C70011 /* MyClassesDetailsViewController.swift */; };
+		0146A6BB2642BEF10060FB6E /* profileSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0146A6BA2642BEF10060FB6E /* profileSwitchViewController.swift */; };
+		0146A6BD2642BFC20060FB6E /* SwitchProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0146A6BC2642BFC20060FB6E /* SwitchProfileTableViewCell.swift */; };
 		0146F438258F18AF008537B8 /* MyGuruDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0146F437258F18AF008537B8 /* MyGuruDetailsTableViewCell.swift */; };
 		0151441D258E7CC000E83F64 /* MyGuruDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151441C258E7CC000E83F64 /* MyGuruDetailsViewController.swift */; };
 		015206B025FA24340049922C /* ScheduleAcademicList_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015206AF25FA24340049922C /* ScheduleAcademicList_2ViewController.swift */; };
@@ -136,6 +138,11 @@
 		01FA8B3825FB43160044C209 /* ScheduleSubject_4TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FA8B3625FB43160044C209 /* ScheduleSubject_4TableViewCell.xib */; };
 		01FA8B3A25FB4E5F0044C209 /* ScheduleDurationTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3925FB4E5F0044C209 /* ScheduleDurationTimeViewController.swift */; };
 		01FA8B3D25FB8D200044C209 /* DurationTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B3C25FB8D200044C209 /* DurationTimeTableViewCell.swift */; };
+		01FDDAF22641648800E763A5 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 016EEB7B25403CF600FE7351 /* SourceSansPro-Black.ttf */; };
+		01FDDAF32641649300E763A5 /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 016EEB7C25403CF700FE7351 /* SourceSansPro-Light.ttf */; };
+		01FDDAF4264164A200E763A5 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 016EEB7925403CF600FE7351 /* SourceSansPro-Bold.ttf */; };
+		01FDDAF5264164AC00E763A5 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 016EEB7A25403CF600FE7351 /* SourceSansPro-Regular.ttf */; };
+		01FDDAF6264164B300E763A5 /* SourceSansPro-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 016EEB7825403CF600FE7351 /* SourceSansPro-SemiBold.ttf */; };
 		85A536B55915651C7C6C1603 /* Pods_Home_Guru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8A0D551E7B6F1213709C33 /* Pods_Home_Guru.framework */; };
 /* End PBXBuildFile section */
 
@@ -190,6 +197,8 @@
 		01438EF92589EAE400C70011 /* ScheduleClassDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleClassDetailsTableViewCell.swift; path = "Home Guru/Model/Custom Cells/My Classes/ScheduleClassDetailsTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		01438EFA2589EAE400C70011 /* ScheduleClassDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ScheduleClassDetailsTableViewCell.xib; path = "Home Guru/Model/Custom Cells/My Classes/ScheduleClassDetailsTableViewCell.xib"; sourceTree = SOURCE_ROOT; };
 		01438EFD258A250800C70011 /* MyClassesDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClassesDetailsViewController.swift; sourceTree = "<group>"; };
+		0146A6BA2642BEF10060FB6E /* profileSwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileSwitchViewController.swift; sourceTree = "<group>"; };
+		0146A6BC2642BFC20060FB6E /* SwitchProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchProfileTableViewCell.swift; sourceTree = "<group>"; };
 		0146F437258F18AF008537B8 /* MyGuruDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGuruDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		0151441C258E7CC000E83F64 /* MyGuruDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGuruDetailsViewController.swift; sourceTree = "<group>"; };
 		015206AF25FA24340049922C /* ScheduleAcademicList_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAcademicList_2ViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				011688B52600BD89005E1701 /* addProfileTableViewCell.swift */,
+				0146A6BC2642BFC20060FB6E /* SwitchProfileTableViewCell.swift */,
 			);
 			path = profile;
 			sourceTree = "<group>";
@@ -362,6 +372,7 @@
 				01C481D92594D3FD00FBFD93 /* Wallet */,
 				011688B22600BC20005E1701 /* addProfileViewController.swift */,
 				01EE0D85262DB5FE0073777E /* editProfileViewController.swift */,
+				0146A6BA2642BEF10060FB6E /* profileSwitchViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -802,6 +813,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01FDDAF6264164B300E763A5 /* SourceSansPro-SemiBold.ttf in Resources */,
+				01FDDAF5264164AC00E763A5 /* SourceSansPro-Regular.ttf in Resources */,
+				01FDDAF4264164A200E763A5 /* SourceSansPro-Bold.ttf in Resources */,
+				01FDDAF32641649300E763A5 /* SourceSansPro-Light.ttf in Resources */,
+				01FDDAF22641648800E763A5 /* SourceSansPro-Black.ttf in Resources */,
 				011294D025F5F7BD00308A91 /* ProgramPickerView.xib in Resources */,
 				011294E425F60B0400308A91 /* ProfileCardTableViewCell.xib in Resources */,
 				015206B425FA258F0049922C /* ScheduleSubject_2TableViewCell.xib in Resources */,
@@ -962,6 +978,7 @@
 				012F3D3926089A5600325823 /* customTextField.swift in Sources */,
 				011688B12600849F005E1701 /* SelectScheduleViewController.swift in Sources */,
 				01FA8B3225FB38640044C209 /* ScheduleAcademicList_3ViewController.swift in Sources */,
+				0146A6BD2642BFC20060FB6E /* SwitchProfileTableViewCell.swift in Sources */,
 				01FA8B3A25FB4E5F0044C209 /* ScheduleDurationTimeViewController.swift in Sources */,
 				01413CD625FF39A7001BCF7A /* confirmSheduleFirstTableViewCell.swift in Sources */,
 				01413CDC25FF6EFD001BCF7A /* confirmScheduleThirdTableViewCell.swift in Sources */,
@@ -987,6 +1004,7 @@
 				0153073E2578C44900F98F1A /* HomeViewController.swift in Sources */,
 				01E8C05E26355E7600EAA9EB /* HttpUtility.swift in Sources */,
 				016EEB7425403B0E00FE7351 /* Constants.swift in Sources */,
+				0146A6BB2642BEF10060FB6E /* profileSwitchViewController.swift in Sources */,
 				015307442578C88700F98F1A /* NotificationsViewController.swift in Sources */,
 				01708523263685FE0037CEF9 /* currentPastBooking.swift in Sources */,
 				01629C3C261F2BA400887B7D /* ReScheduleTableViewCell.swift in Sources */,

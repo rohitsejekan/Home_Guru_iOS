@@ -165,7 +165,7 @@ class addProfileViewController: BaseViewController, UITableViewDelegate, UITable
 //            studentInfo["board"] = studentDetails["board"]
             studentInfo["stdClass"] = ""
             studentInfo["board"] = ""
-            studentInfo["dob"] = ""
+            studentInfo["dob"] = studentDates
                AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.addProfile, details: studentInfo) {
                response in
                   switch response.result {

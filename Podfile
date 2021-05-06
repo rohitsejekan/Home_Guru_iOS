@@ -19,6 +19,7 @@ target 'Home Guru' do
   pod 'Kingfisher'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'JJFloatingActionButton'
 #  pod 'razorpay-pod', '~> 1.0.26'
 
   # Pods for Home Guru

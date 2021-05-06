@@ -28,5 +28,8 @@ class StructOperation {
     static var points = String();
     // for calendar to auto select rest dates
     static var noOfweeks = String();
+    static var address = String();
+        static var parentEmail = String();
+        static var parentPhone = String();
     }
 }

@@ -7,20 +7,23 @@
 //
 
 import UIKit
-
+protocol showDatePicker : class{
+    func datePicker()
+}
 class editProfileTableViewCell: UITableViewCell {
 
     @IBOutlet weak var editClass: UIButton!
-    
-    @IBOutlet weak var editYear: UITextField!
-    @IBOutlet weak var editMonth: UITextField!
-    @IBOutlet weak var editDate: UITextField!
+    var datePickerDelegate: showDatePicker?
+    @IBOutlet weak var dobBtn: UIButton!
     @IBOutlet weak var editName: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
+    @IBAction func showPicker(_ sender: UIButton) {
+        datePickerDelegate?.datePicker()
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

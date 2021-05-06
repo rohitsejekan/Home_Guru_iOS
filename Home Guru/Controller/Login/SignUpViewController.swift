@@ -14,12 +14,12 @@ import SKCountryPicker
 import FirebaseAuth
 import Firebase
 class SignUpViewController: BaseViewController {
-
+    
     @IBOutlet weak var mobileNoTextField: UITextField!
     @IBOutlet weak var countryCodeLabel: UILabel!
     
     var userDetails : [String:Any] = ["password":"123456"]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         hideNavbar()
@@ -30,45 +30,70 @@ class SignUpViewController: BaseViewController {
         customTextFieldPlaceholder(text: "Enter Phone Number", textField: mobileNoTextField)
         countryCodeLabel.text = country.dialingCode
     }
-
-    @IBAction func signUpAction(_ sender: UIButton) {
-       
-        
-  
-        if let OtpFormateNumber = self.userDetails["mobileNo"]{
-            print("your number ....\(OtpFormateNumber)")
-            PhoneAuthProvider.provider().verifyPhoneNumber(OtpFormateNumber as! String, uiDelegate: nil) { (verificationID, error) in
-
-                       if error != nil {
-
-                           print("error:\(String(describing: error?.localizedDescription))")
-
-                           print("1")
-
-                           return
-
-                       } else {
-
-                           print("2")
-
-                           UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-                          
-                         let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "OTPVerificationViewController") as? OTPVerificationViewController
-                                vc!.userDetails = self.userDetails
-                                self.present(vc!, animated: true, completion: nil)
-
-
-                       }
-
-                     
-
-                   }
-            
-        }
-       
-
-            
     
+    @IBAction func signUpAction(_ sender: UIButton) {
+        
+        print("sign in\(userDetails)")
+        AlamofireService.alamofireService.postRequestWithBodyData(url: URLManager.sharedUrlManager.getParentAuth, details: userDetails) {
+            response in
+            switch response.result {
+            case .success(let _):
+                if let status =  response.response?.statusCode {
+                    // user does not exist
+                    if status == 400 {
+                        
+                        if let OtpFormateNumber = self.userDetails["mobileNo"]{
+                            print("your number ....\(OtpFormateNumber)")
+                            PhoneAuthProvider.provider().verifyPhoneNumber(OtpFormateNumber as! String, uiDelegate: nil) { (verificationID, error) in
+                                
+                                if error != nil {
+                                    
+                                    print("error:\(String(describing: error?.localizedDescription))")
+                                    
+                                    print("1")
+                                    
+                                    return
+                                    
+                                } else {
+                                    
+                                    print("2")
+                                    
+                                    UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+                                    
+                                    let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "OTPVerificationViewController") as? OTPVerificationViewController
+                                    vc!.userDetails = self.userDetails
+                                    self.present(vc!, animated: true, completion: nil)
+                                    
+                                    
+                                }
+                                
+                                
+                                
+                            }
+                            
+                        }
+
+                    }else{
+                        // user exist
+                        // pop alert controller
+                        let alert = UIAlertController(title: "User Exist", message: "User Already Exist. please login", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    
+                }
+            case .failure( _):
+                return
+            }
+        }
+        
+        
+        
+        
+        
     }
     
     @IBAction func signInAction(_ sender: UIButton) {

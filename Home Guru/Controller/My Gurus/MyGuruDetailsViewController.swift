@@ -9,7 +9,10 @@
 import UIKit
 import SwiftyJSON
 import NVActivityIndicatorView
+import JJFloatingActionButton
 class MyGuruDetailsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+
+    let actionButton = JJFloatingActionButton()
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
@@ -19,12 +22,17 @@ class MyGuruDetailsViewController: BaseViewController, UITableViewDataSource, UI
       var guruProfileOnId = [GetGuruProfile]()
     var guruName: String = ""
     var guruId: String = ""
-    
+    var guruPic: String = ""
     var gu: String = "5"
     var Totalfare: Int = 0
     var guruFare: String = ""
     var guruPrice: String = ""
     override func viewDidLoad() {
+        //floating button
+        floatingButton()
+        actionButton.buttonDiameter = 65
+        actionButton.buttonImageSize = CGSize(width: 35, height: 35)
+        //floating button ends
         super.viewDidLoad()
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableView.automaticDimension
@@ -112,6 +120,7 @@ class MyGuruDetailsViewController: BaseViewController, UITableViewDataSource, UI
         vc.demoClass = true
         vc.reSchedule = false
         vc.guruFare = guruFare
+        vc.guruProfile = guruPic
          vc.guruProfileDetails = guruProfileDetails
          self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -145,6 +154,13 @@ class MyGuruDetailsViewController: BaseViewController, UITableViewDataSource, UI
                  cell?.aboutDescriptionLabel.text = guruProfileDetails[0].aboutGuru
                  cell?.perClassAmountLabel.text = guruFare
                  cell?.guruImage.image = imageWithGradient(img: cell?.guruImage.image)
+                 cell?.avatar.layer.cornerRadius = 40
+                 if guruPic == ""{
+                    cell?.avatar.image = UIImage(named: "facultyPlaceholder")
+                 }else{
+                    cell?.avatar.image = UIImage(named: "\(guruPic)")
+                 }
+                 
                  cell?.selectionStyle = .none
                  return cell!
              case 1:
@@ -192,4 +208,48 @@ class MyGuruDetailsViewController: BaseViewController, UITableViewDataSource, UI
     
     
 
+}
+extension MyGuruDetailsViewController{
+    func floatingButton(){
+              actionButton.addItem(title: "whatsApp", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
+              
+                         
+                         if let whatsappURL = URL(string: "https://api.whatsapp.com/send?phone=+919001990019&text=Invitation"), UIApplication.shared.canOpenURL(whatsappURL) {
+                                        if #available(iOS 10, *) {
+                                            UIApplication.shared.open(whatsappURL)
+                                        } else {
+                                            UIApplication.shared.openURL(whatsappURL)
+                                        }
+                         }
+                     }
+
+                     actionButton.addItem(title: "call", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
+                       // do something
+                   if let url = URL(string: "tel://\(Constants.contactUs)"), UIApplication.shared.canOpenURL(url) {
+                                      if #available(iOS 10, *) {
+                                          UIApplication.shared.open(url)
+                                      } else {
+                                          UIApplication.shared.openURL(url)
+                                      }
+                                  }
+                     }
+
+                     actionButton.buttonImage = UIImage(named: "customer-service")
+                     actionButton.buttonColor = ColorPalette.homeGuruDarkGreyColor
+                     view.addSubview(actionButton)
+                     actionButton.translatesAutoresizingMaskIntoConstraints = false
+                     if #available(iOS 11.0, *) {
+                         actionButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+                     } else {
+                         // Fallback on earlier versions
+                         actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+                     }
+                     if #available(iOS 11.0, *) {
+                         actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+                     } else {
+                         // Fallback on earlier versions
+                         actionButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+                     }
+          }
+          
 }

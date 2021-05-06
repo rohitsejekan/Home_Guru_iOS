@@ -17,7 +17,8 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var landMarkLabel: UILabel!
     @IBOutlet weak var cityName: UILabel!
-    @IBOutlet weak var addressLabel: UITextView!
+    
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var stateName: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -31,13 +32,8 @@ class AccountViewController: UIViewController {
         // back button
         backBtn.layer.cornerRadius = 5
         //user address
-        let address = UserDefaults.standard.string(forKey: "userAddress")
-        print("add..\(address)")
-        if let add = address{
-            addressLabel.text = add
-        }
-        
-        
+        let a = UserDefaults.standard.string(forKey: "g_address")
+        print("a..\(a)")
         getActiveUser()
     }
     func getActiveUser(){
@@ -53,12 +49,17 @@ class AccountViewController: UIViewController {
                                  let json = JSON(value)
                                 self.phoneLabel.text = json["mobileNo"].stringValue
                                 self.userName.text = json["name"].stringValue
+                                // store parent email and phone
+                                StructOperation.glovalVariable.parentPhone = json["mobileNo"].stringValue
+                                StructOperation.glovalVariable.parentEmail = json["email"].stringValue
+                                // store parent email and phone
                                 self.emailLabel.text = json["email"].stringValue
                                 for arr in json["residentalAddress"].arrayValue{
                                     self.pinCodeLabel.text = "Pin Code: " + arr["pincode"].stringValue
                                     self.cityName.text = "City: " + arr["city"].stringValue
                                     self.stateName.text = "State: " + arr["state"].stringValue
                                     self.landMarkLabel.text = "LandMark: " + arr["landmark"].stringValue
+                                    self.addressLabel.text = StructOperation.glovalVariable.address
                                     
                                 }
 

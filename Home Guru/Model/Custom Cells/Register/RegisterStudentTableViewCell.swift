@@ -11,8 +11,8 @@ import UIKit
 protocol RegisterStudentDelegate {
     func selectDOB(index: Int)
     func getNameTextFieldValue(tag: Int, value: String)
-    func selectBoard(index: Int)
-    func selectClass(index: Int)
+    //func selectBoard(index: Int)
+    //func selectClass(index: Int)
 }
 
 class RegisterStudentTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -44,12 +44,11 @@ class RegisterStudentTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBAction func selectDOB(_ sender: UIButton) {
         delegate?.selectDOB(index: sender.tag)
     }
-    
     @IBAction func selectBoard(_ sender: UIButton) {
-        delegate?.selectBoard(index: sender.tag)
+       // delegate?.selectBoard(index: sender.tag)
     }
     @IBAction func selectClass(_ sender: UIButton) {
-        delegate?.selectClass(index: sender.tag)
+       // delegate?.selectClass(index: sender.tag)
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text != nil {
