@@ -27,8 +27,10 @@ class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITable
         tableView.rowHeight = UITableView.automaticDimension
         // Do any additional setup after loading the view.
         
+        //convert datepicker to time picker
         pickerViewStart.datePickerMode = .time
-        
+        // make timer quater based
+        pickerViewStart.minuteInterval = 30
         outerPickerStartView.isHidden = true
     }
     
@@ -81,10 +83,10 @@ class ReScheduleViewController: BaseViewController, UITableViewDelegate, UITable
         cell.startTime.setTitle(timeSlot, for: .normal)
        cell.classDuration.setTitle(StructOperation.glovalVariable.timeDifference + " hr", for: .normal)
         
-        cell.atHome.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.homeGuruOrangeColor : ColorPalette.whiteColor, for: .normal)
-        cell.atHome.setImage(UIImage(named:(scheduleDetails["classType"] == "Online Class") ?  "orangeVideoClass" : "whiteVideoClass") , for: .normal)
-        cell.onlineClasses.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.whiteColor : ColorPalette.homeGuruOrangeColor, for: .normal)
-        cell.onlineClasses.setImage(UIImage(named: (scheduleDetails["classType"] == "Online Class") ? "whiteAtHome" : "orangeVideoClass"), for: .normal)
+        cell.atHome.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.whiteColor : ColorPalette.homeGuruOrangeColor, for: .normal)
+        cell.atHome.setImage(UIImage(named:(scheduleDetails["classType"] == "Online Class") ?  "whiteAtHome" : "orangeHome") , for: .normal)
+        cell.onlineClasses.setTitleColor((scheduleDetails["classType"] == "Online Class") ? ColorPalette.homeGuruOrangeColor : ColorPalette.whiteColor, for: .normal)
+        cell.onlineClasses.setImage(UIImage(named: (scheduleDetails["classType"] == "Online Class") ? "orangeVideoClass" : "onlineWhite"), for: .normal)
 
         cell.goNextPage.tag = indexPath.row
         cell.selectionStyle = .none

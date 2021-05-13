@@ -42,7 +42,7 @@ class ScheduledClassCardTableViewCell: UITableViewCell {
         if let classType = data["classType"] as? String {
             switch classType {
             case "old class":
-                setAttributes(outerViewColor: ColorPalette.homeGuruDarkGreyColor, dateLabelColor: ColorPalette.homeGuruOrangeColor, nameLabelColor: ColorPalette.homeGuruLightGreyColor, moduleLabelColor: ColorPalette.homeGuruLightGreyColor, classLabelColor: ColorPalette.homeGuruLightGreyColor, noOfDaysLeftStatus: true, ratingsStatus: false, demoStatus: true)
+                setAttributes(outerViewColor: ColorPalette.homeGuruOrangeColor, dateLabelColor: ColorPalette.homeGuruOrangeColor, nameLabelColor: UIColor.white, moduleLabelColor: UIColor.white, classLabelColor: ColorPalette.homeGuruOrangeColor, noOfDaysLeftStatus: true, ratingsStatus: false, demoStatus: true)
             case "today":
                 setAttributes(outerViewColor: ColorPalette.homeGuruOrangeColor, dateLabelColor: ColorPalette.homeGuruBlackColor, nameLabelColor: UIColor.white, moduleLabelColor: UIColor.white, classLabelColor: ColorPalette.homeGuruOrangeColor, noOfDaysLeftStatus: false, ratingsStatus: true, demoStatus: true)
 //            case "demo today":
@@ -51,6 +51,8 @@ class ScheduledClassCardTableViewCell: UITableViewCell {
                 setAttributes(outerViewColor: ColorPalette.homeGuruOrangeColor, dateLabelColor: ColorPalette.homeGuruBlackColor, nameLabelColor: UIColor.white, moduleLabelColor: UIColor.white, classLabelColor: ColorPalette.homeGuruOrangeColor, noOfDaysLeftStatus: false, ratingsStatus: true, demoStatus: false)
             case "future":
                 setAttributes(outerViewColor: ColorPalette.homeGuruDarkGreyColor, dateLabelColor: ColorPalette.homeGuruOrangeColor, nameLabelColor: UIColor.white, moduleLabelColor: UIColor.white, classLabelColor: ColorPalette.homeGuruLightGreyColor,  noOfDaysLeftStatus: false, ratingsStatus: true, demoStatus: true)
+            case "demo":
+                 setAttributes(outerViewColor: ColorPalette.homeGuruDarkGreyColor, dateLabelColor: ColorPalette.homeGuruOrangeColor, nameLabelColor: UIColor.white, moduleLabelColor: UIColor.white, classLabelColor: ColorPalette.homeGuruLightGreyColor,  noOfDaysLeftStatus: false, ratingsStatus: true, demoStatus: false)
             default:
                 setAttributes(outerViewColor: ColorPalette.homeGuruDarkGreyColor, dateLabelColor: ColorPalette.homeGuruOrangeColor, nameLabelColor: UIColor.white, moduleLabelColor: UIColor.white, classLabelColor: ColorPalette.homeGuruLightGreyColor,  noOfDaysLeftStatus: false, ratingsStatus: true, demoStatus: false)
 
@@ -65,7 +67,7 @@ class ScheduledClassCardTableViewCell: UITableViewCell {
         self.timeLabel.textColor = dateLabelColor
         self.nameLabel.textColor = nameLabelColor
         self.moduleLabel.textColor = moduleLabelColor
-        self.classImageView.backgroundColor = classLabelColor
+        //self.classImageView.backgroundColor = classLabelColor
         self.noOfDaysLeft.isHidden = noOfDaysLeftStatus
         self.ratingStackView.isHidden = ratingsStatus
         self.demoLabel.isHidden = demoStatus

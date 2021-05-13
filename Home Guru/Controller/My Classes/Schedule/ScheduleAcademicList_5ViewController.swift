@@ -18,7 +18,9 @@ class ScheduleAcademicList_5ViewController: UIViewController, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         //floating button
-        floatingButton()
+          floatingButton()
+        actionButton.buttonDiameter = 65
+        actionButton.buttonImageSize = CGSize(width: 35, height: 35)
         tableView.register(UINib(nibName: "ScheduleSubject_2TableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduleSubject_2")
         // Do any additional setup after loading the view.
         getBoards()
@@ -93,7 +95,7 @@ class ScheduleAcademicList_5ViewController: UIViewController, UITableViewDataSou
 }
 extension ScheduleAcademicList_5ViewController{
     func floatingButton(){
-              actionButton.addItem(title: "whatsApp", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
+              actionButton.addItem(title: "", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
               
                          
                          if let whatsappURL = URL(string: "https://api.whatsapp.com/send?phone=+919001990019&text=Invitation"), UIApplication.shared.canOpenURL(whatsappURL) {
@@ -105,7 +107,7 @@ extension ScheduleAcademicList_5ViewController{
                          }
                      }
 
-                     actionButton.addItem(title: "call", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
+                     actionButton.addItem(title: "", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
                        // do something
                    if let url = URL(string: "tel://\(Constants.contactUs)"), UIApplication.shared.canOpenURL(url) {
                                       if #available(iOS 10, *) {
@@ -116,7 +118,7 @@ extension ScheduleAcademicList_5ViewController{
                                   }
                      }
 
-                     actionButton.buttonImage = UIImage(named: "profile")
+                     actionButton.buttonImage = UIImage(named: "customer-service")
                      actionButton.buttonColor = ColorPalette.homeGuruDarkGreyColor
                      view.addSubview(actionButton)
                      actionButton.translatesAutoresizingMaskIntoConstraints = false

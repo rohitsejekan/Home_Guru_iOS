@@ -16,16 +16,22 @@ enum DataDisplayType {
 
 class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     @objc func refresh() {
+        DispatchQueue.main.async {
+            self.getMyclassDetails() // a refresh the tableView.
+        }
         
-        self.getMyclassDetails() // a refresh the tableView.
         
     }
     @objc func refreshReschedule(){
-        self.getMyclassDetails() // a refresh the tableView.
+         DispatchQueue.main.async {
+                   self.getMyclassDetails() // a refresh the tableView.
+               }
     }
     
     @objc func refreshCancel(){
-        self.getMyclassDetails()
+         DispatchQueue.main.async {
+                   self.getMyclassDetails() // a refresh the tableView.
+               }
     }
     
     @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
@@ -34,7 +40,7 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
     var overlayBool: Bool = false
     var myClassDetails = [myClasses?]()
     var points : Int = 0
-    
+    var refreshControl: UIRefreshControl!
     var scheduledClassInfo : [[String:Any]] = [["classType":"old class","dateObj":Date()],["classType":"today","dateObj":Date()],["classType":"not held","dateObj":Date()],["classType":"future", "dateObj":Date()],["classType":"future demo","dateObj":Date()]]
     var classDetails : [Int] = []
     var showData : Bool = false
@@ -51,6 +57,7 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
     fileprivate lazy var dateFormatter2: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
         return formatter
     }()
     override func viewDidLoad() {
@@ -81,7 +88,7 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
         navigationController?.delegate = self
         getMyclassDetails()
         
-        print("today....\(dateString)")
+        print("today....\(dateFormatter2.date(from: "\(today)"))")
         let tomorrow = Date().dayAfter
         //Calculate the number of days between today and the user's chosen day.
         let difference = Calendar.current.dateComponents([.day], from: today, to: tomorrow)
@@ -95,6 +102,21 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
         // print("dates...\(components)")
         print("stu id ...\(StructOperation.glovalVariable.studentId)")
         print("address...\(UserDefaults.standard.object(forKey: "userAddres"))")
+        
+        //pull up refresh
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refreshPull), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    @objc func refreshPull(_ sender: Any) {
+        //  your code to reload tableView
+        
+            refreshControl.beginRefreshing()
+            getMyclassDetails()
+            refreshControl.endRefreshing()
+        
+        
     }
     func findDateDiff(time1Str: String, time2Str: String) -> Int {
         let timeformatter = DateFormatter()
@@ -123,8 +145,11 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                         print("guru p ..\(status)")
                         print("g p...\(value)")
                         if status == 200 || status == 201 {
+                            
                             let val = JSON(value)
+                            print("g p...\(value)")
                             if self.myClassDetails.isEmpty{
+                               
                                 
                                 for arr in val.arrayValue{
                                     if let dateString = self.dateFormatter2.date(from: "\(arr["date"].stringValue)"){
@@ -137,7 +162,15 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                                             if arr["status"].stringValue == "cancelled"{
                                                 continue
                                             }
+                                            print("is_demo....\(arr["is_demo"])")
+                                            if arr["is_demo"] == 1{
+                                                UserDefaults.standard.set("1", forKey: "classDemo")
+                                                
+                                            }
                                             print("ststus...\(arr["status"].stringValue)")
+                                            print("classdemo....\(UserDefaults.standard.string(forKey: "classDemo"))")
+                                            StructOperation.glovalVariable.parentEmail = arr["parent"]["email"].stringValue
+                                            StructOperation.glovalVariable.parentPhone = arr["parent"]["mobileNo"].stringValue
                                             self.myClassDetails.append(myClasses(json: arr))
                                             // print("child sub...\(arr)")
                                         }
@@ -145,22 +178,25 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                                     }
                                     
                                 }
+                               
+                               
+                                
                             }else{
                                 self.myClassDetails.removeAll()
                                 self.getMyclassDetails()
                             }
                             
                             print("classes.......\(self.myClassDetails)")
-                            //display homeinfo and scheduleinfo based on muclassDetails dictionary
-                                                           if self.myClassDetails.isEmpty{
-                                                            print("empty true")
-                                                               self.dataDisplayType = .homeInfo
-                                                           }else{
-                                                               self.dataDisplayType = .scheduleInfo
-                                                           }
-                                                           //display homeinfo and scheduleinfo based on muclassDetails dictionary
+                         
                             DispatchQueue.main.async {
-                               
+                               //display homeinfo and scheduleinfo based on muclassDetails dictionary
+                                if self.myClassDetails.isEmpty{
+                                        print("empty true")
+                                    self.dataDisplayType = .homeInfo
+                                }else{
+                                    self.dataDisplayType = .scheduleInfo
+                                }
+                                //display homeinfo and scheduleinfo based on muclassDetails dictionary
                                 self.activityLoaderView.stopAnimating()
                                 self.tableView.reloadData()
                             }
@@ -285,7 +321,7 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
             cell!.overlayView.backgroundColor = ColorPalette.homeGuruBlueColor.withAlphaComponent(0.9)
             overlayBool = true
         }
-        
+        UserDefaults.standard.set("0", forKey: "classDemo")
         
         return cell!
     }
@@ -294,12 +330,16 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
             if indexPath.row == 0{
                 tableView.isScrollEnabled = false
                 return tableView.frame.height
+            }else{
+                return UITableView.automaticDimension
             }
             
         }else{
             tableView.isScrollEnabled = true
+            return UITableView.automaticDimension
         }
-        return UITableView.automaticDimension
+        
+        
     }
     func showScheduledClassInfo(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //        if scheduledClassInfo[indexPath.row].isEmpty {
@@ -327,7 +367,8 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
             cell?.timeLabel.text = myClassDetails[indexPath.row - 1]?.timeSlotFrom
             cell?.selectionStyle = .none
             if myClassDetails[indexPath.row - 1]?.classType == "2"{
-                cell?.classImageView.image = UIImage(named: "whiteVideoClass")
+                cell?.classImageView.image = UIImage(named: "onlineWhite")
+               // cell?.classImageView.backgroundColor = UIColor.
             }else{
                 cell?.classImageView.image = UIImage(named: "whiteAtHome")
                 
@@ -369,11 +410,14 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
             }
             // calculting date difference between current date and scheduled date
             if let dateString = dateFormatter2.date(from: myClassDetails[indexPath.row - 1]?.scheduleDate ?? ""){
-                let difference = Calendar.current.dateComponents([.day], from: today, to: dateString)
+                
+                let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateString)
+                let difference = Calendar.current.dateComponents([.day], from: today, to: tomorrow!)
                 guard let days = difference.day else { return cell! }
                 let ess = days > 1 ? "s" : ""
-                print("That date is \(days) day\(ess) away.")
-                
+                print("That date iss \(days) day\(ess) away.")
+                print("too...\(today)")
+                print("too...\(myClassDetails[indexPath.row - 1]?.scheduleDate)")
                 
                 if Int(days) < 0 {
                     
@@ -388,7 +432,7 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                         
                     }
                     if myClassDetails[indexPath.row - 1]?.status == "upcoming"{
-                        cell?.setCardValues(data: scheduledClassInfo[1])
+                        cell?.setCardValues(data: scheduledClassInfo[0])
                         cell?.noOfDaysLeft.text = "Class was not engaged"
                     }
                     
@@ -430,7 +474,7 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                     
                     // change card color based on demo
                     if myClassDetails[indexPath.row - 1]?.is_demo == "1"{
-                        cell?.setCardValues(data: scheduledClassInfo[3])
+                        cell?.setCardValues(data: scheduledClassInfo[4])
                     }else{
                         cell?.setCardValues(data: scheduledClassInfo[3])
                     }
@@ -457,7 +501,8 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
             if indexPath.row != 0 {
                 // calculting date difference between current date and scheduled date
                 if let dateString = dateFormatter2.date(from: myClassDetails[indexPath.row - 1]?.scheduleDate ?? ""){
-                    let difference = Calendar.current.dateComponents([.day], from: today, to: dateString)
+                    let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateString)
+                    let difference = Calendar.current.dateComponents([.day], from: today, to: tomorrow!)
                     guard let days = difference.day else { return }
                     let ess = days > 1 ? "s" : ""
                     print("That date is \(days) day\(ess) away.")
@@ -473,11 +518,12 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                             // time difference of end time and current time
                             let timeDiffEnd = findDateDiff(time1Str: "\(th):\(tm)", time2Str: myClassDetails[indexPath.row -  1]?.timeSlotTo ?? "12:00")
                             print("..diff...\(timeDiffEnd)")
+                            print("..diff...\(Int(days))")
                             
                             
                             
                             // check today's class time has finished , if finished dont navigate or navigate
-                            if timeDiffEnd < 0{
+                            if timeDiffEnd < 0 && Int(days) <= 0{
                                 print("ended class")
                             }else{
                                 let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "MyClassesDetailsViewController") as? MyClassesDetailsViewController
@@ -485,7 +531,8 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                                 vc!.daysLeft = Int(days)
                                 vc!.scheduledClassInfo = scheduledClassInfo[3]
                                 // check demo class
-                                StructOperation.glovalVariable.isDemo = myClassDetails[0]?.is_demo ?? ""
+                                
+                                StructOperation.glovalVariable.isDemo = myClassDetails[indexPath.row - 1]?.is_demo ?? ""
                                 //check demo class ends
                                 if let facultyName = myClassDetails[indexPath.row - 1]?.faculty?.name{
                                     vc?.facultyName = facultyName
@@ -508,8 +555,12 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                                 print("time 2....\(to)")
                                 print("time difference....\(hours)")
                                 // time difference ends
+                                if hours < 0{
+                                   StructOperation.glovalVariable.timeDifference = String(24 + hours)
+                                }else{
+                                    StructOperation.glovalVariable.timeDifference = String(hours)
+                                }
                                 
-                                StructOperation.glovalVariable.timeDifference = String(hours)
                                 vc?.classId = myClassDetails[indexPath.row - 1]?._id ?? ""
                                 //vc?.daysleft = "\(days)"
                                 vc?.subject = myClassDetails[indexPath.row - 1]?.subject[0].subjectName ?? ""
@@ -555,6 +606,7 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                                 if let langKnowns = myClassDetails[indexPath.row - 1]?.faculty?.languagesKnown{
                                     StructOperation.glovalVariable.languageKnowns = langKnowns
                                 }
+                                print("lang...\(StructOperation.glovalVariable.languageKnowns)")
                                 //subject id
                                 if let subId = myClassDetails[indexPath.row - 1]?.subject[0]._id{
                                     StructOperation.glovalVariable.subjectId = subId
@@ -570,13 +622,6 @@ class MyClassesViewController: BaseViewController, UITableViewDelegate, UITableV
                             }
                             
                         }
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                     }else{

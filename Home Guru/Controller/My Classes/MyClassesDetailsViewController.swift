@@ -50,8 +50,9 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var ratingViewBottom: NSLayoutConstraint!
     //var daysleft: String = ""
-    @IBOutlet weak var queryField: UITextField!
+//    @IBOutlet weak var queryField: UITextField!
     
+    @IBOutlet weak var queryField: UITextView!
     @IBOutlet weak var ratingQuery: UITextView!
     @IBOutlet weak var popView: UIView!
     @IBOutlet weak var bottomView: NSLayoutConstraint!
@@ -85,18 +86,22 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
         print("sub charge....\(StructOperation.glovalVariable.hourlyCompenstaion)")
         //class status
         print("class status  .....\(classStatus)")
+        print("isDemo .....\(isDemo)")
+        print("days left .....\(daysLeft)")
         
         // textfield delegate
         queryField.delegate = self
+        queryField.tag = 1
         //rating textfield delegate
         ratingQuery.text = "Add feedback here...."
         ratingQuery.textColor = UIColor.lightGray
+        ratingQuery.tag = 2
         ratingQuery.delegate = self
         
         // get demo value 1 0r 0
         isDemo = StructOperation.glovalVariable.isDemo
         
-        print("profilePic...\(profilePic)")
+        print("demo...\(StructOperation.glovalVariable.isDemo)")
         
         
     }
@@ -203,7 +208,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isDemo == "1" && classStatus == "upcoming" && daysLeft == 0 {
+        if isDemo == "1" && classStatus == "upcoming" && daysLeft >= 0 {
             return 1
         }else if isDemo == "0" && classStatus == "upcoming" && daysLeft == 0{
             return 1
@@ -263,7 +268,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                 } else {
                     print("bad input")
                 }
-                if classType == "1"{
+                if classType == "2"{
                     cell.classTypeImageView.image = UIImage(named: "onlineWhite")
                     cell.classTypeLabel.text = "Online Class"
                 }else{
@@ -278,7 +283,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                 cell.selectionStyle = .none
                 return cell
             }
-        }else if isDemo == "1" && classStatus == "upcoming" && daysLeft == 0{
+        }else if isDemo == "1" && classStatus == "upcoming" && daysLeft >= 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleClassDetailsTableViewCell", for: indexPath) as! ScheduleClassDetailsTableViewCell
             cell.teacherNameLabel.text = facultyName
             cell.subjectLabel.text = subject
@@ -303,7 +308,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
             } else {
                 print("bad input")
             }
-            if classType == "1"{
+            if classType == "2"{
                 cell.classTypeLabel.text = "Online Class"
             }else{
                 cell.classTypeLabel.text = "At Home Clases"
@@ -336,7 +341,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
             } else {
                 print("bad input")
             }
-            if classType == "1"{
+            if classType == "2"{
                 cell.classTypeLabel.text = "Online Class"
             }else{
                 cell.classTypeLabel.text = "At Home Clases"
@@ -371,7 +376,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                 } else {
                     print("bad input")
                 }
-                if classType == "1"{
+                if classType == "2"{
                     cell.classTypeLabel.text = "Online Class"
                 }else{
                     cell.classTypeLabel.text = "At Home Clases"
@@ -413,7 +418,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                 } else {
                     print("bad input")
                 }
-                if classType == "1"{
+                if classType == "2"{
                     cell.classTypeLabel.text = "Online Class"
                 }else{
                     cell.classTypeLabel.text = "At Home Clases"
@@ -456,7 +461,7 @@ class MyClassesDetailsViewController: BaseViewController, UITableViewDelegate, U
                 } else {
                     print("bad input")
                 }
-                if classType == "1"{
+                if classType == "2"{
                     cell.classTypeLabel.text = "Online Class"
                 }else{
                     cell.classTypeLabel.text = "At Home Clases"
@@ -643,31 +648,50 @@ extension MyClassesDetailsViewController{
         return df.string(from: date);
     }
 }
-extension MyClassesDetailsViewController: UITextFieldDelegate{
-    func textFieldDidEndEditing(_ textField: UITextField) {
-      
-            queryString = textField.text!
-            print("text....\(queryString)")
-        
-        
-    }
-}
+//extension MyClassesDetailsViewController: UITextFieldDelegate{
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//
+//            queryString = textField.text!
+//            print("text....\(queryString)")
+//
+//
+//    }
+//
+//}
 extension MyClassesDetailsViewController: UITextViewDelegate{
     func textViewDidEndEditing(_ textView: UITextView) {
-        ratingString = textView.text!
-        print("text...\(ratingString)")
-        
-        if textView.text.isEmpty {
-            textView.text = "Placeholder"
-            textView.textColor = UIColor.lightGray
+       
+        if textView.tag == 1{
+            queryString = textView.text!
+                   print("text...\(queryString)")
+            if textView.text.isEmpty {
+                       textView.text = "Placeholder"
+                       textView.textColor = UIColor.lightGray
+                   }
+        }else{
+            ratingString = textView.text!
+                   print("text...\(ratingString)")
+            if textView.text.isEmpty {
+                       textView.text = "Placeholder"
+                       textView.textColor = UIColor.lightGray
+                   }
         }
+       
        
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.white
+        if textView.tag == 1{
+            if textView.textColor == UIColor.lightGray {
+                      textView.text = nil
+                      textView.textColor = UIColor.white
+                  }
+        }else{
+            if textView.textColor == UIColor.lightGray {
+                      textView.text = nil
+                      textView.textColor = UIColor.white
+                  }
         }
+      
     }
 }
 extension MyClassesDetailsViewController{

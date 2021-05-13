@@ -181,7 +181,7 @@ class SelectGuruViewController: UIViewController, UITableViewDelegate, UITableVi
 }
 extension SelectGuruViewController{
     func floatingButton(){
-              actionButton.addItem(title: "whatsApp", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
+              actionButton.addItem(title: "", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
               
                          
                          if let whatsappURL = URL(string: "https://api.whatsapp.com/send?phone=+919001990019&text=Invitation"), UIApplication.shared.canOpenURL(whatsappURL) {
@@ -193,7 +193,7 @@ extension SelectGuruViewController{
                          }
                      }
 
-                     actionButton.addItem(title: "call", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
+                     actionButton.addItem(title: "", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
                        // do something
                    if let url = URL(string: "tel://\(Constants.contactUs)"), UIApplication.shared.canOpenURL(url) {
                                       if #available(iOS 10, *) {

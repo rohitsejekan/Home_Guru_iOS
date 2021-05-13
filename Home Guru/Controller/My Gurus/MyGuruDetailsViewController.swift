@@ -154,12 +154,23 @@ class MyGuruDetailsViewController: BaseViewController, UITableViewDataSource, UI
                  cell?.aboutDescriptionLabel.text = guruProfileDetails[0].aboutGuru
                  cell?.perClassAmountLabel.text = guruFare
                  cell?.guruImage.image = imageWithGradient(img: cell?.guruImage.image)
+            
+                 
                  cell?.avatar.layer.cornerRadius = 40
                  if guruPic == ""{
                     cell?.avatar.image = UIImage(named: "facultyPlaceholder")
                  }else{
                     cell?.avatar.image = UIImage(named: "\(guruPic)")
                  }
+                 // hide btn on demo value is 1
+                 print("dd...\(UserDefaults.standard.string(forKey: "classDemo"))")
+                 if let demo = UserDefaults.standard.string(forKey: "classDemo"){
+                           if demo == "1"{
+                              cell?.demoBtn.isHidden = true
+                           }else{
+                              cell?.demoBtn.isHidden = false
+                           }
+                        }
                  
                  cell?.selectionStyle = .none
                  return cell!
@@ -174,10 +185,7 @@ class MyGuruDetailsViewController: BaseViewController, UITableViewDataSource, UI
                     cell?.selectionStyle = .none
                     cell?.subjectPlaceholder.constant = 45
                 
-                // hide btn on demo value is 1
-                if StructOperation.glovalVariable.isDemo == "1" {
-                    cell?.demoBtn.isHidden = true
-                }
+                
                 
                     cell?.subjectsLabel.text = guruProfileDetails[0].guruSubjectDetails[indexPath.row - 2].guruPreferedSubject?.subjectName
                 return cell!
@@ -186,10 +194,7 @@ class MyGuruDetailsViewController: BaseViewController, UITableViewDataSource, UI
                         cell?.selectionStyle = .none
                         cell?.subjectPlaceholder.constant = 0
                        
-                        // hide btn on demo value is 1
-                       if StructOperation.glovalVariable.isDemo == "1" {
-                            cell?.demoBtn.isHidden = true
-                        }
+                     
                         cell?.subjectsLabel.text = guruProfileDetails[0].guruSubjectDetails[indexPath.row - 2].guruPreferedSubject?.subjectName
                                return cell!
                 
@@ -211,7 +216,7 @@ class MyGuruDetailsViewController: BaseViewController, UITableViewDataSource, UI
 }
 extension MyGuruDetailsViewController{
     func floatingButton(){
-              actionButton.addItem(title: "whatsApp", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
+              actionButton.addItem(title: "", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
               
                          
                          if let whatsappURL = URL(string: "https://api.whatsapp.com/send?phone=+919001990019&text=Invitation"), UIApplication.shared.canOpenURL(whatsappURL) {
@@ -223,7 +228,7 @@ extension MyGuruDetailsViewController{
                          }
                      }
 
-                     actionButton.addItem(title: "call", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
+                     actionButton.addItem(title: "", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
                        // do something
                    if let url = URL(string: "tel://\(Constants.contactUs)"), UIApplication.shared.canOpenURL(url) {
                                       if #available(iOS 10, *) {

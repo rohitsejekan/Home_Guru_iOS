@@ -13,6 +13,7 @@ import MBProgressHUD
 import SKCountryPicker
 import FirebaseAuth
 import Firebase
+import SwiftyJSON
 class SignUpViewController: BaseViewController {
     
     @IBOutlet weak var mobileNoTextField: UITextField!
@@ -34,14 +35,25 @@ class SignUpViewController: BaseViewController {
     @IBAction func signUpAction(_ sender: UIButton) {
         
         print("sign in\(userDetails)")
+        
         AlamofireService.alamofireService.postRequestWithBodyData(url: URLManager.sharedUrlManager.getParentAuth, details: userDetails) {
             response in
             switch response.result {
-            case .success(let _):
+            case .success(let value):
                 if let status =  response.response?.statusCode {
-                    // user does not exist
-                    if status == 400 {
-                        
+                    print("status is ..\(status)")
+                    if status == 200 || status == 201 {
+                        // user exist
+                        print("success exist")
+                                           // pop alert controller
+                                           let alert = UIAlertController(title: "User Exist", message: "User Already Exist. please login", preferredStyle: UIAlertController.Style.alert)
+                                           alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                                               self.navigationController?.popViewController(animated: true)
+                                           }))
+                                           
+                                           self.present(alert, animated: true, completion: nil)
+                    }else{
+                        print("success not exist")
                         if let OtpFormateNumber = self.userDetails["mobileNo"]{
                             print("your number ....\(OtpFormateNumber)")
                             PhoneAuthProvider.provider().verifyPhoneNumber(OtpFormateNumber as! String, uiDelegate: nil) { (verificationID, error) in
@@ -73,22 +85,50 @@ class SignUpViewController: BaseViewController {
                             
                         }
 
-                    }else{
-                        // user exist
-                        // pop alert controller
-                        let alert = UIAlertController(title: "User Exist", message: "User Already Exist. please login", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
-                            self.navigationController?.popViewController(animated: true)
-                        }))
+                    }
+                }
+            case .failure( _):
+                print("failure")
+                print("success not exist")
+                if let OtpFormateNumber = self.userDetails["mobileNo"]{
+                    print("your number ....\(OtpFormateNumber)")
+                    PhoneAuthProvider.provider().verifyPhoneNumber(OtpFormateNumber as! String, uiDelegate: nil) { (verificationID, error) in
                         
-                        self.present(alert, animated: true, completion: nil)
+                        if error != nil {
+                            
+                            print("error:\(String(describing: error?.localizedDescription))")
+                            
+                            print("1")
+                            
+                            return
+                            
+                        } else {
+                            
+                            print("2")
+                            
+                            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+                            
+                            let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "OTPVerificationViewController") as? OTPVerificationViewController
+                            vc!.userDetails = self.userDetails
+                            self.present(vc!, animated: true, completion: nil)
+                            
+                            
+                        }
+                        
+                        
+                        
                     }
                     
                 }
-            case .failure( _):
-                return
+
+//                if let status =  response.response?.statusCode {
+//                    hud.hide(animated: true)
+//                    self.showAlert(title: "Message", message: (status == 400) ? "User with \(self.userDetails["mobileNo"] ?? "") isn't registered! Please Sign Up!" : Constants.serverDownMessage)
+//                    return
+//                }
             }
         }
+
         
         
         

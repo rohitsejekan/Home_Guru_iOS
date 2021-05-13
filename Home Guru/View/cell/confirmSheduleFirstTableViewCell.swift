@@ -10,6 +10,8 @@ import UIKit
 
 class confirmSheduleFirstTableViewCell: UITableViewCell, UICollectionViewDelegate,UICollectionViewDataSource{
 
+    @IBOutlet weak var nextMonthWidth: NSLayoutConstraint!
+    @IBOutlet weak var nextMonth: UILabel!
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var guruContainer: UIView!
     @IBOutlet weak var GuruSkills: UILabel!

@@ -10,6 +10,8 @@ import UIKit
 
 class SwitchProfileTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var overLay: UIView!
+    @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var studentName: UILabel!
     @IBOutlet weak var studentDOB: UILabel!
     @IBOutlet weak var studentAddress: UILabel!

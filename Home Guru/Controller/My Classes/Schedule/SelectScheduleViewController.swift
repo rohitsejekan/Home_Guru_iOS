@@ -31,6 +31,7 @@ class SelectScheduleViewController: UIViewController {
     var dateBodyCarry = [[String: String]]()
     var selectedTimeSlot: String = ""
     var getCurrentMonth: String = ""
+    var getNextMonth: Int = 0
     var dateFormated: String = ""
     fileprivate lazy var dateFormatter2: DateFormatter = {
         let formatter = DateFormatter()
@@ -69,6 +70,7 @@ class SelectScheduleViewController: UIViewController {
             print("typeweeks..\(typeOfWeek)")
         }
     }
+   
     // function to get dates based on days [1,2,3,4,5,6,7] ex. 1 means monday and so on
       func getUserSelectedDates(_ arrWeekDay: [Int], calender calenderVW: FSCalendar?) -> NSMutableArray {
           let arrUnAvailibilityDates = NSMutableArray()
@@ -238,12 +240,18 @@ class SelectScheduleViewController: UIViewController {
                             
                             }
                         }
+            if let cType = UserDefaults.standard.string(forKey: "classType"){
+                let dict = ["date": "\(dateFormated)", "classType": "\(cType)"]
+                dateBodyCarry.append(dict)
+            }
+            
                         StructOperation.glovalVariable.subjectDatesSlot = dateBodyCarry
+            
                         vc.subjectDatesSlot = dateBodyCarry
                         vc.bookDemo = demoClass
                         vc.reschedle = reSchedule
                         vc.guruFare = guruFare
-                        print("guruFare........\(guruFare)")
+                        print("guruFare........\(datesStringBody)")
                         vc.guruProfileDetails = guruProfileDetails
                         vc.selectedDate.append(selectedTimeSlot)
                         vc.selectedTimeSlot = dateFormated
@@ -260,10 +268,16 @@ class SelectScheduleViewController: UIViewController {
               vc.hidesBottomBarWhenPushed = true
               vc.slotDetails = slotDetails
               vc.guruAvatar = guruProfile
+            if getNextMonth != 0 {
+                vc.getNextMonth = getNextMonth
+            }
+              
               for typeDates in datesStringBody{
-                 
-                      let dict = ["date": "\(typeDates)", "classType": "1"]
-                                     dateBodyCarry.append(dict)
+                if let ct = UserDefaults.standard.string(forKey: "classType"){
+                    let dict = ["date": "\(typeDates)", "classType": ct]
+                    dateBodyCarry.append(dict)
+                }
+          
                   
                  
               }
@@ -277,7 +291,13 @@ class SelectScheduleViewController: UIViewController {
                   }
               }
               StructOperation.glovalVariable.subjectDatesSlot = dateBodyCarry
-              vc.subjectDatesSlot = dateBodyCarry
+            if dateBodyCarry.isEmpty{
+                vc.subjectDatesSlot = dateBodyCarry
+            }else{
+                dateBodyCarry.removeAll()
+                vc.subjectDatesSlot = dateBodyCarry
+            }
+              
               vc.bookDemo = demoClass
               vc.reschedle = reSchedule
               vc.guruFare = guruFare
@@ -332,16 +352,29 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
               let nextweeks = Calendar.current.date(byAdding: .weekOfYear, value: Int(StructOperation.glovalVariable.noOfweeks) ?? 1, to: firstDate!)
                print("next week....\(nextweeks)")
             print("datesRange contains 1: \(datesRange!)")
+           
                print("firstDate 1: \(firstDate!)")
             var range = datesRange(from: firstDate!, to: nextweeks!)
             // remove last is used because if user selects one week with preference as weekend , it selects 3 weekends date instead of two weekend dates
             print("se 2.......\(range.removeLast())")
               // remove last is used because if user selects one week with preference as weekend , it selects 3 weekends date instead of two weekend dates
               lastDate = range.last
-                             
+                    // get next month name based on date selection
+            print("first date month...\(range.first!.get(.month))")
+            print("last date month...\(range.last!.get(.month))")
+               let currentMonth = range.first!.get(.month)
+                if currentMonth != range.last!.get(.month){
+                    getNextMonth = range.last!.get(.month)
+                }else{
+                    getNextMonth = 0
+            }
+            
+                                        
+                    // get next month name based on date selection
               // display selected dates in calendar
               for d in range {
                       calendar.select(d)
+                     
                      let last4 = String(dateFormatter2.string(from: d).suffix(2))
                     datesString.append(last4)
                     datesStringBody.append(String(dateFormatter2.string(from: d)))
@@ -352,6 +385,7 @@ extension SelectScheduleViewController: FSCalendarDelegate, FSCalendarDataSource
                       print("date contains: \(date)")
                   arrDates.contains(dateFormatter2.string(from: date))
                   print("datesRange contains new: \(datesRange!))")
+                  print("month..: \(getNextMonth))")
 
                     return
                 }
@@ -589,5 +623,15 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM"
         return dateFormatter.string(from: self)
+    }
+}
+// get month from date
+extension Date {
+    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+        return calendar.dateComponents(Set(components), from: self)
+    }
+
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+        return calendar.component(component, from: self)
     }
 }

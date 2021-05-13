@@ -98,6 +98,7 @@
 		01C481E42594ED8A00FBFD93 /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481E32594ED8A00FBFD93 /* NotificationsTableViewCell.swift */; };
 		01C481EF25950B4700FBFD93 /* NotificationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481EE25950B4700FBFD93 /* NotificationDetailsViewController.swift */; };
 		01C481F1259518BE00FBFD93 /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C481F0259518BE00FBFD93 /* PaymentHistoryViewController.swift */; };
+		01DDCB522645611200002CB6 /* gradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DDCB512645611200002CB6 /* gradientView.swift */; };
 		01E130CE253DA82500F63673 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E130CD253DA82500F63673 /* AppDelegate.swift */; };
 		01E130D5253DA82500F63673 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E130D3253DA82500F63673 /* Main.storyboard */; };
 		01E130D7253DA82F00F63673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01E130D6253DA82F00F63673 /* Assets.xcassets */; };
@@ -258,6 +259,7 @@
 		01C481E32594ED8A00FBFD93 /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		01C481EE25950B4700FBFD93 /* NotificationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailsViewController.swift; sourceTree = "<group>"; };
 		01C481F0259518BE00FBFD93 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHistoryViewController.swift; sourceTree = "<group>"; };
+		01DDCB512645611200002CB6 /* gradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gradientView.swift; sourceTree = "<group>"; };
 		01E130CA253DA82500F63673 /* Home Guru Student.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Home Guru Student.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01E130CD253DA82500F63673 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01E130D4253DA82500F63673 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -674,6 +676,7 @@
 				011688AE26007609005E1701 /* DynamicHeightCollectionView.swift */,
 				012F3D3826089A5600325823 /* customTextField.swift */,
 				01629C33261EDFCA00887B7D /* CollectionViewFlowLayout.swift */,
+				01DDCB512645611200002CB6 /* gradientView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 				0146F438258F18AF008537B8 /* MyGuruDetailsTableViewCell.swift in Sources */,
 				01F826C0258A387E00AA03FA /* RegisterStudentTableViewCell.swift in Sources */,
 				0153073E2578C44900F98F1A /* HomeViewController.swift in Sources */,
+				01DDCB522645611200002CB6 /* gradientView.swift in Sources */,
 				01E8C05E26355E7600EAA9EB /* HttpUtility.swift in Sources */,
 				016EEB7425403B0E00FE7351 /* Constants.swift in Sources */,
 				0146A6BB2642BEF10060FB6E /* profileSwitchViewController.swift in Sources */,

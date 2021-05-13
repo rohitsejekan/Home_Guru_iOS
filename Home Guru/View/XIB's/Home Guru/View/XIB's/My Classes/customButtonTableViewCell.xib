@@ -23,25 +23,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEt-fl-TyB">
-                        <rect key="frame" x="60" y="25" width="200" height="50"/>
+                        <rect key="frame" x="60" y="15" width="200" height="60"/>
                         <color key="backgroundColor" red="0.98431372549999996" green="0.4549019608" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="200" id="DBy-R6-ORI"/>
-                            <constraint firstAttribute="height" constant="50" id="xYh-ke-SEk"/>
-                        </constraints>
                         <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="19"/>
                         <state key="normal" title="NEXT">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
-                            <action selector="nextBtnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ykT-7m-SOr"/>
+                            <action selector="nextBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OwU-cQ-u10"/>
                         </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.035294117649999998" blue="0.086274509799999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstItem="zEt-fl-TyB" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="IUU-1B-rUc"/>
-                    <constraint firstItem="zEt-fl-TyB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="mQL-gj-uHS"/>
+                    <constraint firstAttribute="trailing" secondItem="zEt-fl-TyB" secondAttribute="trailing" constant="60" id="1a1-zD-F2C"/>
+                    <constraint firstItem="zEt-fl-TyB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="AIG-Wb-bBt"/>
+                    <constraint firstAttribute="bottom" secondItem="zEt-fl-TyB" secondAttribute="bottom" constant="15" id="fac-Fi-n72"/>
+                    <constraint firstItem="zEt-fl-TyB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="60" id="pDu-nE-JJk"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

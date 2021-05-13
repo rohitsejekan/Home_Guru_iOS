@@ -8,13 +8,16 @@
 
 import UIKit
 import SwiftyJSON
+import NVActivityIndicatorView
 protocol updateProfile: class {
     func updateP()
 }
 class editProfileViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     var updateDelegate: updateProfile!
+    @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
     var editDetails: [String: String] = [:]
     var sendEditedDetails: [String: String] = [:]
+
     //for datepicker
        var studentDates: String = ""
     // for date picker ends
@@ -50,6 +53,7 @@ class editProfileViewController: BaseViewController, UITableViewDelegate, UITabl
                 cell.editName.delegate = self
                 cell.editName.tag = 0
                 cell.datePickerDelegate = self
+            cell.editName.text = editDetails["name"]
 //                cell.editDate.delegate = self
 //                cell.editDate.tag = 1
 //                cell.editYear.delegate = self
@@ -131,10 +135,11 @@ class editProfileViewController: BaseViewController, UITableViewDelegate, UITabl
         }
     }
     private func goAndEdit(){
+        activityLoaderView.startAnimating()
              sendEditedDetails["name"] = editDetails["name"]
              sendEditedDetails["stdClass"] = selectedClass
              sendEditedDetails["studentId"] = StructOperation.glovalVariable.studentId
-             sendEditedDetails["dob"] = "2020-02-03"
+             sendEditedDetails["dob"] = studentDates
                 AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.updateStudent, details: sendEditedDetails) {
                 response in
                    switch response.result {
@@ -152,6 +157,7 @@ class editProfileViewController: BaseViewController, UITableViewDelegate, UITabl
                             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
                             self.present(alert, animated: true, completion: nil)
                             DispatchQueue.main.async {
+                                self.activityLoaderView.stopAnimating()
                                 self.tableView.reloadData()
                             }
                             

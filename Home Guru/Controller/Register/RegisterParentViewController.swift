@@ -23,12 +23,12 @@ class RegisterParentViewController: BaseViewController, UITableViewDataSource, U
     var pickerType : StateCityPickerType = .state
     var userDetails : [String:Any] = [:]
     var cityStateList : [String:[String]] = [:]
+    var hud : MBProgressHUD = MBProgressHUD()
 //    var address : [String:Any] = ["location": ["coordinates" : [0.0,0.0],"type": "point"],"landmark":""]
     var address : [String:Any] = ["location": ["coordinates" : [0.0,0.0]],"landmark":""]
     var tag = 1
     var noOfStudents = 1
     var isAddressSet = false
-    var hud : MBProgressHUD = MBProgressHUD()
 //    var fromSideMenu : Bool = false
 //    var navigateDelegate : RegisterNavigateProtocol?
 

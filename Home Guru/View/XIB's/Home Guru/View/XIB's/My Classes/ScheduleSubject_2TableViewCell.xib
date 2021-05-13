@@ -45,7 +45,7 @@
             <connections>
                 <outlet property="sub_2Name" destination="cYH-4e-nQb" id="dF9-rb-b3f"/>
             </connections>
-            <point key="canvasLocation" x="60.869565217391312" y="86.383928571428569"/>
+            <point key="canvasLocation" x="180" y="64"/>
         </tableViewCell>
     </objects>
     <resources>

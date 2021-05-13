@@ -63,6 +63,7 @@ class WalletViewController: BaseViewController{
 
     @IBAction func rechargeAction(_ sender: UIButton) {
         let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "RechargeWalletViewController") as? RechargeWalletViewController
+        
         self.navigationController?.pushViewController(vc!, animated: true)
         
   

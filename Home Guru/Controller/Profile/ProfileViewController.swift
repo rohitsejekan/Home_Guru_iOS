@@ -67,7 +67,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                            response in
                               switch response.result {
                               case .success(let value):
-                                  if let status =  response.response?.statusCode {
+                                if let status =  response.response?.statusCode {
                                   print("guru p ..\(status)")
                                    print("g p...\(value)")
                                       if status == 200 || status == 201 {
@@ -174,6 +174,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // navigate to edit profile
     let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "editProfileViewController") as! editProfileViewController
         vc.updateDelegate = self
+        vc.editDetails["name"] = studentName
+        vc.studentDates = studentDob
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

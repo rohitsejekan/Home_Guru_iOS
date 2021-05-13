@@ -165,7 +165,8 @@ class URLManager {
     }
     // add attachment
     var addAttachment: String {
-        return baseURL + "/parent/student/updateattachments/"
+        return baseURL + "/parent/student/updateattachments"
+        
     }
     // update student
     

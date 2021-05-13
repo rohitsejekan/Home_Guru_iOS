@@ -45,6 +45,9 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
                               self.studentDetails[currentIndex]["start"] = selectedBoard
                              studentDetails[currentIndex]["name"] = getCheckedName[currentIndex]
                                   print("picker 2 value ....\(self.studentDetails[currentIndex]["start"])")
+            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+                   hideUnhidePickerView(view: self.outerPickerView2, value: true)
+            reload(tableView: self.tableView)
              
          }else{
                     selectedClass = classes[row]
@@ -52,33 +55,37 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
                                        print("picker 1....\(selectedClass)")
                                        print("picker 1 current index....\(currentIndex)")
                                         studentDetails[currentIndex]["name"] = getCheckedName[currentIndex]
-                                       self.studentDetails[currentIndex]["duration"] = selectedClass
+                                       self.studentDetails[currentIndex]["duration"] = ScheduleTime
                             
                                        print("picker 1 value ....\(self.studentDetails[currentIndex]["duration"])")
+            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+                   hideUnhidePickerView(view: self.outerPickerDurationView, value: true)
+            reload(tableView: self.tableView)
          }
              
     }
     func selectDuration(index: Int) {
-        if outerPickerDurationView.isHidden{
-            outerPickerDurationView.isHidden = false
-        }
-        currentIndex = index
+        
+        timeTruncate = String(pickerViewTime.date.string(format: "HH:mm"))
+                   let arr = timeTruncate.prefix(36)
+                   ScheduleTime = String(arr.suffix(11))
+            
+               print("picker date1.....\(ScheduleTime)")
+               print("picker date.....\(timeTruncate)")
+                self.studentDetails[index]["duration"] = "\(timeTruncate)"
+               if outerPickerView2.isHidden{
+                   outerPickerView2.isHidden = false
+               }
+               currentIndex = index
     }
     
     func getStartTime(index: Int) {
        
-        
-        timeTruncate = String(pickerViewTime.date.string(format: "HH:mm"))
-            let arr = timeTruncate.prefix(36)
-            ScheduleTime = String(arr.suffix(11))
-     
-        print("picker date.....\(ScheduleTime)")
-        print("picker date.....\(timeTruncate)")
-         self.studentDetails[index]["duration"] = "\(timeTruncate)"
-        if outerPickerView2.isHidden{
-            outerPickerView2.isHidden = false
+        if outerPickerDurationView.isHidden{
+            outerPickerDurationView.isHidden = false
         }
         currentIndex = index
+       
     }
     
     func serverToLocal(date:String) -> Date? {
@@ -118,8 +125,9 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
         pickerViewDuration.delegate = self
         pickerViewDuration.dataSource = self
         
-       // pickerViewTime.delegate = self
+        //pickerViewTime.delegate = self
         //pickerViewTime.dataSource = self
+        
         
     }
     
@@ -153,12 +161,12 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
                 cell?.subjectName.layer.cornerRadius = 8
                 cell?.subjectName.layer.borderColor = ColorPalette.homeGuruOrangeColor.cgColor
                        cell?.subjectName.layer.borderWidth = 1
-            if let duration = studentDetails[indexPath.row]["duration"] as? String{
+            if let duration = studentDetails[indexPath.row]["start"] as? String{
 
             cell?.selectDuration.setTitle(duration, for: .normal)
 
             }
-            if let startTime = studentDetails[indexPath.row]["start"] as? String{
+            if let startTime = studentDetails[indexPath.row]["duration"] as? String{
 
                       cell?.selectStartTime.setTitle(startTime, for: .normal)
 
@@ -241,7 +249,7 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
         }else if indexPath.row < getCheckedName.count{
             return 200
         }else{
-            return 100
+            return 80
         }
         
     }
@@ -265,7 +273,9 @@ class ScheduleDurationTimeViewController: BaseViewController, UITableViewDelegat
           backBtn.layer.cornerRadius = 5
          pickerViewTime.datePickerMode = .time
         
-       
+        // time interval in quater
+       pickerViewTime.minuteInterval = 30
+        
        // hideUnhidePickerView(view: self.outerPickerView, value: true)
 //        hideUnhidePickerView(view: self.outerPickerView2, value: true)
         

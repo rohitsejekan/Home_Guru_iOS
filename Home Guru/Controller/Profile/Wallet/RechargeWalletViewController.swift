@@ -18,6 +18,9 @@ class RechargeWalletViewController: BaseViewController,RazorpayPaymentCompletion
     var paymentSuccess: [String: String] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //available points
+        availablePointsLabel.text = "Available Points: " + "\(StructOperation.glovalVariable.points)"
              razorpay = RazorpayCheckout.initWithKey("rzp_test_TLpg89CUg8B1bI", andDelegate: self)
 //        razorpay = RazorpayCheckout.initWithKey("rzp_live_NBgNfxcb6H93HM", andDelegate: self)
         

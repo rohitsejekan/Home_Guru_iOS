@@ -10,8 +10,10 @@
 import UIKit
 import Photos
 import SwiftyJSON
+import NVActivityIndicatorView
 class addProfileViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate {
     
+    @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
     //for datepicker
     var studentDates: String = ""
     // for date picker ends
@@ -129,7 +131,7 @@ class addProfileViewController: BaseViewController, UITableViewDelegate, UITable
         if indexPath.row == 1{
             return 70
         }else{
-            return UITableView.automaticDimension
+            return 55
         }
         
     }
@@ -159,6 +161,7 @@ class addProfileViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     private func addStudent(){
+        activityLoaderView.startAnimating()
         if(self.userFrontImage != nil){
             studentInfo["name"] = studentDetails["name"]
 //            studentInfo["stdClass"] = studentDetails["stdClass"]
@@ -180,6 +183,7 @@ class addProfileViewController: BaseViewController, UITableViewDelegate, UITable
                                                  
                        DispatchQueue.main.async {
                            self.uploadImage(stuId: self.studentId)
+                        
                         }
                    }
                       }
@@ -197,7 +201,10 @@ class addProfileViewController: BaseViewController, UITableViewDelegate, UITable
     private func uploadImage(stuId: String){
         
         attachmentDetails["studentId"] = stuId
-        attachmentDetails["profilePic"] = "ImageName"
+        if let imgInfo = self.userFrontImage?.pngData(){
+            attachmentDetails["profilePic"] = imgInfo
+        }
+        
         print("attachment...\(attachmentDetails)")
         AlamofireService.alamofireService.postMultiFormRequest(url: URLManager.sharedUrlManager.addAttachment, details: attachmentDetails,imageDetails:imageDetails) {
         response in
@@ -213,11 +220,13 @@ class addProfileViewController: BaseViewController, UITableViewDelegate, UITable
 
                 DispatchQueue.main.async {
                     self.addProfileTV.reloadData()
+                    self.activityLoaderView.stopAnimating()
                  }
             }
                }
-           case .failure( _):
-               print("failure")
+           case .failure( let error):
+            self.activityLoaderView.stopAnimating()
+            print("failure.....\(error.localizedDescription)")
                     return
                 }
            }
@@ -226,28 +235,31 @@ class addProfileViewController: BaseViewController, UITableViewDelegate, UITable
 //        if(self.userFrontImage != nil)
 //              {
 //                  //self.activityIndicator.isHidden = false
-//                  manager?.uploadImage(data: (self.userFrontImage?.pngData())!,stuId: stuId, completionHandler: { (response) in
+//                if let imgfront = self.userFrontImage?.pngData(){
+//                    manager?.uploadImage(data: imgfront,stuId: stuId, completionHandler: { (response) in
 //
-//                      if(response.path.isEmpty == false)
-//                      {
+//                        if(response.path.isEmpty == false)
+//                        {
 //
-//                          DispatchQueue.main.async {
-//                             // self.activityIndicator.isHidden = true
-//                              let alert = UIAlertController(title: "Image", message: "Image uploaded successfully", preferredStyle: .alert)
-//                              let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//                              alert.addAction(okAction)
-//                              self.present(alert, animated: true)
-//                          }
-//                      }else{
-//                        DispatchQueue.main.async {
-//                        // self.activityIndicator.isHidden = true
-//                        let alert = UIAlertController(title: "Image", message: "Image uploaded unsuccessfully", preferredStyle: .alert)
-//                        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//                        alert.addAction(okAction)
+//                            DispatchQueue.main.async {
+//                               // self.activityIndicator.isHidden = true
+//                                let alert = UIAlertController(title: "Image", message: "Image uploaded successfully", preferredStyle: .alert)
+//                                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                                alert.addAction(okAction)
 //                                self.present(alert, animated: true)
-//                                                 }
-//                    }
-//                  })
+//                            }
+//                        }else{
+//                          DispatchQueue.main.async {
+//                          // self.activityIndicator.isHidden = true
+//                          let alert = UIAlertController(title: "Image", message: "Image uploaded unsuccessfully", preferredStyle: .alert)
+//                          let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                          alert.addAction(okAction)
+//                                  self.present(alert, animated: true)
+//                                                   }
+//                      }
+//                    })
+//
+//                }
 //              }
     }
 

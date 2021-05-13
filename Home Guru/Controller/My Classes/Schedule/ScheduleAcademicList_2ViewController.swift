@@ -41,7 +41,7 @@ class ScheduleAcademicList_2ViewController: UIViewController, IndicatorInfoProvi
         //floating button ends
         tableView.register(UINib(nibName: "ScheduleSubject_2TableViewCell", bundle: nil), forCellReuseIdentifier: "ScheduleSubject_2")
         // custom userupdate cell
-                          tableView.register(UINib(nibName: "userUpdateTableViewCell", bundle: nil), forCellReuseIdentifier: "userUpdate")
+        tableView.register(UINib(nibName: "userUpdateTableViewCell", bundle: nil), forCellReuseIdentifier: "userUpdate")
         backBtn.layer.cornerRadius = 5
         getGroupCat()
         //nav title

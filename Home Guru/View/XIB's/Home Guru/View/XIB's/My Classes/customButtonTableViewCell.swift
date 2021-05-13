@@ -19,10 +19,10 @@ class customButtonTableViewCell: UITableViewCell {
         // Initialization code
         self.btn.layer.cornerRadius = 5
     }
-
-    @IBAction func nextBtnClicked(_ sender: Any) {
+    @IBAction func nextBtn(_ sender: UIButton) {
         goToDelegate.gotoScreen()
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

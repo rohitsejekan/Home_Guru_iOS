@@ -30,8 +30,10 @@ struct subjectInfo {
 struct facultyInformation{
     var name: String = ""
     var profilePic: profilepic?
+    var gender: String = ""
     init(fi: JSON) {
         self.name = fi["name"].stringValue
+        self.gender = fi["gender"].stringValue
         self.profilePic = profilepic(pc: fi["profilePic"])
     }
 }

@@ -13,16 +13,21 @@ import XLPagerTabStrip
 import NVActivityIndicatorView
 import Kingfisher
 class currentBookingViewController: UIViewController ,IndicatorInfoProvider{
-  
+    
     var norecord: Bool?
     @IBOutlet weak var activityLoaderView: NVActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     var bookingStatus = [String: String]()
     var currentBook = [currentPastBooking]()
     var childNumber = ""
+    var stuId: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // student id
+        if let id = UserDefaults.standard.string(forKey: "studentId"){
+            //UserDefaults.standard.set(id, forKey: "prevstudentId") = id
+            UserDefaults.standard.set(id, forKey: "prevstudentId")
+        }
         // Do any additional setup after loading the view.
         // custom cell
         tableView.estimatedRowHeight = 80.0
@@ -33,101 +38,115 @@ class currentBookingViewController: UIViewController ,IndicatorInfoProvider{
         tableView.register(UINib(nibName: "userUpdateTableViewCell", bundle: nil), forCellReuseIdentifier: "userUpdate")
         currentBooking()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        if let id = UserDefaults.standard.string(forKey: "studentId"), let previd = UserDefaults.standard.string(forKey: "prevstudentId"){
+            if previd != id{
+                currentBooking()
+            }
+        }
+    }
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-          return IndicatorInfo(title: "\(childNumber)")
-      }
+        return IndicatorInfo(title: "\(childNumber)")
+    }
+    
     override var preferredStatusBarStyle : UIStatusBarStyle {
-         return UIStatusBarStyle.default
-     }
+        return UIStatusBarStyle.default
+    }
     
     func gotoNorecord(){
         if let id = UserDefaults.standard.string(forKey: "studentId"){
-                   
-                   activityLoaderView.startAnimating()
-                          bookingStatus["studentId"] = id
-                          bookingStatus["type"] = "current"
-                   AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.currentBooking, details: bookingStatus) {
-                               response in
-                               switch response.result {
-                               case .success(let value):
-                                   if let status =  response.response?.statusCode {
-                                       print("status is ..\(status)")
-                                       if status == 200 || status == 201 {
-                                           let val = JSON(value)
-                                           self.norecord = true
-                                           print("valbook...\(val)")
-                                         
-                                           DispatchQueue.main.async {
-                                               self.activityLoaderView.stopAnimating()
-                                               self.tableView.reloadData()
-                                               print("booking...\(self.currentBook)")
-                                           }
-                                       } else {
-                                           print("failure 402")
-                                       }
-                                   }
-                               case .failure( _):
-                                   
-                                   print("failure")
-                                   
-                               }
-                           }
-                   
-               }
-              
+            
+            
+            bookingStatus["studentId"] = id
+            bookingStatus["type"] = "current"
+            AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.currentBooking, details: bookingStatus) {
+                response in
+                switch response.result {
+                case .success(let value):
+                    if let status =  response.response?.statusCode {
+                        print("status is ..\(status)")
+                        if status == 200 || status == 201 {
+                            let val = JSON(value)
+                            self.norecord = true
+                            print("valbook...\(val)")
+                            
+                            DispatchQueue.main.async {
+                                self.activityLoaderView.stopAnimating()
+                                self.tableView.reloadData()
+                                print("booking...\(self.currentBook)")
+                            }
+                        } else {
+                            print("failure 402")
+                        }
+                    }
+                case .failure( _):
+                    
+                    print("failure")
+                    
+                }
+            }
+            
+        }
+        
     }
-
+    
     func currentBooking(){
         if let id = UserDefaults.standard.string(forKey: "studentId"){
             
             activityLoaderView.startAnimating()
-                   bookingStatus["studentId"] = id
-                   bookingStatus["type"] = "current"
-            AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.currentBooking, details: bookingStatus) {
-                        response in
-                        switch response.result {
-                        case .success(let value):
-                            if let status =  response.response?.statusCode {
-                                print("status is ..\(status)")
-                                if status == 200 || status == 201 {
-                                    let val = JSON(value)
-                                    self.norecord = false
-                                    print("valbook...\(val)")
-                                    for arr in val.arrayValue{
-                                        self.currentBook.append(currentPastBooking(json: arr))
-                                    }
-                                    DispatchQueue.main.async {
-                                        self.activityLoaderView.stopAnimating()
-                                        self.tableView.reloadData()
-                                        print("booking...\(self.currentBook)")
-                                    }
-                                } else {
-                                    print("failure 400")
+            bookingStatus["studentId"] = id
+            bookingStatus["type"] = "current"
+            AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.currentBooking, details: bookingStatus) { [weak self] response  in
+                guard let self = self else { return }
+                switch response.result {
+                case .success(let value):
+                    if let status =  response.response?.statusCode {
+                        print("status is ..\(status)")
+                        if status == 200 || status == 201 {
+                            let val = JSON(value)
+                            self.norecord = false
+                            print("valbook...\(val)")
+                            if self.currentBook.isEmpty{
+                                for arr in val.arrayValue{
+                                    self.currentBook.append(currentPastBooking(json: arr))
                                 }
+                                DispatchQueue.main.async {
+                                    self.activityLoaderView.stopAnimating()
+                                    self.tableView.reloadData()
+                                    print("booking...\(self.currentBook)")
+                                }
+                            }else{
+                                self.currentBook.removeAll()
+                                self.currentBooking()
                             }
-                        case .failure( _):
-                            self.activityLoaderView.stopAnimating()
-                            self.gotoNorecord()
-                            print("failure1")
                             
+                        } else {
+                            print("failure 400")
                         }
                     }
+                case .failure( _):
+                    self.activityLoaderView.stopAnimating()
+                    self.gotoNorecord()
+                    print("failure1")
+                    
+                }
+            }
             
         }
-       
-
+        
+        
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension currentBookingViewController: UITableViewDelegate, UITableViewDataSource{
@@ -144,16 +163,21 @@ extension currentBookingViewController: UITableViewDelegate, UITableViewDataSour
         if norecord == false{
             let cell = tableView.dequeueReusableCell(withIdentifier: "currentPastCell", for: indexPath) as! currentPastBookingTableViewCell
             cell.containerView.layer.cornerRadius = 7
-                  cell.subjectName.text = currentBook[indexPath.row].subject[0].subjectName
-                  cell.facultyName.text = currentBook[indexPath.row].faculty?.name
-                  cell.scheduleDate.text = currentBook[indexPath.row].date
+            cell.subjectName.text = currentBook[indexPath.row].subject[0].subjectName
+            cell.facultyName.text = currentBook[indexPath.row].faculty?.name
+            cell.scheduleDate.text = currentBook[indexPath.row].date
             cell.facultyImage.layer.cornerRadius = 25
             cell.selectionStyle = .none
             
             if let img = currentBook[indexPath.row].faculty?.profilePic?.image_url{
                 print("img...\(img)")
                 if img == ""{
-                    cell.facultyImage.image = UIImage(named: "facultyPlaceholder")
+                    if currentBook[indexPath.row].faculty?.gender == "maile"{
+                        cell.facultyImage.image = UIImage(named: "facultyPlaceholder")
+                    }else{
+                        cell.facultyImage.image = UIImage(named: "Avatar 2")
+                    }
+                    
                 }else{
                     //cell.facultyImage.image = UIImage(named: "\(img)")
                     let url = URL(string: "\(img)")
@@ -162,13 +186,13 @@ extension currentBookingViewController: UITableViewDelegate, UITableViewDataSour
                 }
             }
             
-                  return cell
+            return cell
         }else{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "userUpdate", for: indexPath) as! userUpdateTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "userUpdate", for: indexPath) as! userUpdateTableViewCell
             cell.selectionStyle = .none
-                return cell
+            return cell
         }
-      
+        
     }
     
     

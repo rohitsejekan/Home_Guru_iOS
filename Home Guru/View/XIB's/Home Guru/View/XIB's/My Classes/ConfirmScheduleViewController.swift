@@ -22,7 +22,9 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
     var bookDemo: Bool?
     var reschedle: Bool?
     var guruAvatar: String = ""
-    var subjectDatesSlot: [[String: String]] = [[:]]
+    var getNextMonth: Int = 0
+    var subjectDatesSlot : [[String: String]] = [[:]]
+    var months: [String] = ["Janauary", "Feburary","March","April","May","June","July","Augest","September","October","Novemeber","Decmeber"]
     @IBOutlet weak var backBtn: UIButton!
     var getSubjectSlots: [[String: Any]] = [[:]]
     var selectedTimeSlot: String = ""
@@ -56,7 +58,8 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
         //reSchedule()
         // check demo
         print("demo......\(bookDemo)")
-        print("classes......\(StructOperation.glovalVariable.subjectDatesSlot)")
+        print("classes......\(subjectDatesSlot)")
+        
     }
     func reSchedule(){
         
@@ -67,7 +70,10 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
         confirmBook["classType"] = classTypeId
         confirmBook["is_demo"] = StructOperation.glovalVariable.isDemo
         confirmBook["facultyId"] = guruId
-        confirmBook["studentId"] = "2"
+        
+        if let id = UserDefaults.standard.string(forKey: "studentId"){
+           confirmBook["studentId"] = id
+        }
         //                confirmBook["studentId"] = StructOperation.glovalVariable.studentId
         confirmBook["noOfHours"] = StructOperation.glovalVariable.timeDifference
         //               confirmBook["hourlyCompensation"] = guruFare
@@ -155,7 +161,16 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
         //               confirmBook["hourlyCompensation"] = guruFare
         //        confirmBook["hourlyCompensation"] = UserDefaults.standard.string(forKey: "totalFare")
         confirmBook["hourlyCompensation"] = guruFare
-        confirmBook["classes"] = StructOperation.glovalVariable.subjectDatesSlot
+        if bookDemo == false{
+            confirmBook["classes"] = StructOperation.glovalVariable.subjectDatesSlot
+        }else{
+            for arr in subjectDatesSlot.reversed(){
+                confirmBook["classes"] = arr
+                break
+            }
+            
+        }
+        
         
         print("confirm schedule book...\(confirmBook)")
         
@@ -188,17 +203,7 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                         
                     }
                     if status == 400{
-                        // pop alert controller
-                        let val = JSON(value)
-                        print("message..\(val)")
-                        let alert = UIAlertController(title: "Booking", message: "\(val["message"])", preferredStyle: UIAlertController.Style.alert)
-                        
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
-                            
-                            
-                            self.navigationController?.popToRootViewController(animated: true)
-                        }))
-                        self.present(alert, animated: true, completion: nil)
+                        self.confirmBookingJSON()
                         
                     }
                 }
@@ -213,10 +218,91 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
         
         
     }
+    
+    //string message
+    func confirmBookingJSON(){
+          
+          slotDetails = UserDefaults.standard.value(forKey: "dict") as! [String: Any]
+          userSubId = UserDefaults.standard.object(forKey: "subjectId") as! [String]
+          classTypeId = UserDefaults.standard.string(forKey: "classType") ?? ""
+          
+          guruId = UserDefaults.standard.string(forKey: "guruId") ?? ""
+          
+          
+//          for timeSlot in getSubjectSlots{
+//              let timeString: String = timeSlot["start"] as? String ?? ""
+//
+//              self.getTimeSlot.append(String(timeString.prefix(3)))
+//
+//          }
+          print("got subjectt...\(getTimeSlot)")
+          
+          confirmBook["subject"] = userSubId
+          confirmBook["timeSlotFrom"] = StructOperation.glovalVariable.timeSlotFrom
+          confirmBook["classType"] = classTypeId
+          if bookDemo == true{
+              confirmBook["is_demo"] = "1"
+          }else{
+              confirmBook["is_demo"] = "0"
+          }
+          
+          confirmBook["facultyId"] = guruId
+          //        confirmBook["studentId"] = "2"
+          if let id = UserDefaults.standard.string(forKey: "studentId"){
+              confirmBook["studentId"] = id
+          }
+          
+          //        confirmBook["studentId"] = StructOperation.glovalVariable.studentId
+          confirmBook["noOfHours"] = getTimeSlot
+          //               confirmBook["hourlyCompensation"] = guruFare
+          //        confirmBook["hourlyCompensation"] = UserDefaults.standard.string(forKey: "totalFare")
+          confirmBook["hourlyCompensation"] = guruFare
+          confirmBook["classes"] = StructOperation.glovalVariable.subjectDatesSlot
+          
+          print("confirm schedule book...\(confirmBook)")
+          
+          //        parentDetails["mobileNo"] = UserDefaults.standard.string(forKey: Constants.mobileNo)
+          AlamofireService.alamofireService.postRequestWithBodyDataAndToken(url: URLManager.sharedUrlManager.makeBooking, details: confirmBook) {
+              response in
+              switch response.result {
+              case .success(let value):
+                  if let status =  response.response?.statusCode {
+                      print("status issw ..\(status)")
+                      print("value...\(value)")
+
+                      if status == 400{
+                        
+                          let val = JSON(value)
+                    
+                          print("message..\(val)")
+                          let alert = UIAlertController(title: "Booking", message: "\(val["message"])", preferredStyle: UIAlertController.Style.alert)
+                          
+                          alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                              
+                              
+                              self.navigationController?.popToRootViewController(animated: true)
+                          }))
+                          self.present(alert, animated: true, completion: nil)
+
+                          
+                      }
+                  }
+              case .failure( _):
+                  print("failure...\(response.result)")
+                  return
+              }
+          }
+          
+          
+          print("confirm")
+          
+          
+      }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if bookDemo == false{
             return getSubjectSlots.count + 3
         }else if reschedle == true{
+            
             return 3
         }
         else{
@@ -234,10 +320,19 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                 cell.guruName.text = guruProfileDetails[0].name
                 if guruAvatar != ""{
                     cell.avatar.image = UIImage(named: "\(guruAvatar)")
+                    cell.avatar.layer.cornerRadius = 25
                 }else{
                     cell.avatar.image = UIImage(named: "facultyPlaceholder")
+                    cell.avatar.layer.cornerRadius = 25
                 }
-                
+                if getNextMonth != 0{
+                    if cell.nextMonthWidth.constant == 0{
+                        cell.nextMonthWidth.constant = 110
+                    }
+                    cell.nextMonth.text = months[getNextMonth - 1]
+                }else{
+                    cell.nextMonthWidth.constant = 0
+                }
                 cell.GuruSkills.text = guruProfileDetails[0].languagesKnown
                 cell.guruContainer.layer.cornerRadius = 8
                 cell.GuruFare.text = guruFare + "/ Hr"
@@ -256,7 +351,7 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                     let cell = tableView.dequeueReusableCell(withIdentifier: "ConfirmScheduleSecond", for: indexPath) as! ConfirmScheduleSecondTableViewCell
                     cell.subjectContainer.layer.cornerRadius = 5
                     cell.subjectName.text = getSubjectSlots[indexPath.row - 1]["name"] as? String
-                    cell.subjectTime.text =  getSubjectSlots[indexPath.row - 1]["start"] as? String
+                    cell.subjectTime.text =  "-          " + "\(getSubjectSlots[indexPath.row - 1]["start"] ?? "")"
                     cell.selectionStyle = .none
                     return cell
                 }else{
@@ -271,10 +366,12 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                 cell.totalContainer.layer.cornerRadius = 5
                 cell.selectionStyle = .none
                 return cell
-            }else{
+            }
+            else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "customButton", for: indexPath) as! customButtonTableViewCell
                 cell.goToDelegate = self
                 return cell
+//                return UITableViewCell()
             }
         case true:
             if indexPath.row == 0{
@@ -319,7 +416,7 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                         cell.secondStarRating.isHidden = true
                     }
                 }
-                
+
                 //cell.GuruFare.text = guruFare
                 cell.configure(with: self.selectedDate)
                 //            DispatchQueue.main.async {
@@ -328,21 +425,27 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
                 //                cell.getLoad()
                 //            }
                 return cell
-            }else if indexPath.row == 1{
-                
+            }
+             else if indexPath.row == 1{
+
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ConfirmScheduleSecond", for: indexPath) as! ConfirmScheduleSecondTableViewCell
                 cell.subjectContainer.layer.cornerRadius = 5
                 cell.selectionStyle = .none
                 cell.subjectName.text = StructOperation.glovalVariable.forRescheduleSubjectName
                 cell.subjectTime.text = "-          " + StructOperation.glovalVariable.reScheduleTimeSlotFrom
                 return cell
-                
-                
+
+
             }else{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "customButton", for: indexPath) as! customButtonTableViewCell
-                cell.goToDelegate = self
-                return cell
+                                let cell = tableView.dequeueReusableCell(withIdentifier: "customButton", for: indexPath) as! customButtonTableViewCell
+                
+                                cell.goToDelegate = self
+                                return cell
+                                
+
             }
+            
+            
         default:
             return UITableViewCell()
             
@@ -352,15 +455,33 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if reschedle == false{
+        if reschedle == false && bookDemo == false{
             if indexPath.row == getSubjectSlots.count + 2{
                 return 90
+            }else if indexPath.row == 0{
+                return UITableView.automaticDimension
+            }
+            else if indexPath.row <= getSubjectSlots.count{
+                return 50
+            }
+            else{
+                return UITableView.automaticDimension
+            }
+        }else if bookDemo == true{
+            if indexPath.row == 2{
+                return 75
+            }else if indexPath.row == 1{
+                return 55
             }else{
                 return UITableView.automaticDimension
             }
-        }else{
+
+        }
+        else{
             if indexPath.row == 2{
-                return 90
+                return 75
+            }else if indexPath.row == 1{
+                return 55
             }else{
                 return UITableView.automaticDimension
             }
@@ -370,6 +491,11 @@ class ConfirmScheduleViewController: UIViewController ,UITableViewDataSource,UIT
     }
     
     @IBAction func goBack(_ sender: UIButton) {
+        print("getSubjectSlots...\(getSubjectSlots)")
+        if !subjectDatesSlot.isEmpty{
+            subjectDatesSlot.removeAll()
+            print("getSubjectSlots1...\(subjectDatesSlot)")
+        }
         self.navigationController?.popViewController(animated: true)
     }
 }

@@ -34,7 +34,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tp5-Pq-p66">
-                                <rect key="frame" x="40" y="10" width="235" height="46"/>
+                                <rect key="frame" x="20" y="10" width="255" height="46"/>
                                 <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -44,7 +44,7 @@
                         <constraints>
                             <constraint firstItem="Tp5-Pq-p66" firstAttribute="top" secondItem="Aov-KC-6A4" secondAttribute="top" constant="10" id="1rm-Ki-Oq9"/>
                             <constraint firstItem="Avm-vs-sJu" firstAttribute="leading" secondItem="Tp5-Pq-p66" secondAttribute="trailing" constant="5" id="5eT-Sp-rS9"/>
-                            <constraint firstItem="Tp5-Pq-p66" firstAttribute="leading" secondItem="Aov-KC-6A4" secondAttribute="leading" constant="40" id="6J8-eM-Gh1"/>
+                            <constraint firstItem="Tp5-Pq-p66" firstAttribute="leading" secondItem="Aov-KC-6A4" secondAttribute="leading" constant="20" id="6J8-eM-Gh1"/>
                             <constraint firstAttribute="bottom" secondItem="Tp5-Pq-p66" secondAttribute="bottom" constant="10" id="8c5-3g-IUH"/>
                             <constraint firstItem="Avm-vs-sJu" firstAttribute="centerY" secondItem="Aov-KC-6A4" secondAttribute="centerY" id="u8w-2R-bN8"/>
                             <constraint firstAttribute="trailing" secondItem="Avm-vs-sJu" secondAttribute="trailing" constant="20" id="xbF-f8-OQU"/>
@@ -63,7 +63,7 @@
                 <outlet property="radioImageView" destination="Avm-vs-sJu" id="TdQ-ul-A7h"/>
                 <outlet property="subjectLabel" destination="Tp5-Pq-p66" id="4yn-77-F2u"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="99.107142857142847"/>
+            <point key="canvasLocation" x="306" y="78"/>
         </tableViewCell>
     </objects>
     <resources>

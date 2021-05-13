@@ -117,9 +117,19 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
     }
     @IBAction func goBack(_ sender: Any) {
         if popToVC == true{
-            // self.dismiss(animated: true, completion: nil)
-             let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleAcademicList_2") as! ScheduleAcademicList_2ViewController
-            self.navigationController?.popToViewController(vc, animated: true)
+            
+            for obj in (self.navigationController?.viewControllers)! {
+                       if obj is ScheduleAcademicList_2ViewController {
+             let vc2: ScheduleAcademicList_2ViewController =  obj as! ScheduleAcademicList_2ViewController
+             
+            self.navigationController?.popToViewController(vc2, animated: true)
+             break
+                       }
+                   }
+            
+//            // self.dismiss(animated: true, completion: nil)
+//             let vc = Constants.mainStoryboard.instantiateViewController(withIdentifier: "ScheduleAcademicList_2") as! ScheduleAcademicList_2ViewController
+//            self.navigationController?.popToViewController(vc, animated: true)
         }else{
             self.navigationController?.popViewController(animated: true)
         }
@@ -173,7 +183,7 @@ class ScheduleAcademicList_4ViewController: UIViewController,IndicatorInfoProvid
             switch norecord{
             case false:
                 if indexPath.row == getSubjects.count{
-                    return 100
+                    return 75
                 }else{
                     return 75
                 }
@@ -252,7 +262,7 @@ extension ScheduleAcademicList_4ViewController: nextScreen{
 }
 extension ScheduleAcademicList_4ViewController{
     func floatingButton(){
-              actionButton.addItem(title: "whatsApp", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
+              actionButton.addItem(title: "", image: UIImage(named: "whatsApp")?.withRenderingMode(.alwaysTemplate)) { item in
               
                          
                          if let whatsappURL = URL(string: "https://api.whatsapp.com/send?phone=+919001990019&text=Invitation"), UIApplication.shared.canOpenURL(whatsappURL) {
@@ -264,7 +274,7 @@ extension ScheduleAcademicList_4ViewController{
                          }
                      }
 
-                     actionButton.addItem(title: "call", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
+                     actionButton.addItem(title: "", image: UIImage(named: "mdi_call")?.withRenderingMode(.alwaysTemplate)) { item in
                        // do something
                    if let url = URL(string: "tel://\(Constants.contactUs)"), UIApplication.shared.canOpenURL(url) {
                                       if #available(iOS 10, *) {

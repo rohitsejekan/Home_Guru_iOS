@@ -12,6 +12,7 @@ import SwiftyJSON
 struct myClasses{
     var faculty: facultyDetails?
     var student: studentDetails?
+    var parent: parentDetails?
     var subject = [subjectDetails]()
     var scheduleDate: String = ""
     var timeSlotFrom: String = ""
@@ -21,6 +22,7 @@ struct myClasses{
     var classType: String = ""
     var status: String = ""
     init(json: JSON) {
+        self.parent = parentDetails(pDetails: json["parent"])
         self.student = studentDetails(sDetails: json["student"])
         self.classType = json["classType"].stringValue
         self.scheduleDate = json["date"].stringValue
@@ -33,6 +35,14 @@ struct myClasses{
         for arr in json["subject"].arrayValue{
             self.subject.append(subjectDetails(subDetails: arr))
         }
+    }
+}
+struct parentDetails{
+    var mobileNo: String = ""
+    var email: String = ""
+    init(pDetails: JSON) {
+        self.mobileNo = pDetails["mobileNo"].stringValue
+        self.email = pDetails["email"].stringValue
     }
 }
 struct studentDetails{
@@ -56,6 +66,7 @@ struct facultyDetails{
         self.ratings = fJson["ratings"].stringValue
         self._id = fJson["_id"].stringValue
         self.name = fJson["name"].stringValue
+        self.languagesKnown = fJson["languagesKnown"].stringValue
     }
 }
 
